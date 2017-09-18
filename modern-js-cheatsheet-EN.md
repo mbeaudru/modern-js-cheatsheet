@@ -207,7 +207,7 @@ const myVar = "Nick";
 const myVar = "John" // raises an error, re-declaration is not allowed
 ```
 
-But there is a subtility : ```const``` variables are not [**immutables**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
+But there is a subtlety : ```const``` variables are not [**immutables**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
 
 For objects:
 ```js
@@ -337,7 +337,7 @@ When there is no argument provided to an arrow function, you need to provide par
 
 ##### *this* reference
 
-To understand this subtility introduced with arrow functions, you must understand how [this](#this_def) behaves in JavaScript.
+To understand this subtlety introduced with arrow functions, you must understand how [this](#this_def) behaves in JavaScript.
 
 In an arrow function, *this* is equal to the *this* value of the enclosing execution context. What it means is that an arrow function doesn't create a new *this*, it grabs it from its surrounding instead.
 
