@@ -1133,11 +1133,10 @@ Source: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
 A variable is said to have been mutated when its initial value has changed afterwards.
 
 ```js
-var myVar = "Nick";
-myVar = "John" // here myVar is being mutated
-
 var myArray = [];
 myArray.push("firstEl") // myArray is being mutated
 ```
 
 A variable is said to be *immutable* if it can't be mutated.
+
+[Check MDN Mutable article](https://developer.mozilla.org/en-US/docs/Glossary/Mutable) for more details.
