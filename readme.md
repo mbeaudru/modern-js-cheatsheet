@@ -4,11 +4,11 @@
 
 ### Motivation
 
-This document aims to be a cheatsheet for the JavaScript knowledge you will frequently encounter in modern projects and in most today-produced sample code.
+This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and in most contemporary sample code.
 
-It is not an attempt to make you learn the language from the ground up, but an help for developpers familiar with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn React for instance) because of the JavaScript concepts used.
+This guide is not intended to teach you JavaScript from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn React for instance) because of the JavaScript concepts used.
 
-Besides, I will sometimes provide personal tips that may be debatable, but will take care to mention that's its a personal recommandation when I do so.
+Besides, I will sometimes provide personal tips that may be debatable, but will take care to mention that's its a personal recommendation when I do so.
 
 > **Note :** Most of the concepts introduced here are coming from a JavaScript language update (ES2015, often called ES6). You can find new features added by this update [here](http://es6-features.org), it's very well done.
 
@@ -89,13 +89,13 @@ When you struggle to understand a notion, I suggest you to look for answers on t
 
 ### Variable declaration: var, const, let
 
-In JavaScript, there are three keywords available to declare a variable, and each have its differences. Those are ```var```, ```let``` and ```const```.
+In JavaScript, there are three keywords available to declare a variable, and each has its differences. Those are ```var```, ```let``` and ```const```.
 
 #### Short explanation
 
-Variables declared with ```const``` keyword can't be reassigned, while it is the case with ```let``` and ```var```.
+Variables declared with ```const``` keyword can't be reassigned, while ```let``` and ```var``` can.
 
-I recommand to always declare your variables with ```const``` by default, and with ```let``` if you need to *mutate* it or reassign it later.
+I recommend always declaring your variables with ```const``` by default, and with ```let``` if you need to *mutate* it or reassign it later.
 
 <table>
   <tr>
@@ -134,7 +134,7 @@ person = "John" // Will raise an error, person can't be reassigned
 ```javascript
 let person = "Nick";
 person = "John";
-console.log(person) // "John", reassignation is allowed with let
+console.log(person) // "John", reassignment is allowed with let
 ```
 
 #### Detailed explanation
@@ -185,21 +185,21 @@ function myFunction() {
     let myVar = "John";
     console.log(myVar); // "John"
     // actually, myVar being block scoped, we just created a new variable myVar.
-    // this variable is not accessible outside this block and totally independant
+    // this variable is not accessible outside this block and totally independent
     // from the first myVar created !
   }
-  console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affected this value
+  console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affect this value
 }
 console.log(myVar); // Undefined, myVar is not accessible outside the function.
 ```
 
 - **const**
 
-A ```const``` declared variable is *block scoped* as well as ```let``` variables, but they can't be reassigned nor re-declared afterwards.
+A ```const```, as well as ```let```, declared variables are *block scoped*, but they can't be reassigned nor re-declared afterwards.
 
 ```js
 const myVar = "Nick";
-myVar = "John" // raises an error, reassignation is not allowed
+myVar = "John" // raises an error, reassignment is not allowed
 ```
 
 ```js
@@ -207,7 +207,7 @@ const myVar = "Nick";
 const myVar = "John" // raises an error, re-declaration is not allowed
 ```
 
-But there is a subtlety : ```const``` variables are not [**immutables**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
+But there is a subtlety : ```const``` variables are not [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
 
 For objects:
 ```js
@@ -216,7 +216,7 @@ const person = {
 };
 person.name = 'John' // this will work ! person variable is not completely reassigned, but mutated
 console.log(person.name) // "John"
-person = "Sandra" // raises an error, because reassignation is not allowed with const declared variables
+person = "Sandra" // raises an error, because reassignment is not allowed with const declared variables
 ```
 
 For arrays:
@@ -224,7 +224,7 @@ For arrays:
 const person = [];
 person.push('John'); // this will work ! person variable is not completely reassigned, but mutated
 console.log(person[0]) // "John"
-person = ["Nick"] // raises an error, because reassignation is not allowed with const declared variables
+person = ["Nick"] // raises an error, because reassignment is not allowed with const declared variables
 ```
 
 #### External resource
@@ -233,7 +233,7 @@ person = ["Nick"] // raises an error, because reassignation is not allowed with 
 
 ### <a name="arrow_func_concept"></a> Arrow function
 
-With the ES6 JavaScript update has been introduced *arrow functions*, which is an other way to declare and use functions. Here are the benefits they bring:
+The ES6 JavaScript update has introduced *arrow functions*, which are another way to declare and use functions. Here are the benefits they bring:
 
 - More concise
 - *this* is picked up from surroundings
@@ -305,7 +305,7 @@ To do so, we only need to **remove the brackets** and the **return** keyword. Th
 
 - Only one argument
 
-If your function only takes one parameter, you can avoid the parenthesis around it. If we take back the above *double* code:
+If your function only takes one parameter, you can omit the parenthesis around it. If we take back the above *double* code:
 
 ```js
  const double = (x) => x * 2; // this arrow function only takes one parameter
@@ -319,7 +319,7 @@ Parenthesis around the parameter can be avoided:
 
 - No arguments
 
-When there is no argument provided to an arrow function, you need to provide parenthesis anyway or it won't be valid syntax.
+When there is no argument provided to an arrow function, you need to provide parentheses or it won't be valid syntax.
 
 ```js
   () => { // parenthesis are provided, everything is fine
@@ -405,7 +405,7 @@ console.log(myFunc(5)) // 5 -- a value is provided so x is equal to 5 in myFunc
 
 *Destructuring* is a convenient way of creating new variables by extracting some values from data stored in objects or arrays.
 
-To name a few useful cases, *destructuring* can be used to destructure function parameters or *this.props* in react projects for instance.
+To name a few useful cases, *destructuring* can be used to destructure function parameters or *this.props* in React projects for instance.
 
 #### Explanation with sample code
 
@@ -515,9 +515,9 @@ To sum it up:
 
 - **Array.prototype.map()** takes an array, does something on its elements and returns an array with the transformed elements.
 - **Array.prototype.filter()** takes an array, decides element by element if it should keep it or not and returns an array with the kept elements only
-- **Array.prototype.reduce()** takes an array and agregates the elements into a single value (which is returned)
+- **Array.prototype.reduce()** takes an array and aggregates the elements into a single value (which is returned)
 
-I recommand to use them as much as possible in following the principles of functional programming, because they are composable, concicse and elegant.
+I recommend to use them as much as possible in following the principles of functional programming, because they are composable, concise and elegant.
 
 With those three methods you can avoid the use of *for* and *forEach* loops in must situations. When you are tempted to do a *for* loop, try to do it with *map*, *filter* and *reduce* composed. You might struggle to do it at first because it requires you to learn a new way of thinking, but once you've got it things gets easier.
 
@@ -550,7 +550,7 @@ console.log(aboveTenSum) // 44 -- 10 (Nick) + 15 (John) + 19 (Julia), Nathalie b
 
 #### Explanation
 
-Lets consider the following array of numbers for our samples:
+Let's consider the following array of numbers for our examples:
 
 ```js
 const numbers = [0, 1, 2, 3, 4, 5, 6];
@@ -565,7 +565,7 @@ const doubledNumbers = numbers.map(function(n) {
 console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 ```
 
-What's happening here ? We are using .map on the *numbers* array, map is iterating on each element of the array and passes it to our function. The function goal is to produce and return a new value from the one passed so that map can replace it.
+What's happening here ? We are using .map on the *numbers* array, map is iterating on each element of the array and passes it to our function. The goal of the function is to produce and return a new value from the one passed so that map can replace it.
 
 Lets extract this function to make it more clear, just for this once:
 
@@ -588,11 +588,11 @@ const parNumbers = numbers.filter(function(n) {
 console.log(parNumbers); // [0, 2, 4, 6]
 ```
 
-We are using .filter on the *numbers* array, filter is iterating on each element of the array and passes it to our function. The function goal is to return a boolean that will determine whether the current value will be kept or not. Filter then returns the array with only the kept values.
+We are using .filter on the *numbers* array, filter is iterating on each element of the array and passes it to our function. The goal of the function is to return a boolean that will determine whether the current value will be kept or not. Filter then returns the array with only the kept values.
 
 ##### Array.prototype.reduce()
 
-The reduce method goal is to *reduce* all elements of the array it iterates on into a single value. How it agregates thoses elements is up to you.
+The reduce method goal is to *reduce* all elements of the array it iterates on into a single value. How it aggregates those elements is up to you.
 
 ```js
 const sum = numbers.reduce(
@@ -613,11 +613,11 @@ This time though, there are changes:
 
 The first parameter is a function that will be called at each iteration step.
 
-The second parameter is the value of the accumulator variable value (*acc* here) at the first iteration step (read next point to understand).
+The second parameter is the value of the accumulator variable (*acc* here) at the first iteration step (read next point to understand).
 
 - Function parameters
 
-The function you pass as first reduce parameter takes two parameters. The first one (*acc* here) is the accumulator variable, whereas the second parameter (*n*) is the current element.
+The function you pass as the first parameter of .reduce takes two parameters. The first one (*acc* here) is the accumulator variable, whereas the second parameter (*n*) is the current element.
 
 The accumulator variable is equal to the return value of your function at the **previous** iteration step. At the first step of the iteration, *acc* is equal to the value you passed as .reduce second parameter.
 
@@ -647,7 +647,7 @@ Function returns *acc* + *n* --> 1 + 2 --> 3
 
 ###### At fourth iteration step
 
-```acc = 3``` because its the value the function returned at the previous iteration step
+```acc = 3``` because it's the value the function returned at the previous iteration step
 
 ```n = 3``` fourth element of the *number* array
 
@@ -655,7 +655,7 @@ Function returns *acc* + *n* --> 3 + 3 --> 6
 
 ###### [...] At last iteration step
 
-```acc = 15``` because its the value the function returned at the previous iteration step
+```acc = 15``` because it's the value the function returned at the previous iteration step
 
 ```n = 6``` last element of the *number* array
 
@@ -703,7 +703,7 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
 #### Explanation
 
-##### In iterables (like array)
+##### In iterables (like arrays)
 
 If we have the two following arrays:
 
@@ -740,9 +740,9 @@ myFunc("Nick", "Anderson", 10, 12, 6);
 // 6
 ```
 
-But lets say that we want this function to create a new student with its grades and with its average grade. Wouldn't it be more convenient to extract the first two parameters into two separated variables, and then have all the grades into an array we can loop on ?
+But lets say that we want this function to create a new student with its grades and with its average grade. Wouldn't it be more convenient to extract the first two parameters into two separated variables, and then have all the grades in an array we can iterate over?
 
-That's exactly what the rest operator allows us to do !
+That's exactly what the rest operator allows us to do!
 
 ```js
 function createStudent(firstName, lastName, ...grades) {
@@ -774,7 +774,7 @@ console.log(student);
 
 ##### Object properties spreading
 
-For this one I recommand you to read previous explanations about rest operator on iterables and functions parameters.
+For this one I recommend you read previous explanations about the rest operator on iterables and function parameters.
 
 ```js
 const myObj = { x: 1, y: 2, a: 3, b: 4 };
@@ -788,7 +788,7 @@ console.log(z); // { a: 3, b: 4 }
 const n = { x, y, ...z };
 console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
-// Here z object properties are spreaded into n
+// Here z object properties are spread into n
 ```
 
 #### External resources
@@ -880,7 +880,7 @@ Let's say we want to use promises to handle an AJAX request to fetch the resourc
 
 ##### Create the promise
 
-We firstly are going to create a promise. We will use jQuery get method to do our AJAX request to X.
+We firstly are going to create a promise. We will use the jQuery get method to do our AJAX request to X.
 
 ```js
 const xFetcherPromise = new Promise( // Create promise using "new" keyword and store it into a variable
@@ -898,7 +898,7 @@ const xFetcherPromise = new Promise( // Create promise using "new" keyword and s
 
 As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectivly a *resolved* and *rejected* state.
 
-But at the moment, the promise has not been used but only has been declared and stored into *xFetcherPromise* variable ! So it doesn't have a current state.
+But at the moment, the promise has not been used but only has been declared and stored into *xFetcherPromise* variable! So it doesn't have a current state.
 
 ##### Use the promise
 
@@ -953,7 +953,7 @@ const name = "Nick";
 
 ES6 modules are used to access variables or functions in a module explicitly exported by the modules it imports.
 
-I highly recommand to take a look at MDN resources on import / export (see external resources below), it is both simple and complete.
+I highly recommend to take a look at MDN resources on import / export (see external resources below), it is both simple and complete.
 
 #### Explanation with sample code
 
@@ -984,7 +984,7 @@ console.log(constants.exp) // 2.7
 
 - Default import / export
 
-Concerning the default export, there is only a single default export per module. A default export can be a function, a class, an object or anything else. This value is to be considered as the "main" exported value since it will be the simplest to import. [Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
+Concerning the default export, there is only a single default export per module. A default export can be a function, a class, an object or anything else. This value is considered the "main" exported value since it will be the simplest to import. [Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
 
 ```js
 // coolNumber.js
@@ -1063,7 +1063,7 @@ myBoundFunc("test") // "hello" -- myBoundFunc is person.myFunc with "hello" boun
 
 ### Class
 
-JavaScript is a *prototype* oriented language (whereas Java is object oriented for instance). ES6 has introduced JavaScript classes which are meant to be a syntaxic sugar for prototype-based inheritance and **not** a new object-oriented inheritance model ([ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)).
+JavaScript is a *prototype* oriented language (whereas Java is object oriented for instance). ES6 has introduced JavaScript classes which are meant to be a syntactic sugar for prototype-based inheritance and **not** a new object-oriented inheritance model ([ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)).
 
 The word *class* is indeed error prone if you are familiar with classes in other languages. If you do, avoid assuming how JavaScript classes work on this basis and consider it an entirely different notion.
 
