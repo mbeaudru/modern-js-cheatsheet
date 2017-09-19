@@ -108,7 +108,7 @@ I recommend always declaring your variables with ```const``` by default, and wit
     <th>const</th>
     <td>Block</td>
     <td>No</td>
-    <td>Yes</td>
+    <td>No</td>
   </tr>
     <tr>
     <th>let</th>
