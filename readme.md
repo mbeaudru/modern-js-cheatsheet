@@ -384,7 +384,7 @@ function myFunc() {
 
 ### Function default parameter value
 
-Starting from ES2015 JavaScript upadte, you can set default value to your function parameters using the following syntax:
+Starting from ES2015 JavaScript update, you can set default value to your function parameters using the following syntax:
 
 ```js
 function myFunc(x = 10) {
