@@ -143,7 +143,7 @@ The [*scope*](#scope_def) of a variable roughly means "where is this variable av
 
 - **var**
 
-```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access to that variable. Conversely, a *function scoped* variable created in a function can't be accessed outside this function.
+```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Conversely, a *block scoped* variable created in a function can't be accessed outside this function.
 
 > **Note :** If a ```var``` variable is created outside a function, it is attached to the **window** object and thus globally available.
 
