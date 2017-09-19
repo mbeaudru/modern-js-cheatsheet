@@ -25,7 +25,7 @@ When you struggle to understand a notion, I suggest you to look for answers on t
 
 ## Table of contents
 
-- [Javascript for React cheatsheet](#javascript-for-react-cheatsheet)
+- [Modern JavaScript cheatsheet](#modern-javascript-cheatsheet)
   * [Introduction](#introduction)
     + [Motivation](#motivation)
     + [Complementary resources](#complementary-resources)
