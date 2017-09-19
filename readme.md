@@ -21,7 +21,7 @@ When you struggle to understand a notion, I suggest you to look for answers on t
 - [ES6 Features with examples](http://es6-features.org)
 - [WesBos blog (ES6)](http://wesbos.com/category/es6/)
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
-- [Google](https://www.google.fr/) to find specific blog and resources
+- [Google](https://www.google.com/) to find specific blog and resources
 
 ## Table of contents
 
