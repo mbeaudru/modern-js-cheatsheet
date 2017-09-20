@@ -103,24 +103,28 @@ I recommend always declaring your variables with ```const``` by default, and wit
     <th>Scope</th>
     <th>Reassignable</th>
     <th>Mutable</th>
-  </tr>
-    <tr>
-    <th>const</th>
-    <td>Block</td>
-    <td>No</td>
-    <td>Yes</td>
-  </tr>
-    <tr>
-    <th>let</th>
-    <td>Block</td>
-    <td>Yes</td>
-    <td>Yes</td>
+   <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting">Hoisting</a></th>
   </tr>
   <tr>
     <th>var</th>
     <td>Function</td>
     <td>Yes</td>
     <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <th>let</th>
+    <td>Block</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <th>const</th>
+    <td>Block</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>No</td>
   </tr>
 </table>
 
@@ -145,8 +149,6 @@ The [*scope*](#scope_def) of a variable roughly means "where is this variable av
 
 ```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Conversely, a *block scoped* variable created in a function can't be accessed outside this function.
 
-> **Note :** A ```var``` variable can be declared outside a function. In a browser, it is added to the **window** object, making it globally available. In [Node.js](https://nodejs.org/api/globals.html#globals_global), it will be local to the module in which it is declared.
-
 I recommand you to picture it as if an *X scoped* variable meant that this variable was a property of X.
 
 ```javascript
@@ -157,7 +159,7 @@ function myFunction() {
 console.log(myVar); // Undefined, myVar is not accessible outside the function.
 ```
 
-More subtle example:
+Still focusing on the variable scope, here is a more subtle example:
 
 ```javascript
 function myFunction() {
@@ -172,11 +174,28 @@ function myFunction() {
 console.log(myVar); // Undefined, myVar is not accessible outside the function.
 ```
 
+Besides, *var* declared variables are moved to the top of the scope at execution. This is what we call [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
+
+This portion of code:
+
+```js
+console.log(myVar) // undefined -- no error raised
+var myVar = 2;
+```
+
+is understood at execution like:
+
+```js
+var myVar;
+console.log(myVar) // undefined -- no error raised
+myVar = 2;
+```
+
 - **let**
 
-```var``` and ```let ``` are about the same, but ```let``` declared variables are *block scoped*.
+```var``` and ```let ``` are about the same, but ```let``` declared variables are *block scoped* and they are **not** hoisted.
 
-Taking our previous example:
+Let's see the impact of block-scoping taking our previous example:
 
 ```javascript
 function myFunction() {
@@ -193,9 +212,16 @@ function myFunction() {
 console.log(myVar); // Undefined, myVar is not accessible outside the function.
 ```
 
+Now, what it means for *let* (and *const*) variables for not being hoisted:
+
+```js
+console.log(myVar) // raises an error !
+let myVar = 2;
+```
+
 - **const**
 
-A ```const```, as well as ```let```, declared variables are *block scoped*, but they can't be reassigned nor re-declared afterwards.
+A ```const```, as well as ```let```, declared variables are *block scoped* and not hoisted, but they can't be reassigned nor re-declared afterwards.
 
 ```js
 const myVar = "Nick";
@@ -230,6 +256,7 @@ person = ["Nick"] // raises an error, because reassignment is not allowed with c
 #### External resource
 
 - [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
+- [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
 
 ### <a name="arrow_func_concept"></a> Arrow function
 
