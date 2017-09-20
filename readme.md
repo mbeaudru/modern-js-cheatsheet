@@ -145,7 +145,7 @@ The [*scope*](#scope_def) of a variable roughly means "where is this variable av
 
 ```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Conversely, a *block scoped* variable created in a function can't be accessed outside this function.
 
-> **Note :** If a ```var``` variable is created outside a function, it is attached to the **window** object and thus globally available.
+> **Note :** A ```var``` variable can be declared outside a function. In a browser, is added to the **window** object, making it globally available. In [Node.js](https://nodejs.org/api/globals.html#globals_global), it will be local to the module in which it is declared.
 
 I recommand you to picture it as if an *X scoped* variable meant that this variable was a property of X.
 
