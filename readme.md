@@ -106,11 +106,11 @@ I recommend always declaring your variables with ```const``` by default, and wit
    <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting">Hoisting</a></th>
   </tr>
   <tr>
-    <th>var</th>
-    <td>Function</td>
+    <th>const</th>
+    <td>Block</td>
+    <td>No</td>
     <td>Yes</td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>No</td>
   </tr>
   <tr>
     <th>let</th>
@@ -119,12 +119,12 @@ I recommend always declaring your variables with ```const``` by default, and wit
     <td>Yes</td>
     <td>No</td>
   </tr>
-  <tr>
-    <th>const</th>
-    <td>Block</td>
-    <td>No</td>
+   <tr>
+    <th>var</th>
+    <td>Function</td>
     <td>Yes</td>
-    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
   </tr>
 </table>
 
