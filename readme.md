@@ -149,7 +149,7 @@ The [*scope*](#scope_def) of a variable roughly means "where is this variable av
 
 ```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Conversely, a *block scoped* variable created in a function can't be accessed outside this function.
 
-I recommand you to picture it as if an *X scoped* variable meant that this variable was a property of X.
+I recommend you to picture it as if an *X scoped* variable meant that this variable was a property of X.
 
 ```javascript
 function myFunction() {
@@ -933,7 +933,7 @@ const xFetcherPromise = new Promise( // Create promise using "new" keyword and s
 )
 ```
 
-As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectivly a *resolved* and *rejected* state.
+As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *resolved* and *rejected* state.
 
 But at the moment, the promise has not been used but only has been declared and stored into *xFetcherPromise* variable! So it doesn't have a current state.
 
