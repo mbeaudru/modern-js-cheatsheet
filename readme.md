@@ -225,7 +225,7 @@ By contrast with *var* variables, if you try to read or write on a *let* or *con
 
 - **const**
 
-A ```const```, as well as ```let```, declared variables are *block scoped* and not accessible before being defined, but they can't be reassigned nor re-declared afterwards.
+A ```const```, as well as ```let```, declared variables are *block scoped* and not accessible before being assigned, but they can't be reassigned nor re-declared afterwards.
 
 ```js
 const myVar = "Nick";
