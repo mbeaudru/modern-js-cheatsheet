@@ -124,7 +124,7 @@ I recommend always declaring your variables with ```const``` by default, and wit
     <td>Function</td>
     <td>Yes</td>
     <td>Yes</td>
-    <td>Yes</td>
+    <td>No</td>
   </tr>
 </table>
 
