@@ -109,7 +109,7 @@ I recommend always declaring your variables with ```const``` by default, and wit
     <th>const</th>
     <td>Block</td>
     <td>No</td>
-    <td>Yes</td>
+    <td><a href="#const_mutable_sample">Yes</a></td>
     <td>No</td>
   </tr>
   <tr>
@@ -233,7 +233,7 @@ const myVar = "Nick";
 const myVar = "John" // raises an error, re-declaration is not allowed
 ```
 
-But there is a subtlety : ```const``` variables are not [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
+<a name="const_mutable_sample"></a> But there is a subtlety : ```const``` variables are not [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
 
 For objects:
 ```js
