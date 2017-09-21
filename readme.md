@@ -905,7 +905,7 @@ fetchingPosts
 
 #### Explanation
 
-When you do an *AJAX request* the response is not synchronous because you want a resource that takes some time to come. It even may never come if the resource you have requested is unavailable for some reason (404).
+When you do an *Ajax request* the response is not synchronous because you want a resource that takes some time to come. It even may never come if the resource you have requested is unavailable for some reason (404).
 
 To handle that kind of situations, ES2015 has given us *promises*. Promises can have three different states:
 
@@ -913,16 +913,16 @@ To handle that kind of situations, ES2015 has given us *promises*. Promises can 
 - Resolved
 - Rejected
 
-Let's say we want to use promises to handle an AJAX request to fetch the resource X.
+Let's say we want to use promises to handle an Ajax request to fetch the resource X.
 
 ##### Create the promise
 
-We firstly are going to create a promise. We will use the jQuery get method to do our AJAX request to X.
+We firstly are going to create a promise. We will use the jQuery get method to do our Ajax request to X.
 
 ```js
 const xFetcherPromise = new Promise( // Create promise using "new" keyword and store it into a variable
   function(resolve, reject) { // Promise constructor takes a function parameter which has resolve and reject parameters itself
-    $.get("X") // Launch the AJAX request
+    $.get("X") // Launch the Ajax request
       .done(function(X) { // Once the request is done...
         resolve(X); // ... resolve the promise with the X value as parameter
       })
@@ -951,7 +951,7 @@ xFetcherPromise
   })
 ```
 
-```.then``` is a method that once called will put the xFetcherPromise in **pending** state. When called, the promise body runs and in this case an AJAX call is being done.
+```.then``` is a method that once called will put the xFetcherPromise in **pending** state. When called, the promise body runs and in this case an Ajax call is being done.
 
 If it succeeds, *resolve* is called and the function passed as ```.then``` parameter is executed.
 
