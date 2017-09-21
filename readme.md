@@ -921,7 +921,7 @@ We firstly are going to create a promise. We will use the jQuery get method to d
 
 ```js
 const xFetcherPromise = new Promise( // Create promise using "new" keyword and store it into a variable
-  function(resolve, reject) { // Promise constructor takes a function parameter which as resolve and reject parameters itself
+  function(resolve, reject) { // Promise constructor takes a function parameter which has resolve and reject parameters itself
     $.get("X") // Launch the AJAX request
       .done(function(X) { // Once the request is done...
         resolve(X); // ... resolve the promise with the X value as parameter
