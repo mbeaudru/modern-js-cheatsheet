@@ -103,21 +103,21 @@ I recommend always declaring your variables with ```const``` by default, and wit
     <th>Scope</th>
     <th>Reassignable</th>
     <th>Mutable</th>
-   <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting">Hoisting</a></th>
+   <th><a href="#tdz_sample">Temporal Dead Zone</a></th>
   </tr>
   <tr>
     <th>const</th>
     <td>Block</td>
     <td>No</td>
     <td><a href="#const_mutable_sample">Yes</a></td>
-    <td>No</td>
+    <td>Yes</td>
   </tr>
   <tr>
     <th>let</th>
     <td>Block</td>
     <td>Yes</td>
     <td>Yes</td>
-    <td>No</td>
+    <td>Yes</td>
   </tr>
    <tr>
     <th>var</th>
@@ -193,7 +193,7 @@ myVar = 2;
 
 - **let**
 
-```var``` and ```let ``` are about the same, but ```let``` declared variables are *block scoped* and they are **not** hoisted.
+```var``` and ```let ``` are about the same, but ```let``` declared variables are *block scoped* and they are **not** accessible before they are assigned.
 
 Let's see the impact of block-scoping taking our previous example:
 
@@ -212,12 +212,16 @@ function myFunction() {
 console.log(myVar); // Undefined, myVar is not accessible outside the function.
 ```
 
-Now, what it means for *let* (and *const*) variables for not being hoisted:
+<a name="tdz_sample"></a> Now, what it means for *let* (and *const*) variables for not being accessible before being assigned:
 
 ```js
-console.log(myVar) // raises an error !
+console.log(myVar) // raises a ReferenceError !
 let myVar = 2;
 ```
+
+By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenom is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
+
+> **Note :** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
 
 - **const**
 
