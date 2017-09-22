@@ -567,7 +567,7 @@ With those three methods you can avoid the use of *for* and *forEach* loops in m
 ```js
 const numbers = [0, 1, 2, 3, 4, 5, 6];
 const doubledNumbers = numbers.map(n => n * 2); // [0, 2, 4, 6, 8, 10, 12]
-const parNumbers = numbers.filter(n => n % 2 === 0); // [0, 2, 4, 6]
+const evenNumbers = numbers.filter(n => n % 2 === 0); // [0, 2, 4, 6]
 const sum = numbers.reduce((prev, next) => prev + next, 0); // 21
 ```
 
@@ -623,10 +623,10 @@ console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 ##### Array.prototype.filter()
 
 ```js
-const parNumbers = numbers.filter(function(n) {
+const evenNumbers = numbers.filter(function(n) {
   return n % 2 === 0; // true if "n" is par, false if "n" isn't
 });
-console.log(parNumbers); // [0, 2, 4, 6]
+console.log(evenNumbers); // [0, 2, 4, 6]
 ```
 
 We are using .filter on the *numbers* array, filter is iterating on each element of the array and passes it to our function. The goal of the function is to return a boolean that will determine whether the current value will be kept or not. Filter then returns the array with only the kept values.
