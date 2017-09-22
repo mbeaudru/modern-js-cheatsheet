@@ -84,6 +84,10 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     + [Class](#class)
       - [Samples](#samples)
       - [External resources](#external-resources-5)
+    + [Async await](#async-await)
+      - [Sample code](#sample-code-5)
+      - [Explanation](#explanation-4)
+      - [External resources](#external-resources-6)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1181,6 +1185,34 @@ For classes understanding:
 - [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
 - [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+
+
+### Async await
+
+The `async function` declaration defines an asynchronous function, which returns and `AsyncFunction` object. `await` is operator which is used to wait for a `Promise`. The `await` operator can only be used inside `async` function.
+
+#### Sample Code
+
+```js
+async function getGithubUser(handle) {
+  const url = `https://api.github.com/api/users/${handle}`;
+  const response = await fetch(url);
+  return await response.json();
+}
+
+const userPromise = getGithubUser('user123');
+```
+
+#### Explanation
+
+An `await` expression causes `async` function to pause the execution, wait for promise to resolve, and then resume the execution once the value is resolved. Any `async` function returns the `Promise`, and will be resolved to returned value.
+
+#### External resources
+
+- [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+- [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [ES7 Async/Await](http://rossboucher.com/await/#/)
+- [6 Reasons Why JavaScript’s Async/Await Blows Promises Away](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
 
 ## Glossary
 
