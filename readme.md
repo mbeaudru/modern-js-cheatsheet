@@ -15,7 +15,7 @@ Besides, I will sometimes provide personal tips that may be debatable but will t
 
 > **Note:** Most of the concepts introduced here are coming from a JavaScript language update (ES2015, often called ES6). You can find new features added by this update [here](http://es6-features.org); it's very well done.
 
-### Complementary Resourceqs
+### Complementary Resources
 
 When you struggle to understand a notion, I suggest you look for answers on the following resources:
 
