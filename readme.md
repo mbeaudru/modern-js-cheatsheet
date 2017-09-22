@@ -935,7 +935,7 @@ When you do an *Ajax request* the response is not synchronous because you want a
 To handle that kind of situations, ES2015 has given us *promises*. Promises can have three different states:
 
 - Pending
-- Resolved
+- Fulfilled
 - Rejected
 
 Let's say we want to use promises to handle an Ajax request to fetch the resource X.
@@ -958,7 +958,7 @@ const xFetcherPromise = new Promise( // Create promise using "new" keyword and s
 )
 ```
 
-As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *resolved* and *rejected* state.
+As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *fulfilled* and *rejected* state.
 
 But at the moment, the promise has not been used but only has been declared and stored into *xFetcherPromise* variable! So it doesn't have a current state.
 
