@@ -1,18 +1,18 @@
-# Modern JavaScript cheatsheet
+# Modern JavaScript Cheatsheet
 
 ## Introduction
 
 ### Motivation
 
-This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and in most contemporary sample code.
+This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and most contemporary sample code.
 
 This guide is not intended to teach you JavaScript from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn React for instance) because of the JavaScript concepts used.
 
-Besides, I will sometimes provide personal tips that may be debatable, but will take care to mention that it's a personal recommendation when I do so.
+Besides, I will sometimes provide personal tips that may be debatable but will take care to mention that it's a personal recommendation when I do so.
 
-> **Note :** Most of the concepts introduced here are coming from a JavaScript language update (ES2015, often called ES6). You can find new features added by this update [here](http://es6-features.org); it's very well done.
+> **Note:** Most of the concepts introduced here are coming from a JavaScript language update (ES2015, often called ES6). You can find new features added by this update [here](http://es6-features.org); it's very well done.
 
-### Complementary resources
+### Complementary Resourceqs
 
 When you struggle to understand a notion, I suggest you look for answers on the following resources:
 
@@ -23,7 +23,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
 - [Google](https://www.google.com/) to find specific blog and resources
 
-## Table of contents
+## Table of Contents
 
 - [Modern JavaScript cheatsheet](#modern-javascript-cheatsheet)
   * [Introduction](#introduction)
@@ -223,9 +223,9 @@ console.log(myVar) // raises a ReferenceError !
 let myVar = 2;
 ```
 
-By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenom is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
+By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenon is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
 
-> **Note :** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
+> **Note:** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation, it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
 
 In addition, you can't re-declare a *let* variable:
 
@@ -236,7 +236,7 @@ let myVar = 3; // Raises a SyntaxError
 
 ##### const
 
-```const``` declared variables behave like *let* variables, but in addition they can't be reassigned.
+```const``` declared variables behave like *let* variables, but also they can't be reassigned.
 
 To sum it up, *const* variables:
 
@@ -282,7 +282,7 @@ person = ["Nick"] // raises an error, because reassignment is not allowed with c
 
 ### <a name="arrow_func_concept"></a> Arrow function
 
-The ES6 JavaScript update has introduced *arrow functions*, which are another way to declare and use functions. Here are the benefits they bring:
+The ES6 JavaScript update has introduced *arrow functions*, which is another way to declare and use functions. Here are the benefits they bring:
 
 - More concise
 - *this* is picked up from surroundings
@@ -304,7 +304,7 @@ console.log(double(2)) // 4
 
 - *this* reference
 
-In an arrow function, *this* is equal to the *this* value of the enclosing execution context. Basically, with arrow functions you don't have to do the "that = this" trick before calling a function inside a function anymore.
+In an arrow function, *this* is equal to the *this* value of the enclosing execution context. Basically, with arrow functions, you don't have to do the "that = this" trick before calling a function inside a function anymore.
 
 ```js
 function myFunc() {
@@ -348,9 +348,9 @@ Since there only is a return value here, we can do an implicit return.
  const double = (x) => x * 2;
 ```
 
-To do so, we only need to **remove the brackets** and the **return** keyword. That's why it's called an *implicit* return, the *return* keyword is not there but this function will indeed return ```x * 2```.
+To do so, we only need to **remove the brackets** and the **return** keyword. That's why it's called an *implicit* return, the *return* keyword is not there, but this function will indeed return ```x * 2```.
 
-> **Note :** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
+> **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
 
 - Only one argument
 
@@ -368,7 +368,7 @@ Parenthesis around the parameter can be avoided:
 
 - No arguments
 
-When there is no argument provided to an arrow function, you need to provide parentheses or it won't be valid syntax.
+When there is no argument provided to an arrow function, you need to provide parentheses, or it won't be valid syntax.
 
 ```js
   () => { // parenthesis are provided, everything is fine
@@ -386,7 +386,7 @@ When there is no argument provided to an arrow function, you need to provide par
 
 ##### *this* reference
 
-To understand this subtlety introduced with arrow functions, you must understand how [this](#this_def) behaves in JavaScript.
+To understand this subtlety introduced with arrow functions, you must know how [this](#this_def) behaves in JavaScript.
 
 In an arrow function, *this* is equal to the *this* value of the enclosing execution context. What it means is that an arrow function doesn't create a new *this*, it grabs it from its surrounding instead.
 
@@ -453,7 +453,7 @@ The default parameter is applied in two and only two situations:
 
 In other words, if you pass in *null* the default parameter **won't be applied**.
 
-> **Note :** Default value assignment can be used with destructured parameters as well (see next notion to see an example)
+> **Note:** Default value assignment can be used with destructured parameters as well (see next notion to see an example)
 
 #### External resource
 
@@ -464,13 +464,13 @@ In other words, if you pass in *null* the default parameter **won't be applied**
 
 *Destructuring* is a convenient way of creating new variables by extracting some values from data stored in objects or arrays.
 
-To name a few useful cases, *destructuring* can be used to destructure function parameters or *this.props* in React projects for instance.
+To name a few use cases, *destructuring* can be used to destructure function parameters or *this.props* in React projects for instance.
 
 #### Explanation with sample code
 
 - Object
 
-Lets consider the following object for all the samples:
+Let's consider the following object for all the samples:
 
 ```js
 const person = {
@@ -576,9 +576,9 @@ To sum it up:
 - **Array.prototype.filter()** takes an array, decides element by element if it should keep it or not and returns an array with the kept elements only
 - **Array.prototype.reduce()** takes an array and aggregates the elements into a single value (which is returned)
 
-I recommend to use them as much as possible in following the principles of functional programming, because they are composable, concise and elegant.
+I recommend to use them as much as possible in following the principles of functional programming because they are composable, concise and elegant.
 
-With those three methods you can avoid the use of *for* and *forEach* loops in must situations. When you are tempted to do a *for* loop, try to do it with *map*, *filter* and *reduce* composed. You might struggle to do it at first because it requires you to learn a new way of thinking, but once you've got it things gets easier.
+With those three methods, you can avoid the use of *for* and *forEach* loops in most situations. When you are tempted to do a *for* loop, try to do it with *map*, *filter* and *reduce* composed. You might struggle to do it at first because it requires you to learn a new way of thinking, but once you've got it things gets easier.
 
 #### Sample code
 
@@ -624,7 +624,7 @@ const doubledNumbers = numbers.map(function(n) {
 console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 ```
 
-What's happening here ? We are using .map on the *numbers* array, map is iterating on each element of the array and passes it to our function. The goal of the function is to produce and return a new value from the one passed so that map can replace it.
+What's happening here? We are using .map on the *numbers* array, the map is iterating on each element of the array and passes it to our function. The goal of the function is to produce and return a new value from the one passed so that map can replace it.
 
 Lets extract this function to make it more clear, just for this once:
 
@@ -636,7 +636,7 @@ console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 
 ```numbers.map(doubleN)``` produces ```[doubleN(0), doubleN(1), doubleN(2), doubleN(3), doubleN(4), doubleN(5), doubleN(6)]``` which is equal to ```[0, 2, 4, 6, 8, 10, 12]```.
 
-> **Note :** If you do not need to return a new array and just want to do a loop that have side effects, you might just want to use a for / forEach loop instead of a map.
+> **Note:** If you do not need to return a new array and just want to do a loop that has side effects, you might just want to use a for / forEach loop instead of a map.
 
 ##### Array.prototype.filter()
 
@@ -664,7 +664,7 @@ const sum = numbers.reduce(
 console.log(sum) //21
 ```
 
-Just like for .map and .filter methods, .reduce is applied on an array and takes a function as first parameter.
+Just like for .map and .filter methods, .reduce is applied on an array and takes a function as the first parameter.
 
 This time though, there are changes:
 
@@ -682,7 +682,7 @@ The accumulator variable is equal to the return value of your function at the **
 
 ###### At first iteration step
 
-```acc = 0``` because we passed in 0 as second parameter for reduce
+```acc = 0``` because we passed in 0 as the second parameter for reduce
 
 ```n = 0``` first element of the *number* array
 
@@ -771,7 +771,7 @@ const arr1 = ["a", "b", "c"];
 const arr2 = [arr1, "d", "e", "f"]; // [["a", "b", "c"], "d", "e", "f"]
 ```
 
-*arr2* first element is an array, because *arr1* is injected as is into *arr2*. But what we want is *arr2* to be an array of letters. To do so, we can *spread* the elements of *arr1* into *arr2*.
+*arr2* the first element is an array because *arr1* is injected as is into *arr2*. But what we want is *arr2* to be an array of letters. To do so, we can *spread* the elements of *arr1* into *arr2*.
 
 With spread operator
 
@@ -782,7 +782,7 @@ const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 
 ##### Function rest parameter
 
-In function parameters, we can use the rest operator in order to inject parameters into an array we can loop in. There is already an **argument** object bound to every function that is equal to an array of all the parameters passed-in to the function.
+In function parameters, we can use the rest operator to inject parameters into an array we can loop in. There is already an **argument** object bound to every function that is equal to an array of all the parameters passed into the function.
 
 ```js
 function myFunc() {
@@ -799,7 +799,7 @@ myFunc("Nick", "Anderson", 10, 12, 6);
 // 6
 ```
 
-But lets say that we want this function to create a new student with its grades and with its average grade. Wouldn't it be more convenient to extract the first two parameters into two separated variables, and then have all the grades in an array we can iterate over?
+But let's say that we want this function to create a new student with its grades and with its average grade. Wouldn't it be more convenient to extract the first two parameters into two separate variables, and then have all the grades in an array we can iterate over?
 
 That's exactly what the rest operator allows us to do!
 
@@ -829,11 +829,11 @@ console.log(student);
 // }
 ```
 
-> **Note :** createStudent function is bad because we don't check if grades.length exists or is different from 0. But its easier to read this way so I didn't handled this case.
+> **Note:** createStudent function is bad because we don't check if grades.length exists or is different from 0. But it's easier to read this way, so I didn't handle this case.
 
 ##### Object properties spreading
 
-For this one I recommend you read previous explanations about the rest operator on iterables and function parameters.
+For this one, I recommend you read previous explanations about the rest operator on iterables and function parameters.
 
 ```js
 const myObj = { x: 1, y: 2, a: 3, b: 4 };
@@ -842,7 +842,7 @@ console.log(x); // 1
 console.log(y); // 2
 console.log(z); // { a: 3, b: 4 }
 
-// z is the rest of the object destructured : myObj object minus x and y properties destructured
+// z is the rest of the object destructured: myObj object minus x and y properties destructured
 
 const n = { x, y, ...z };
 console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
@@ -909,7 +909,7 @@ console.log(myObj.y) // 20
 
 A promise is an object which can be returned synchronously from an asynchronous function ([ref](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)).
 
-Promises can be used to avoid [callback hell](http://callbackhell.com/) and they are more and more frequently encountered in modern JavaScript projects.
+Promises can be used to avoid [callback hell](http://callbackhell.com/), and they are more and more frequently encountered in modern JavaScript projects.
 
 #### Sample code
 
@@ -973,7 +973,7 @@ xFetcherPromise
   })
 ```
 
-```.then``` is a method that once called will put the xFetcherPromise in **pending** state. When called, the promise body runs and in this case an Ajax call is being done.
+```.then``` is a method that once called will put the xFetcherPromise in **pending** state. When called, the promise body runs, and in this case, an Ajax call is being done.
 
 If it succeeds, *resolve* is called and the function passed as ```.then``` parameter is executed.
 
@@ -1012,13 +1012,13 @@ const name = "Nick";
 
 ES6 modules are used to access variables or functions in a module explicitly exported by the modules it imports.
 
-I highly recommend to take a look at MDN resources on import / export (see external resources below), it is both simple and complete.
+I highly recommend to take a look at MDN resources on import/export (see external resources below), it is both straightforward and complete.
 
 #### Explanation with sample code
 
 - Named exports
 
-Named exports are useful to export several values from a module. You can only name-export variables (not functions or class), so if you want to name-export a function, you have to store it in a variable before.
+Named exports are used to export several values from a module. You can only name-export variables (not functions or class), so if you want to name-export a function, you have to store it in a variable before.
 
 ```js
 // mathConstants.js
@@ -1084,14 +1084,14 @@ console.log(result) // 3
 
 *this* operator behaves differently than in other languages and is in most cases determined by how a function is called. ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)).
 
-This notion having many subtleties and being quite hard, I highly suggest you to deep dive in the external resources below. Thus, I will provide what I personally have in mind to determine what *this* is equal to. I have learned this tip from [this article written by Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/).
+This notion is having many subtleties and being quite hard, I highly suggest you to deep dive in the external resources below. Thus, I will provide what I personally have in mind to determine what *this* is equal to. I have learned this tip from [this article written by Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/).
 
 ```js
 function myFunc() {
   ...
 }
 
-// After each statement you find the value of *this* in myFunc
+// After each statement, you find the value of *this* in myFunc
 
 myFunc.call("myString", "hello") // "myString" -- first .call parameter value is injected into *this*
 
@@ -1126,10 +1126,10 @@ JavaScript is a [prototype-based](https://en.wikipedia.org/wiki/Prototype-based_
 
 The word *class* is indeed error prone if you are familiar with classes in other languages. If you do, avoid assuming how JavaScript classes work on this basis and consider it an entirely different notion.
 
-Since this document is not an attempt to teach you the language from the ground up, I will consider you know what prototypes are and how they behave. But here are some links I found great to understand this notion:
+Since this document is not an attempt to teach you the language from the ground up, I will believe you know what prototypes are and how they behave. But here are some links I found great to understand this notion:
 
 - [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
-- [A plain english guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
+- [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
 - [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 
 #### Samples
@@ -1170,7 +1170,7 @@ console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 For prototype understanding:
 
 - [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
-- [A plain english guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
+- [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
 - [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 
 For classes understanding:
@@ -1189,7 +1189,7 @@ Source: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
 
 ### <a name="mutation_def"></a> Variable mutation
 
-A variable is said to have been mutated when its initial value has changed afterwards.
+A variable is said to have been mutated when its initial value has changed afterward.
 
 ```js
 var myArray = [];
