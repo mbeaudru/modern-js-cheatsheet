@@ -145,7 +145,7 @@ console.log(person) // "John", reassignment is allowed with let
 
 The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
 
-- **var**
+##### var
 
 ```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Conversely, a *block scoped* variable created in a function can't be accessed outside this function.
 
@@ -191,9 +191,13 @@ console.log(myVar) // undefined -- no error raised
 myVar = 2;
 ```
 
-- **let**
+##### let
 
-```var``` and ```let ``` are about the same, but ```let``` declared variables are *block scoped* and they are **not** accessible before they are assigned.
+```var``` and ```let ``` are about the same, but ```let``` declared variables
+
+- are *block scoped*
+- are **not** accessible before they are assigned
+- can't be re-declared in the same scope
 
 Let's see the impact of block-scoping taking our previous example:
 
@@ -223,9 +227,23 @@ By contrast with *var* variables, if you try to read or write on a *let* or *con
 
 > **Note :** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
 
-- **const**
+In addition, you can't re-declare a *let* variable:
 
-A ```const```, as well as ```let```, declared variables are *block scoped* and not accessible before being assigned, but they can't be reassigned nor re-declared afterwards.
+```js
+let myVar = 2;
+let myVar = 3; // Raises a SyntaxError
+```
+
+##### const
+
+```const``` declared variables behave like *let* variables, but in addition they can't be reassigned.
+
+To sum it up, *const* variables:
+
+- are *block scoped*
+- are not accessible before being assigned
+- can't be re-declared in the same scope
+- can't be reassigned
 
 ```js
 const myVar = "Nick";
