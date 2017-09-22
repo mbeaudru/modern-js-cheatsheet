@@ -84,10 +84,10 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     + [Class](#class)
       - [Samples](#samples)
       - [External resources](#external-resources-5)
-    + [Async await](#async-await)
-      - [Sample code](#sample-code-5)
+    + [Async Await](#async-await)
+      - [Sample code](#sample-code-6)
       - [Explanation](#explanation-4)
-      - [External resources](#external-resources-6)
+      - [External resources](#external-resources-7)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1187,7 +1187,7 @@ For classes understanding:
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
 
-### Async await
+### Async Await
 
 The `async function` declaration defines an asynchronous function, which returns and `AsyncFunction` object. `await` is operator which is used to wait for a `Promise`. The `await` operator can only be used inside `async` function.
 
