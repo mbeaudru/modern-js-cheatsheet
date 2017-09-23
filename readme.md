@@ -84,6 +84,10 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     + [Class](#class)
       - [Samples](#samples)
       - [External resources](#external-resources-5)
+    + [Async Await](#async-await)
+      - [Sample code](#sample-code-6)
+      - [Explanation](#explanation-4)
+      - [External resources](#external-resources-7)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1181,6 +1185,46 @@ For classes understanding:
 - [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
 - [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+
+### Async Await
+
+In addition to [Promises](#promises), there is a new syntax you might encounter to handle asynchronous code named *async / await*.
+
+The purpose of async/await functions is to simplify the behavior of using promises synchronously and to perform some behavior on a group of Promises. Just as Promises are similar to structured callbacks, async/await is similar to combining generators and promises. ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function))
+
+> **Note :** You must understand what are promises and how they work before trying to understand async / await since they rely on it.
+
+> **Note 2:** [*await* must be used in an *async* function](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9#f3f0), which means that you can't use await in the top level of our code since that is not inside an async function.
+
+#### Explanation with sample code
+
+*Async / Await* is built on promises but they allow a more imperative style of code.
+
+An `await` expression causes `async` function to pause the execution, wait for promise to resolve, and then resume the execution once the value is resolved. Any `async` function returns the `Promise`, and will be resolved to returned value.
+
+```js
+async function getGithubUser(handle) { // async keyword allows usage of await in the function and means function returns a promise 
+  try { // this is how errors are handled with async / await
+    const url = `https://api.github.com/users/${handle}`;
+    const response = await fetch(url); // "synchronously" waiting fetch promise to resolve before going to next line
+    return response.json();
+  } catch (err) {
+    alert(err);
+  }
+}
+
+getGithubUser('mbeaudru').then(user => console.log(user)); // logging user response - cannot use await syntax since this code isn't in async function
+```
+
+#### External resources
+
+- [Async/Await - JavaScript.Info](https://javascript.info/async-await)
+- [ES7 Async/Await](http://rossboucher.com/await/#/)
+- [6 Reasons Why JavaScript’s Async/Await Blows Promises Away](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
+- [JavaScript awaits](https://dev.to/kayis/javascript-awaits)
+- [Using Async Await in Express with Node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
+- [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+- [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 
 ## Glossary
 
