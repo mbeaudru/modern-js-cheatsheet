@@ -1186,7 +1186,6 @@ For classes understanding:
 - [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
-
 ### Async Await
 
 In addition to [Promises](#promises), there is a new syntax you might encounter to handle asynchronous code named *async / await*.
