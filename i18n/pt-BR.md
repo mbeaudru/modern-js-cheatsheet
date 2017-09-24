@@ -72,29 +72,6 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
       - [Explicação](#explanation-3)
         * [Criando uma promise](#create-the-promise)
         * [Usando uma promise](#use-the-promise)
-Esse documento é um conjunto de "cheatsheet" para javascript que você frequentemente encontrará em projetos modernos e na maioria de exemplos de códigos atuais.
-
-Esse guia não tem a intenção de te ensinar Javascript do zero, mas sim ajudar desenvolvedores com conhecimentos básicos a se familiarizarem com códigos modernos.
-
-      - [Material Complementar](#external-resources)
-    + [Template literals](#template-literals)
-      - [Exemplo](#sample-code-5)
-      - [Material Complementar](#external-resources-2)
-    + [Imports / Exports](#imports--exports)
-      - [Explicação com Exemplos](#explanation-with-sample-code-1)
-      - [Material Complementar](#external-resources-3)
-    + [JavaScript *this*](#-javascript-this)
-      - [Material Complementar](#external-resources-4)
-    + [Class](#class)
-      - [Exemplos](#samples)
-      - [Material Complementar](#external-resources-5)
-    + [Async Await](#async-await)
-      - [Exemplo](#sample-code-6)
-      - [Explicação](#explanation-4)
-      - [Material Complementar](#external-resources-7)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
-Esse documento é um conjunto de "cheatsheet" para javascript que você frequentemente encontrará em projetos modernos e na maioria de exemplos de códigos atuais.
-
-Esse guia não tem a intenção de te ensinar Javascript do zero, mas sim ajudar desenvolvedores com conhecimentos básicos a se familiarizarem com códigos modernos.
