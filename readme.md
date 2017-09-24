@@ -89,8 +89,8 @@
       - [說明](#explanation-4)
       - [外部資源](#external-resources-7)
   * [術語詞彙](#glossary)
-    + [作用域範圍](#-scope)
-    + [Variable mutation](#-variable-mutation)
+    + [作用域範圍](#-作用域範圍)
+    + [變數變異](#-變數變異)
 
 ## 概念
 
@@ -1233,13 +1233,13 @@ getGithubUser('mbeaudru').then(user => console.log(user)); // 印出 user 的值
 
 ## 術語詞彙
 
-### <a name="scope_def"></a> 作用域範圍 (scope)
+### <a name="作用域範圍"></a> 作用域範圍 (scope)
 
-在上下文之中有著 "明顯可見的" 值和表達式，又或者是可以被參照的。如果變數或是表達式並不在 "當前作用域和範圍"，那麼它將會是不能用的。
+在上下文之中有著 "明顯可見的 (visible)" 值和表達式，又或者是可以被參照的。如果變數或是表達式並不在 "當前作用域和範圍"，那麼它將會是不能用的。
 
 資料來源： [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
 
-### <a name="mutation_def"></a> Variable mutation
+### <a name="變數變異"></a> 變數變異 (Variable mutation)
 
 一個變數在被宣告之後發生初始值變化的過程。
 
