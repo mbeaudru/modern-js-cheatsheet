@@ -3,17 +3,17 @@
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
 <small>圖片來源: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
 
-## Introduction
+## 介紹
 
-### Motivation
+### 動機
 
-This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and most contemporary sample code.
+本文檔整理了各種現代化 JavaScript 開發過程中經常使用到的腳本。
 
-This guide is not intended to teach you JavaScript from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn React for instance) because of the JavaScript concepts used.
+該份指南的目標並不是放在幫助初學者從零基礎到入門，而是為了幫助那些因為 Javascript 新式語法導致可能很難熟悉現代函式庫使用方式 (以 React 做為舉例) 的開發人員。
 
-Besides, I will sometimes provide personal tips that may be debatable but will take care to mention that it's a personal recommendation when I do so.
+此外我也會偶爾提供一些個人主觀的建議和技巧，而這些建議可能會造成部分的爭議性，但請務必留意，當我做出這些舉例時這僅僅是出自於個人的推薦作法。
 
-> **Note:** Most of the concepts introduced here are coming from a JavaScript language update (ES2015, often called ES6). You can find new features added by this update [here](http://es6-features.org); it's very well done.
+> **注意:** 此處介紹的大部分概念出自於 JavaScript 的語言更新 (ES2015，更多人稱其作 ES6)。你可以在[這個好地方](http://es6-features.org)找到更多添加的新功能。
 
 ### Complementary Resources
 
