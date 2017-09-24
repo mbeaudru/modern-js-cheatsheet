@@ -15,16 +15,16 @@
 
 > **注意:** 此處介紹的大部分概念出自於 JavaScript 的語言更新 (ES2015，更多人稱其作 ES6)。你可以在[這個好地方](http://es6-features.org)找到更多添加的新功能。
 
-### Complementary Resources
+### 配套資源
 
-When you struggle to understand a notion, I suggest you look for answers on the following resources:
+當你在試圖理解一個新概念時，我建議你可以去瀏覽以下這些資源尋找解答：
 
 - [MDN (Mozilla Developer Network)](https://developer.mozilla.org/fr/search?q=)
 - [You don't know JS (book)](https://github.com/getify/You-Dont-Know-JS)
 - [ES6 Features with examples](http://es6-features.org)
 - [WesBos blog (ES6)](http://wesbos.com/category/es6/)
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
-- [Google](https://www.google.com/) to find specific blog and resources
+- [Google](https://www.google.com/) 尋找特定相關主題的部落格文章和資源
 
 ## Table of Contents
 
