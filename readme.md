@@ -9,7 +9,7 @@
 
 本文檔整理了各種現代化 JavaScript 開發過程中經常使用到的腳本。
 
-該份指南的目標並不是放在幫助初學者從零基礎到入門，而是為了幫助那些因為 Javascript 新式語法導致可能很難熟悉現代函式庫使用方式 (以 React 做為舉例) 的開發人員。
+該份指南的目標並不是放在幫助初學者從零基礎到入門，而是為了幫助那些因為 Javascript 新式語法導致可能很難熟悉現代函數庫使用方式 (以 React 做為舉例) 的開發人員。
 
 此外我也會偶爾提供一些個人主觀的建議和技巧，而這些建議可能會造成部分的爭議性，但請務必留意，當我做出這些舉例時這僅僅是出自於個人的推薦作法。
 
@@ -89,84 +89,84 @@
       - [說明](#explanation-4)
       - [外部資源](#external-resources-7)
   * [術語詞彙](#glossary)
-    + [Scope](#-scope)
+    + [作用域範圍](#-scope)
     + [Variable mutation](#-variable-mutation)
 
-## Notions
+## 概念
 
-### Variable declaration: var, const, let
+### 變數聲明： var, const, let
 
-In JavaScript, there are three keywords available to declare a variable, and each has its differences. Those are ```var```, ```let``` and ```const```.
+在 JavaScript 中有三個不同關鍵字可用於宣告一個變數，分別是 ```var```， ```let``` 和 ```const```。
 
-#### Short explanation
+#### 簡短解釋
 
-Variables declared with ```const``` keyword can't be reassigned, while ```let``` and ```var``` can.
+使用 ```const``` 關鍵字宣告的變數無法被重新指派, 而 ```let``` 和 ```var``` 是可以的。
 
-I recommend always declaring your variables with ```const``` by default, and with ```let``` if you need to *mutate* it or reassign it later.
+我會建議在默認情況下一律使用 ```const``` ，當你需要<i>改變</i>它或是稍後才重新指派時才使用 ```let``` 。
 
 <table>
   <tr>
     <th></th>
-    <th>Scope</th>
-    <th>Reassignable</th>
-    <th>Mutable</th>
-   <th><a href="#tdz_sample">Temporal Dead Zone</a></th>
+    <th>作用域範圍</th>
+    <th>是否可重新指派</th>
+    <th>狀態變更</th>
+   <th><a href="#tdz_sample">暫時性死區 (Temporal Dead Zone)</a></th>
   </tr>
   <tr>
     <th>const</th>
-    <td>Block</td>
-    <td>No</td>
-    <td><a href="#const_mutable_sample">Yes</a></td>
-    <td>Yes</td>
+    <td>區塊</td>
+    <td>不是</td>
+    <td><a href="#const_mutable_sample">是</a></td>
+    <td>是</td>
   </tr>
   <tr>
     <th>let</th>
-    <td>Block</td>
-    <td>Yes</td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>區塊</td>
+    <td>是</td>
+    <td>是</td>
+    <td>是</td>
   </tr>
    <tr>
     <th>var</th>
-    <td>Function</td>
-    <td>Yes</td>
-    <td>Yes</td>
-    <td>No</td>
+    <td>函數</td>
+    <td>是</td>
+    <td>是</td>
+    <td>不是</td>
   </tr>
 </table>
 
-#### Sample code
+#### 範例程式碼
 
 ```javascript
 const person = "Nick";
-person = "John" // Will raise an error, person can't be reassigned
+person = "John" // 會有錯誤跳出，person 不能被重新指派
 ```
 
 ```javascript
 let person = "Nick";
 person = "John";
-console.log(person) // "John", reassignment is allowed with let
+console.log(person) // "John" 在 let 的使用下允許被重新指派
 ```
 
-#### Detailed explanation
+#### 詳細說明
 
-The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
+變數的 [*作用域範圍 (scope)*](#scope_def) 大致上意味著 "這個變數的效力可被作用在哪段程式碼 (where is this variable available in the code)"。
 
 ##### var
 
-```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Conversely, a *block scoped* variable created in a function can't be accessed outside this function.
+```var``` 宣告的變數是 *函數範圍 (function scoped)* 的，這表示當函數中創造變數的時候，該函數中的所有內容都可以訪問並使用該變數。相反的，在函數外創造的 *區塊範圍 (block scoped)* 變數則無法被使用。
 
-I recommend you to picture it as if an *X scoped* variable meant that this variable was a property of X.
+我會建議你把它看作是一個 *X scoped* 範圍的變數代表著這個變數是 X 的屬性之一。
 
 ```javascript
 function myFunction() {
   var myVar = "Nick";
-  console.log(myVar); // "Nick" - myVar is accessible inside the function
+  console.log(myVar); // "Nick" - myVar 可以在函數範圍之內被使用
 }
-console.log(myVar); // Undefined, myVar is not accessible outside the function.
+console.log(myVar); // Undefined, myVar 在函數範圍外部無法被使用
 ```
 
-Still focusing on the variable scope, here is a more subtle example:
+持續觀察變數的作用域範圍，這裡有個更細微的範例：
 
 ```javascript
 function myFunction() {
@@ -174,39 +174,39 @@ function myFunction() {
   if (true) {
     var myVar = "John";
     console.log(myVar); // "John"
-    // actually, myVar being function scoped, we just erased the previous myVar value "Nick" for "John"
+    // actually, myVar 是函數範圍之內的，我們剛剛覆蓋了之前的 myVar 變數，值從 "Nick" 變成 "John"
   }
-  console.log(myVar); // "John" - see how the instructions in the if block affected this value
+  console.log(myVar); // "John" - 印出來看看區塊如何影響 myVar 這個變數的值
 }
-console.log(myVar); // Undefined, myVar is not accessible outside the function.
+console.log(myVar); // Undefined, myVar 在函數範圍外部無法被使用
 ```
 
-Besides, *var* declared variables are moved to the top of the scope at execution. This is what we call [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
+此外， *var* 宣告出來的變數在程式執行之時就會被移到作用域的頂部。這個就是我們所說的[變數提升 (var hoisting)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting)。
 
-This portion of code:
+這段程式碼：
 
 ```js
-console.log(myVar) // undefined -- no error raised
+console.log(myVar) // undefined -- 沒有錯誤發生
 var myVar = 2;
 ```
 
-is understood at execution like:
+在程式執行過程中被解讀為：
 
 ```js
 var myVar;
-console.log(myVar) // undefined -- no error raised
+console.log(myVar) // undefined -- 沒有錯誤發生
 myVar = 2;
 ```
 
 ##### let
 
-```var``` and ```let ``` are about the same, but ```let``` declared variables
+```var``` 和 ```let ``` 大致上行為相同， ```let``` 在宣告變數時
 
-- are *block scoped*
-- are **not** accessible before they are assigned
-- can't be re-declared in the same scope
+- 作用域是 *區塊範圍 (block scoped)*
+- 在被指派值以前 **無法** 被存取使用
+- 同一個作用域之下不能被重新宣告
 
-Let's see the impact of block-scoping taking our previous example:
+採用我們前面的例子來看看區塊範圍 (block scoped) 的影響：
 
 ```javascript
 function myFunction() {
@@ -214,80 +214,82 @@ function myFunction() {
   if (true) {
     let myVar = "John";
     console.log(myVar); // "John"
-    // actually, myVar being block scoped, we just created a new variable myVar.
-    // this variable is not accessible outside this block and totally independent
-    // from the first myVar created !
+    // 事實上，myVar 是區塊範圍之內的，我們剛剛創造了一個全新的 myVar 變數
+    // 這個變數是無法從區塊範圍以外的地方存取，
+    // 而且它也是完全獨立於我們創造的第一個 myVar 變數！
   }
-  console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affect this value
+  console.log(myVar); // "Nick", 查看 if 區塊中的程式會不會影響到 myVar 這個值
 }
-console.log(myVar); // Undefined, myVar is not accessible outside the function.
+console.log(myVar); // Undefined, myVar 在函數範圍外部無法被使用
 ```
 
-<a name="tdz_sample"></a> Now, what it means for *let* (and *const*) variables for not being accessible before being assigned:
+<a name="tdz_sample"></a> 現在我們來看看 *let* ( 和 *const* ) 變數在被賦值以前無法被使用是什麼意思：
 
 ```js
-console.log(myVar) // raises a ReferenceError !
+console.log(myVar) // 觸發 ReferenceError 錯誤!
 let myVar = 2;
 ```
 
-By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenon is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
+和 *var* 變數比較之下，如果在指派 *let* 或是 *const* 變數的值之前嘗試讀取或是寫入的動作是會引發錯誤的。這種現象通常被稱之為 [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) 或者是 *TDZ*。
 
-> **Note:** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation, it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
+> **注意：** 技術上而言， *let* 和 *const* 變數在聲明時也是會被提升的，但並不是指它們的賦值。因為他們在被指派之前是不能使用的，所以直觀上就像是沒有提升一樣，但它們其實是有的。如果你想知道更多的話請查看 [更加詳細解釋的這篇文章](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)。
 
-In addition, you can't re-declare a *let* variable:
+此外，你不能重新宣告一個 *let* 變數：
 
 ```js
 let myVar = 2;
-let myVar = 3; // Raises a SyntaxError
+let myVar = 3; // 跳出 SyntaxError 錯誤
 ```
 
 ##### const
 
-```const``` declared variables behave like *let* variables, but also they can't be reassigned.
+```const``` 宣告出來的行為如同 *let* 變數，但它們同樣都不能被重新指派。
 
-To sum it up, *const* variables:
+總結一下， *const* 變數：
 
-- are *block scoped*
-- are not accessible before being assigned
-- can't be re-declared in the same scope
-- can't be reassigned
+- 作用域是 *區塊範圍 (block scoped)*
+- 在被指派值以前 **無法** 被存取使用
+- 同一個作用域之下不能被重新宣告
+- 無法被重新指派新值
 
 ```js
 const myVar = "Nick";
-myVar = "John" // raises an error, reassignment is not allowed
+myVar = "John" // 跳出錯誤，不允許重新指派新值
 ```
 
 ```js
 const myVar = "Nick";
-const myVar = "John" // raises an error, re-declaration is not allowed
+const myVar = "John" // 跳出錯誤， 重新宣告是不被允許的
 ```
 
-<a name="const_mutable_sample"></a> But there is a subtlety : ```const``` variables are not [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
+<a name="const_mutable_sample"></a> 但有個微妙之處 : ```const``` 變數是不 [**可變的**](#mutation_def) ! 更具體而言，這代表著 *object* 和 *array* 中由 ```const``` 宣告出來的變數是 **可以** 被改變的。
 
-For objects:
+對於 objects：
+
 ```js
 const person = {
   name: 'Nick'
 };
-person.name = 'John' // this will work ! person variable is not completely reassigned, but mutated
+person.name = 'John' // 這完全可行！ person 這個變數尚未完全被重新指派，但它確實改變了
 console.log(person.name) // "John"
-person = "Sandra" // raises an error, because reassignment is not allowed with const declared variables
+person = "Sandra" // 跳出錯誤，因為重新指派時是不允許使用 const 宣告出來的變數的
 ```
 
-For arrays:
+對於 arrays：
+
 ```js
 const person = [];
-person.push('John'); // this will work ! person variable is not completely reassigned, but mutated
+person.push('John'); // 這完全可行！ person 這個變數尚未完全被重新指派，但它確實改變了 
 console.log(person[0]) // "John"
-person = ["Nick"] // raises an error, because reassignment is not allowed with const declared variables
+person = ["Nick"] // 跳出錯誤，因為重新指派時是不允許使用 const 宣告出來的變數的
 ```
 
-#### External resource
+#### 外部資源
 
 - [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
 - [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
 
-### <a name="arrow_func_concept"></a> Arrow function
+### <a name="arrow_func_concept"></a> 箭頭函數
 
 The ES6 JavaScript update has introduced *arrow functions*, which is another way to declare and use functions. Here are the benefits they bring:
 
@@ -295,7 +297,7 @@ The ES6 JavaScript update has introduced *arrow functions*, which is another way
 - *this* is picked up from surroundings
 - implicit return
 
-#### Sample code
+#### 範例程式碼
 
 - Concision and implicit return
 
@@ -1172,7 +1174,7 @@ console.log(myPerson.age) // 23
 console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 ```
 
-#### External resources
+#### 外部資源
 
 For prototype understanding:
 
@@ -1216,7 +1218,7 @@ async function getGithubUser(handle) { // async keyword allows usage of await in
 getGithubUser('mbeaudru').then(user => console.log(user)); // logging user response - cannot use await syntax since this code isn't in async function
 ```
 
-#### External resources
+#### 外部資源
 
 - [Async/Await - JavaScript.Info](https://javascript.info/async-await)
 - [ES7 Async/Await](http://rossboucher.com/await/#/)
@@ -1226,23 +1228,23 @@ getGithubUser('mbeaudru').then(user => console.log(user)); // logging user respo
 - [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 - [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 
-## Glossary
+## 術語詞彙
 
-### <a name="scope_def"></a> Scope
+### <a name="scope_def"></a> 作用域範圍 (scope)
 
 The context in which values and expressions are "visible," or can be referenced. If a variable or other expression is not "in the current scope," then it is unavailable for use.
 
-Source: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
+資料來源： [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
 
 ### <a name="mutation_def"></a> Variable mutation
 
-A variable is said to have been mutated when its initial value has changed afterward.
+一個變數在被宣告之後發生初始值變化的過程。
 
 ```js
 var myArray = [];
-myArray.push("firstEl") // myArray is being mutated
+myArray.push("firstEl") // myArray 正在變化
 ```
 
-A variable is said to be *immutable* if it can't be mutated.
+如果變數不能被改變的話，我們會說這個變數是 *不可變的 (immutable)* 。
 
-[Check MDN Mutable article](https://developer.mozilla.org/en-US/docs/Glossary/Mutable) for more details.
+[查看 MDN Mutable 文章](https://developer.mozilla.org/en-US/docs/Glossary/Mutable) 了解更多詳細資料。
