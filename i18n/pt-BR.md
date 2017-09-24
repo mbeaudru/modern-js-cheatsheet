@@ -89,5 +89,5 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
       - [Explanation](#explanation-4)
       - [External resources](#external-resources-7)
     * [Glossary](#glossary)
-    + [Scope](#-scope)
-+ [Variable mutation](#-variable-mutation)
+     + [Scope](#-scope)
+     + [Variable mutation](#-variable-mutation)
