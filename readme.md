@@ -869,7 +869,7 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
 ### Object 屬性簡寫
 
-When assigning a variable to an object property, if the variable name is equal to the property name, you can do the following:
+當我們想要把某個物件屬性指派給變數，如果變數名稱等同於屬性名稱，你可以試著執行以下操作：
 
 ```js
 const x = 10;
@@ -879,24 +879,24 @@ console.log(myObj.x) // 10
 
 #### 說明
 
-Usually (pre-ES2015) when you declare a new *object literal* and want to use variables as object properties values, you would write this kind of code:
+通常 (pre-ES2015) 當你宣告一個新的 *物件實體語法 (object literal)* 並且想要使用變數做為物件屬性的值時，你可能會寫出以下類似的程式碼：
 
 ```js
 const x = 10;
 const y = 20;
 
 const myObj = {
-  x: x, // assigning x variable value to myObj.x
-  y: y // assigning y variable value to myObj.y
+  x: x, // 將變數 x 賦值給 myObj.x
+  y: y // 將變數 y 賦值給 myObj.y
 };
 
 console.log(myObj.x) // 10
 console.log(myObj.y) // 20
 ```
 
-As you can see, this is quite repetitive because the properties name of myObj are the same as the variable names you want to assign to those properties.
+你可以發現，這樣的作法其實相當繁瑣，因為 myObj 的屬性名和要指派給這些屬性的變數名稱都是相同的。
 
-With ES2015, when the variable name is the same as the property name, you can do this shorthand:
+透過使用 ES2015，當變數名稱和屬性名稱相同時，你可以把程式碼這樣簡寫：
 
 ```js
 const x = 10;
@@ -917,9 +917,9 @@ console.log(myObj.y) // 20
 
 ### Promises
 
-A promise is an object which can be returned synchronously from an asynchronous function ([ref](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)).
+promise 是一個可以從異步函數 ([參考](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)) 同步回傳的函數。
 
-Promises can be used to avoid [callback hell](http://callbackhell.com/), and they are more and more frequently encountered in modern JavaScript projects.
+Promises 可以被用來避開 [回調地獄 (callback hell)](http://callbackhell.com/)，而且它們在現代 Javascript 專案中也越來越常被使用到。
 
 #### 範例程式碼
 
@@ -937,41 +937,41 @@ fetchingPosts
 
 #### 說明
 
-When you do an *Ajax request* the response is not synchronous because you want a resource that takes some time to come. It even may never come if the resource you have requested is unavailable for some reason (404).
+當你在進行 *Ajax 請求* 時，回傳絕對是非同步的，因為資源請求需要時間。如果你要的資源由於某些原因 (404) 而不能使用，請求的資源可能永遠都不會出現。
 
-To handle that kind of situations, ES2015 has given us *promises*. Promises can have three different states:
+為了處理這類情況，ES2015 為我們提供了 *promises*。Promises 可以有三種不同的狀態：
 
-- Pending
-- Fulfilled
-- Rejected
+- 等待中 (Pending)
+- 達成 (Fulfilled)
+- 拒絕 (Rejected)
 
-Let's say we want to use promises to handle an Ajax request to fetch the resource X.
+假設我們希望使用 promises 去進行 Ajax 請求以獲取 X 這項資源。
 
 ##### 創造 promise
 
-We firstly are going to create a promise. We will use the jQuery get method to do our Ajax request to X.
+首先要創造一個 promise。我們將會使用 jQuery 的 get 方法去進行資源 X 的 Ajax 請求。
 
 ```js
-const xFetcherPromise = new Promise( // Create promise using "new" keyword and store it into a variable
-  function(resolve, reject) { // Promise constructor takes a function parameter which has resolve and reject parameters itself
-    $.get("X") // Launch the Ajax request
-      .done(function(X) { // Once the request is done...
-        resolve(X); // ... resolve the promise with the X value as parameter
+const xFetcherPromise = new Promise( // 使用 "new" 這個關鍵字並把它存至一個變數
+  function(resolve, reject) { // Promise 建構子需要一個有著 resolve 和 reject 這兩個參數的函數作為參數
+    $.get("X") // 執行 Ajax 請求
+      .done(function(X) { // 一旦請求完成...
+        resolve(X); // ... 把 X 做為參數去 resolve promise
       })
-      .fail(function(error) { // If the request has failed...
-        reject(error); // ... reject the promise with the error as parameter
+      .fail(function(error) { // 如果請求失敗...
+        reject(error); // ... 把 error 做為參數去 reject promise
       });
   }
 )
 ```
 
-As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *fulfilled* and *rejected* state.
+如上所示，Promise 物件需要一個帶有兩個參數 ( **resolve** 以及 **reject** ) 的函數。這兩個參數會把 *pending* 狀態的 promise 分別進行 *fulfilled* 和 *rejected* 的處理。
 
-But at the moment, the promise has not been used but only has been declared and stored into *xFetcherPromise* variable! So it doesn't have a current state.
+但在此時此刻，promise 尚未被使用，它僅僅是被宣告並且儲存到 *xFetcherPromise* 這個變數當中！所以它並不存在當前的狀態。
 
 ##### 使用 promise
 
-To use the promise, we do the following:
+為了使用 promise，我們可以進行以下的實作：
 
 ```js
 xFetcherPromise
@@ -983,11 +983,11 @@ xFetcherPromise
   })
 ```
 
-```.then``` is a method that once called will put the xFetcherPromise in **pending** state. When called, the promise body runs, and in this case, an Ajax call is being done.
+```.then``` 是一種方法，一旦被調用將會把 xFetcherPromise 調整至 **pending** 狀態。當被調用時，promise 本體會運行，在這個範例當中，Ajax 請求正在進行中。
 
-If it succeeds, *resolve* is called and the function passed as ```.then``` parameter is executed.
+如果成功，將會調用 *resolve*，並且 ```.then``` 將會執行做為參數傳遞的函數。
 
-If it fails, *reject* is called and the function passed as ```.catch``` parameter is executed.
+如果失敗，將會調用 *reject*，並且 ```.catch``` 將會執行做為參數傳遞的函數。
 
 #### 外部資源
 
