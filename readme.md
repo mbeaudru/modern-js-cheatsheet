@@ -1,7 +1,7 @@
-# Modern JavaScript Cheatsheet
+# Modern JavaScript Cheatsheet 正體中文版
 
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
-<small>Image Credits: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
+<small>圖片來源: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
 
 ## Introduction
 
