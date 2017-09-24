@@ -738,7 +738,7 @@ console.log(sum) //21
 
 ### 展開運算子 "..."
 
-The spread operator ```...``` has been introduced with ES2015 and is used to expand elements of an iterable (like an array) into places where multiple elements can fit.
+展開運算子 ```...``` 的語法在 ES2015 之下已經支援了，而它將會被用於把可迭代的元素 (像是 array) 擴展到容納更多元素。
 
 #### 範例程式碼
 
@@ -774,16 +774,16 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
 ##### 迭代用法 (如同 array)
 
-If we have the two following arrays:
+如果我們有以下兩個 arrays：
 
 ```js
 const arr1 = ["a", "b", "c"];
 const arr2 = [arr1, "d", "e", "f"]; // [["a", "b", "c"], "d", "e", "f"]
 ```
 
-*arr2* the first element is an array because *arr1* is injected as is into *arr2*. But what we want is *arr2* to be an array of letters. To do so, we can *spread* the elements of *arr1* into *arr2*.
+*arr2* 中的第一個元素是 array ，因為 *arr1* 是被注入到 *arr2* 之中的。但我們真正想要得到的 *arr2* 是一個純字母的 array。為了做到這點，我們可以將 *arr1* *擴展 (spread)* 到 *arr2*。
 
-With spread operator
+透過展開運算子
 
 ```js
 const arr1 = ["a", "b", "c"];
@@ -792,7 +792,7 @@ const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 
 ##### 不定參數
 
-In function parameters, we can use the rest operator to inject parameters into an array we can loop in. There is already an **argument** object bound to every function that is equal to an array of all the parameters passed into the function.
+在有著不定參數的函數當中，我們可以使用 rest 運算子將參數注入到我們可以進行迴圈操作的 array。這裡已經有一個名為 **argument** 的 object 被綁定在函數上，等同於把 array 中的所有參數都傳遞給函數。
 
 ```js
 function myFunc() {
@@ -809,17 +809,17 @@ myFunc("Nick", "Anderson", 10, 12, 6);
 // 6
 ```
 
-But let's say that we want this function to create a new student with its grades and with its average grade. Wouldn't it be more convenient to extract the first two parameters into two separate variables, and then have all the grades in an array we can iterate over?
+但是如果說我們希望創造的是一個包含他的各科成績和平均成績的新學生，提取前兩個參數 (firstName 和 lastName)並把剩下的元素迭代生成一個 array 的作法是否會更有效率呢？
 
-That's exactly what the rest operator allows us to do!
+這正是 rest 運算子允許我們做的事！
 
 ```js
 function createStudent(firstName, lastName, ...grades) {
   // firstName = "Nick"
   // lastName = "Anderson"
-  // [10, 12, 6] -- "..." takes all other parameters passed and creates a "grades" array variable that contains them
+  // [10, 12, 6] -- "..." 運算子會把 firstName 和 lastName 以外的參數傳入，同時創造一個包含這些元素，叫做 "grades" 的 array
 
-  const avgGrade = grades.reduce((acc, curr) => acc + curr, 0) / grades.length; // computes average grade from grades
+  const avgGrade = grades.reduce((acc, curr) => acc + curr, 0) / grades.length; // 計算平均成績
 
   return {
     firstName: firstName,
@@ -839,25 +839,25 @@ console.log(student);
 // }
 ```
 
-> **Note:** createStudent function is bad because we don't check if grades.length exists or is different from 0. But it's easier to read this way, so I didn't handle this case.
+> **注意：** createStudent 這個函數的舉例其實並不太好，因為我們並沒有去檢查 grades.length 是否存在又或者它根本等於 0。但是這個例子的確能夠幫助我們更為容易理解其中運作，所以我並沒有花額外的時間處理這個情況，請見諒。
 
 ##### Object 屬性擴展
 
-For this one, I recommend you read previous explanations about the rest operator on iterables and function parameters.
+關於這點，我建議你去閱讀先前有關 rest 運算子，迭代運作和帶有不定參數的函數等相關說明。
 
 ```js
 const myObj = { x: 1, y: 2, a: 3, b: 4 };
-const { x, y, ...z } = myObj; // object destructuring here
+const { x, y, ...z } = myObj; // object 在此處被解耦
 console.log(x); // 1
 console.log(y); // 2
 console.log(z); // { a: 3, b: 4 }
 
-// z is the rest of the object destructured: myObj object minus x and y properties destructured
+// 解耦後剩餘的部分都放在 z : 也就是 myObj 這個物件經過解耦後鎖剩下的東西
 
 const n = { x, y, ...z };
 console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
-// Here z object properties are spread into n
+// 把 z 所包含的屬性擴展到 n 當中
 ```
 
 #### 外部資源
