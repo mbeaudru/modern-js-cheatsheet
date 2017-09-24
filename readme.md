@@ -6,6 +6,7 @@
 <a name="introduction"></a>
 ## 介紹
 
+<a name="motivation"></a>
 ### 動機
 
 本文檔整理了各種現代化 JavaScript 開發過程中經常使用到的腳本。
@@ -16,6 +17,7 @@
 
 > **注意:** 此處介紹的大部分概念出自於 JavaScript 的語言更新 (ES2015，更多人稱其作 ES6)。你可以在[這個好地方](http://es6-features.org)找到更多添加的新功能。
 
+<a name="complementary-resources"></a>
 ### 配套資源
 
 當你在試圖理解一個新概念時，我建議你可以去瀏覽以下這些資源尋找解答：
@@ -27,6 +29,7 @@
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
 - [Google](https://www.google.com/) 搜尋特定相關主題的部落格文章和資源
 
+<a name="table-of-contents"></a>
 ## 目錄
 
 - [Modern JavaScript cheatsheet 繁體中文版](#modern-javascript-cheatsheet)
@@ -36,65 +39,67 @@
   * [目錄](#table-of-contents)
   * [概念](#notions)
     + [變數聲明： var, const, let](#variable-declaration-var-const-let)
-      - [簡短解釋](#short-explanation)
-      - [範例程式碼](#sample-code)
-      - [詳細說明](#detailed-explanation)
-      - [外部資源](#external-resource)
-    + [箭頭函數](#-arrow-function)
-      - [範例程式碼](#sample-code-1)
-      - [詳細說明](#detailed-explanation-1)
-        * [簡潔性](#concision)
-        * [*this* 關鍵字參照](#this-reference)
-      - [有用資源](#useful-resources)
-    + [函數預設值](#function-default-parameter-value)
-      - [外部資源](#external-resource-1)
-    + [objects 和 arrays 的解耦](#destructuring-objects-and-arrays)
-      - [說明和範例程式碼](#explanation-with-sample-code)
-      - [有用資源](#useful-resources-1)
-    + [Array 的操作方法 - map / filter / reduce](#array-methods---map--filter--reduce)
+      - [簡短解釋](#short-explanation-1)
       - [範例程式碼](#sample-code-2)
-      - [說明](#explanation)
-        * [Array.prototype.map()](#arrayprototypemap)
-        * [Array.prototype.filter()](#arrayprototypefilter)
-        * [Array.prototype.reduce()](#arrayprototypereduce)
-      - [外部資源](#external-resource)
-    + [展開運算子 "..."](#spread-operator-)
-      - [範例程式碼](#sample-code-3)
-      - [說明](#explanation-1)
-        * [迭代用法 (如同 array)](#in-iterables-like-array)
-        * [不定參數](#function-rest-parameter)
-        * [Object 屬性擴展](#object-properties-spreading)
-      - [外部資源](#external-resources)
-    + [Object 屬性簡寫](#object-property-shorthand)
-      - [說明](#explanation-2)
-      - [外部資源](#external-resources-1)
-    + [Promises](#promises)
-      - [範例程式碼](#sample-code-4)
-      - [說明](#explanation-3)
-        * [創造 promise](#create-the-promise)
-        * [使用 promise](#use-the-promise)
-      - [外部資源](#external-resources)
-    + [模板字符串](#template-literals)
+      - [詳細說明](#detailed-explanation-3)
+      - [外部資源](#external-resource-4)
+    + [箭頭函數](#-arrow-function-4)
       - [範例程式碼](#sample-code-5)
-      - [外部資源](#external-resources-2)
-    + [Imports / Exports](#imports--exports)
-      - [說明與範例程式碼](#explanation-with-sample-code-1)
-      - [外部資源](#external-resources-3)
-    + [JavaScript *this*](#-javascript-this)
-      - [外部資源](#external-resources-4)
-    + [Class](#class)
-      - [範例](#samples)
-      - [外部資源](#external-resources-5)
-    + [Async Await](#async-await)
-      - [範例程式碼](#sample-code-6)
-      - [說明](#explanation-4)
-      - [外部資源](#external-resources-7)
-  * [術語詞彙](#glossary)
-    + [作用域範圍](#-作用域範圍)
-    + [變數變異](#-變數變異)
+      - [詳細說明](#detailed-explanation-6)
+        * [簡潔性](#concision-7)
+        * [*this* 關鍵字參照](#this-reference-8)
+      - [有用資源](#useful-resources-9)
+    + [函數預設值](#function-default-parameter-value-10)
+      - [外部資源](#external-resource-11)
+    + [objects 和 arrays 的解耦](#destructuring-objects-and-arrays-12)
+      - [說明和範例程式碼](#explanation-with-sample-code-13)
+      - [有用資源](#useful-resources-14)
+    + [Array 的操作方法 - map / filter / reduce](#array-methods---map--filter--reduce-15)
+      - [範例程式碼](#sample-code-16)
+      - [說明](#explanation-17)
+        * [Array.prototype.map()](#arrayprototypemap-18)
+        * [Array.prototype.filter()](#arrayprototypefilter-19)
+        * [Array.prototype.reduce()](#arrayprototypereduce-20)
+      - [外部資源](#external-resource-21)
+    + [展開運算子 "..."](#spread-operator-22)
+      - [範例程式碼](#sample-code-23)
+      - [說明](#explanation-24)
+        * [迭代用法 (如同 array)](#in-iterables-like-array-25)
+        * [不定參數](#function-rest-parameter-26)
+        * [Object 屬性擴展](#object-properties-spreading-27)
+      - [外部資源](#external-resources-28)
+    + [Object 屬性簡寫](#object-property-shorthand-29)
+      - [說明](#explanation-30)
+      - [外部資源](#external-resources-31)
+    + [Promises](#promises-32)
+      - [範例程式碼](#sample-code-33)
+      - [說明](#explanation-34)
+        * [創造 promise](#create-the-promise-35)
+        * [使用 promise](#use-the-promise-36)
+      - [外部資源](#external-resources-37)
+    + [模板字符串](#template-literals-38)
+      - [範例程式碼](#sample-code-39)
+      - [外部資源](#external-resources-40)
+    + [Imports / Exports](#imports--exports-41)
+      - [說明與範例程式碼](#explanation-with-sample-code-42)
+      - [外部資源](#external-resources-43)
+    + [JavaScript *this*](#-javascript-this-44)
+      - [外部資源](#external-resources-45)
+    + [Class](#class-46)
+      - [範例](#samples-47)
+      - [外部資源](#external-resources-48)
+    + [Async Await](#async-await-49)
+      - [範例程式碼](#sample-code-50)
+      - [說明](#explanation-51)
+      - [外部資源](#external-resources-52)
+  * [術語詞彙](#glossary-53)
+    + [作用域範圍](#-scope-54)
+    + [變數變異](#-variable-variance-55)
 
+<a name="notions"></a>
 ## 概念
 
+<a name="variable-declaration-var-const-let"></a>
 ### 變數聲明： var, const, let
 
 在 JavaScript 中有三個不同關鍵字可用於宣告一個變數，分別是 ```var```， ```let``` 和 ```const```。
