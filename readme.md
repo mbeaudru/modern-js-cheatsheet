@@ -1235,7 +1235,7 @@ getGithubUser('mbeaudru').then(user => console.log(user)); // 印出 user 的值
 
 ### <a name="scope_def"></a> 作用域範圍 (scope)
 
-The context in which values and expressions are "visible," or can be referenced. If a variable or other expression is not "in the current scope," then it is unavailable for use.
+在上下文之中有著 "明顯可見的" 值和表達式，又或者是可以被參照的。如果變數或是表達式並不在 "當前作用域和範圍"，那麼它將會是不能用的。
 
 資料來源： [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
 
