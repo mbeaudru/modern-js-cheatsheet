@@ -1,3 +1,4 @@
+<a name="#modern-javascript-cheatsheet"></a>
 # Modern JavaScript Cheatsheet 正體中文版
 
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
@@ -104,6 +105,7 @@
 
 在 JavaScript 中有三個不同關鍵字可用於宣告一個變數，分別是 ```var```， ```let``` 和 ```const```。
 
+<a name="short-explanation-1"></a>
 #### 簡短解釋
 
 使用 ```const``` 關鍵字宣告的變數無法被重新指派, 而 ```let``` 和 ```var``` 是可以的。
@@ -141,6 +143,7 @@
   </tr>
 </table>
 
+<a name="sample-code-2"></a>
 #### 範例程式碼
 
 ```javascript
@@ -154,6 +157,7 @@ person = "John";
 console.log(person) // "John" 在 let 的使用下允許被重新指派
 ```
 
+<a name="detailed-explanation-3"></a>
 #### 詳細說明
 
 變數的 [*作用域範圍 (scope)*](#scope_def) 大致上意味著 "這個變數的效力可被作用在哪段程式碼 (where is this variable available in the code)"。
@@ -290,12 +294,13 @@ console.log(person[0]) // "John"
 person = ["Nick"] // 跳出錯誤，因為重新指派時是不允許使用 const 宣告出來的變數的
 ```
 
+<a name="external-resource-4"></a>
 #### 外部資源
 
 - [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
 - [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
 
-### <a name="arrow_func_concept"></a> 箭頭函數
+### <a name="-arrow-function-4"></a> 箭頭函數
 
 ES6 的更新正式引入了 *箭頭函數 (arrow functions)*，這是另外一種宣告和使用函數的方法。以下是它們所帶來的好處：
 
@@ -303,6 +308,7 @@ ES6 的更新正式引入了 *箭頭函數 (arrow functions)*，這是另外一�
 - *this* 的值繼承自外圍作用域 (*this* is picked up from surroundings)
 - 隱式回傳 (implicit return)
 
+<a name="sample-code-5"></a>
 #### 範例程式碼
 
 - 簡潔性和隱式回傳 (implicit return)
@@ -331,8 +337,10 @@ function myFunc() {
 }
 ```
 
+<a name="detailed-explanation-6"></a>
 #### 詳細說明
 
+<a name="concision-7"></a>
 ##### 簡潔性
 
 箭頭函數在諸多方面都較傳統函數來的更為簡潔。讓我們來看看所有可能的情況：
@@ -399,6 +407,7 @@ function myFunc() {
   }
 ```
 
+<a name="this-reference-8"></a>
 ##### *this* 關鍵字參照
 
 要理解箭頭函數的精妙之處，你一定要清楚 [this](#this_def) 在 JavaScript 中是如何運作的。
@@ -440,12 +449,14 @@ function myFunc() {
 }
 ```
 
+<a name="useful-resources-9"></a>
 #### 有用資源
 
 - [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
 - [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 - [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
 
+<a name="function-default-parameter-value-10"></a>
 ### 函數預設值
 
 從 ES2015 JavaScript 更新之後，你可以透過下列的語法為函數中的參數設定預設值：
@@ -470,17 +481,20 @@ console.log(myFunc(null)) // null -- 提供一個值 (null)，詳細資料請見
 
 > **注意：** 預設值的指派可以搭配解耦參數一同使用 (參照下一個概念的實際例子)
 
+<a name="external-resource-11"></a>
 #### 外部資源
 
 - [Default parameter value - ES6 Features](http://es6-features.org/#DefaultParameterValues)
 - [Default parameters - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
 
+<a name="destructuring-objects-and-arrays-12"></a>
 ### objects 和 arrays 的解耦
 
 *解耦 (Destructuring)* 的概念是從 objects 或是 arrays 當中提取部分用值一種相當方便的方法。
 
 舉個簡單的實例，*destructuring* 可以被用來解耦函數中的參數或者像是 React 專案中 *this.props* 這樣的用法。
 
+<a name="explanation-with-sample-code-13"></a>
 #### 說明和範例程式碼
 
 - Object
@@ -576,12 +590,14 @@ console.log(x) // "a"
 console.log(y) // "b"
 ```
 
+<a name="useful-resources-14"></a>
 #### 有用資源
 
 - [ES6 Features - Destructuring Assignment](http://es6-features.org/#ArrayMatching)
 - [Destructuring Objects - WesBos](http://wesbos.com/destructuring-objects/)
 - [ExploringJS - Destructuring](http://exploringjs.com/es6/ch_destructuring.html)
 
+<a name="array-methods---map--filter--reduce-1"></a>
 ### Array 的操作方法 - map / filter / reduce
 
 *Map*，*filter* 和 *reduce* 都是 array 提供的方法，它們源自於 [*functional programming*](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0) 開發範式。
@@ -596,6 +612,7 @@ console.log(y) // "b"
 
 透過這三種方法，你將可以避免在大多數情況下使用 *for* 和 *forEach*。當你想做一個 *for* 迴圈時，試著用 *map*，*filter* 和 *reduce* 組合看看。起初你可能會覺得窒礙難行，因為它需要你學習一種新的思維方式，但一旦你掌握它了，事情也將變得更加容易。
 
+<a name="sample-code-16"></a>
 #### 範例程式碼
 
 ```js
@@ -623,6 +640,7 @@ const aboveTenSum = students
 console.log(aboveTenSum) // 44 -- 10 (Nick) + 15 (John) + 19 (Julia), Nathalie below 10 is ignored
 ```
 
+<a name="explanation-17"></a>
 #### 說明
 
 讓我們來思考下列這個 array：
@@ -631,6 +649,7 @@ console.log(aboveTenSum) // 44 -- 10 (Nick) + 15 (John) + 19 (Julia), Nathalie b
 const numbers = [0, 1, 2, 3, 4, 5, 6];
 ```
 
+<a name="arrayprototypemap-18"></a>
 ##### Array.prototype.map()
 
 ```js
@@ -653,6 +672,7 @@ console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 
 > **注意：** 如果你不需要回傳一個新的 array 且只想實作一個帶有副作用的迴圈，使用 for / forEach 迴圈會更為符合你所需。
 
+<a name="arrayprototypefilter-19"></a>
 ##### Array.prototype.filter()
 
 ```js
@@ -664,6 +684,7 @@ console.log(evenNumbers); // [0, 2, 4, 6]
 
 我們在這個充滿 *numbers* 的 array 上使用 .filter 方法，過濾器將會遍歷當中的每一個元素並回傳給我們的函數。函數的目標是回傳一個布林值，它將會確定當前值是否被保留。過濾之後回傳的是一個僅保留所需值的 array。
 
+<a name="arrayprototypereduce-20"></a>
 ##### Array.prototype.reduce()
 
 reduce 方法的目標是將進行迭代的 array 中的所有元素 *減少* 到只留下單一值。計算這些元素的方式將取決於你的需求。
@@ -738,14 +759,17 @@ console.log(sum) //21
 
 因為它是最後一個迭代步驟了， **.reduce** 將回傳 21。
 
+<a name="external-resource-21"></a>
 #### 外部資源
 
 - [Understanding map / filter / reduce in JS](https://hackernoon.com/understanding-map-filter-and-reduce-in-javascript-5df1c7eee464)
 
+<a name="spread-operator-22"></a>
 ### 展開運算子 "..."
 
 展開運算子 ```...``` 的語法在 ES2015 之下已經支援了，而它將會被用於把可迭代的元素 (像是 array) 擴展到容納更多元素。
 
+<a name="sample-code-23"></a>
 #### 範例程式碼
 
 ```js
@@ -776,8 +800,10 @@ const n = { x, y, ...z };
 console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 ```
 
+<a name="explanation-24"></a>
 #### 說明
 
+<a name="in-iterables-like-array-25"></a>
 ##### 迭代用法 (如同 array)
 
 如果我們有以下兩個 arrays：
@@ -796,6 +822,7 @@ const arr1 = ["a", "b", "c"];
 const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 ```
 
+<a name="function-rest-parameter-26"></a>
 ##### 不定參數
 
 在有著不定參數的函數當中，我們可以使用 rest 運算子將參數注入到我們可以進行迴圈操作的 array。這裡已經有一個名為 **argument** 的 object 被綁定在函數上，等同於把 array 中的所有參數都傳遞給函數。
@@ -847,6 +874,7 @@ console.log(student);
 
 > **注意：** createStudent 這個函數的舉例其實並不太好，因為我們並沒有去檢查 grades.length 是否存在又或者它根本等於 0。但是這個例子的確能夠幫助我們更為容易理解其中運作，所以我並沒有花額外的時間處理這個情況，請見諒。
 
+<a name="object-properties-spreading-27"></a>
 ##### Object 屬性擴展
 
 關於這點，我建議你去閱讀先前有關 rest 運算子，迭代運作和帶有不定參數的函數等相關說明。
@@ -866,6 +894,7 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 // 把 z 所包含的屬性擴展到 n 當中
 ```
 
+<a name="external-resources-28"></a>
 #### 外部資源
 
 - [TC39 - Object rest/spread](https://github.com/tc39/proposal-object-rest-spread)
@@ -873,6 +902,7 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 - [JavaScript & the spread operator](https://codeburst.io/javascript-the-spread-operator-a867a71668ca)
 - [6 Great uses of the spread operator](https://davidwalsh.name/spread-operator)
 
+<a name="object-property-shorthand-29"></a>
 ### Object 屬性簡寫
 
 當我們想要把某個物件屬性指派給變數，如果變數名稱等同於屬性名稱，你可以試著執行以下操作：
@@ -883,6 +913,7 @@ const myObj = { x };
 console.log(myObj.x) // 10
 ```
 
+<a name="explanation-30"></a>
 #### 說明
 
 通常 (pre-ES2015) 當你宣告一個新的 *物件實體語法 (object literal)* 並且想要使用變數做為物件屬性的值時，你可能會寫出以下類似的程式碼：
@@ -917,16 +948,19 @@ console.log(myObj.x) // 10
 console.log(myObj.y) // 20
 ```
 
+<a name="external-resources-31"></a>
 #### 外部資源
 
 - [Property shorthand - ES6 Features](http://es6-features.org/#PropertyShorthand)
 
+<a name="promises-32"></a>
 ### Promises
 
 promise 是一個可以從異步函數 ([參考](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)) 同步回傳的函數。
 
 Promises 可以被用來避開 [回調地獄 (callback hell)](http://callbackhell.com/)，而且它們在現代 Javascript 專案中也越來越常被使用到。
 
+<a name="sample-code-33"></a>
 #### 範例程式碼
 
 ```js
@@ -941,6 +975,7 @@ fetchingPosts
   .catch(err => console.log(err));
 ```
 
+<a name="explanation-34"></a>
 #### 說明
 
 當你在進行 *Ajax 請求* 時，回傳絕對是非同步的，因為資源請求需要時間。如果你要的資源由於某些原因 (404) 而不能使用，請求的資源可能永遠都不會出現。
@@ -953,6 +988,7 @@ fetchingPosts
 
 假設我們希望使用 promises 去進行 Ajax 請求以獲取 X 這項資源。
 
+<a name="create-the-promise-35"></a>
 ##### 創造 promise
 
 首先要創造一個 promise。我們將會使用 jQuery 的 get 方法去進行資源 X 的 Ajax 請求。
@@ -975,6 +1011,7 @@ const xFetcherPromise = new Promise( // 使用 "new" 這個關鍵字並把它存
 
 但在此時此刻，promise 尚未被使用，它僅僅是被宣告並且儲存到 *xFetcherPromise* 這個變數當中！所以它並不存在當前的狀態。
 
+<a name="use-the-promise-36"></a>
 ##### 使用 promise
 
 為了使用 promise，我們可以進行以下的實作：
@@ -995,6 +1032,7 @@ xFetcherPromise
 
 如果失敗，將會調用 *reject*，並且 ```.catch``` 將會執行做為參數傳遞的函數。
 
+<a name="external-resources-37"></a>
 #### 外部資源
 
 - [JavaScript Promises for dummies - Jecelyn Yeen](https://scotch.io/tutorials/javascript-promises-for-dummies)
@@ -1004,12 +1042,14 @@ xFetcherPromise
 - [JavaScript Promises: an Introduction - Jake Archibald](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
 - [Promise documentation - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
+<a name="template-literals-38"></a>
 ### 模板字符串
 
 模板字符串是一種單行和多行字符串的 [*表達式差值 (expression interpolation)*](https://en.wikipedia.org/wiki/String_interpolation)。
 
 換句話說，它是一種新的字符串語法，你可以更方便地在 Javascript 表達式中使用 (例如變數)。
 
+<a name="sample-code-39"></a>
 #### 範例程式碼
 
 ```js
@@ -1019,17 +1059,20 @@ const name = "Nick";
 // Hello Nick, the following expression is equal to four: 4
 ```
 
+<a name="external-resources-40"></a>
 #### 外部資源
 
 - [String interpolation - ES6 Features](http://es6-features.org/#StringInterpolation)
 - [ES6 Template Strings - Addy Osmani](https://developers.google.com/web/updates/2015/01/ES6-Template-Strings)
 
+<a name="imports--exports-41"></a>
 ### Imports / Exports
 
 ES6 模組被用來存取顯式輸出 (explicitly export)的變數或是函數。
 
 我強烈建議你去瀏覽 MDN 上有關 import/export (請參考下面的外部資源) 的文章，它們寫的既簡潔又完整。
 
+<a name="explanation-with-sample-code-42"></a>
 #### 說明與範例程式碼
 
 - Named exports
@@ -1089,6 +1132,7 @@ const result = sum(1, 2);
 console.log(result) // 3
 ```
 
+<a name="external-resources-43"></a>
 #### 外部資源
 
 - [Export - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
@@ -1096,7 +1140,7 @@ console.log(result) // 3
 - [Understanding ES6 Modules](https://www.sitepoint.com/understanding-es6-modules/)
 - [Modules in JavaScript](http://exploringjs.com/es6/ch_modules.html#sec_modules-in-javascript)
 
-### <a name="this_def"></a> JavaScript *this*
+### <a name="-javascript-this-44"></a> JavaScript *this*
 
 *this* 這個運算子的行為和其他語言是不太一樣的，在大多數情況之下是由函數的調用方式決定。([參考： MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)).
 
@@ -1131,11 +1175,13 @@ person.myFunc("test") // person Object -- 綁定方法對原有方法並無造�
 myBoundFunc("test") // "hello" -- myBoundFunc 是把帶有 "hello" 的 person.myFunc 綁定到 this
 ```
 
+<a name="external-resources-45"></a>
 #### 外部資源
 
 - [Understanding JavaScript Function Invocation and "this" - Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/)
 - [JavaScript this - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
 
+<a name="class-46"></a>
 ### Class
 
 JavaScript 是一個 [基於原型](https://en.wikipedia.org/wiki/Prototype-based_programming) 的語言 (然而 Java 是 [基於類別](https://en.wikipedia.org/wiki/Class-based_programming) 的語言)。 ES6 引入了 JavaScript 類別，它們是基於原型繼承的語法糖，而 **不是** 真正意義上基於類別的繼承模型。([參考](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)).
@@ -1149,6 +1195,7 @@ JavaScript 是一個 [基於原型](https://en.wikipedia.org/wiki/Prototype-base
 - [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
 - [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 
+<a name="samples-47"></a>
 #### 範例
 
 ES6 之前的原型語法：
@@ -1182,6 +1229,7 @@ console.log(myPerson.age) // 23
 console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 ```
 
+<a name="external-resources-48"></a>
 #### 外部資源
 
 更好的理解原型：
@@ -1196,6 +1244,7 @@ console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 - [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
+<a name="async-await-49"></a>
 ### Async Await
 
 除了 [Promises](#promises) 以外，還有一種新語法你可能會遇到，那就是被稱作非同步的 *async / await*。
@@ -1206,6 +1255,7 @@ async/await 的目的在於簡化同步使用 promise 的行為，並對一組 p
 
 > **注意：** [*await* must be used in an *async* function](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9#f3f0) 意味著你不能程式碼的頂部使用 await，因為它並不在異步函數之內。
 
+<a name="sample-code-50"></a>
 #### 說明與範例程式碼
 
 *Async / Await* 是基於 promises 之上的新概念，但它們更允許你使用命令式風格 (imperative style)去撰寫程式。
@@ -1227,6 +1277,7 @@ async function getGithubUser(handle) { // async 這個關鍵字允許在函數�
 getGithubUser('mbeaudru').then(user => console.log(user)); // 印出 user 的值 - 不能使用 await 語法，因為此段程式碼並不在 async 函數當中
 ```
 
+<a name="external-resources-52"></a>
 #### 外部資源
 
 - [Async/Await - JavaScript.Info](https://javascript.info/async-await)
@@ -1237,15 +1288,16 @@ getGithubUser('mbeaudru').then(user => console.log(user)); // 印出 user 的值
 - [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 - [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 
+<a name="glossary-53"></a>
 ## 術語詞彙
 
-### <a name="作用域範圍"></a> 作用域範圍 (scope)
+### <a name="-scope-54"></a> 作用域範圍 (scope)
 
 在上下文之中有著 "明顯可見的 (visible)" 值和表達式，又或者是可以被參照的。如果變數或是表達式並不在 "當前作用域和範圍"，那麼它將會是不能用的。
 
 資料來源： [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
 
-### <a name="變數變異"></a> 變數變異 (Variable mutation)
+### <a name="-variable-variance-55"></a> 變數變異 (Variable mutation)
 
 一個變數在被宣告之後發生初始值變化的過程。
 
