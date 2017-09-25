@@ -78,6 +78,8 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [External resources](#external-resources-2)
     + [Imports / Exports](#imports--exports)
       - [Explanation with sample code](#explanation-with-sample-code-1)
+        * [Named exports](#named-exports)
+        * [Default import / export](#default-import--export)
       - [External resources](#external-resources-3)
     + [JavaScript *this*](#-javascript-this)
       - [External resources](#external-resources-4)
@@ -1023,7 +1025,7 @@ I highly recommend to take a look at MDN resources on import/export (see externa
 
 #### Explanation with sample code
 
-- Named exports
+##### Named exports
 
 Named exports are used to export several values from a module. You can only name-export variables (not functions or class), so if you want to name-export a function, you have to store it in a variable before.
 
@@ -1048,7 +1050,15 @@ console.log(constants.pi) // 3.14
 console.log(constants.exp) // 2.7
 ```
 
-- Default import / export
+While named imports looks like *destructuring*, they have a different syntax and are not the same. They don't support default values nor *deep* destructuring.
+
+Besides, you can do aliases but the syntax is different from the one used in destructuring:
+
+```js
+import { foo as bar } from 'myFile.js'; // foo is imported and injected into a new bar variable
+```
+
+##### Default import / export
 
 Concerning the default export, there is only a single default export per module. A default export can be a function, a class, an object or anything else. This value is considered the "main" exported value since it will be the simplest to import. [Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
 
@@ -1082,9 +1092,12 @@ console.log(result) // 3
 
 #### External resources
 
+- [ES6 Modules in bulletpoints](https://ponyfoo.com/articles/es6#modules)
 - [Export - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
 - [Import - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 - [Understanding ES6 Modules](https://www.sitepoint.com/understanding-es6-modules/)
+- [Destructuring special case - import statements](https://ponyfoo.com/articles/es6-destructuring-in-depth#special-case-import-statements)
+- [Misunderstanding ES6 Modules - Kent C. Dodds](https://medium.com/@kentcdodds/misunderstanding-es6-modules-upgrading-babel-tears-and-a-solution-ad2d5ab93ce0)
 - [Modules in JavaScript](http://exploringjs.com/es6/ch_modules.html#sec_modules-in-javascript)
 
 ### <a name="this_def"></a> JavaScript *this*
