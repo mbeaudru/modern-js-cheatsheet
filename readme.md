@@ -86,8 +86,8 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [External resources](#external-resources-5)
     + [Async Await](#async-await)
       - [Sample code](#sample-code-6)
-      - [Explanation](#explanation-4)
-      - [External resources](#external-resources-7)
+      - [Explanation with sample code](#explanation-with-sample-code-2)
+      - [External resources](#external-resources-6)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1196,17 +1196,12 @@ The purpose of async/await functions is to simplify the behavior of using promis
 
 > **Note 2:** [*await* must be used in an *async* function](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9#f3f0), which means that you can't use await in the top level of our code since that is not inside an async function.
 
-#### Explanation with sample code
-
-*Async / Await* is built on promises but they allow a more imperative style of code.
-
-An `await` expression causes `async` function to pause the execution, wait for promise to resolve, and then resume the execution once the value is resolved. Any `async` function returns the `Promise`, and will be resolved to returned value.
+#### Sample code
 
 ```js
-async function getGithubUser(handle) { // async keyword allows usage of await in the function and means function returns a promise 
+async function getGithubUser(username) { // async keyword allows usage of await in the function and means function returns a promise
   try { // this is how errors are handled with async / await
-    const url = `https://api.github.com/users/${handle}`;
-    const response = await fetch(url); // "synchronously" waiting fetch promise to resolve before going to next line
+    const response = await fetch(`https://api.github.com/users/${username}`); // "synchronously" waiting fetch promise to resolve before going to next line
     return response.json();
   } catch (err) {
     alert(err);
@@ -1215,6 +1210,93 @@ async function getGithubUser(handle) { // async keyword allows usage of await in
 
 getGithubUser('mbeaudru').then(user => console.log(user)); // logging user response - cannot use await syntax since this code isn't in async function
 ```
+
+#### Explanation with sample code
+
+*Async / Await* is built on promises but they allow a more imperative style of code.
+
+*async* operator turns a function into a *promise* in which you can use the *await* operator.
+
+```js
+async function myFunc() {
+  // we can use await operator because this function is async
+  try {
+    return "hello world";
+  } catch(e) {
+    throw new Error();
+  }
+}
+
+myFunc().then(msg => console.log(msg)) // "hello world" -- myFunc is turned into a promise because of async operator
+```
+
+When the *return* statement of an async function is reached, the promise is fulfilled with the value returned. If an error is thrown inside an async function, the promise state will turn to *rejected*.
+
+*await* operator is used to wait for a *Promise* to be fulfilled and only can be used inside an *async* function body. When encountered, the code execution is paused until the promise is fulfilled.
+
+> **Note :** *fetch* is a Promise that allows to do an AJAX request
+
+Let's see how we could fetch a github user with promises first:
+
+```js
+function getGithubUser(username) {
+  return new Promise((resolve, reject) => {
+    fetch(`https://api.github.com/users/${username}`)
+      .then(response => {
+        const user = response.json();
+        resolve(user);
+      })
+      .catch(err => reject(err));
+  })
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+Here's the *async / await* equivalent:
+
+```js
+async function getGithubUser(username) { // promise + await keyword usage allowed
+  try { // We handle async function errors with try / catch
+    const response = await fetch(`https://api.github.com/users/${username}`); // Execution stops here until fetch promise is fulfilled.
+    const user = response.json();
+    return user; // equivalent of resolving the getGithubUser promise with user value.
+  } catch (err) {
+    throw new Error(err); // equivalent of rejecting getGithubUser promise with err value.
+  }
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+*async / await* syntax is particularly convenient when you need to chain promises that are interdependent.
+
+For instance, if you need to get a token in order to be able to fetch a blog post on a database and then the author informations:
+
+```js
+async function fetchPostById(postId) {
+  try {
+    const token = await fetch('token_url');
+    const post = await fetch(`/posts/${postId}?token=${token}`);
+    const author = await fetch(`/users/${post.authorId}`);
+
+    post.author = author;
+    return post;
+  } catch(e) {
+    throw new Error(e);
+  }
+}
+
+fetchPostById('gzIrzeo64')
+  .then(post => console.log(post))
+  .catch(err => console.log(err));
+```
+
+> **Note :** As you can see, *try / catch* are necessary to handle errors. But if you are making *express routes*, you can use a middleware to avoid error handling and have a very pleasant code to read. See [this article from Alex Bazhenov](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016) to learn more.
 
 #### External resources
 
@@ -1225,6 +1307,7 @@ getGithubUser('mbeaudru').then(user => console.log(user)); // logging user respo
 - [Using Async Await in Express with Node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 - [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 - [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 
 ## Glossary
 
