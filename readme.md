@@ -61,7 +61,7 @@
       - [有用資源](#useful-resources-9)
     + [函數預設值](#function-default-parameter-value-10)
       - [外部資源](#external-resource-11)
-    + [objects 和 arrays 的解耦](#destructuring-objects-and-arrays-12)
+    + [objects 和 arrays 的解構](#destructuring-objects-and-arrays-12)
       - [說明和範例程式碼](#explanation-with-sample-code-13)
       - [有用資源](#useful-resources-14)
     + [Array 的操作方法 - map / filter / reduce](#array-methods---map--filter--reduce-15)
@@ -488,7 +488,7 @@ console.log(myFunc(null)) // null -- 提供一個值 (null)，詳細資料請見
 
 換句話說，如果你傳入的是 *null* ，那麼預設值的機制是不會被觸發的。
 
-> **注意：** 預設值的指派可以搭配解耦參數一同使用 (參照下一個概念的實際例子)
+> **注意：** 預設值的指派可以搭配解構參數一同使用 (參照下一個概念的實際例子)
 
 <a name="external-resource-11"></a>
 #### 外部資源
@@ -497,11 +497,11 @@ console.log(myFunc(null)) // null -- 提供一個值 (null)，詳細資料請見
 - [Default parameters - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
 
 <a name="destructuring-objects-and-arrays-12"></a>
-### objects 和 arrays 的解耦
+### objects 和 arrays 的解構
 
-*解耦 (Destructuring)* 的概念是從 objects 或是 arrays 當中提取部分用值一種相當方便的方法。
+*解構 (Destructuring)* 的概念是從 objects 或是 arrays 當中提取部分用值一種相當方便的方法。
 
-舉個簡單的實例，*destructuring* 可以被用來解耦函數中的參數或者像是 React 專案中 *this.props* 這樣的用法。
+舉個簡單的實例，*destructuring* 可以被用來解構函數中的參數或者像是 React 專案中 *this.props* 這樣的用法。
 
 <a name="explanation-with-sample-code-13"></a>
 #### 說明和範例程式碼
@@ -519,7 +519,7 @@ const person = {
 }
 ```
 
-沒有解耦的作法，你只能這樣做：
+沒有解構的作法，你只能這樣做：
 
 ```js
 const first = person.firstName;
@@ -527,7 +527,7 @@ const age = person.age;
 const city = person.city || "Paris";
 ```
 
-使用解耦，你只需要一行：
+使用解構，你只需要一行：
 
 ```js
 const { firstName: first, age, city = "Paris" } = person; // 這樣就搞定了！
@@ -538,13 +538,13 @@ console.log(firstName) // Undefined -- person.firstName 雖然存在，但是有
 console.log(city) // "Paris" -- 一個名為 city 的新變數被創建出來了，同時因為 person.city 是未被定義的，所以 city 將等同於預設值也就是 "Paris"。
 ```
 
-**注意：** 在 ```const { age } = person;```當中， *const* 後的括號並不是用來宣告 object 或者是區塊，僅僅是 *解耦 (destructuring)* 的使用語法。
+**注意：** 在 ```const { age } = person;```當中， *const* 後的括號並不是用來宣告 object 或者是區塊，僅僅是 *解構 (destructuring)* 的使用語法。
 
 - 帶有參數的函數用法
 
-*解耦 (Destructuring)* 經常被用來解 objects 中的參數。
+*解構 (Destructuring)* 經常被用來解 objects 中的參數。
 
-沒有解耦的作法，你只能這樣做：
+沒有解構的作法，你只能這樣做：
 
 ```js
 function joinFirstLastName(person) {
@@ -556,18 +556,18 @@ function joinFirstLastName(person) {
 joinFirstLastName(person); // "Nick-Anderson"
 ```
 
-在解耦 obejct 當中 *person* 這個參數時，我們可以得到一個更簡潔的函數：
+在解構 obejct 當中 *person* 這個參數時，我們可以得到一個更簡潔的函數：
 
 ```js
 function joinFirstLastName({ firstName, lastName }) { 
-  // 我們透過解耦 person 分別創造了 firstName 和 lastName 這兩個變數
+  // 我們透過解構 person 分別創造了 firstName 和 lastName 這兩個變數
   return firstName + '-' + lastName;
 }
 
 joinFirstLastName(person); // "Nick-Anderson"
 ```
 
-解耦搭配[箭頭函數](#arrow_func_concept)使得開發過程更加愉快：
+解構搭配[箭頭函數](#arrow_func_concept)使得開發過程更加愉快：
 
 ```js
 const joinFirstLastName = ({ firstName, lastName }) => firstName + '-' + lastName;
@@ -583,14 +583,14 @@ joinFirstLastName(person); // "Nick-Anderson"
 const myArray = ["a", "b", "c"];
 ```
 
-沒有解耦的作法，你只能這樣做：
+沒有解構的作法，你只能這樣做：
 
 ```js
 const x = myArray[0];
 const y = myArray[1];
 ```
 
-使用解耦的作法：
+使用解構的作法：
 
 ```js
 const [x, y] = myArray; // 就是這麼簡單！
@@ -890,12 +890,12 @@ console.log(student);
 
 ```js
 const myObj = { x: 1, y: 2, a: 3, b: 4 };
-const { x, y, ...z } = myObj; // object 在此處被解耦
+const { x, y, ...z } = myObj; // object 在此處被解構
 console.log(x); // 1
 console.log(y); // 2
 console.log(z); // { a: 3, b: 4 }
 
-// 解耦後剩餘的部分都放在 z : 也就是 myObj 這個物件經過解耦後鎖剩下的東西
+// 解構後剩餘的部分都放在 z : 也就是 myObj 這個物件經過解構後鎖剩下的東西
 
 const n = { x, y, ...z };
 console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
@@ -1097,7 +1097,7 @@ export const alpha = 0.35;
 // -------------
 
 // myFile.js
-import { pi, exp } from './mathConstants.js'; // 對 import 進行解耦
+import { pi, exp } from './mathConstants.js'; // 對 import 進行解構
 console.log(pi) // 3.14
 console.log(exp) // 2.7
 
