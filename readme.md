@@ -4,6 +4,15 @@
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
 <small>圖片來源: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
 
+### 譯者的話
+> 原標題：[mbeaudru/modern-js-cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet)
+>
+> 原作者：[BEAUDRU Manuel](https://github.com/mbeaudru)
+> 
+> 對於現代 Javascript 開發而言，這篇文章整理了不少知識點，當作複習或是學習都很不錯。自己一直以來都是做為讀者的角色，很少主動為整個開源社群做些實際貢獻，這點一直感到蠻慚愧的，就像是 Sublime 是啟蒙你寫程式的第一個 editor，當你開始工作賺錢後卻遲遲不買 license 是類似的道理。趁著短暫的假日譯者盡可能的把翻譯做到盡善盡美，畢竟不是專業的，要做到信達雅的程度其實不太可能，但過程中確實查閱了不少相關資料，部分關鍵字因為怕超譯所以會在後頭括號保留原文。
+>
+> 另外也想藉著這回翻譯的經驗說點八股的，英文真的天殺的重要，能夠直接閱讀原文始終是最能理解原意的方式。整篇 cheatsheet 從意譯的角度出發，詞意有所疑問或是理解錯誤都煩請發個 Pull Request 謝謝。
+
 <a name="introduction"></a>
 ## 介紹
 
