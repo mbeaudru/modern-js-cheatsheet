@@ -7,7 +7,7 @@
 ### 譯者的話
 > 原標題：[mbeaudru/modern-js-cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet)
 >
-> 原作者：[BEAUDRU Manuel](https://github.com/mbeaudru)
+> 原作者：[BEAUDRU Manuel](https://github.com/mbeaudru)
 > 
 > 對於現代 Javascript 開發而言，這篇文章整理了不少知識點，當作複習或是學習都很不錯。自己一直以來都是做為讀者的角色，很少主動為整個開源社群做些實際貢獻，這點一直感到蠻慚愧的，就像是 Sublime 是啟蒙你寫程式的第一個 editor，當你開始工作賺錢後卻遲遲不買 license 是類似的道理。趁著短暫的假日譯者盡可能的把翻譯做到盡善盡美，畢竟不是專業的，要做到信達雅的程度其實不太可能，但過程中確實查閱了不少相關資料，部分關鍵字因為怕超譯所以會在後頭括號保留原文。
 >
