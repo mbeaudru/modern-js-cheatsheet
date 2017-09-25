@@ -1036,7 +1036,7 @@ export const alpha = 0.35;
 // -------------
 
 // myFile.js
-import { pi, exp } from './mathConstants.js'; // Named import
+import { pi, exp } from './mathConstants.js'; // Named import -- destructuring-like syntax
 console.log(pi) // 3.14
 console.log(exp) // 2.7
 
