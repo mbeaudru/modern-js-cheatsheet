@@ -1,18 +1,21 @@
-# Modern JavaScript cheatsheet
+# Modern JavaScript Cheatsheet
+
+![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
+<small>Image Credits: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
 
 ## Introduction
 
 ### Motivation
 
-This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and in most contemporary sample code.
+This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and most contemporary sample code.
 
 This guide is not intended to teach you JavaScript from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn React for instance) because of the JavaScript concepts used.
 
-Besides, I will sometimes provide personal tips that may be debatable, but will take care to mention that it's a personal recommendation when I do so.
+Besides, I will sometimes provide personal tips that may be debatable but will take care to mention that it's a personal recommendation when I do so.
 
-> **Note :** Most of the concepts introduced here are coming from a JavaScript language update (ES2015, often called ES6). You can find new features added by this update [here](http://es6-features.org); it's very well done.
+> **Note:** Most of the concepts introduced here are coming from a JavaScript language update (ES2015, often called ES6). You can find new features added by this update [here](http://es6-features.org); it's very well done.
 
-### Complementary resources
+### Complementary Resources
 
 When you struggle to understand a notion, I suggest you look for answers on the following resources:
 
@@ -23,7 +26,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
 - [Google](https://www.google.com/) to find specific blog and resources
 
-## Table of contents
+## Table of Contents
 
 - [Modern JavaScript cheatsheet](#modern-javascript-cheatsheet)
   * [Introduction](#introduction)
@@ -75,12 +78,18 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [External resources](#external-resources-2)
     + [Imports / Exports](#imports--exports)
       - [Explanation with sample code](#explanation-with-sample-code-1)
+        * [Named exports](#named-exports)
+        * [Default import / export](#default-import--export)
       - [External resources](#external-resources-3)
     + [JavaScript *this*](#-javascript-this)
       - [External resources](#external-resources-4)
     + [Class](#class)
       - [Samples](#samples)
       - [External resources](#external-resources-5)
+    + [Async Await](#async-await)
+      - [Sample code](#sample-code-6)
+      - [Explanation with sample code](#explanation-with-sample-code-2)
+      - [External resources](#external-resources-6)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -145,9 +154,9 @@ console.log(person) // "John", reassignment is allowed with let
 
 The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
 
-- **var**
+##### var
 
-```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Conversely, a *block scoped* variable created in a function can't be accessed outside this function.
+```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Besides, a *function scoped* variable created in a function can't be accessed outside this function.
 
 I recommend you to picture it as if an *X scoped* variable meant that this variable was a property of X.
 
@@ -191,9 +200,13 @@ console.log(myVar) // undefined -- no error raised
 myVar = 2;
 ```
 
-- **let**
+##### let
 
-```var``` and ```let ``` are about the same, but ```let``` declared variables are *block scoped* and they are **not** accessible before they are assigned.
+```var``` and ```let ``` are about the same, but ```let``` declared variables
+
+- are *block scoped*
+- are **not** accessible before they are assigned
+- can't be re-declared in the same scope
 
 Let's see the impact of block-scoping taking our previous example:
 
@@ -219,13 +232,27 @@ console.log(myVar) // raises a ReferenceError !
 let myVar = 2;
 ```
 
-By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenom is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
+By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenon is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
 
-> **Note :** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
+> **Note:** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation, it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
 
-- **const**
+In addition, you can't re-declare a *let* variable:
 
-A ```const```, as well as ```let```, declared variables are *block scoped* and not accessible before being assigned, but they can't be reassigned nor re-declared afterwards.
+```js
+let myVar = 2;
+let myVar = 3; // Raises a SyntaxError
+```
+
+##### const
+
+```const``` declared variables behave like *let* variables, but also they can't be reassigned.
+
+To sum it up, *const* variables:
+
+- are *block scoped*
+- are not accessible before being assigned
+- can't be re-declared in the same scope
+- can't be reassigned
 
 ```js
 const myVar = "Nick";
@@ -264,7 +291,7 @@ person = ["Nick"] // raises an error, because reassignment is not allowed with c
 
 ### <a name="arrow_func_concept"></a> Arrow function
 
-The ES6 JavaScript update has introduced *arrow functions*, which are another way to declare and use functions. Here are the benefits they bring:
+The ES6 JavaScript update has introduced *arrow functions*, which is another way to declare and use functions. Here are the benefits they bring:
 
 - More concise
 - *this* is picked up from surroundings
@@ -286,7 +313,7 @@ console.log(double(2)) // 4
 
 - *this* reference
 
-In an arrow function, *this* is equal to the *this* value of the enclosing execution context. Basically, with arrow functions you don't have to do the "that = this" trick before calling a function inside a function anymore.
+In an arrow function, *this* is equal to the *this* value of the enclosing execution context. Basically, with arrow functions, you don't have to do the "that = this" trick before calling a function inside a function anymore.
 
 ```js
 function myFunc() {
@@ -330,9 +357,9 @@ Since there only is a return value here, we can do an implicit return.
  const double = (x) => x * 2;
 ```
 
-To do so, we only need to **remove the brackets** and the **return** keyword. That's why it's called an *implicit* return, the *return* keyword is not there but this function will indeed return ```x * 2```.
+To do so, we only need to **remove the brackets** and the **return** keyword. That's why it's called an *implicit* return, the *return* keyword is not there, but this function will indeed return ```x * 2```.
 
-> **Note :** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
+> **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
 
 - Only one argument
 
@@ -350,7 +377,7 @@ Parenthesis around the parameter can be avoided:
 
 - No arguments
 
-When there is no argument provided to an arrow function, you need to provide parentheses or it won't be valid syntax.
+When there is no argument provided to an arrow function, you need to provide parentheses, or it won't be valid syntax.
 
 ```js
   () => { // parenthesis are provided, everything is fine
@@ -368,7 +395,7 @@ When there is no argument provided to an arrow function, you need to provide par
 
 ##### *this* reference
 
-To understand this subtlety introduced with arrow functions, you must understand how [this](#this_def) behaves in JavaScript.
+To understand this subtlety introduced with arrow functions, you must know how [this](#this_def) behaves in JavaScript.
 
 In an arrow function, *this* is equal to the *this* value of the enclosing execution context. What it means is that an arrow function doesn't create a new *this*, it grabs it from its surrounding instead.
 
@@ -435,7 +462,7 @@ The default parameter is applied in two and only two situations:
 
 In other words, if you pass in *null* the default parameter **won't be applied**.
 
-> **Note :** Default value assignment can be used with destructured parameters as well (see next notion to see an example)
+> **Note:** Default value assignment can be used with destructured parameters as well (see next notion to see an example)
 
 #### External resource
 
@@ -446,13 +473,13 @@ In other words, if you pass in *null* the default parameter **won't be applied**
 
 *Destructuring* is a convenient way of creating new variables by extracting some values from data stored in objects or arrays.
 
-To name a few useful cases, *destructuring* can be used to destructure function parameters or *this.props* in React projects for instance.
+To name a few use cases, *destructuring* can be used to destructure function parameters or *this.props* in React projects for instance.
 
 #### Explanation with sample code
 
 - Object
 
-Lets consider the following object for all the samples:
+Let's consider the following object for all the samples:
 
 ```js
 const person = {
@@ -558,16 +585,16 @@ To sum it up:
 - **Array.prototype.filter()** takes an array, decides element by element if it should keep it or not and returns an array with the kept elements only
 - **Array.prototype.reduce()** takes an array and aggregates the elements into a single value (which is returned)
 
-I recommend to use them as much as possible in following the principles of functional programming, because they are composable, concise and elegant.
+I recommend to use them as much as possible in following the principles of functional programming because they are composable, concise and elegant.
 
-With those three methods you can avoid the use of *for* and *forEach* loops in must situations. When you are tempted to do a *for* loop, try to do it with *map*, *filter* and *reduce* composed. You might struggle to do it at first because it requires you to learn a new way of thinking, but once you've got it things gets easier.
+With those three methods, you can avoid the use of *for* and *forEach* loops in most situations. When you are tempted to do a *for* loop, try to do it with *map*, *filter* and *reduce* composed. You might struggle to do it at first because it requires you to learn a new way of thinking, but once you've got it things gets easier.
 
 #### Sample code
 
 ```js
 const numbers = [0, 1, 2, 3, 4, 5, 6];
 const doubledNumbers = numbers.map(n => n * 2); // [0, 2, 4, 6, 8, 10, 12]
-const parNumbers = numbers.filter(n => n % 2 === 0); // [0, 2, 4, 6]
+const evenNumbers = numbers.filter(n => n % 2 === 0); // [0, 2, 4, 6]
 const sum = numbers.reduce((prev, next) => prev + next, 0); // 21
 ```
 
@@ -606,7 +633,7 @@ const doubledNumbers = numbers.map(function(n) {
 console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 ```
 
-What's happening here ? We are using .map on the *numbers* array, map is iterating on each element of the array and passes it to our function. The goal of the function is to produce and return a new value from the one passed so that map can replace it.
+What's happening here? We are using .map on the *numbers* array, the map is iterating on each element of the array and passes it to our function. The goal of the function is to produce and return a new value from the one passed so that map can replace it.
 
 Lets extract this function to make it more clear, just for this once:
 
@@ -618,15 +645,15 @@ console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 
 ```numbers.map(doubleN)``` produces ```[doubleN(0), doubleN(1), doubleN(2), doubleN(3), doubleN(4), doubleN(5), doubleN(6)]``` which is equal to ```[0, 2, 4, 6, 8, 10, 12]```.
 
-> **Note :** If you do not need to return a new array and just want to do a loop that have side effects, you might just want to use a for / forEach loop instead of a map.
+> **Note:** If you do not need to return a new array and just want to do a loop that has side effects, you might just want to use a for / forEach loop instead of a map.
 
 ##### Array.prototype.filter()
 
 ```js
-const parNumbers = numbers.filter(function(n) {
+const evenNumbers = numbers.filter(function(n) {
   return n % 2 === 0; // true if "n" is par, false if "n" isn't
 });
-console.log(parNumbers); // [0, 2, 4, 6]
+console.log(evenNumbers); // [0, 2, 4, 6]
 ```
 
 We are using .filter on the *numbers* array, filter is iterating on each element of the array and passes it to our function. The goal of the function is to return a boolean that will determine whether the current value will be kept or not. Filter then returns the array with only the kept values.
@@ -646,7 +673,7 @@ const sum = numbers.reduce(
 console.log(sum) //21
 ```
 
-Just like for .map and .filter methods, .reduce is applied on an array and takes a function as first parameter.
+Just like for .map and .filter methods, .reduce is applied on an array and takes a function as the first parameter.
 
 This time though, there are changes:
 
@@ -664,7 +691,7 @@ The accumulator variable is equal to the return value of your function at the **
 
 ###### At first iteration step
 
-```acc = 0``` because we passed in 0 as second parameter for reduce
+```acc = 0``` because we passed in 0 as the second parameter for reduce
 
 ```n = 0``` first element of the *number* array
 
@@ -753,7 +780,7 @@ const arr1 = ["a", "b", "c"];
 const arr2 = [arr1, "d", "e", "f"]; // [["a", "b", "c"], "d", "e", "f"]
 ```
 
-*arr2* first element is an array, because *arr1* is injected as is into *arr2*. But what we want is *arr2* to be an array of letters. To do so, we can *spread* the elements of *arr1* into *arr2*.
+*arr2* the first element is an array because *arr1* is injected as is into *arr2*. But what we want is *arr2* to be an array of letters. To do so, we can *spread* the elements of *arr1* into *arr2*.
 
 With spread operator
 
@@ -764,7 +791,7 @@ const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 
 ##### Function rest parameter
 
-In function parameters, we can use the rest operator in order to inject parameters into an array we can loop in. There is already an **argument** object bound to every function that is equal to an array of all the parameters passed-in to the function.
+In function parameters, we can use the rest operator to inject parameters into an array we can loop in. There is already an **argument** object bound to every function that is equal to an array of all the parameters passed into the function.
 
 ```js
 function myFunc() {
@@ -781,7 +808,7 @@ myFunc("Nick", "Anderson", 10, 12, 6);
 // 6
 ```
 
-But lets say that we want this function to create a new student with its grades and with its average grade. Wouldn't it be more convenient to extract the first two parameters into two separated variables, and then have all the grades in an array we can iterate over?
+But let's say that we want this function to create a new student with its grades and with its average grade. Wouldn't it be more convenient to extract the first two parameters into two separate variables, and then have all the grades in an array we can iterate over?
 
 That's exactly what the rest operator allows us to do!
 
@@ -811,11 +838,11 @@ console.log(student);
 // }
 ```
 
-> **Note :** createStudent function is bad because we don't check if grades.length exists or is different from 0. But its easier to read this way so I didn't handled this case.
+> **Note:** createStudent function is bad because we don't check if grades.length exists or is different from 0. But it's easier to read this way, so I didn't handle this case.
 
 ##### Object properties spreading
 
-For this one I recommend you read previous explanations about the rest operator on iterables and function parameters.
+For this one, I recommend you read previous explanations about the rest operator on iterables and function parameters.
 
 ```js
 const myObj = { x: 1, y: 2, a: 3, b: 4 };
@@ -824,7 +851,7 @@ console.log(x); // 1
 console.log(y); // 2
 console.log(z); // { a: 3, b: 4 }
 
-// z is the rest of the object destructured : myObj object minus x and y properties destructured
+// z is the rest of the object destructured: myObj object minus x and y properties destructured
 
 const n = { x, y, ...z };
 console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
@@ -891,7 +918,7 @@ console.log(myObj.y) // 20
 
 A promise is an object which can be returned synchronously from an asynchronous function ([ref](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)).
 
-Promises can be used to avoid [callback hell](http://callbackhell.com/) and they are more and more frequently encountered in modern JavaScript projects.
+Promises can be used to avoid [callback hell](http://callbackhell.com/), and they are more and more frequently encountered in modern JavaScript projects.
 
 #### Sample code
 
@@ -914,7 +941,7 @@ When you do an *Ajax request* the response is not synchronous because you want a
 To handle that kind of situations, ES2015 has given us *promises*. Promises can have three different states:
 
 - Pending
-- Resolved
+- Fulfilled
 - Rejected
 
 Let's say we want to use promises to handle an Ajax request to fetch the resource X.
@@ -937,7 +964,7 @@ const xFetcherPromise = new Promise( // Create promise using "new" keyword and s
 )
 ```
 
-As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *resolved* and *rejected* state.
+As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *fulfilled* and *rejected* state.
 
 But at the moment, the promise has not been used but only has been declared and stored into *xFetcherPromise* variable! So it doesn't have a current state.
 
@@ -955,7 +982,7 @@ xFetcherPromise
   })
 ```
 
-```.then``` is a method that once called will put the xFetcherPromise in **pending** state. When called, the promise body runs and in this case an Ajax call is being done.
+```.then``` is a method that once called will put the xFetcherPromise in **pending** state. When called, the promise body runs, and in this case, an Ajax call is being done.
 
 If it succeeds, *resolve* is called and the function passed as ```.then``` parameter is executed.
 
@@ -994,13 +1021,13 @@ const name = "Nick";
 
 ES6 modules are used to access variables or functions in a module explicitly exported by the modules it imports.
 
-I highly recommend to take a look at MDN resources on import / export (see external resources below), it is both simple and complete.
+I highly recommend to take a look at MDN resources on import/export (see external resources below), it is both straightforward and complete.
 
 #### Explanation with sample code
 
-- Named exports
+##### Named exports
 
-Named exports are useful to export several values from a module. You can only name-export variables (not functions or class), so if you want to name-export a function, you have to store it in a variable before.
+Named exports are used to export several values from a module. You can only name-export variables (not functions or class), so if you want to name-export a function, you have to store it in a variable before.
 
 ```js
 // mathConstants.js
@@ -1011,7 +1038,7 @@ export const alpha = 0.35;
 // -------------
 
 // myFile.js
-import { pi, exp } from './mathConstants.js'; // Destructuring import
+import { pi, exp } from './mathConstants.js'; // Named import -- destructuring-like syntax
 console.log(pi) // 3.14
 console.log(exp) // 2.7
 
@@ -1023,7 +1050,15 @@ console.log(constants.pi) // 3.14
 console.log(constants.exp) // 2.7
 ```
 
-- Default import / export
+While named imports looks like *destructuring*, they have a different syntax and are not the same. They don't support default values nor *deep* destructuring.
+
+Besides, you can do aliases but the syntax is different from the one used in destructuring:
+
+```js
+import { foo as bar } from 'myFile.js'; // foo is imported and injected into a new bar variable
+```
+
+##### Default import / export
 
 Concerning the default export, there is only a single default export per module. A default export can be a function, a class, an object or anything else. This value is considered the "main" exported value since it will be the simplest to import. [Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
 
@@ -1057,23 +1092,26 @@ console.log(result) // 3
 
 #### External resources
 
+- [ES6 Modules in bulletpoints](https://ponyfoo.com/articles/es6#modules)
 - [Export - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
 - [Import - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 - [Understanding ES6 Modules](https://www.sitepoint.com/understanding-es6-modules/)
+- [Destructuring special case - import statements](https://ponyfoo.com/articles/es6-destructuring-in-depth#special-case-import-statements)
+- [Misunderstanding ES6 Modules - Kent C. Dodds](https://medium.com/@kentcdodds/misunderstanding-es6-modules-upgrading-babel-tears-and-a-solution-ad2d5ab93ce0)
 - [Modules in JavaScript](http://exploringjs.com/es6/ch_modules.html#sec_modules-in-javascript)
 
 ### <a name="this_def"></a> JavaScript *this*
 
 *this* operator behaves differently than in other languages and is in most cases determined by how a function is called. ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)).
 
-This notion having many subtleties and being quite hard, I highly suggest you to deep dive in the external resources below. Thus, I will provide what I personally have in mind to determine what *this* is equal to. I have learned this tip from [this article written by Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/).
+This notion is having many subtleties and being quite hard, I highly suggest you to deep dive in the external resources below. Thus, I will provide what I personally have in mind to determine what *this* is equal to. I have learned this tip from [this article written by Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/).
 
 ```js
 function myFunc() {
   ...
 }
 
-// After each statement you find the value of *this* in myFunc
+// After each statement, you find the value of *this* in myFunc
 
 myFunc.call("myString", "hello") // "myString" -- first .call parameter value is injected into *this*
 
@@ -1108,10 +1146,10 @@ JavaScript is a [prototype-based](https://en.wikipedia.org/wiki/Prototype-based_
 
 The word *class* is indeed error prone if you are familiar with classes in other languages. If you do, avoid assuming how JavaScript classes work on this basis and consider it an entirely different notion.
 
-Since this document is not an attempt to teach you the language from the ground up, I will consider you know what prototypes are and how they behave. But here are some links I found great to understand this notion:
+Since this document is not an attempt to teach you the language from the ground up, I will believe you know what prototypes are and how they behave. But here are some links I found great to understand this notion:
 
 - [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
-- [A plain english guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
+- [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
 - [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 
 #### Samples
@@ -1152,7 +1190,7 @@ console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 For prototype understanding:
 
 - [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
-- [A plain english guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
+- [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
 - [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 
 For classes understanding:
@@ -1160,6 +1198,129 @@ For classes understanding:
 - [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
 - [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+
+### Async Await
+
+In addition to [Promises](#promises), there is a new syntax you might encounter to handle asynchronous code named *async / await*.
+
+The purpose of async/await functions is to simplify the behavior of using promises synchronously and to perform some behavior on a group of Promises. Just as Promises are similar to structured callbacks, async/await is similar to combining generators and promises. ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function))
+
+> **Note :** You must understand what are promises and how they work before trying to understand async / await since they rely on it.
+
+> **Note 2:** [*await* must be used in an *async* function](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9#f3f0), which means that you can't use await in the top level of our code since that is not inside an async function.
+
+#### Sample code
+
+```js
+async function getGithubUser(username) { // async keyword allows usage of await in the function and means function returns a promise
+  try { // this is how errors are handled with async / await
+    const response = await fetch(`https://api.github.com/users/${username}`); // "synchronously" waiting fetch promise to resolve before going to next line
+    return response.json();
+  } catch (err) {
+    alert(err);
+  }
+}
+
+getGithubUser('mbeaudru').then(user => console.log(user)); // logging user response - cannot use await syntax since this code isn't in async function
+```
+
+#### Explanation with sample code
+
+*Async / Await* is built on promises but they allow a more imperative style of code.
+
+*async* operator turns a function into a *promise* in which you can use the *await* operator.
+
+```js
+async function myFunc() {
+  // we can use await operator because this function is async
+  try {
+    return "hello world";
+  } catch(e) {
+    throw new Error();
+  }
+}
+
+myFunc().then(msg => console.log(msg)) // "hello world" -- myFunc is turned into a promise because of async operator
+```
+
+When the *return* statement of an async function is reached, the promise is fulfilled with the value returned. If an error is thrown inside an async function, the promise state will turn to *rejected*.
+
+*await* operator is used to wait for a *Promise* to be fulfilled and only can be used inside an *async* function body. When encountered, the code execution is paused until the promise is fulfilled.
+
+> **Note :** *fetch* is a Promise that allows to do an AJAX request
+
+Let's see how we could fetch a github user with promises first:
+
+```js
+function getGithubUser(username) {
+  return new Promise((resolve, reject) => {
+    fetch(`https://api.github.com/users/${username}`)
+      .then(response => {
+        const user = response.json();
+        resolve(user);
+      })
+      .catch(err => reject(err));
+  })
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+Here's the *async / await* equivalent:
+
+```js
+async function getGithubUser(username) { // promise + await keyword usage allowed
+  try { // We handle async function errors with try / catch
+    const response = await fetch(`https://api.github.com/users/${username}`); // Execution stops here until fetch promise is fulfilled.
+    const user = response.json();
+    return user; // equivalent of resolving the getGithubUser promise with user value.
+  } catch (err) {
+    throw new Error(err); // equivalent of rejecting getGithubUser promise with err value.
+  }
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+*async / await* syntax is particularly convenient when you need to chain promises that are interdependent.
+
+For instance, if you need to get a token in order to be able to fetch a blog post on a database and then the author informations:
+
+```js
+async function fetchPostById(postId) {
+  try {
+    const token = await fetch('token_url');
+    const post = await fetch(`/posts/${postId}?token=${token}`);
+    const author = await fetch(`/users/${post.authorId}`);
+
+    post.author = author;
+    return post;
+  } catch(e) {
+    throw new Error(e);
+  }
+}
+
+fetchPostById('gzIrzeo64')
+  .then(post => console.log(post))
+  .catch(err => console.log(err));
+```
+
+> **Note :** As you can see, *try / catch* are necessary to handle errors. But if you are making *express routes*, you can use a middleware to avoid error handling and have a very pleasant code to read. See [this article from Alex Bazhenov](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016) to learn more.
+
+#### External resources
+
+- [Async/Await - JavaScript.Info](https://javascript.info/async-await)
+- [ES7 Async/Await](http://rossboucher.com/await/#/)
+- [6 Reasons Why JavaScript’s Async/Await Blows Promises Away](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
+- [JavaScript awaits](https://dev.to/kayis/javascript-awaits)
+- [Using Async Await in Express with Node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
+- [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+- [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 
 ## Glossary
 
@@ -1171,7 +1332,7 @@ Source: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
 
 ### <a name="mutation_def"></a> Variable mutation
 
-A variable is said to have been mutated when its initial value has changed afterwards.
+A variable is said to have been mutated when its initial value has changed afterward.
 
 ```js
 var myArray = [];
