@@ -154,7 +154,7 @@ The [*scope*](#scope_def) of a variable roughly means "where is this variable av
 
 ##### var
 
-```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Conversely, a *function scoped* variable created in a function can't be accessed outside this function.
+```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Besides, a *function scoped* variable created in a function can't be accessed outside this function.
 
 I recommend you to picture it as if an *X scoped* variable meant that this variable was a property of X.
 
