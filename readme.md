@@ -72,7 +72,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [Sample code](#sample-code-4)
       - [Explanation](#explanation-3)
         * [Create the promise](#create-the-promise)
-        * [Use the promise](#use-the-promise)
+        * [Promise handlers usage](#promise-handlers-usage)
       - [External Resources](#external-resources)
     + [Template literals](#template-literals)
       - [Sample code](#sample-code-5)
