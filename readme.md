@@ -9,7 +9,7 @@
 >
 > 原作者：[BEAUDRU Manuel](https://github.com/mbeaudru)
 > 
-> 對於現代 Javascript 開發而言，這篇文章整理了不少知識點，當作複習或是學習都很不錯。自己一直以來都是做為讀者的角色，很少主動為整個開源社群做些實際貢獻，這點一直感到蠻慚愧的，就像是 Sublime 是啟蒙你寫程式的第一個 editor，當你開始工作賺錢後卻遲遲不買 license 是類似的道理。趁著短暫的假日譯者盡可能的把翻譯做到盡善盡美，畢竟不是專業的，要做到信達雅的程度其實不太可能，但過程中確實查閱了不少相關資料，部分關鍵字因為怕超譯所以會在後頭括號保留原文。
+> 對於現代 JavaScript 開發而言，這篇文章整理了不少知識點，當作複習或是學習都很不錯。自己一直以來都是做為讀者的角色，很少主動為整個開源社群做些實際貢獻，這點一直感到蠻慚愧的，就像是 Sublime 是啟蒙你寫程式的第一個 editor，當你開始工作賺錢後卻遲遲不買 license 是類似的道理。趁著短暫的假日譯者盡可能的把翻譯做到盡善盡美，畢竟不是專業的，要做到信達雅的程度其實不太可能，但過程中確實查閱了不少相關資料，部分關鍵字因為怕超譯所以會在後頭括號保留原文。
 >
 > 另外也想藉著這回翻譯的經驗說點八股的，英文真的天殺的重要，能夠直接閱讀原文始終是最能理解原意的方式。整篇 cheatsheet 從意譯的角度出發，詞意有所疑問或是理解錯誤都煩請發個 Pull Request 謝謝。
 
@@ -21,7 +21,7 @@
 
 本文檔整理了各種現代化 JavaScript 開發過程中經常使用到的腳本。
 
-該份指南的目標並不是放在幫助初學者從零基礎到入門，而是為了幫助那些因為 Javascript 新式語法導致可能很難熟悉現代函數庫使用方式 (以 React 做為舉例) 的開發人員。
+該份指南的目標並不是放在幫助初學者從零基礎到入門，而是為了幫助那些因為 JavaScript 新式語法導致可能很難熟悉現代函數庫使用方式 (以 React 做為舉例) 的開發人員。
 
 此外我也會偶爾提供一些個人主觀的建議和技巧，而這些建議可能會造成部分的爭議性，但請務必留意，當我做出這些舉例時這僅僅是出自於個人的推薦作法。
 
@@ -967,7 +967,7 @@ console.log(myObj.y) // 20
 
 promise 是一個可以從異步函數 ([參考](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)) 同步回傳的函數。
 
-Promises 可以被用來避開 [回調地獄 (callback hell)](http://callbackhell.com/)，而且它們在現代 Javascript 專案中也越來越常被使用到。
+Promises 可以被用來避開 [回調地獄 (callback hell)](http://callbackhell.com/)，而且它們在現代 JavaScript 專案中也越來越常被使用到。
 
 <a name="sample-code-33"></a>
 #### 範例程式碼
@@ -1056,7 +1056,7 @@ xFetcherPromise
 
 模板字符串是一種單行和多行字符串的 [*表達式差值 (expression interpolation)*](https://en.wikipedia.org/wiki/String_interpolation)。
 
-換句話說，它是一種新的字符串語法，你可以更方便地在 Javascript 表達式中使用 (例如變數)。
+換句話說，它是一種新的字符串語法，你可以更方便地在 JavaScript 表達式中使用 (例如變數)。
 
 <a name="sample-code-39"></a>
 #### 範例程式碼
@@ -1196,9 +1196,9 @@ myBoundFunc("test") // "hello" -- myBoundFunc 是把帶有 "hello" 的 person.my
 JavaScript 是一個 [基於原型](https://en.wikipedia.org/wiki/Prototype-based_programming) 的語言 (然而 Java 是 [基於類別](https://en.wikipedia.org/wiki/Class-based_programming) 的語言)。 ES6 引入了 JavaScript 類別，它們是基於原型繼承的語法糖，而 **不是** 真正意義上基於類別的繼承模型。([參考](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)).
 
 
-*類別 (class)* 一詞的確容易出錯，尤其是你同時也熟悉其他語言的情況下。如果真的有此困擾，請避免在這樣的認知下思考 Javascript 的類別行為，並把它當作一個完全不同的新概念。
+*類別 (class)* 一詞的確容易出錯，尤其是你同時也熟悉其他語言的情況下。如果真的有此困擾，請避免在這樣的認知下思考 JavaScript 的類別行為，並把它當作一個完全不同的新概念。
 
-由於此份文件的目標不在於從頭教會你 Javascript，我相信你早已知道什麼是原型，以及它們的行為模式。不過這裡還是有一些參考連結，以方便你去理解這些概念：
+由於此份文件的目標不在於從頭教會你 JavaScript，我相信你早已知道什麼是原型，以及它們的行為模式。不過這裡還是有一些參考連結，以方便你去理解這些概念：
 
 - [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
 - [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
