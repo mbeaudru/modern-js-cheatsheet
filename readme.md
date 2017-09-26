@@ -972,13 +972,13 @@ const xFetcherPromise = new Promise( // Create promise using "new" keyword and s
 )
 ```
 
-As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *fulfilled* and *rejected* state.
+As seen in the above sample, the Promise object takes an *executor* function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *fulfilled* and *rejected* state.
 
-But at the moment, the promise has not been used but only has been declared and stored into *xFetcherPromise* variable! So it doesn't have a current state.
+The promise is in pending state after instance creation and it's *executor* function is executed immediately. Once one of the function *resolve* or *reject* is called in the *executor* function, the promise will call its associated handlers.
 
-##### Use the promise
+##### Promise handlers usage
 
-To use the promise, we do the following:
+To get the promise result (or error), we must attach to it handlers by doing the following:
 
 ```js
 xFetcherPromise
@@ -990,11 +990,11 @@ xFetcherPromise
   })
 ```
 
-```.then``` is a method that once called will put the xFetcherPromise in **pending** state. When called, the promise body runs, and in this case, an Ajax call is being done.
+If the promise succeeds, *resolve* is executed and the function passed as ```.then``` parameter is executed.
 
-If it succeeds, *resolve* is called and the function passed as ```.then``` parameter is executed.
+If it fails, *reject* is executed and the function passed as ```.catch``` parameter is executed.
 
-If it fails, *reject* is called and the function passed as ```.catch``` parameter is executed.
+> **Note :** If the promise has already been fulfilled or rejected when a corresponding handler is attached, the handler will be called, so there is no race condition between an asynchronous operation completing and its handlers being attached. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Description)
 
 #### External Resources
 
