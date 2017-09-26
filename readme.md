@@ -262,7 +262,7 @@ let myVar = 3; // 跳出 SyntaxError 錯誤
 
 ##### const
 
-```const``` 宣告出來的行為如同 *let* 變數，但它們同樣都不能被重新指派。
+```const``` 宣告出來的行為如同 *let* 變數，但它們同樣都不能被重新宣告。
 
 總結一下， *const* 變數：
 
@@ -281,7 +281,7 @@ const myVar = "Nick";
 const myVar = "John" // 跳出錯誤， 重新宣告是不被允許的
 ```
 
-<a name="const_mutable_sample"></a> 但有個精妙之處 : ```const``` 變數是不[**可變的**](#mutation_def) ! 更具體而言，這代表著 *object* 和 *array* 中由 ```const``` 宣告出來的變數是 **可以** 被改變的。
+<a name="const_mutable_sample"></a> 但有個精妙之處 : ```const``` 變數不是[**不可變的**](#mutation_def) ! 更具體而言，這代表著 *object* 和 *array* 中由 ```const``` 宣告出來的變數是 **可以** 被改變的。
 
 對於 objects：
 
