@@ -165,7 +165,7 @@ function myFunction() {
   var myVar = "Nick";
   console.log(myVar); // "Nick" - myVar is accessible inside the function
 }
-console.log(myVar); // Undefined, myVar is not accessible outside the function.
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
 ```
 
 Still focusing on the variable scope, here is a more subtle example:
@@ -180,7 +180,7 @@ function myFunction() {
   }
   console.log(myVar); // "John" - see how the instructions in the if block affected this value
 }
-console.log(myVar); // Undefined, myVar is not accessible outside the function.
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
 ```
 
 Besides, *var* declared variables are moved to the top of the scope at execution. This is what we call [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
@@ -222,7 +222,7 @@ function myFunction() {
   }
   console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affect this value
 }
-console.log(myVar); // Undefined, myVar is not accessible outside the function.
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
 ```
 
 <a name="tdz_sample"></a> Now, what it means for *let* (and *const*) variables for not being accessible before being assigned:
