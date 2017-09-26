@@ -362,6 +362,13 @@ To do so, we only need to **remove the brackets** and the **return** keyword. Th
 
 > **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
 
+Besides, if you want to implicitly return an *object* you **must have parenthesis around it** since it will conflict with the block braces:
+
+```js
+const getPerson = () => ({ name: "Nick", age: 24 })
+console.log(getPerson()) // { name: "Nick", age: 24 } -- object implicitly returned by arrow function
+```
+
 - Only one argument
 
 If your function only takes one parameter, you can omit the parenthesis around it. If we take back the above *double* code:
