@@ -1349,7 +1349,7 @@ var bSuLin = new Boolean("Su Lin");
 ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean))
 - `!0` - This is the new way of writing `true`.
 
-I won't do it with false, but you get the idea 😊.
+I won't do it with `false`, but you get the idea 😊.
 
 Now, it's clear that you can replace all `true` by `!0`, and `false` by `!1`.
 
