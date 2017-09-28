@@ -1320,7 +1320,20 @@ fetchPostById('gzIrzeo64')
   .catch(err => console.log(err));
 ```
 
-# Boolean
+> **Note :** As you can see, *try / catch* are necessary to handle errors. But if you are making *express routes*, you can use a middleware to avoid error handling and have a very pleasant code to read. See [this article from Alex Bazhenov](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016) to learn more.
+
+#### External resources
+
+- [Async/Await - JavaScript.Info](https://javascript.info/async-await)
+- [ES7 Async/Await](http://rossboucher.com/await/#/)
+- [6 Reasons Why JavaScript’s Async/Await Blows Promises Away](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
+- [JavaScript awaits](https://dev.to/kayis/javascript-awaits)
+- [Using Async Await in Express with Node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
+- [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+- [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
+
+### Boolean
 Booleans value are `true` and `false`. In ES6 / ES7 there is a much simpler syntax that can save you some time.
 
 #### Sample code
@@ -1352,19 +1365,6 @@ var bSuLin = new Boolean("Su Lin");
 I won't do it with `false`, but you get the idea 😊.
 
 Now, it's clear that you can replace all `true` by `!0`, and `false` by `!1`.
-
-> **Note :** As you can see, *try / catch* are necessary to handle errors. But if you are making *express routes*, you can use a middleware to avoid error handling and have a very pleasant code to read. See [this article from Alex Bazhenov](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016) to learn more.
-
-#### External resources
-
-- [Async/Await - JavaScript.Info](https://javascript.info/async-await)
-- [ES7 Async/Await](http://rossboucher.com/await/#/)
-- [6 Reasons Why JavaScript’s Async/Await Blows Promises Away](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
-- [JavaScript awaits](https://dev.to/kayis/javascript-awaits)
-- [Using Async Await in Express with Node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
-- [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
-- [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
-- [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 
 ## Glossary
 
