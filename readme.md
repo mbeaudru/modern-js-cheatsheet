@@ -92,8 +92,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [Explanation with sample code](#explanation-with-sample-code-2)
       - [External resources](#external-resources-6)
 	+ [Boolean](#boolean)
-	  - [Sample code](#sample-code-7)
-	  - [Explanation](#explanation-4)
+	  - [Explanation with sample code](#explanation-with-sample-code-3)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1333,10 +1332,10 @@ fetchPostById('gzIrzeo64')
 - [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 - [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 
-### Boolean
+# Boolean
 Booleans value are `true` and `false`. In ES6 / ES7 there is a much simpler syntax that can save you some time.
 
-#### Sample code
+#### Explanation with sample code
 ```js
 const result = Math.floor(Math.random() * 2) // random result between 0 and 1
 
@@ -1347,24 +1346,16 @@ function isOne(val) {
 console.log(isOne(result)) // if result is one, will return true, and if it's not, false.
 ```
 
-#### Explanation
 Booleans can be written in different manners, for example, `true` can be expressed as:
 - `true` - Obvious, isn't it?
-- With `new Boolean`:
-```js
-var btrue = new Boolean(true);
-var btrueString = new Boolean("true");
-var bfalseString = new Boolean("false");
-var bArrayProto = new Boolean([]);
-var bObjProto = new Boolean({});
-var bSuLin = new Boolean("Su Lin");
-```
-([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean))
 - `!0` - This is the new way of writing `true`.
 
-I won't do it with `false`, but you get the idea 😊.
+I won't do it with false, but you get the idea 😊.
 
 Now, it's clear that you can replace all `true` by `!0`, and `false` by `!1`.
+
+> External ressources
+[Best Practice: Convert 1 and 0 to true and false in Javascript](https://en.code-bude.net/2016/03/14/best-practice-convert-1-and-0-to-true-and-false-in-javascript/)
 
 ## Glossary
 
