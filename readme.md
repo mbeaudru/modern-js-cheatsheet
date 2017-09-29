@@ -152,7 +152,7 @@ console.log(person) // "John", reassignment is allowed with let
 ```
 
 <details>
-  <summary>Detailed explanation</summary>
+  <summary>#### Detailed explanation</summary>
 
   The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
 
