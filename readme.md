@@ -61,7 +61,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     + [Spread operator "..."](#spread-operator-)
       - [Sample code](#sample-code-3)
       - [Explanation](#explanation-1)
-        * [In iterables (like array)](#in-iterables-like-array)
+        * [In iterables (like arrays)](#in-iterables-like-arrays)
         * [Function rest parameter](#function-rest-parameter)
         * [Object properties spreading](#object-properties-spreading)
       - [External resources](#external-resources)
@@ -91,8 +91,9 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [Sample code](#sample-code-6)
       - [Explanation with sample code](#explanation-with-sample-code-2)
       - [External resources](#external-resources-6)
-	+ [Boolean](#boolean)
+	+ [Truthy / Falsy](#truthy---falsy)
 	  - [Explanation with sample code](#explanation-with-sample-code-3)
+	  - [External ressources](#external-resources-7)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1332,30 +1333,65 @@ fetchPostById('gzIrzeo64')
 - [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 - [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 
-# Boolean
-Booleans value are `true` and `false`. In ES6 / ES7 there is a much simpler syntax that can save you some time.
+# Truthy / Falsy
+In JavaScript, a truthy value is a value that is considered  true when evaluated in a Boolean context. All values are truthy unless they are defined as falsy (i.e., except for `false`, `0`, `""`, `null`, `undefined`, and `NaN`).
 
 #### Explanation with sample code
-```js
-const result = Math.floor(Math.random() * 2) // random result between 0 and 1
 
-function isOne(val) {
-	return val == 1 ? !0 : !1; // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
-}
+- How to use `!` operator for making new Truthy and Falsy:  
+ 	If we agree on the fact that `0` can be evaluated as `false`, and `1` as true in the `Boolean` object like:
+	```js
+	new Boolean(0) // false
+	new Boolean(1) // true
+	```
+	, I have to tell you that there is something that is new with ES6 that will definitely make your life easier:
+	```js
+	!0 // not false, so true
+	!1 // not true, so false
+	// By the way:
+	!0 === true
+	!1 === false
+	```
+	We can push the concept forward by adding a second `!`:
+	```js
+	!!1 // not not true, so true
+	!!0 // not not false, so true
+	// Same as before
+	!!1 === true
+	!!0 === false
+	```
+- How to use Truthy and Falsy with `if` statements:
+	```js
+	// Example of Truthy values (which will translate to true and thus execute the if block):
+	if (true)
+	if ({})
+	if ([])
+	if (42)
+	if ("foo")
+	if (new Date())
+	if (-42)
+	if (3.14)
+	if (-3.14)
+	if (Infinity)
+	if (-Infinity)
+	// Same, but for Falsy:
+	if (false)
+	if (null)
+	if (undefined)
+	if (0)
+	if (NaN)
+	if ('')
+	if ("")
+	```
+	⚠️ Not every Truthy or Falsy can be compared with the `===` operator.
 
-console.log(isOne(result)) // if result is one, will return true, and if it's not, false.
-```
+#### External ressources
 
-Booleans can be written in different manners, for example, `true` can be expressed as:
-- `true` - Obvious, isn't it?
-- `!0` - This is the new way of writing `true`.
-
-I won't do it with false, but you get the idea 😊.
-
-Now, it's clear that you can replace all `true` by `!0`, and `false` by `!1`.
-
-> External ressources
 [Best Practice: Convert 1 and 0 to true and false in Javascript](https://en.code-bude.net/2016/03/14/best-practice-convert-1-and-0-to-true-and-false-in-javascript/)
+
+[Truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
+
+[Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
 
 ## Glossary
 
