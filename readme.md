@@ -153,6 +153,7 @@ console.log(person) // "John", reassignment is allowed with let
 
 <details>
   <summary>Detailed explanation</summary>
+
   The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
 
   ##### var
@@ -284,12 +285,13 @@ console.log(person) // "John", reassignment is allowed with let
   console.log(person[0]) // "John"
   person = ["Nick"] // raises an error, because reassignment is not allowed with const declared variables
   ```
+
+  #### External resource
+
+  - [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
+  - [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
+
 </details>
-
-#### External resource
-
-- [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
-- [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
 
 ### <a name="arrow_func_concept"></a> Arrow function
 
