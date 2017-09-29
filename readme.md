@@ -151,139 +151,140 @@ person = "John";
 console.log(person) // "John", reassignment is allowed with let
 ```
 
-#### Detailed explanation
+<details>
+  <summary>Detailed explanation</summary>
+  The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
 
-The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
+  ##### var
 
-##### var
+  ```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Besides, a *function scoped* variable created in a function can't be accessed outside this function.
 
-```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Besides, a *function scoped* variable created in a function can't be accessed outside this function.
+  I recommend you to picture it as if an *X scoped* variable meant that this variable was a property of X.
 
-I recommend you to picture it as if an *X scoped* variable meant that this variable was a property of X.
-
-```javascript
-function myFunction() {
-  var myVar = "Nick";
-  console.log(myVar); // "Nick" - myVar is accessible inside the function
-}
-console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
-```
-
-Still focusing on the variable scope, here is a more subtle example:
-
-```javascript
-function myFunction() {
-  var myVar = "Nick";
-  if (true) {
-    var myVar = "John";
-    console.log(myVar); // "John"
-    // actually, myVar being function scoped, we just erased the previous myVar value "Nick" for "John"
+  ```javascript
+  function myFunction() {
+    var myVar = "Nick";
+    console.log(myVar); // "Nick" - myVar is accessible inside the function
   }
-  console.log(myVar); // "John" - see how the instructions in the if block affected this value
-}
-console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
-```
+  console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
+  ```
 
-Besides, *var* declared variables are moved to the top of the scope at execution. This is what we call [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
+  Still focusing on the variable scope, here is a more subtle example:
 
-This portion of code:
-
-```js
-console.log(myVar) // undefined -- no error raised
-var myVar = 2;
-```
-
-is understood at execution like:
-
-```js
-var myVar;
-console.log(myVar) // undefined -- no error raised
-myVar = 2;
-```
-
-##### let
-
-```var``` and ```let ``` are about the same, but ```let``` declared variables
-
-- are *block scoped*
-- are **not** accessible before they are assigned
-- can't be re-declared in the same scope
-
-Let's see the impact of block-scoping taking our previous example:
-
-```javascript
-function myFunction() {
-  let myVar = "Nick";
-  if (true) {
-    let myVar = "John";
-    console.log(myVar); // "John"
-    // actually, myVar being block scoped, we just created a new variable myVar.
-    // this variable is not accessible outside this block and totally independent
-    // from the first myVar created !
+  ```javascript
+  function myFunction() {
+    var myVar = "Nick";
+    if (true) {
+      var myVar = "John";
+      console.log(myVar); // "John"
+      // actually, myVar being function scoped, we just erased the previous myVar value "Nick" for "John"
+    }
+    console.log(myVar); // "John" - see how the instructions in the if block affected this value
   }
-  console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affect this value
-}
-console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
-```
+  console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
+  ```
 
-<a name="tdz_sample"></a> Now, what it means for *let* (and *const*) variables for not being accessible before being assigned:
+  Besides, *var* declared variables are moved to the top of the scope at execution. This is what we call [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
 
-```js
-console.log(myVar) // raises a ReferenceError !
-let myVar = 2;
-```
+  This portion of code:
 
-By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenon is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
+  ```js
+  console.log(myVar) // undefined -- no error raised
+  var myVar = 2;
+  ```
 
-> **Note:** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation, it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
+  is understood at execution like:
 
-In addition, you can't re-declare a *let* variable:
+  ```js
+  var myVar;
+  console.log(myVar) // undefined -- no error raised
+  myVar = 2;
+  ```
 
-```js
-let myVar = 2;
-let myVar = 3; // Raises a SyntaxError
-```
+  ##### let
 
-##### const
+  ```var``` and ```let ``` are about the same, but ```let``` declared variables
 
-```const``` declared variables behave like *let* variables, but also they can't be reassigned.
+  - are *block scoped*
+  - are **not** accessible before they are assigned
+  - can't be re-declared in the same scope
 
-To sum it up, *const* variables:
+  Let's see the impact of block-scoping taking our previous example:
 
-- are *block scoped*
-- are not accessible before being assigned
-- can't be re-declared in the same scope
-- can't be reassigned
+  ```javascript
+  function myFunction() {
+    let myVar = "Nick";
+    if (true) {
+      let myVar = "John";
+      console.log(myVar); // "John"
+      // actually, myVar being block scoped, we just created a new variable myVar.
+      // this variable is not accessible outside this block and totally independent
+      // from the first myVar created !
+    }
+    console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affect this value
+  }
+  console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
+  ```
 
-```js
-const myVar = "Nick";
-myVar = "John" // raises an error, reassignment is not allowed
-```
+  <a name="tdz_sample"></a> Now, what it means for *let* (and *const*) variables for not being accessible before being assigned:
 
-```js
-const myVar = "Nick";
-const myVar = "John" // raises an error, re-declaration is not allowed
-```
+  ```js
+  console.log(myVar) // raises a ReferenceError !
+  let myVar = 2;
+  ```
 
-<a name="const_mutable_sample"></a> But there is a subtlety : ```const``` variables are not [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
+  By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenon is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
 
-For objects:
-```js
-const person = {
-  name: 'Nick'
-};
-person.name = 'John' // this will work ! person variable is not completely reassigned, but mutated
-console.log(person.name) // "John"
-person = "Sandra" // raises an error, because reassignment is not allowed with const declared variables
-```
+  > **Note:** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation, it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
 
-For arrays:
-```js
-const person = [];
-person.push('John'); // this will work ! person variable is not completely reassigned, but mutated
-console.log(person[0]) // "John"
-person = ["Nick"] // raises an error, because reassignment is not allowed with const declared variables
-```
+  In addition, you can't re-declare a *let* variable:
+
+  ```js
+  let myVar = 2;
+  let myVar = 3; // Raises a SyntaxError
+  ```
+
+  ##### const
+
+  ```const``` declared variables behave like *let* variables, but also they can't be reassigned.
+
+  To sum it up, *const* variables:
+
+  - are *block scoped*
+  - are not accessible before being assigned
+  - can't be re-declared in the same scope
+  - can't be reassigned
+
+  ```js
+  const myVar = "Nick";
+  myVar = "John" // raises an error, reassignment is not allowed
+  ```
+
+  ```js
+  const myVar = "Nick";
+  const myVar = "John" // raises an error, re-declaration is not allowed
+  ```
+
+  <a name="const_mutable_sample"></a> But there is a subtlety : ```const``` variables are not [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
+
+  For objects:
+  ```js
+  const person = {
+    name: 'Nick'
+  };
+  person.name = 'John' // this will work ! person variable is not completely reassigned, but mutated
+  console.log(person.name) // "John"
+  person = "Sandra" // raises an error, because reassignment is not allowed with const declared variables
+  ```
+
+  For arrays:
+  ```js
+  const person = [];
+  person.push('John'); // this will work ! person variable is not completely reassigned, but mutated
+  console.log(person[0]) // "John"
+  person = ["Nick"] // raises an error, because reassignment is not allowed with const declared variables
+  ```
+</details>
 
 #### External resource
 
