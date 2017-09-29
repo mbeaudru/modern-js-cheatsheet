@@ -154,7 +154,7 @@ console.log(person) // "John", reassignment is allowed with let
 #### Detailed explanation
 
 <details>
-  <summary>Detailed explanation</summary>
+  <summary>Toggle detailed explanation</summary>
 
   The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
 
@@ -334,7 +334,7 @@ function myFunc() {
 #### Detailed explanation
 
 <details>
-  <summary>Detailed explanation</summary>
+  <summary>Toggle detailed explanation</summary>
 
   ##### Concision
 
