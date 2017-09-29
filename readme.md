@@ -151,6 +151,8 @@ person = "John";
 console.log(person) // "John", reassignment is allowed with let
 ```
 
+#### Detailed explanations
+
 <details>
   <summary>Detailed explanation</summary>
 
@@ -328,6 +330,8 @@ function myFunc() {
   }, 0);
 }
 ```
+
+#### Detailed explanation
 
 <details>
   <summary>Detailed explanation</summary>
