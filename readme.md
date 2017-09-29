@@ -19,12 +19,13 @@ Besides, I will sometimes provide personal tips that may be debatable but will t
 
 When you struggle to understand a notion, I suggest you look for answers on the following resources:
 
-- [MDN (Mozilla Developer Network)](https://developer.mozilla.org/fr/search?q=)
+- [MDN (Mozilla Developer Network)](https://developer.mozilla.org/en-US/search?q=)
 - [You don't know JS (book)](https://github.com/getify/You-Dont-Know-JS)
 - [ES6 Features with examples](http://es6-features.org)
 - [WesBos blog (ES6)](http://wesbos.com/category/es6/)
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
 - [Google](https://www.google.com/) to find specific blog and resources
+- [StackOverflow](https://stackoverflow.com/questions/tagged/javascript)
 
 ## Table of Contents
 
@@ -71,7 +72,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [Sample code](#sample-code-4)
       - [Explanation](#explanation-3)
         * [Create the promise](#create-the-promise)
-        * [Use the promise](#use-the-promise)
+        * [Promise handlers usage](#promise-handlers-usage)
       - [External Resources](#external-resources)
     + [Template literals](#template-literals)
       - [Sample code](#sample-code-5)
@@ -165,7 +166,7 @@ function myFunction() {
   var myVar = "Nick";
   console.log(myVar); // "Nick" - myVar is accessible inside the function
 }
-console.log(myVar); // Undefined, myVar is not accessible outside the function.
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
 ```
 
 Still focusing on the variable scope, here is a more subtle example:
@@ -180,7 +181,7 @@ function myFunction() {
   }
   console.log(myVar); // "John" - see how the instructions in the if block affected this value
 }
-console.log(myVar); // Undefined, myVar is not accessible outside the function.
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
 ```
 
 Besides, *var* declared variables are moved to the top of the scope at execution. This is what we call [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
@@ -222,7 +223,7 @@ function myFunction() {
   }
   console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affect this value
 }
-console.log(myVar); // Undefined, myVar is not accessible outside the function.
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
 ```
 
 <a name="tdz_sample"></a> Now, what it means for *let* (and *const*) variables for not being accessible before being assigned:
@@ -360,6 +361,13 @@ Since there only is a return value here, we can do an implicit return.
 To do so, we only need to **remove the brackets** and the **return** keyword. That's why it's called an *implicit* return, the *return* keyword is not there, but this function will indeed return ```x * 2```.
 
 > **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
+
+Besides, if you want to implicitly return an *object* you **must have parenthesis around it** since it will conflict with the block braces:
+
+```js
+const getPerson = () => ({ name: "Nick", age: 24 })
+console.log(getPerson()) // { name: "Nick", age: 24 } -- object implicitly returned by arrow function
+```
 
 - Only one argument
 
@@ -964,13 +972,13 @@ const xFetcherPromise = new Promise( // Create promise using "new" keyword and s
 )
 ```
 
-As seen in the above sample, the Promise object takes a function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *fulfilled* and *rejected* state.
+As seen in the above sample, the Promise object takes an *executor* function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *fulfilled* and *rejected* state.
 
-But at the moment, the promise has not been used but only has been declared and stored into *xFetcherPromise* variable! So it doesn't have a current state.
+The promise is in pending state after instance creation and it's *executor* function is executed immediately. Once one of the function *resolve* or *reject* is called in the *executor* function, the promise will call its associated handlers.
 
-##### Use the promise
+##### Promise handlers usage
 
-To use the promise, we do the following:
+To get the promise result (or error), we must attach to it handlers by doing the following:
 
 ```js
 xFetcherPromise
@@ -982,11 +990,11 @@ xFetcherPromise
   })
 ```
 
-```.then``` is a method that once called will put the xFetcherPromise in **pending** state. When called, the promise body runs, and in this case, an Ajax call is being done.
+If the promise succeeds, *resolve* is executed and the function passed as ```.then``` parameter is executed.
 
-If it succeeds, *resolve* is called and the function passed as ```.then``` parameter is executed.
+If it fails, *reject* is executed and the function passed as ```.catch``` parameter is executed.
 
-If it fails, *reject* is called and the function passed as ```.catch``` parameter is executed.
+> **Note :** If the promise has already been fulfilled or rejected when a corresponding handler is attached, the handler will be called, so there is no race condition between an asynchronous operation completing and its handlers being attached. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Description)
 
 #### External Resources
 

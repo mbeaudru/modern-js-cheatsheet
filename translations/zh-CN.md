@@ -19,12 +19,13 @@
 
 当你觉得有的概念不容易理解时，你可以在下面的链接里面寻找答案。
 
-- [MDN (Mozilla Developer Network)](https://developer.mozilla.org/fr/search?q=)
+- [MDN (Mozilla Developer Network)](https://developer.mozilla.org/zh-CN/search?q=)
 - [You don't know JS（书）](https://github.com/getify/You-Dont-Know-JS)
 - [ES6 新特性和例子](http://es6-features.org)
 - [WesBos 博客中 ES6 类别](http://wesbos.com/category/es6/)
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
 - [Google](https://www.google.com/) 可直接查找特定的博客和资源
+- [StackOverflow](https://stackoverflow.com/questions/tagged/javascript)
 
 ## 目录
 
@@ -93,7 +94,7 @@ function myFunction() {
   var myVar = "Nick";
   console.log(myVar); // "Nick" - 在这个函数中 myVar 可被访问到
 }
-console.log(myVar); // Undefined, 在函数之外 myVar 则无法访问
+console.log(myVar); // 抛出错误 ReferenceError, 在函数之外 myVar 则无法访问
 ```
 
 继续来看变量的作用域，下面有更多精妙的例子：
@@ -108,7 +109,7 @@ function myFunction() {
   }
   console.log(myVar); // "John" - 可见 if 块中的代码会如何影响变量
 }
-console.log(myVar); // Undefined, 在函数之外 myVar 则无法访问
+console.log(myVar); // 抛出错误 ReferenceError, 在函数之外 myVar 则无法访问
 ```
 
 另外，*var* 声明的变量在执行的时候，就像会被移动到作用域的开始，这就是我们所说的[变量声明提升（var hoisting)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/**var)。
@@ -149,7 +150,7 @@ function myFunction() {
   }
   console.log(myVar); // "Nick", 可见 if 块中的代码，并没有影响到这个变量的值
 }
-console.log(myVar); // Undefined，在函数外部无法访问到 myVar。
+console.log(myVar); // 抛出错误 ReferenceError，在函数外部无法访问到 myVar。
 ```
 
 <a name="tdz_sample"></a>现在，来看看 *let*（和 *const* ）声明的变量在赋值前无法访问是什么意思：
