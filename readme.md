@@ -91,7 +91,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [Sample code](#sample-code-6)
       - [Explanation with sample code](#explanation-with-sample-code-2)
       - [External resources](#external-resources-6)
-	+ [Truthy / Falsy](#truthy---falsy)
+	+ [Truthy / Falsy](#truthy--falsy)
 	  - [Explanation with sample code](#explanation-with-sample-code-3)
 	  - [External ressources](#external-resources-7)
   * [Glossary](#glossary)
@@ -1385,7 +1385,7 @@ In JavaScript, a truthy value is a value that is considered  true when evaluated
 	```
 	⚠️ Not every Truthy or Falsy can be compared with the `===` operator.
 
-#### External ressources
+#### External resources
 
 [Best Practice: Convert 1 and 0 to true and false in Javascript](https://en.code-bude.net/2016/03/14/best-practice-convert-1-and-0-to-true-and-false-in-javascript/)
 
