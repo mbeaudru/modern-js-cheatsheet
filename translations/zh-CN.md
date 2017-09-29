@@ -28,17 +28,17 @@
 
 ## 目录
 
-- [Modern JavaScript cheatsheet 中文版](#modern-javascript-cheatsheet)
-  * [简介](#introduction)
-    + [初心](#motivation)
-    + [参考材料](#complementary-resources)
-  * [目录](#table-of-contents)
-  * [概念](#notions)
-    + [变量声明: var, const, let](#variable-declaration-var-const-let)
-      - [简述](#short-explanation)
-      - [代码示例](#sample-code)
-      - [详述](#detailed-explanation)
-      - [延伸资料](#external-resource)
+- [Modern JavaScript Cheatsheet 简体中文版](#Modern-JavaScript-Cheatsheet-简体中文版)
+  * [简介](#简介)
+    + [初心](#初心)
+    + [参考材料](#参考材料)
+  * [目录](#目录)
+  * [概念](#概念)
+    + [变量声明: var, const, let](#变量声明-var-const-let)
+      - [简述](#简述)
+      - [代码示例](#代码示例)
+      - [详述](#详述)
+      - [延伸资料](#延伸资料)
 
 ## 概念
 
