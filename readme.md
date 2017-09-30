@@ -1,195 +1,175 @@
-<a name="#modern-javascript-cheatsheet"></a>
-# Modern JavaScript Cheatsheet 繁體中文版
+# Modern JavaScript Cheatsheet
 
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
-<small>圖片來源: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
+<small>Image Credits: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
 
-### 譯者的話
-> 原標題：[mbeaudru/modern-js-cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet)
->
-> 原作者：[BEAUDRU Manuel](https://github.com/mbeaudru)
-> 
-> 對於現代 JavaScript 開發而言，這篇文章整理了不少知識點，當作複習或是學習都很不錯。自己一直以來都是做為讀者的角色，很少主動為整個開源社群做些實際貢獻，這點一直感到蠻慚愧的，就像是 Sublime 是啟蒙你寫程式的第一個 editor，當你開始工作賺錢後卻遲遲不買 license 是類似的道理。趁著短暫的假日譯者盡可能的把翻譯做到盡善盡美，畢竟不是專業的，要做到信達雅的程度其實不太可能，但過程中確實查閱了不少相關資料，部分關鍵字因為怕超譯所以會在後頭括號保留原文。
->
-> 另外也想藉著這回翻譯的經驗說點八股的，英文真的天殺的重要，能夠直接閱讀原文始終是最能理解原意的方式。整篇 cheatsheet 從意譯的角度出發，詞意有所疑問或是理解錯誤都煩請發個 Pull Request 謝謝。
->
-> 2017/09/30 Update
->
-> 昨天晚上收到簡體中文譯者的來信提醒，才發現原來 Issue 內早已有社群朋友 @BirkhoffLee 正在做繁體中文的翻譯 ([詳情可見此討論串](https://github.com/mbeaudru/modern-js-cheatsheet/issues/15))，真的很抱歉昨天才驚覺這件事，譯者在這裡推薦大家如果有空也可以多多瀏覽  @BirkhoffLee 翻譯過的 [機器學習動手玩](https://github.com/humphd/have-fun-with-machine-learning/blob/master/README_zh-tw.md) 以及相關專案，他也是位對於開源社群推廣非常積極的開發者。最後關於這份繁體中文文件，譯者會在這一兩天回顧下文件翻譯用詞有無需要調整的地方，確認過後便會 merge 回原作者的 repo，大概是醬。
+## Introduction
 
-<a name="introduction"></a>
-## 介紹
+### Motivation
 
-<a name="motivation"></a>
-### 動機
+This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and most contemporary sample code.
 
-本文檔整理了各種現代化 JavaScript 開發過程中經常使用到的腳本。
+This guide is not intended to teach you JavaScript from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn React for instance) because of the JavaScript concepts used.
 
-該份指南的目標並不是放在幫助初學者從零基礎到入門，而是為了幫助那些因為 JavaScript 新式語法導致可能很難熟悉現代函數庫使用方式 (以 React 做為舉例) 的開發人員。
+Besides, I will sometimes provide personal tips that may be debatable but will take care to mention that it's a personal recommendation when I do so.
 
-此外我也會偶爾提供一些個人主觀的建議和技巧，而這些建議可能會造成部分的爭議性，但請務必留意，當我做出這些舉例時這僅僅是出自於個人的推薦作法。
+> **Note:** Most of the concepts introduced here are coming from a JavaScript language update (ES2015, often called ES6). You can find new features added by this update [here](http://es6-features.org); it's very well done.
 
-> **注意:** 此處介紹的大部分概念出自於 JavaScript 的語言更新 (ES2015，更多人稱其作 ES6)。你可以在[這個好地方](http://es6-features.org)找到更多添加的新功能。
+### Complementary Resources
 
-<a name="complementary-resources"></a>
-### 配套資源
+When you struggle to understand a notion, I suggest you look for answers on the following resources:
 
-當你在試圖理解一個新概念時，我建議你可以去瀏覽以下這些資源尋找解答：
-
-- [MDN (Mozilla Developer Network)](https://developer.mozilla.org/fr/search?q=)
+- [MDN (Mozilla Developer Network)](https://developer.mozilla.org/en-US/search?q=)
 - [You don't know JS (book)](https://github.com/getify/You-Dont-Know-JS)
 - [ES6 Features with examples](http://es6-features.org)
 - [WesBos blog (ES6)](http://wesbos.com/category/es6/)
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
-- [Google](https://www.google.com/) 搜尋特定相關主題的部落格文章和資源
+- [Google](https://www.google.com/) to find specific blog and resources
+- [StackOverflow](https://stackoverflow.com/questions/tagged/javascript)
 
-<a name="table-of-contents"></a>
-## 目錄
+## Table of Contents
 
-- [Modern JavaScript cheatsheet 繁體中文版](#modern-javascript-cheatsheet)
-  * [介紹](#introduction)
-    + [動機](#motivation)
-    + [配套資源](#complementary-resources)
-  * [目錄](#table-of-contents)
-  * [概念](#notions)
-    + [變數聲明： var, const, let](#variable-declaration-var-const-let)
-      - [簡短解釋](#short-explanation-1)
-      - [範例程式碼](#sample-code-2)
-      - [詳細說明](#detailed-explanation-3)
-      - [外部資源](#external-resource-4)
-    + [箭頭函數](#-arrow-function-4)
-      - [範例程式碼](#sample-code-5)
-      - [詳細說明](#detailed-explanation-6)
-        * [簡潔性](#concision-7)
-        * [*this* 關鍵字參照](#this-reference-8)
-      - [有用資源](#useful-resources-9)
-    + [函數預設值](#function-default-parameter-value-10)
-      - [外部資源](#external-resource-11)
-    + [objects 和 arrays 的解構](#destructuring-objects-and-arrays-12)
-      - [說明和範例程式碼](#explanation-with-sample-code-13)
-      - [有用資源](#useful-resources-14)
-    + [Array 的操作方法 - map / filter / reduce](#array-methods---map--filter--reduce-15)
-      - [範例程式碼](#sample-code-16)
-      - [說明](#explanation-17)
-        * [Array.prototype.map()](#arrayprototypemap-18)
-        * [Array.prototype.filter()](#arrayprototypefilter-19)
-        * [Array.prototype.reduce()](#arrayprototypereduce-20)
-      - [外部資源](#external-resource-21)
-    + [展開運算子 "..."](#spread-operator-22)
-      - [範例程式碼](#sample-code-23)
-      - [說明](#explanation-24)
-        * [迭代用法 (如同 array)](#in-iterables-like-array-25)
-        * [不定參數](#function-rest-parameter-26)
-        * [Object 屬性擴展](#object-properties-spreading-27)
-      - [外部資源](#external-resources-28)
-    + [Object 屬性簡寫](#object-property-shorthand-29)
-      - [說明](#explanation-30)
-      - [外部資源](#external-resources-31)
-    + [Promises](#promises-32)
-      - [範例程式碼](#sample-code-33)
-      - [說明](#explanation-34)
-        * [創造 promise](#create-the-promise-35)
-        * [使用 promise](#use-the-promise-36)
-      - [外部資源](#external-resources-37)
-    + [模板字符串](#template-literals-38)
-      - [範例程式碼](#sample-code-39)
-      - [外部資源](#external-resources-40)
-    + [Imports / Exports](#imports--exports-41)
-      - [說明與範例程式碼](#explanation-with-sample-code-42)
-      - [外部資源](#external-resources-43)
-    + [JavaScript *this*](#-javascript-this-44)
-      - [外部資源](#external-resources-45)
-    + [Class](#class-46)
-      - [範例](#samples-47)
-      - [外部資源](#external-resources-48)
-    + [Async Await](#async-await-49)
-      - [範例程式碼](#sample-code-50)
-      - [說明](#explanation-51)
-      - [外部資源](#external-resources-52)
-  * [術語詞彙](#glossary-53)
-    + [作用域範圍](#-scope-54)
-    + [變數變異](#-variable-variance-55)
+- [Modern JavaScript cheatsheet](#modern-javascript-cheatsheet)
+  * [Introduction](#introduction)
+    + [Motivation](#motivation)
+    + [Complementary resources](#complementary-resources)
+  * [Table of contents](#table-of-contents)
+  * [Notions](#notions)
+    + [Variable declaration: var, const, let](#variable-declaration-var-const-let)
+      - [Short explanation](#short-explanation)
+      - [Sample code](#sample-code)
+      - [Detailed explanation](#detailed-explanation)
+      - [External resource](#external-resource)
+    + [Arrow function](#-arrow-function)
+      - [Sample code](#sample-code-1)
+      - [Detailed explanation](#detailed-explanation-1)
+        * [Concision](#concision)
+        * [*this* reference](#this-reference)
+      - [Useful resources](#useful-resources)
+    + [Function default parameter value](#function-default-parameter-value)
+      - [External resource](#external-resource-1)
+    + [Destructuring objects and arrays](#destructuring-objects-and-arrays)
+      - [Explanation with sample code](#explanation-with-sample-code)
+      - [Useful resources](#useful-resources-1)
+    + [Array methods - map / filter / reduce](#array-methods---map--filter--reduce)
+      - [Sample code](#sample-code-2)
+      - [Explanation](#explanation)
+        * [Array.prototype.map()](#arrayprototypemap)
+        * [Array.prototype.filter()](#arrayprototypefilter)
+        * [Array.prototype.reduce()](#arrayprototypereduce)
+      - [External Resource](#external-resource)
+    + [Spread operator "..."](#spread-operator-)
+      - [Sample code](#sample-code-3)
+      - [Explanation](#explanation-1)
+        * [In iterables (like array)](#in-iterables-like-array)
+        * [Function rest parameter](#function-rest-parameter)
+        * [Object properties spreading](#object-properties-spreading)
+      - [External resources](#external-resources)
+    + [Object property shorthand](#object-property-shorthand)
+      - [Explanation](#explanation-2)
+      - [External resources](#external-resources-1)
+    + [Promises](#promises)
+      - [Sample code](#sample-code-4)
+      - [Explanation](#explanation-3)
+        * [Create the promise](#create-the-promise)
+        * [Promise handlers usage](#promise-handlers-usage)
+      - [External Resources](#external-resources)
+    + [Template literals](#template-literals)
+      - [Sample code](#sample-code-5)
+      - [External resources](#external-resources-2)
+    + [Imports / Exports](#imports--exports)
+      - [Explanation with sample code](#explanation-with-sample-code-1)
+        * [Named exports](#named-exports)
+        * [Default import / export](#default-import--export)
+      - [External resources](#external-resources-3)
+    + [JavaScript *this*](#-javascript-this)
+      - [External resources](#external-resources-4)
+    + [Class](#class)
+      - [Samples](#samples)
+      - [External resources](#external-resources-5)
+    + [Async Await](#async-await)
+      - [Sample code](#sample-code-6)
+      - [Explanation with sample code](#explanation-with-sample-code-2)
+      - [External resources](#external-resources-6)
+  * [Glossary](#glossary)
+    + [Scope](#-scope)
+    + [Variable mutation](#-variable-mutation)
 
-<a name="notions"></a>
-## 概念
+## Notions
 
-<a name="variable-declaration-var-const-let"></a>
-### 變數聲明： var, const, let
+### Variable declaration: var, const, let
 
-在 JavaScript 中有三個不同關鍵字可用於宣告一個變數，分別是 ```var```， ```let``` 和 ```const```。
+In JavaScript, there are three keywords available to declare a variable, and each has its differences. Those are ```var```, ```let``` and ```const```.
 
-<a name="short-explanation-1"></a>
-#### 簡短解釋
+#### Short explanation
 
-使用 ```const``` 關鍵字宣告的變數無法被重新指派, 而 ```let``` 和 ```var``` 是可以的。
+Variables declared with ```const``` keyword can't be reassigned, while ```let``` and ```var``` can.
 
-我會建議在默認情況下一律使用 ```const``` ，當你需要<i>改變</i>它或是稍後才重新指派時才使用 ```let``` 。
+I recommend always declaring your variables with ```const``` by default, and with ```let``` if you need to *mutate* it or reassign it later.
 
 <table>
   <tr>
     <th></th>
-    <th>作用域範圍</th>
-    <th>是否可重新指派</th>
-    <th>狀態變更</th>
-   <th><a href="#tdz_sample">暫時性死區 (Temporal Dead Zone)</a></th>
+    <th>Scope</th>
+    <th>Reassignable</th>
+    <th>Mutable</th>
+   <th><a href="#tdz_sample">Temporal Dead Zone</a></th>
   </tr>
   <tr>
     <th>const</th>
-    <td>區塊</td>
-    <td>不是</td>
-    <td><a href="#const_mutable_sample">是</a></td>
-    <td>是</td>
+    <td>Block</td>
+    <td>No</td>
+    <td><a href="#const_mutable_sample">Yes</a></td>
+    <td>Yes</td>
   </tr>
   <tr>
     <th>let</th>
-    <td>區塊</td>
-    <td>是</td>
-    <td>是</td>
-    <td>是</td>
+    <td>Block</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes</td>
   </tr>
    <tr>
     <th>var</th>
-    <td>函數</td>
-    <td>是</td>
-    <td>是</td>
-    <td>不是</td>
+    <td>Function</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
   </tr>
 </table>
 
-<a name="sample-code-2"></a>
-#### 範例程式碼
+#### Sample code
 
 ```javascript
 const person = "Nick";
-person = "John" // 會有錯誤跳出，person 不能被重新指派
+person = "John" // Will raise an error, person can't be reassigned
 ```
 
 ```javascript
 let person = "Nick";
 person = "John";
-console.log(person) // "John" 在 let 的使用下允許被重新指派
+console.log(person) // "John", reassignment is allowed with let
 ```
 
-<a name="detailed-explanation-3"></a>
-#### 詳細說明
+#### Detailed explanation
 
-變數的 [*作用域範圍 (scope)*](#scope_def) 大致上意味著 "這個變數的效力可被作用在哪段程式碼 (where is this variable available in the code)"。
+The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
 
 ##### var
 
-```var``` 宣告的變數是 *函數範圍 (function scoped)* 的，這表示當函數中創造變數的時候，該函數中的所有內容都可以訪問並使用該變數。相反的，在函數外創造的 *區塊範圍 (block scoped)* 變數則無法被使用。
+```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Besides, a *function scoped* variable created in a function can't be accessed outside this function.
 
-我會建議你把它看作是一個 *X scoped* 範圍的變數代表著這個變數是 X 的屬性之一。
+I recommend you to picture it as if an *X scoped* variable meant that this variable was a property of X.
 
 ```javascript
 function myFunction() {
   var myVar = "Nick";
-  console.log(myVar); // "Nick" - myVar 可以在函數範圍之內被使用
+  console.log(myVar); // "Nick" - myVar is accessible inside the function
 }
-console.log(myVar); // Undefined, myVar 在函數範圍外部無法被使用
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
 ```
 
-持續觀察變數的作用域範圍，這裡有個更細微的範例：
+Still focusing on the variable scope, here is a more subtle example:
 
 ```javascript
 function myFunction() {
@@ -197,39 +177,39 @@ function myFunction() {
   if (true) {
     var myVar = "John";
     console.log(myVar); // "John"
-    // actually, myVar 是函數範圍之內的，我們剛剛覆蓋了之前的 myVar 變數，值從 "Nick" 變成 "John"
+    // actually, myVar being function scoped, we just erased the previous myVar value "Nick" for "John"
   }
-  console.log(myVar); // "John" - 印出來看看區塊如何影響 myVar 這個變數的值
+  console.log(myVar); // "John" - see how the instructions in the if block affected this value
 }
-console.log(myVar); // Undefined, myVar 在函數範圍外部無法被使用
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
 ```
 
-此外， *var* 宣告出來的變數在程式執行之時就會被移到作用域的頂部。這個就是我們所說的[變數提升 (var hoisting)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting)。
+Besides, *var* declared variables are moved to the top of the scope at execution. This is what we call [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
 
-這段程式碼：
+This portion of code:
 
 ```js
-console.log(myVar) // undefined -- 沒有錯誤發生
+console.log(myVar) // undefined -- no error raised
 var myVar = 2;
 ```
 
-在程式執行過程中被解讀為：
+is understood at execution like:
 
 ```js
 var myVar;
-console.log(myVar) // undefined -- 沒有錯誤發生
+console.log(myVar) // undefined -- no error raised
 myVar = 2;
 ```
 
 ##### let
 
-```var``` 和 ```let ``` 大致上行為相同， ```let``` 在宣告變數時
+```var``` and ```let ``` are about the same, but ```let``` declared variables
 
-- 作用域是 *區塊範圍 (block scoped)*
-- 在被指派值以前 **無法** 被存取使用
-- 同一個作用域之下不能被重新宣告
+- are *block scoped*
+- are **not** accessible before they are assigned
+- can't be re-declared in the same scope
 
-採用我們前面的例子來看看區塊範圍 (block scoped) 的影響：
+Let's see the impact of block-scoping taking our previous example:
 
 ```javascript
 function myFunction() {
@@ -237,108 +217,104 @@ function myFunction() {
   if (true) {
     let myVar = "John";
     console.log(myVar); // "John"
-    // 事實上，myVar 是區塊範圍之內的，我們剛剛創造了一個全新的 myVar 變數
-    // 這個變數是無法從區塊範圍以外的地方存取，
-    // 而且它也是完全獨立於我們創造的第一個 myVar 變數！
+    // actually, myVar being block scoped, we just created a new variable myVar.
+    // this variable is not accessible outside this block and totally independent
+    // from the first myVar created !
   }
-  console.log(myVar); // "Nick", 查看 if 區塊中的程式會不會影響到 myVar 這個值
+  console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affect this value
 }
-console.log(myVar); // Undefined, myVar 在函數範圍外部無法被使用
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
 ```
 
-<a name="tdz_sample"></a> 現在我們來看看 *let* ( 和 *const* ) 變數在被賦值以前無法被使用是什麼意思：
+<a name="tdz_sample"></a> Now, what it means for *let* (and *const*) variables for not being accessible before being assigned:
 
 ```js
-console.log(myVar) // 觸發 ReferenceError 錯誤!
+console.log(myVar) // raises a ReferenceError !
 let myVar = 2;
 ```
 
-和 *var* 變數比較之下，如果在指派 *let* 或是 *const* 變數的值之前嘗試讀取或是寫入的動作是會引發錯誤的。這種現象通常被稱之為 [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) 或者是 *TDZ*。
+By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenon is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
 
-> **注意：** 技術上而言， *let* 和 *const* 變數在聲明時也是會被提升的，但並不是指它們的賦值。因為他們在被指派之前是不能使用的，所以直觀上就像是沒有提升一樣，但它們其實是有的。如果你想知道更多的話請查看 [更加詳細解釋的這篇文章](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)。
+> **Note:** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation, it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
 
-此外，你不能重新宣告一個 *let* 變數：
+In addition, you can't re-declare a *let* variable:
 
 ```js
 let myVar = 2;
-let myVar = 3; // 跳出 SyntaxError 錯誤
+let myVar = 3; // Raises a SyntaxError
 ```
 
 ##### const
 
-```const``` 宣告出來的行為如同 *let* 變數，但它們同樣都不能被重新宣告。
+```const``` declared variables behave like *let* variables, but also they can't be reassigned.
 
-總結一下， *const* 變數：
+To sum it up, *const* variables:
 
-- 作用域是 *區塊範圍 (block scoped)*
-- 在被指派值以前 **無法** 被存取使用
-- 同一個作用域之下不能被重新宣告
-- 無法被重新指派新值
+- are *block scoped*
+- are not accessible before being assigned
+- can't be re-declared in the same scope
+- can't be reassigned
 
 ```js
 const myVar = "Nick";
-myVar = "John" // 跳出錯誤，不允許重新指派新值
+myVar = "John" // raises an error, reassignment is not allowed
 ```
 
 ```js
 const myVar = "Nick";
-const myVar = "John" // 跳出錯誤， 重新宣告是不被允許的
+const myVar = "John" // raises an error, re-declaration is not allowed
 ```
 
-<a name="const_mutable_sample"></a> 但有個精妙之處 : ```const``` 變數不是[**不可變的**](#mutation_def) ! 更具體而言，這代表著 *object* 和 *array* 中由 ```const``` 宣告出來的變數是 **可以** 被改變的。
+<a name="const_mutable_sample"></a> But there is a subtlety : ```const``` variables are not [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
 
-對於 objects：
-
+For objects:
 ```js
 const person = {
   name: 'Nick'
 };
-person.name = 'John' // 這完全可行！ person 這個變數尚未完全被重新指派，但它確實改變了
+person.name = 'John' // this will work ! person variable is not completely reassigned, but mutated
 console.log(person.name) // "John"
-person = "Sandra" // 跳出錯誤，因為重新指派時是不允許使用 const 宣告出來的變數的
+person = "Sandra" // raises an error, because reassignment is not allowed with const declared variables
 ```
 
-對於 arrays：
-
+For arrays:
 ```js
 const person = [];
-person.push('John'); // 這完全可行！ person 這個變數尚未完全被重新指派，但它確實改變了 
+person.push('John'); // this will work ! person variable is not completely reassigned, but mutated
 console.log(person[0]) // "John"
-person = ["Nick"] // 跳出錯誤，因為重新指派時是不允許使用 const 宣告出來的變數的
+person = ["Nick"] // raises an error, because reassignment is not allowed with const declared variables
 ```
 
-<a name="external-resource-4"></a>
-#### 外部資源
+#### External resource
 
 - [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
 - [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
 
-### <a name="-arrow-function-4"></a> 箭頭函數
+### <a name="arrow_func_concept"></a> Arrow function
 
-ES6 的更新正式引入了 *箭頭函數 (arrow functions)*，這是另外一種宣告和使用函數的方法。以下是它們所帶來的好處：
+The ES6 JavaScript update has introduced *arrow functions*, which is another way to declare and use functions. Here are the benefits they bring:
 
-- 更為簡潔
-- *this* 的值繼承自外圍作用域 (*this* is picked up from surroundings)
-- 隱式回傳 (implicit return)
+- More concise
+- *this* is picked up from surroundings
+- implicit return
 
-<a name="sample-code-5"></a>
-#### 範例程式碼
+#### Sample code
 
-- 簡潔性和隱式回傳 (implicit return)
+- Concision and implicit return
 
 ```js
-function double(x) { return x * 2; } // 傳統作法
+function double(x) { return x * 2; } // Traditional way
 console.log(double(2)) // 4
 ```
 
 ```js
-const double = x => x * 2; // 仍然是同樣的函數，寫成帶有隱式回傳的作法
+const double = x => x * 2; // Same function written as an arrow function with implicit return
 console.log(double(2)) // 4
 ```
 
-- *this* 關鍵字參照
+- *this* reference
 
-在箭頭函數中， *this* 意味著封閉執行上下文的 *這個值*。基本上，透過使用箭頭函數，在函數中調用函數之前，你不需要去使用像是 "that = this" 這樣的用法。
+In an arrow function, *this* is equal to the *this* value of the enclosing execution context. Basically, with arrow functions, you don't have to do the "that = this" trick before calling a function inside a function anymore.
 
 ```js
 function myFunc() {
@@ -350,110 +326,114 @@ function myFunc() {
 }
 ```
 
-<a name="detailed-explanation-6"></a>
-#### 詳細說明
+#### Detailed explanation
 
-<a name="concision-7"></a>
-##### 簡潔性
+##### Concision
 
-箭頭函數在諸多方面都較傳統函數來的更為簡潔。讓我們來看看所有可能的情況：
+Arrow functions are more concise than traditional functions in many ways. Let's review all the possible cases:
 
-- 隱式回傳 VS 顯式回傳
+- Implicit VS Explicit return
 
- **顯式回傳 (explicit return)** 是指在函數中明確的使用 *return* 這個關鍵字。
+An **explicit return** is a function where the *return* keyword is used in its body.
 
 ```js
   function double(x) {
-    return x * 2; // 這個函數顯式回傳了 x * 2，並且使用了 return 這個關鍵字
+    return x * 2; // this function explicitly returns x * 2, *return* keyword is used
   }
 ```
 
-以傳統的作法撰寫，return 永遠都會是顯式的。但是如果是使用箭頭函數，你可以執行隱式回傳，這同時代表著你不需要使用關鍵字 return 去取得回傳值。
+In the traditional way of writing functions, the return was always explicit. But with arrow functions, you can do *implicit return* which means that you don't need to use the keyword *return* to return a value.
 
-要做隱式回傳，程式碼必須用一行句子撰寫。
+To do an implicit return, the code must be written in a one-line sentence.
 
 ```js
   const double = (x) => {
-    return x * 2; // 此處顯示 return 值
+    return x * 2; // Explicit return here
   }
 ```
 
-由於這裡只有一個回傳值，我們可以做一個隱式回傳。
+Since there only is a return value here, we can do an implicit return.
 
 ```js
  const double = (x) => x * 2;
 ```
 
-做到上述的轉換，我們只需要 **移除括號** 以及 **return** 這個關鍵字。這就是為什麼它會被稱為 *隱式* 回傳，*return* 關鍵字不在了，但是這個函數確實會回傳 ```x * 2```。
+To do so, we only need to **remove the brackets** and the **return** keyword. That's why it's called an *implicit* return, the *return* keyword is not there, but this function will indeed return ```x * 2```.
 
-> **注意：** 如果你的函數沒有回傳一個值 (這種作法有 *副作用*)，那麼它將不屬於顯式或是隱式返回中的任一種。
+> **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
 
-- 只有一個參數
-
-如果你的函數只接受一個參數，你可以省略它周圍的括號。如果我們拿上述的 *double* 程式碼做為舉例：
+Besides, if you want to implicitly return an *object* you **must have parenthesis around it** since it will conflict with the block braces:
 
 ```js
- const double = (x) => x * 2; // 這個箭頭函數只接受一個參數
+const getPerson = () => ({ name: "Nick", age: 24 })
+console.log(getPerson()) // { name: "Nick", age: 24 } -- object implicitly returned by arrow function
 ```
 
-括號是可以被省略的：
+- Only one argument
+
+If your function only takes one parameter, you can omit the parenthesis around it. If we take back the above *double* code:
 
 ```js
- const double = x => x * 2; // 這個箭頭函數只接受一個參數
+ const double = (x) => x * 2; // this arrow function only takes one parameter
 ```
 
-- 沒有參數
-
-當沒有為箭頭函數提供任何參數時，你就必須加上括號，否則語法將會出錯。
+Parenthesis around the parameter can be avoided:
 
 ```js
-  () => { // 有加上括號，一切都正常運作
+ const double = x => x * 2; // this arrow function only takes one parameter
+```
+
+- No arguments
+
+When there is no argument provided to an arrow function, you need to provide parentheses, or it won't be valid syntax.
+
+```js
+  () => { // parenthesis are provided, everything is fine
     const x = 2;
     return x;
   }
 ```
 
 ```js
-  => { // 沒有括號，這樣的語法是行不通的！
+  => { // No parenthesis, this won't work!
     const x = 2;
     return x;
   }
 ```
 
-<a name="this-reference-8"></a>
-##### *this* 關鍵字參照
+##### *this* reference
 
-要理解箭頭函數的精妙之處，你一定要清楚 [this](#this_def) 在 JavaScript 中是如何運作的。
+To understand this subtlety introduced with arrow functions, you must know how [this](#this_def) behaves in JavaScript.
 
-在一個箭頭函數當中，*this* 等同於封閉執行上下文的 *這個值* 。意思就是說，一個箭頭函數並不會創造一個新的 *this*，而是從它的外圍作用域一併抓起。
+In an arrow function, *this* is equal to the *this* value of the enclosing execution context. What it means is that an arrow function doesn't create a new *this*, it grabs it from its surrounding instead.
 
-沒有箭頭函數的這項功能，如果你想要取得位於函數的函數內部由 *this* 參照的變數，你就只能使用 *that = this* 或者是 *self = this* 這樣的技巧。
+Without arrow function, if you wanted to access a variable from *this* in a function inside a function, you had to use the *that = this* or *self = this* trick.
 
-舉例來說，你在 myFunc 函數中使用 setTimeout 函數：
+For instance, using setTimeout function inside myFunc:
 
 ```js
 function myFunc() {
   this.myVar = 0;
-  var that = this; // 使用 that = this 這個技巧
+  var that = this; // that = this trick
   setTimeout(
-    function() { // 創造了一個新的 this 
+    function() { // A new *this* is created in this function scope
       that.myVar++;
       console.log(that.myVar) // 1
 
-      console.log(this.myVar) // undefined -- 詳見上述的函數宣告
+      console.log(this.myVar) // undefined -- see function declaration above
     },
     0
   );
 }
 ```
 
-但如果你使用了箭頭函數，*this* 的範圍將會是它的外圍作用域：
+But with arrow function, *this* is taken from its surrounding:
 
 ```js
 function myFunc() {
   this.myVar = 0;
   setTimeout(
-    () => { // this 的值來自於它的外圍作用域，也就是 myFunc 函數
+    () => { // this taken from surrounding, meaning myFunc here
       this.myVar++;
       console.log(this.myVar) // 1
     },
@@ -462,57 +442,52 @@ function myFunc() {
 }
 ```
 
-<a name="useful-resources-9"></a>
-#### 有用資源
+#### Useful resources
 
 - [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
 - [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 - [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
 
-<a name="function-default-parameter-value-10"></a>
-### 函數預設值
+### Function default parameter value
 
-從 ES2015 JavaScript 更新之後，你可以透過下列的語法為函數中的參數設定預設值：
+Starting from ES2015 JavaScript update, you can set default value to your function parameters using the following syntax:
 
 ```js
 function myFunc(x = 10) {
   return x;
 }
-console.log(myFunc()) // 10 -- 沒有提供任何值，所以 10 在 myFunc 中做為預設值指派給 x
-console.log(myFunc(5)) // 5 -- 有提供一個參數值，所以 x 在 myFunc 中等於 5   
+console.log(myFunc()) // 10 -- no value is provided so x default value 10 is assigned to x in myFunc
+console.log(myFunc(5)) // 5 -- a value is provided so x is equal to 5 in myFunc
 
-console.log(myFunc(undefined)) // 10 -- 未定義的值，所以預設值被指派給 x
-console.log(myFunc(null)) // null -- 提供一個值 (null)，詳細資料請見下文
+console.log(myFunc(undefined)) // 10 -- undefined value is provided so default value is assigned to x
+console.log(myFunc(null)) // null -- a value (null) is provided, see below for more details
 ```
 
-預設值若且為若應用在兩種情況：
+The default parameter is applied in two and only two situations:
 
-- 沒有傳入任何參數
-- 傳入 *undefined* 這個參數
+- No parameter provided
+- *undefined* parameter provided
 
-換句話說，如果你傳入的是 *null* ，那麼預設值的機制是不會被觸發的。
+In other words, if you pass in *null* the default parameter **won't be applied**.
 
-> **注意：** 預設值的指派可以搭配解構參數一同使用 (參照下一個概念的實際例子)
+> **Note:** Default value assignment can be used with destructured parameters as well (see next notion to see an example)
 
-<a name="external-resource-11"></a>
-#### 外部資源
+#### External resource
 
 - [Default parameter value - ES6 Features](http://es6-features.org/#DefaultParameterValues)
 - [Default parameters - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
 
-<a name="destructuring-objects-and-arrays-12"></a>
-### objects 和 arrays 的解構
+### Destructuring objects and arrays
 
-*解構 (Destructuring)* 的概念是從 objects 或是 arrays 當中提取部分用值一種相當方便的方法。
+*Destructuring* is a convenient way of creating new variables by extracting some values from data stored in objects or arrays.
 
-舉個簡單的實例，*destructuring* 可以被用來解構函數中的參數或者像是 React 專案中 *this.props* 這樣的用法。
+To name a few use cases, *destructuring* can be used to destructure function parameters or *this.props* in React projects for instance.
 
-<a name="explanation-with-sample-code-13"></a>
-#### 說明和範例程式碼
+#### Explanation with sample code
 
 - Object
 
-試著想想以下這個 object：
+Let's consider the following object for all the samples:
 
 ```js
 const person = {
@@ -523,7 +498,7 @@ const person = {
 }
 ```
 
-沒有解構的作法，你只能這樣做：
+Without destructuring
 
 ```js
 const first = person.firstName;
@@ -531,24 +506,24 @@ const age = person.age;
 const city = person.city || "Paris";
 ```
 
-使用解構，你只需要一行：
+With destructuring, all in one line:
 
 ```js
-const { firstName: first, age, city = "Paris" } = person; // 這樣就搞定了！
+const { firstName: first, age, city = "Paris" } = person; // That's it !
 
-console.log(age) // 35 -- 一個名為 age 的新變數被創建出來了，其值等同於 person.age
-console.log(first) // "Nick" -- 一個名為 first 的新變數被創建出來了，其值等同於person.firstName
-console.log(firstName) // Undefined -- person.firstName 雖然存在，但其值是存在名叫 first 的新變數
-console.log(city) // "Paris" -- 一個名為 city 的新變數被創建出來了，同時因為 person.city 是未被定義的，所以 city 將等同於預設值也就是 "Paris"。
+console.log(age) // 35 -- A new variable age is created and is equal to person.age
+console.log(first) // "Nick" -- A new variable first is created and is equal to person.firstName
+console.log(firstName) // Undefined -- person.firstName exists BUT the new variable created is named first
+console.log(city) // "Paris" -- A new variable city is created and since person.city is undefined, city is equal to the default value provided "Paris".
 ```
 
-**注意：** 在 ```const { age } = person;```當中， *const* 後的括號並不是用來宣告 object 或者是區塊，僅僅是 *解構 (destructuring)* 的使用語法。
+**Note :** In ```const { age } = person;```, the brackets after *const* keyword are not used to declare an object nor a block but is the *destructuring* syntax.
 
-- 帶有參數的函數用法
+- Function parameters
 
-*解構 (Destructuring)* 經常被用來解 objects 中的參數。
+*Destructuring* is often used to destructure objects parameters in functions.
 
-沒有解構的作法，你只能這樣做：
+Without destructuring
 
 ```js
 function joinFirstLastName(person) {
@@ -560,18 +535,17 @@ function joinFirstLastName(person) {
 joinFirstLastName(person); // "Nick-Anderson"
 ```
 
-在解構 obejct 當中 *person* 這個參數時，我們可以得到一個更簡潔的函數：
+In destructuring the object parameter *person*, we get a more concise function:
 
 ```js
-function joinFirstLastName({ firstName, lastName }) { 
-  // 我們透過解構 person 分別創造了 firstName 和 lastName 這兩個變數
+function joinFirstLastName({ firstName, lastName }) { // we create firstName and lastName variables by destructuring person parameter
   return firstName + '-' + lastName;
 }
 
 joinFirstLastName(person); // "Nick-Anderson"
 ```
 
-解構搭配[箭頭函數](#arrow_func_concept)使得開發過程更加愉快：
+Destructuring is even more pleasant to use with [arrow functions](#arrow_func_concept):
 
 ```js
 const joinFirstLastName = ({ firstName, lastName }) => firstName + '-' + lastName;
@@ -581,52 +555,49 @@ joinFirstLastName(person); // "Nick-Anderson"
 
 - Array
 
-讓我們來想想下列這個 array：
+Lets consider the following array:
 
 ```js
 const myArray = ["a", "b", "c"];
 ```
 
-沒有解構的作法，你只能這樣做：
+Without destructuring
 
 ```js
 const x = myArray[0];
 const y = myArray[1];
 ```
 
-使用解構的作法：
+With destructuring
 
 ```js
-const [x, y] = myArray; // 就是這麼簡單！
+const [x, y] = myArray; // That's it !
 
 console.log(x) // "a"
 console.log(y) // "b"
 ```
 
-<a name="useful-resources-14"></a>
-#### 有用資源
+#### Useful resources
 
 - [ES6 Features - Destructuring Assignment](http://es6-features.org/#ArrayMatching)
 - [Destructuring Objects - WesBos](http://wesbos.com/destructuring-objects/)
 - [ExploringJS - Destructuring](http://exploringjs.com/es6/ch_destructuring.html)
 
-<a name="array-methods---map--filter--reduce-1"></a>
-### Array 的操作方法 - map / filter / reduce
+### Array methods - map / filter / reduce
 
-*Map*，*filter* 和 *reduce* 都是 array 提供的方法，它們源自於 [*functional programming*](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0) 開發範式。
+*Map*, *filter* and *reduce* are array methods that are coming from a programming paradigm named [*functional programming*](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0).
 
-總結一下：
+To sum it up:
 
-- **Array.prototype.map()** 接受一組 array，針對其中的元素進行某些操作和轉換的動作。
-- **Array.prototype.filter()** 接受一組 array，依照元素本身決定是否保留，並且將會回傳一個僅含有保留元素的 array
-- **Array.prototype.reduce()** 接受一組 array，將這些元素合併成一個值並回傳
+- **Array.prototype.map()** takes an array, does something on its elements and returns an array with the transformed elements.
+- **Array.prototype.filter()** takes an array, decides element by element if it should keep it or not and returns an array with the kept elements only
+- **Array.prototype.reduce()** takes an array and aggregates the elements into a single value (which is returned)
 
-我會建議在開發時盡可能的遵循函數式編程 (functional programming) 的原則，因為它們是可組合的，簡潔且優雅的。
+I recommend to use them as much as possible in following the principles of functional programming because they are composable, concise and elegant.
 
-透過這三種方法，你將可以避免在大多數情況下使用 *for* 和 *forEach*。當你想做一個 *for* 迴圈時，試著用 *map*，*filter* 和 *reduce* 組合看看。起初你可能會覺得窒礙難行，因為它需要你學習一種新的思維方式，但一旦你掌握它了，事情也將變得更加容易。
+With those three methods, you can avoid the use of *for* and *forEach* loops in most situations. When you are tempted to do a *for* loop, try to do it with *map*, *filter* and *reduce* composed. You might struggle to do it at first because it requires you to learn a new way of thinking, but once you've got it things gets easier.
 
-<a name="sample-code-16"></a>
-#### 範例程式碼
+#### Sample code
 
 ```js
 const numbers = [0, 1, 2, 3, 4, 5, 6];
@@ -635,7 +606,7 @@ const evenNumbers = numbers.filter(n => n % 2 === 0); // [0, 2, 4, 6]
 const sum = numbers.reduce((prev, next) => prev + next, 0); // 21
 ```
 
-透過 map，filter 和 reduce 這幾種組合技去計算出學生成績 >= 10 的總和：
+Compute total grade sum for students above 10 by composing map, filter and reduce:
 
 ```js
 const students = [
@@ -646,23 +617,21 @@ const students = [
 ];
 
 const aboveTenSum = students
-  .map(student => student.grade) // map the students array to an array of their grades
+  .map(student => student.grade) // we map the students array to an array of their grades
   .filter(grade => grade >= 10) // we filter the grades array to keep those above 10
   .reduce((prev, next) => prev + next, 0); // we sum all the grades above 10 one by one
 
 console.log(aboveTenSum) // 44 -- 10 (Nick) + 15 (John) + 19 (Julia), Nathalie below 10 is ignored
 ```
 
-<a name="explanation-17"></a>
-#### 說明
+#### Explanation
 
-讓我們來思考下列這個 array：
+Let's consider the following array of numbers for our examples:
 
 ```js
 const numbers = [0, 1, 2, 3, 4, 5, 6];
 ```
 
-<a name="arrayprototypemap-18"></a>
 ##### Array.prototype.map()
 
 ```js
@@ -671,9 +640,10 @@ const doubledNumbers = numbers.map(function(n) {
 });
 console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 ```
-發生了什麼事？我們在 *numbers* 這個 array 中使用了 .map 方法，map 將會去迭代 array 中的每一個元素並且回傳給我們的函數。該函數的目標是生成並回傳一個新的值使得 map 可以替換掉原本的 array。
 
-讓我們提取這個函數以便讓解釋更清楚：
+What's happening here? We are using .map on the *numbers* array, the map is iterating on each element of the array and passes it to our function. The goal of the function is to produce and return a new value from the one passed so that map can replace it.
+
+Lets extract this function to make it more clear, just for this once:
 
 ```js
 const doubleN = function(n) { return n * 2; };
@@ -681,11 +651,10 @@ const doubledNumbers = numbers.map(doubleN);
 console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 ```
 
-```numbers.map(doubleN)``` 將會產生 ```[doubleN(0), doubleN(1), doubleN(2), doubleN(3), doubleN(4), doubleN(5), doubleN(6)]``` ，而它們分別等同於 ```[0, 2, 4, 6, 8, 10, 12]```。
+```numbers.map(doubleN)``` produces ```[doubleN(0), doubleN(1), doubleN(2), doubleN(3), doubleN(4), doubleN(5), doubleN(6)]``` which is equal to ```[0, 2, 4, 6, 8, 10, 12]```.
 
-> **注意：** 如果你不需要回傳一個新的 array 且只想實作一個帶有副作用的迴圈，使用 for / forEach 迴圈會更為符合你所需。
+> **Note:** If you do not need to return a new array and just want to do a loop that has side effects, you might just want to use a for / forEach loop instead of a map.
 
-<a name="arrayprototypefilter-19"></a>
 ##### Array.prototype.filter()
 
 ```js
@@ -695,95 +664,90 @@ const evenNumbers = numbers.filter(function(n) {
 console.log(evenNumbers); // [0, 2, 4, 6]
 ```
 
-我們在這個充滿 *numbers* 的 array 上使用 .filter 方法，過濾器將會遍歷當中的每一個元素並回傳給我們的函數。函數的目標是回傳一個布林值，它將會確定當前值是否被保留。過濾之後回傳的是一個僅保留所需值的 array。
+We are using .filter on the *numbers* array, filter is iterating on each element of the array and passes it to our function. The goal of the function is to return a boolean that will determine whether the current value will be kept or not. Filter then returns the array with only the kept values.
 
-<a name="arrayprototypereduce-20"></a>
 ##### Array.prototype.reduce()
 
-reduce 方法的目標是將進行迭代的 array 中的所有元素 *減少* 到只留下單一值。計算這些元素的方式將取決於你的需求。
+The reduce method goal is to *reduce* all elements of the array it iterates on into a single value. How it aggregates those elements is up to you.
 
 ```js
 const sum = numbers.reduce(
   function(acc, n) {
     return acc + n;
   },
-  0 // 進行迭代計算的初始值
+  0 // accumulator variable value at first iteration step
 );
 
 console.log(sum) //21
 ```
 
-就像 .map 和 .filter 方法一樣， .reduce 方法被應用在 array 上並將函數做為第一個參數。
+Just like for .map and .filter methods, .reduce is applied on an array and takes a function as the first parameter.
 
+This time though, there are changes:
 
-這次有些變化了：
+- .reduce takes two parameters
 
-- .reduce 接受兩個參數
+The first parameter is a function that will be called at each iteration step.
 
-第一個參數是在每個迭代步驟中調用的函數。
+The second parameter is the value of the accumulator variable (*acc* here) at the first iteration step (read next point to understand).
 
-第二個參數是在第一個迭代步驟（讀取下一個之用）的累加器變數的值（此處是 *acc*）。
+- Function parameters
 
-- 帶有參數的函數用法
+The function you pass as the first parameter of .reduce takes two parameters. The first one (*acc* here) is the accumulator variable, whereas the second parameter (*n*) is the current element.
 
-做為 .reduce 的第一個參數所傳遞的函數需要兩個參數。第一個（此處是 *acc*）是累加器變數，而第二個參數（*n*）則是當前元素。
+The accumulator variable is equal to the return value of your function at the **previous** iteration step. At the first step of the iteration, *acc* is equal to the value you passed as .reduce second parameter.
 
-累加器變數的值等於 **上一次** 迭代步驟中函數的回傳值。在迭代過程的第一步，*acc* 等於你做為 .reduce 時第二個參數所傳遞的值。
+###### At first iteration step
 
-###### 進行第一次迭代
+```acc = 0``` because we passed in 0 as the second parameter for reduce
 
-```acc = 0``` 因為我們把 0 做為 reduce 的第二個參數
+```n = 0``` first element of the *number* array
 
-```n = 0```  *number* array 的第一個元素
+Function returns *acc* + *n* --> 0 + 0 --> 0
 
-函數回傳 *acc* + *n* --> 0 + 0 --> 0
+###### At second iteration step
 
-###### 進行第二次迭代
+```acc = 0``` because its the value the function returned at the previous iteration step
 
-```acc = 0``` 因為它是上次迭代所回傳的值 
+```n = 1``` second element of the *number* array
 
-```n = 1``` *number* array 的第二個元素
+Function returns *acc* + *n* --> 0 + 1 --> 1
 
-函數回傳 *acc* + *n* --> 0 + 1 --> 1
+###### At third iteration step
 
-###### 進行第三次迭代
+```acc = 1``` because its the value the function returned at the previous iteration step
 
-```acc = 1``` 因為它是上次迭代所回傳的值 
+```n = 2``` third element of the *number* array
 
-```n = 2``` *number* array 的第三個元素
+Function returns *acc* + *n* --> 1 + 2 --> 3
 
-函數回傳 *acc* + *n* --> 1 + 2 --> 3
+###### At fourth iteration step
 
-###### 進行第四次迭代
+```acc = 3``` because it's the value the function returned at the previous iteration step
 
-```acc = 3``` 因為它是上次迭代所回傳的值
+```n = 3``` fourth element of the *number* array
 
-```n = 3``` *number* array 的第四個元素
+Function returns *acc* + *n* --> 3 + 3 --> 6
 
-函數回傳 *acc* + *n* --> 3 + 3 --> 6
+###### [...] At last iteration step
 
-###### [...] 進行最後一次迭代
+```acc = 15``` because it's the value the function returned at the previous iteration step
 
-```acc = 15``` 因為它是上次迭代所回傳的值
+```n = 6``` last element of the *number* array
 
-```n = 6``` *number* array 的最後一個元素
+Function returns *acc* + *n* --> 15 + 6 --> 21
 
-函數回傳 *acc* + *n* --> 15 + 6 --> 21
+As it is the last iteration step, **.reduce** returns 21.
 
-因為它是最後一個迭代步驟了， **.reduce** 將回傳 21。
-
-<a name="external-resource-21"></a>
-#### 外部資源
+#### External Resource
 
 - [Understanding map / filter / reduce in JS](https://hackernoon.com/understanding-map-filter-and-reduce-in-javascript-5df1c7eee464)
 
-<a name="spread-operator-22"></a>
-### 展開運算子 "..."
+### Spread operator "..."
 
-展開運算子 ```...``` 的語法在 ES2015 之下已經支援了，而它將會被用於把可迭代的元素 (像是 array) 擴展到容納更多元素。
+The spread operator ```...``` has been introduced with ES2015 and is used to expand elements of an iterable (like an array) into places where multiple elements can fit.
 
-<a name="sample-code-23"></a>
-#### 範例程式碼
+#### Sample code
 
 ```js
 const arr1 = ["a", "b", "c"];
@@ -813,32 +777,29 @@ const n = { x, y, ...z };
 console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 ```
 
-<a name="explanation-24"></a>
-#### 說明
+#### Explanation
 
-<a name="in-iterables-like-array-25"></a>
-##### 迭代用法 (如同 array)
+##### In iterables (like arrays)
 
-如果我們有以下兩個 arrays：
+If we have the two following arrays:
 
 ```js
 const arr1 = ["a", "b", "c"];
 const arr2 = [arr1, "d", "e", "f"]; // [["a", "b", "c"], "d", "e", "f"]
 ```
 
-*arr2* 中的第一個元素是 array ，因為 *arr1* 是被注入到 *arr2* 之中的。但我們真正想要得到的 *arr2* 是一個純字母的 array。為了做到這點，我們可以將 *arr1* *擴展 (spread)* 到 *arr2*。
+*arr2* the first element is an array because *arr1* is injected as is into *arr2*. But what we want is *arr2* to be an array of letters. To do so, we can *spread* the elements of *arr1* into *arr2*.
 
-透過展開運算子
+With spread operator
 
 ```js
 const arr1 = ["a", "b", "c"];
 const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 ```
 
-<a name="function-rest-parameter-26"></a>
-##### 不定參數
+##### Function rest parameter
 
-在有著不定參數的函數當中，我們可以使用 rest 運算子將參數注入到我們可以進行迴圈操作的 array。這裡已經有一個名為 **argument** 的 object 被綁定在函數上，等同於把 array 中的所有參數都傳遞給函數。
+In function parameters, we can use the rest operator to inject parameters into an array we can loop in. There is already an **argument** object bound to every function that is equal to an array of all the parameters passed into the function.
 
 ```js
 function myFunc() {
@@ -855,17 +816,17 @@ myFunc("Nick", "Anderson", 10, 12, 6);
 // 6
 ```
 
-但是如果說我們希望創造的是一個包含他的各科成績和平均成績的新學生，提取前兩個參數 (firstName 和 lastName)並把剩下的元素迭代生成一個 array 的作法是否會更有效率呢？
+But let's say that we want this function to create a new student with its grades and with its average grade. Wouldn't it be more convenient to extract the first two parameters into two separate variables, and then have all the grades in an array we can iterate over?
 
-這正是 rest 運算子允許我們做的事！
+That's exactly what the rest operator allows us to do!
 
 ```js
 function createStudent(firstName, lastName, ...grades) {
   // firstName = "Nick"
   // lastName = "Anderson"
-  // [10, 12, 6] -- "..." 運算子會把 firstName 和 lastName 以外的參數傳入，同時創造一個包含這些元素，叫做 "grades" 的 array
+  // [10, 12, 6] -- "..." takes all other parameters passed and creates a "grades" array variable that contains them
 
-  const avgGrade = grades.reduce((acc, curr) => acc + curr, 0) / grades.length; // 計算平均成績
+  const avgGrade = grades.reduce((acc, curr) => acc + curr, 0) / grades.length; // computes average grade from grades
 
   return {
     firstName: firstName,
@@ -885,40 +846,37 @@ console.log(student);
 // }
 ```
 
-> **注意：** createStudent 這個函數的舉例其實並不太好，因為我們並沒有去檢查 grades.length 是否存在又或者它根本等於 0。但是這個例子的確能夠幫助我們更為容易理解其中運作，所以我並沒有花額外的時間處理這個情況，請見諒。
+> **Note:** createStudent function is bad because we don't check if grades.length exists or is different from 0. But it's easier to read this way, so I didn't handle this case.
 
-<a name="object-properties-spreading-27"></a>
-##### Object 屬性擴展
+##### Object properties spreading
 
-關於這點，我建議你去閱讀先前有關 rest 運算子，迭代運作和帶有不定參數的函數等相關說明。
+For this one, I recommend you read previous explanations about the rest operator on iterables and function parameters.
 
 ```js
 const myObj = { x: 1, y: 2, a: 3, b: 4 };
-const { x, y, ...z } = myObj; // object 在此處被解構
+const { x, y, ...z } = myObj; // object destructuring here
 console.log(x); // 1
 console.log(y); // 2
 console.log(z); // { a: 3, b: 4 }
 
-// 解構後剩餘的部分都放在 z : 也就是 myObj 這個物件經過解構後鎖剩下的東西
+// z is the rest of the object destructured: myObj object minus x and y properties destructured
 
 const n = { x, y, ...z };
 console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
-// 把 z 所包含的屬性擴展到 n 當中
+// Here z object properties are spread into n
 ```
 
-<a name="external-resources-28"></a>
-#### 外部資源
+#### External resources
 
 - [TC39 - Object rest/spread](https://github.com/tc39/proposal-object-rest-spread)
 - [Spread operator introduction - WesBos](https://github.com/wesbos/es6-articles/blob/master/28%20-%20Spread%20Operator%20Introduction.md)
 - [JavaScript & the spread operator](https://codeburst.io/javascript-the-spread-operator-a867a71668ca)
 - [6 Great uses of the spread operator](https://davidwalsh.name/spread-operator)
 
-<a name="object-property-shorthand-29"></a>
-### Object 屬性簡寫
+### Object property shorthand
 
-當我們想要把某個物件屬性指派給變數，如果變數名稱等同於屬性名稱，你可以試著執行以下操作：
+When assigning a variable to an object property, if the variable name is equal to the property name, you can do the following:
 
 ```js
 const x = 10;
@@ -926,27 +884,26 @@ const myObj = { x };
 console.log(myObj.x) // 10
 ```
 
-<a name="explanation-30"></a>
-#### 說明
+#### Explanation
 
-通常 (pre-ES2015) 當你宣告一個新的 *物件實體語法 (object literal)* 並且想要使用變數做為物件屬性的值時，你可能會寫出以下類似的程式碼：
+Usually (pre-ES2015) when you declare a new *object literal* and want to use variables as object properties values, you would write this kind of code:
 
 ```js
 const x = 10;
 const y = 20;
 
 const myObj = {
-  x: x, // 將變數 x 賦值給 myObj.x
-  y: y // 將變數 y 賦值給 myObj.y
+  x: x, // assigning x variable value to myObj.x
+  y: y // assigning y variable value to myObj.y
 };
 
 console.log(myObj.x) // 10
 console.log(myObj.y) // 20
 ```
 
-你可以發現，這樣的作法其實相當繁瑣，因為 myObj 的屬性名和要指派給這些屬性的變數名稱都是相同的。
+As you can see, this is quite repetitive because the properties name of myObj are the same as the variable names you want to assign to those properties.
 
-透過使用 ES2015，當變數名稱和屬性名稱相同時，你可以把程式碼這樣簡寫：
+With ES2015, when the variable name is the same as the property name, you can do this shorthand:
 
 ```js
 const x = 10;
@@ -961,20 +918,17 @@ console.log(myObj.x) // 10
 console.log(myObj.y) // 20
 ```
 
-<a name="external-resources-31"></a>
-#### 外部資源
+#### External resources
 
 - [Property shorthand - ES6 Features](http://es6-features.org/#PropertyShorthand)
 
-<a name="promises-32"></a>
 ### Promises
 
-promise 是一個可以從異步函數 ([參考](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)) 同步回傳的函數。
+A promise is an object which can be returned synchronously from an asynchronous function ([ref](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)).
 
-Promises 可以被用來避開 [回調地獄 (callback hell)](http://callbackhell.com/)，而且它們在現代 JavaScript 專案中也越來越常被使用到。
+Promises can be used to avoid [callback hell](http://callbackhell.com/), and they are more and more frequently encountered in modern JavaScript projects.
 
-<a name="sample-code-33"></a>
-#### 範例程式碼
+#### Sample code
 
 ```js
 const fetchingPosts = new Promise((res, rej) => {
@@ -988,46 +942,43 @@ fetchingPosts
   .catch(err => console.log(err));
 ```
 
-<a name="explanation-34"></a>
-#### 說明
+#### Explanation
 
-當你在進行 *Ajax 請求* 時，回傳絕對是非同步的，因為資源請求需要時間。如果你要的資源由於某些原因 (404) 而不能使用，請求的資源可能永遠都不會出現。
+When you do an *Ajax request* the response is not synchronous because you want a resource that takes some time to come. It even may never come if the resource you have requested is unavailable for some reason (404).
 
-為了處理這類情況，ES2015 為我們提供了 *promises*。Promises 可以有三種不同的狀態：
+To handle that kind of situations, ES2015 has given us *promises*. Promises can have three different states:
 
-- 等待中 (Pending)
-- 達成 (Fulfilled)
-- 拒絕 (Rejected)
+- Pending
+- Fulfilled
+- Rejected
 
-假設我們希望使用 promises 去進行 Ajax 請求以獲取 X 這項資源。
+Let's say we want to use promises to handle an Ajax request to fetch the resource X.
 
-<a name="create-the-promise-35"></a>
-##### 創造 promise
+##### Create the promise
 
-首先要創造一個 promise。我們將會使用 jQuery 的 get 方法去進行資源 X 的 Ajax 請求。
+We firstly are going to create a promise. We will use the jQuery get method to do our Ajax request to X.
 
 ```js
-const xFetcherPromise = new Promise( // 使用 "new" 這個關鍵字並把它存至一個變數
-  function(resolve, reject) { // Promise 建構子需要一個有著 resolve 和 reject 這兩個參數的函數作為參數
-    $.get("X") // 執行 Ajax 請求
-      .done(function(X) { // 一旦請求完成...
-        resolve(X); // ... 把 X 做為參數去 resolve promise
+const xFetcherPromise = new Promise( // Create promise using "new" keyword and store it into a variable
+  function(resolve, reject) { // Promise constructor takes a function parameter which has resolve and reject parameters itself
+    $.get("X") // Launch the Ajax request
+      .done(function(X) { // Once the request is done...
+        resolve(X); // ... resolve the promise with the X value as parameter
       })
-      .fail(function(error) { // 如果請求失敗...
-        reject(error); // ... 把 error 做為參數去 reject promise
+      .fail(function(error) { // If the request has failed...
+        reject(error); // ... reject the promise with the error as parameter
       });
   }
 )
 ```
 
-如上所示，Promise 物件需要一個帶有兩個參數 ( **resolve** 以及 **reject** ) 的函數。這兩個參數會把 *pending* 狀態的 promise 分別進行 *fulfilled* 和 *rejected* 的處理。
+As seen in the above sample, the Promise object takes an *executor* function which takes two parameters **resolve** and **reject**. Those parameters are functions which when called are going to move the promise *pending* state to respectively a *fulfilled* and *rejected* state.
 
-但在此時此刻，promise 尚未被使用，它僅僅是被宣告並且儲存到 *xFetcherPromise* 這個變數當中！所以它並不存在當前的狀態。
+The promise is in pending state after instance creation and it's *executor* function is executed immediately. Once one of the function *resolve* or *reject* is called in the *executor* function, the promise will call its associated handlers.
 
-<a name="use-the-promise-36"></a>
-##### 使用 promise
+##### Promise handlers usage
 
-為了使用 promise，我們可以進行以下的實作：
+To get the promise result (or error), we must attach to it handlers by doing the following:
 
 ```js
 xFetcherPromise
@@ -1039,14 +990,13 @@ xFetcherPromise
   })
 ```
 
-```.then``` 是一種方法，一旦被調用將會把 xFetcherPromise 調整至 **pending** 狀態。當被調用時，promise 本體會運行，在這個範例當中，Ajax 請求正在進行中。
+If the promise succeeds, *resolve* is executed and the function passed as ```.then``` parameter is executed.
 
-如果成功，將會調用 *resolve*，並且 ```.then``` 將會執行做為參數傳遞的函數。
+If it fails, *reject* is executed and the function passed as ```.catch``` parameter is executed.
 
-如果失敗，將會調用 *reject*，並且 ```.catch``` 將會執行做為參數傳遞的函數。
+> **Note :** If the promise has already been fulfilled or rejected when a corresponding handler is attached, the handler will be called, so there is no race condition between an asynchronous operation completing and its handlers being attached. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Description)
 
-<a name="external-resources-37"></a>
-#### 外部資源
+#### External Resources
 
 - [JavaScript Promises for dummies - Jecelyn Yeen](https://scotch.io/tutorials/javascript-promises-for-dummies)
 - [JavaScript Promise API - David Walsh](https://davidwalsh.name/promises)
@@ -1055,15 +1005,13 @@ xFetcherPromise
 - [JavaScript Promises: an Introduction - Jake Archibald](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
 - [Promise documentation - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-<a name="template-literals-38"></a>
-### 模板字符串
+### Template literals
 
-模板字符串是一種單行和多行字符串的 [*表達式差值 (expression interpolation)*](https://en.wikipedia.org/wiki/String_interpolation)。
+Template literals is an [*expression interpolation*](https://en.wikipedia.org/wiki/String_interpolation) for single and multiple-line strings.
 
-換句話說，它是一種新的字符串語法，你可以更方便地在 JavaScript 表達式中使用 (例如變數)。
+In other words, it is a new string syntax in which you can conveniently use any JavaScript expressions (variables for instance).
 
-<a name="sample-code-39"></a>
-#### 範例程式碼
+#### Sample code
 
 ```js
 const name = "Nick";
@@ -1072,25 +1020,22 @@ const name = "Nick";
 // Hello Nick, the following expression is equal to four: 4
 ```
 
-<a name="external-resources-40"></a>
-#### 外部資源
+#### External resources
 
 - [String interpolation - ES6 Features](http://es6-features.org/#StringInterpolation)
 - [ES6 Template Strings - Addy Osmani](https://developers.google.com/web/updates/2015/01/ES6-Template-Strings)
 
-<a name="imports--exports-41"></a>
 ### Imports / Exports
 
-ES6 模組被用來存取顯式輸出 (explicitly export)的變數或是函數。
+ES6 modules are used to access variables or functions in a module explicitly exported by the modules it imports.
 
-我強烈建議你去瀏覽 MDN 上有關 import/export (請參考下面的外部資源) 的文章，它們寫的既簡潔又完整。
+I highly recommend to take a look at MDN resources on import/export (see external resources below), it is both straightforward and complete.
 
-<a name="explanation-with-sample-code-42"></a>
-#### 說明與範例程式碼
+#### Explanation with sample code
 
-- Named exports
+##### Named exports
 
-Named exports 被用於從模組中輸出多個值的情況。你只能命名將要輸出的變數 (不能是函數或是類別)，所以當你想要輸出一個函數時，你必須先把它儲存在一個變數中。
+Named exports are used to export several values from a module. You can only name-export variables (not functions or class), so if you want to name-export a function, you have to store it in a variable before.
 
 ```js
 // mathConstants.js
@@ -1101,21 +1046,29 @@ export const alpha = 0.35;
 // -------------
 
 // myFile.js
-import { pi, exp } from './mathConstants.js'; // 對 import 進行解構
+import { pi, exp } from './mathConstants.js'; // Named import -- destructuring-like syntax
 console.log(pi) // 3.14
 console.log(exp) // 2.7
 
 // -------------
 
 // mySecondFile.js
-import * as constants from './mathConstants.js'; // 把所有的值輸出到 constants 這個變數
+import * as constants from './mathConstants.js'; // Inject all exported values into constants variable
 console.log(constants.pi) // 3.14
 console.log(constants.exp) // 2.7
 ```
 
-- 預設 import / export
+While named imports looks like *destructuring*, they have a different syntax and are not the same. They don't support default values nor *deep* destructuring.
 
-關於輸出，每個模組在預設下只能有一個輸出。一個預設的輸出可以是函數，類別，物件又或者是任何東西。這個值被認為是 "主要的" 輸出值，因為它將會是最簡單純粹的輸出。[參考： MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
+Besides, you can do aliases but the syntax is different from the one used in destructuring:
+
+```js
+import { foo as bar } from 'myFile.js'; // foo is imported and injected into a new bar variable
+```
+
+##### Default import / export
+
+Concerning the default export, there is only a single default export per module. A default export can be a function, a class, an object or anything else. This value is considered the "main" exported value since it will be the simplest to import. [Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
 
 ```js
 // coolNumber.js
@@ -1126,11 +1079,11 @@ export default ultimateNumber;
 
 // myFile.js
 import number from './coolNumber.js';
-// 預設輸出將獨立於其名稱， 將被自動注入到 number 這個變數;
+// Default export, independently from its name, is automatically injected into number variable;
 console.log(number) // 42
 ```
 
-函數輸出：
+Function exporting:
 
 ```js
 // sum.js
@@ -1145,34 +1098,36 @@ const result = sum(1, 2);
 console.log(result) // 3
 ```
 
-<a name="external-resources-43"></a>
-#### 外部資源
+#### External resources
 
+- [ES6 Modules in bulletpoints](https://ponyfoo.com/articles/es6#modules)
 - [Export - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
 - [Import - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 - [Understanding ES6 Modules](https://www.sitepoint.com/understanding-es6-modules/)
+- [Destructuring special case - import statements](https://ponyfoo.com/articles/es6-destructuring-in-depth#special-case-import-statements)
+- [Misunderstanding ES6 Modules - Kent C. Dodds](https://medium.com/@kentcdodds/misunderstanding-es6-modules-upgrading-babel-tears-and-a-solution-ad2d5ab93ce0)
 - [Modules in JavaScript](http://exploringjs.com/es6/ch_modules.html#sec_modules-in-javascript)
 
-### <a name="-javascript-this-44"></a> JavaScript *this*
+### <a name="this_def"></a> JavaScript *this*
 
-*this* 這個運算子的行為和其他語言是不太一樣的，在大多數情況之下是由函數的調用方式決定。([參考： MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)).
+*this* operator behaves differently than in other languages and is in most cases determined by how a function is called. ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)).
 
-這個概念有很多精妙之處，並不是那麼容易理解，我強烈建議你好好研讀下面的外部資源。因此，我將會提供我個人對於 *this* 的一點理解和想法。我是從 [Yehuda Katz 寫的這篇文章](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) 學到了這個技巧。
+This notion is having many subtleties and being quite hard, I highly suggest you to deep dive in the external resources below. Thus, I will provide what I personally have in mind to determine what *this* is equal to. I have learned this tip from [this article written by Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/).
 
 ```js
 function myFunc() {
   ...
 }
 
-// 在每個述句後頭，你都可以在 myFunc 中找到 this 的值
+// After each statement, you find the value of *this* in myFunc
 
-myFunc.call("myString", "hello") // "myString" -- 首先， .call 參數的值被注入到 this
+myFunc.call("myString", "hello") // "myString" -- first .call parameter value is injected into *this*
 
-// 非嚴格模式下
-myFunc("hello") // window -- myFunc() 是 myFunc.call(window, "hello") 的語法糖
+// In non-strict-mode
+myFunc("hello") // window -- myFunc() is syntax sugar for myFunc.call(window, "hello")
 
-// 嚴格模式下
-myFunc("hello") // undefined -- myFunc() 是 myFunc.call(undefined, "hello") 的語法糖
+// In strict-mode
+myFunc("hello") // undefined -- myFunc() is syntax sugar for myFunc.call(undefined, "hello")
 ```
 
 ```js
@@ -1180,38 +1135,34 @@ var person = {
   myFunc: function() { ... }
 }
 
-person.myFunc.call(person, "test") // person 物件 -- 調用參數注入 this
-person.myFunc("test") // person Object -- person.myFunc() 是 person.myFunc.call(person, "test") 的語法糖
+person.myFunc.call(person, "test") // person Object -- first call parameter is injected into *this*
+person.myFunc("test") // person Object -- person.myFunc() is syntax sugar for person.myFunc.call(person, "test")
 
-var myBoundFunc = person.myFunc.bind("hello") // 創造了一個函數，並且把 "hello" 注入到 this
-person.myFunc("test") // person Object -- 綁定方法對原有方法並無造成影響
-myBoundFunc("test") // "hello" -- myBoundFunc 是把帶有 "hello" 的 person.myFunc 綁定到 this
+var myBoundFunc = person.myFunc.bind("hello") // Creates a new function in which we inject "hello" in *this* value
+person.myFunc("test") // person Object -- The bind method has no effect on the original method
+myBoundFunc("test") // "hello" -- myBoundFunc is person.myFunc with "hello" bound to *this*
 ```
 
-<a name="external-resources-45"></a>
-#### 外部資源
+#### External resources
 
 - [Understanding JavaScript Function Invocation and "this" - Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/)
 - [JavaScript this - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
 
-<a name="class-46"></a>
 ### Class
 
-JavaScript 是一個 [基於原型](https://en.wikipedia.org/wiki/Prototype-based_programming) 的語言 (然而 Java 是 [基於類別](https://en.wikipedia.org/wiki/Class-based_programming) 的語言)。 ES6 引入了 JavaScript 類別，它們是基於原型繼承的語法糖，而 **不是** 真正意義上基於類別的繼承模型。([參考](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)).
+JavaScript is a [prototype-based](https://en.wikipedia.org/wiki/Prototype-based_programming) language (whereas Java is [class-based](https://en.wikipedia.org/wiki/Class-based_programming) language, for instance). ES6 has introduced JavaScript classes which are meant to be a syntactic sugar for prototype-based inheritance and **not** a new class-based inheritance model ([ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)).
 
+The word *class* is indeed error prone if you are familiar with classes in other languages. If you do, avoid assuming how JavaScript classes work on this basis and consider it an entirely different notion.
 
-*類別 (class)* 一詞的確容易出錯，尤其是你同時也熟悉其他語言的情況下。如果真的有此困擾，請避免在這樣的認知下思考 JavaScript 的類別行為，並把它當作一個完全不同的新概念。
-
-由於此份文件的目標不在於從頭教會你 JavaScript，我相信你早已知道什麼是原型，以及它們的行為模式。不過這裡還是有一些參考連結，以方便你去理解這些概念：
+Since this document is not an attempt to teach you the language from the ground up, I will believe you know what prototypes are and how they behave. But here are some links I found great to understand this notion:
 
 - [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
 - [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
 - [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 
-<a name="samples-47"></a>
-#### 範例
+#### Samples
 
-ES6 之前的原型語法：
+Before ES6, prototype syntax:
 
 ```js
 var Person = function(name, age) {
@@ -1223,7 +1174,7 @@ Person.prototype.stringSentence = function() {
 }
 ```
 
-ES6 之後的類型語法：
+With ES6 class syntax:
 
 ```js
 class Person {
@@ -1242,56 +1193,133 @@ console.log(myPerson.age) // 23
 console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 ```
 
-<a name="external-resources-48"></a>
-#### 外部資源
+#### External resources
 
-更好的理解原型：
+For prototype understanding:
 
 - [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
 - [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
 - [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 
-更好的理解類別：
+For classes understanding:
 
 - [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
 - [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
-<a name="async-await-49"></a>
 ### Async Await
 
-除了 [Promises](#promises) 以外，還有一種新語法你可能會遇到，那就是被稱作非同步的 *async / await*。
+In addition to [Promises](#promises), there is a new syntax you might encounter to handle asynchronous code named *async / await*.
 
-async/await 的目的在於簡化同步使用 promise 的行為，並對一組 promise 執行一些處理。正如同Promises 類似於結構化之後的回調 (callback)，async/await 同樣類似於組合生成器 (combining generators) 和 promises。 ([參考： MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function))
+The purpose of async/await functions is to simplify the behavior of using promises synchronously and to perform some behavior on a group of Promises. Just as Promises are similar to structured callbacks, async/await is similar to combining generators and promises. ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function))
 
-> **注意：** 你必須先行了解到什麼是 promises 和它們是如何運作的，然後再去嘗試理解 async / await 的概念，因為後者是基於前者的進一步延伸。
+> **Note :** You must understand what are promises and how they work before trying to understand async / await since they rely on it.
 
-> **注意：** [*await* must be used in an *async* function](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9#f3f0) 意味著你不能程式碼的頂部使用 await，因為它並不在異步函數之內。
+> **Note 2:** [*await* must be used in an *async* function](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9#f3f0), which means that you can't use await in the top level of our code since that is not inside an async function.
 
-<a name="sample-code-50"></a>
-#### 說明與範例程式碼
-
-*Async / Await* 是基於 promises 之上的新概念，但它們更允許你使用命令式風格 (imperative style)去撰寫程式。
-
-
-`await` 表達式使 `async` 函數暫停執行，直到 promise 被成功解析才會繼續執行。任何 `async` 函數堆將回傳 `Promise`，並將其解析為回傳值。
+#### Sample code
 
 ```js
-async function getGithubUser(handle) { // async 這個關鍵字允許在函數中使用 await，並且意味著函數將回傳一個 promise 
-  try { // 這是 async / await 使用的方式
-    const url = `https://api.github.com/users/${handle}`;
-    const response = await fetch(url); // "同步" 等待 fetch 去解析 promise，然後才會跳轉到下一行
+async function getGithubUser(username) { // async keyword allows usage of await in the function and means function returns a promise
+  try { // this is how errors are handled with async / await
+    const response = await fetch(`https://api.github.com/users/${username}`); // "synchronously" waiting fetch promise to resolve before going to next line
     return response.json();
   } catch (err) {
     alert(err);
   }
 }
 
-getGithubUser('mbeaudru').then(user => console.log(user)); // 印出 user 的值 - 不能使用 await 語法，因為此段程式碼並不在 async 函數當中
+getGithubUser('mbeaudru').then(user => console.log(user)); // logging user response - cannot use await syntax since this code isn't in async function
 ```
 
-<a name="external-resources-52"></a>
-#### 外部資源
+#### Explanation with sample code
+
+*Async / Await* is built on promises but they allow a more imperative style of code.
+
+*async* operator turns a function into a *promise* in which you can use the *await* operator.
+
+```js
+async function myFunc() {
+  // we can use await operator because this function is async
+  try {
+    return "hello world";
+  } catch(e) {
+    throw new Error();
+  }
+}
+
+myFunc().then(msg => console.log(msg)) // "hello world" -- myFunc is turned into a promise because of async operator
+```
+
+When the *return* statement of an async function is reached, the promise is fulfilled with the value returned. If an error is thrown inside an async function, the promise state will turn to *rejected*.
+
+*await* operator is used to wait for a *Promise* to be fulfilled and only can be used inside an *async* function body. When encountered, the code execution is paused until the promise is fulfilled.
+
+> **Note :** *fetch* is a Promise that allows to do an AJAX request
+
+Let's see how we could fetch a github user with promises first:
+
+```js
+function getGithubUser(username) {
+  return new Promise((resolve, reject) => {
+    fetch(`https://api.github.com/users/${username}`)
+      .then(response => {
+        const user = response.json();
+        resolve(user);
+      })
+      .catch(err => reject(err));
+  })
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+Here's the *async / await* equivalent:
+
+```js
+async function getGithubUser(username) { // promise + await keyword usage allowed
+  try { // We handle async function errors with try / catch
+    const response = await fetch(`https://api.github.com/users/${username}`); // Execution stops here until fetch promise is fulfilled.
+    const user = response.json();
+    return user; // equivalent of resolving the getGithubUser promise with user value.
+  } catch (err) {
+    throw new Error(err); // equivalent of rejecting getGithubUser promise with err value.
+  }
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+*async / await* syntax is particularly convenient when you need to chain promises that are interdependent.
+
+For instance, if you need to get a token in order to be able to fetch a blog post on a database and then the author informations:
+
+```js
+async function fetchPostById(postId) {
+  try {
+    const token = await fetch('token_url');
+    const post = await fetch(`/posts/${postId}?token=${token}`);
+    const author = await fetch(`/users/${post.authorId}`);
+
+    post.author = author;
+    return post;
+  } catch(e) {
+    throw new Error(e);
+  }
+}
+
+fetchPostById('gzIrzeo64')
+  .then(post => console.log(post))
+  .catch(err => console.log(err));
+```
+
+> **Note :** As you can see, *try / catch* are necessary to handle errors. But if you are making *express routes*, you can use a middleware to avoid error handling and have a very pleasant code to read. See [this article from Alex Bazhenov](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016) to learn more.
+
+#### External resources
 
 - [Async/Await - JavaScript.Info](https://javascript.info/async-await)
 - [ES7 Async/Await](http://rossboucher.com/await/#/)
@@ -1300,25 +1328,25 @@ getGithubUser('mbeaudru').then(user => console.log(user)); // 印出 user 的值
 - [Using Async Await in Express with Node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 - [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 - [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 
-<a name="glossary-53"></a>
-## 術語詞彙
+## Glossary
 
-### <a name="-scope-54"></a> 作用域範圍 (scope)
+### <a name="scope_def"></a> Scope
 
-在上下文之中有著 "明顯可見的 (visible)" 值和表達式，又或者是可以被參照的。如果變數或是表達式並不在 "當前作用域和範圍"，那麼它將會是不能用的。
+The context in which values and expressions are "visible," or can be referenced. If a variable or other expression is not "in the current scope," then it is unavailable for use.
 
-資料來源： [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
+Source: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
 
-### <a name="-variable-variance-55"></a> 變數變異 (Variable mutation)
+### <a name="mutation_def"></a> Variable mutation
 
-一個變數在被宣告之後發生初始值變化的過程。
+A variable is said to have been mutated when its initial value has changed afterward.
 
 ```js
 var myArray = [];
-myArray.push("firstEl") // myArray 正在變化
+myArray.push("firstEl") // myArray is being mutated
 ```
 
-如果變數不能被改變的話，我們會說這個變數是 *不可變的 (immutable)* 。
+A variable is said to be *immutable* if it can't be mutated.
 
-[查看 MDN Mutable 文章](https://developer.mozilla.org/en-US/docs/Glossary/Mutable) 了解更多詳細資料。
+[Check MDN Mutable article](https://developer.mozilla.org/en-US/docs/Glossary/Mutable) for more details.
