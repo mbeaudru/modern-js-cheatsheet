@@ -14,6 +14,7 @@
 > 另外也想藉著這回翻譯的經驗說點八股的，英文真的天殺的重要，能夠直接閱讀原文始終是最能理解原意的方式。整篇 cheatsheet 從意譯的角度出發，詞意有所疑問或是理解錯誤都煩請發個 Pull Request 謝謝。
 >
 > 2017/09/30 Update
+>
 > 昨天晚上收到簡體中文譯者的來信提醒，才發現原來 Issue 內早已有社群朋友 @BirkhoffLee 正在做繁體中文的翻譯 ([詳情可見此討論串](https://github.com/mbeaudru/modern-js-cheatsheet/issues/15))，真的很抱歉昨天才驚覺這件事，譯者在這裡推薦大家如果有空也可以多多瀏覽  @BirkhoffLee 翻譯過的 [機器學習動手玩](https://github.com/humphd/have-fun-with-machine-learning/blob/master/README_zh-tw.md) 以及相關專案，他也是位對於開源社群推廣非常積極的開發者。最後關於這份繁體中文文件，譯者會在這一兩天回顧下文件翻譯用詞有無需要調整的地方，確認過後便會 merge 回原作者的 repo，大概是醬。
 
 <a name="introduction"></a>
