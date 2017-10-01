@@ -155,147 +155,142 @@ console.log(person) // "John", reassignment is allowed with let
 
 #### Detailed explanation
 
-<details>
-  <summary>Toggle detailed explanation</summary>
+The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
 
-  The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
+##### var
 
-  ##### var
+```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Besides, a *function scoped* variable created in a function can't be accessed outside this function.
 
-  ```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Besides, a *function scoped* variable created in a function can't be accessed outside this function.
+I recommend you to picture it as if an *X scoped* variable meant that this variable was a property of X.
 
-  I recommend you to picture it as if an *X scoped* variable meant that this variable was a property of X.
+```javascript
+function myFunction() {
+  var myVar = "Nick";
+  console.log(myVar); // "Nick" - myVar is accessible inside the function
+}
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
+```
 
-  ```javascript
-  function myFunction() {
-    var myVar = "Nick";
-    console.log(myVar); // "Nick" - myVar is accessible inside the function
+Still focusing on the variable scope, here is a more subtle example:
+
+```javascript
+function myFunction() {
+  var myVar = "Nick";
+  if (true) {
+    var myVar = "John";
+    console.log(myVar); // "John"
+    // actually, myVar being function scoped, we just erased the previous myVar value "Nick" for "John"
   }
-  console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
-  ```
+  console.log(myVar); // "John" - see how the instructions in the if block affected this value
+}
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
+```
 
-  Still focusing on the variable scope, here is a more subtle example:
+Besides, *var* declared variables are moved to the top of the scope at execution. This is what we call [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
 
-  ```javascript
-  function myFunction() {
-    var myVar = "Nick";
-    if (true) {
-      var myVar = "John";
-      console.log(myVar); // "John"
-      // actually, myVar being function scoped, we just erased the previous myVar value "Nick" for "John"
-    }
-    console.log(myVar); // "John" - see how the instructions in the if block affected this value
+This portion of code:
+
+```js
+console.log(myVar) // undefined -- no error raised
+var myVar = 2;
+```
+
+is understood at execution like:
+
+```js
+var myVar;
+console.log(myVar) // undefined -- no error raised
+myVar = 2;
+```
+
+##### let
+
+```var``` and ```let ``` are about the same, but ```let``` declared variables
+
+- are *block scoped*
+- are **not** accessible before they are assigned
+- can't be re-declared in the same scope
+
+Let's see the impact of block-scoping taking our previous example:
+
+```javascript
+function myFunction() {
+  let myVar = "Nick";
+  if (true) {
+    let myVar = "John";
+    console.log(myVar); // "John"
+    // actually, myVar being block scoped, we just created a new variable myVar.
+    // this variable is not accessible outside this block and totally independent
+    // from the first myVar created !
   }
-  console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
-  ```
+  console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affect this value
+}
+console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
+```
 
-  Besides, *var* declared variables are moved to the top of the scope at execution. This is what we call [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
+<a name="tdz_sample"></a> Now, what it means for *let* (and *const*) variables for not being accessible before being assigned:
 
-  This portion of code:
+```js
+console.log(myVar) // raises a ReferenceError !
+let myVar = 2;
+```
 
-  ```js
-  console.log(myVar) // undefined -- no error raised
-  var myVar = 2;
-  ```
+By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenon is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
 
-  is understood at execution like:
+> **Note:** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation, it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
 
-  ```js
-  var myVar;
-  console.log(myVar) // undefined -- no error raised
-  myVar = 2;
-  ```
+In addition, you can't re-declare a *let* variable:
 
-  ##### let
+```js
+let myVar = 2;
+let myVar = 3; // Raises a SyntaxError
+```
 
-  ```var``` and ```let ``` are about the same, but ```let``` declared variables
+##### const
 
-  - are *block scoped*
-  - are **not** accessible before they are assigned
-  - can't be re-declared in the same scope
+```const``` declared variables behave like *let* variables, but also they can't be reassigned.
 
-  Let's see the impact of block-scoping taking our previous example:
+To sum it up, *const* variables:
 
-  ```javascript
-  function myFunction() {
-    let myVar = "Nick";
-    if (true) {
-      let myVar = "John";
-      console.log(myVar); // "John"
-      // actually, myVar being block scoped, we just created a new variable myVar.
-      // this variable is not accessible outside this block and totally independent
-      // from the first myVar created !
-    }
-    console.log(myVar); // "Nick", see how the instructions in the if block DID NOT affect this value
-  }
-  console.log(myVar); // Throws a ReferenceError, myVar is not accessible outside the function.
-  ```
+- are *block scoped*
+- are not accessible before being assigned
+- can't be re-declared in the same scope
+- can't be reassigned
 
-  <a name="tdz_sample"></a> Now, what it means for *let* (and *const*) variables for not being accessible before being assigned:
+```js
+const myVar = "Nick";
+myVar = "John" // raises an error, reassignment is not allowed
+```
 
-  ```js
-  console.log(myVar) // raises a ReferenceError !
-  let myVar = 2;
-  ```
+```js
+const myVar = "Nick";
+const myVar = "John" // raises an error, re-declaration is not allowed
+```
 
-  By contrast with *var* variables, if you try to read or write on a *let* or *const* variable before they are assigned an error will be raised. This phenomenon is often called [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) or *TDZ*.
+<a name="const_mutable_sample"></a> But there is a subtlety : ```const``` variables are not [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
 
-  > **Note:** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation, it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
+For objects:
+```js
+const person = {
+  name: 'Nick'
+};
+person.name = 'John' // this will work ! person variable is not completely reassigned, but mutated
+console.log(person.name) // "John"
+person = "Sandra" // raises an error, because reassignment is not allowed with const declared variables
+```
 
-  In addition, you can't re-declare a *let* variable:
+For arrays:
+```js
+const person = [];
+person.push('John'); // this will work ! person variable is not completely reassigned, but mutated
+console.log(person[0]) // "John"
+person = ["Nick"] // raises an error, because reassignment is not allowed with const declared variables
+```
 
-  ```js
-  let myVar = 2;
-  let myVar = 3; // Raises a SyntaxError
-  ```
+#### External resource
 
-  ##### const
-
-  ```const``` declared variables behave like *let* variables, but also they can't be reassigned.
-
-  To sum it up, *const* variables:
-
-  - are *block scoped*
-  - are not accessible before being assigned
-  - can't be re-declared in the same scope
-  - can't be reassigned
-
-  ```js
-  const myVar = "Nick";
-  myVar = "John" // raises an error, reassignment is not allowed
-  ```
-
-  ```js
-  const myVar = "Nick";
-  const myVar = "John" // raises an error, re-declaration is not allowed
-  ```
-
-  <a name="const_mutable_sample"></a> But there is a subtlety : ```const``` variables are not [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
-
-  For objects:
-  ```js
-  const person = {
-    name: 'Nick'
-  };
-  person.name = 'John' // this will work ! person variable is not completely reassigned, but mutated
-  console.log(person.name) // "John"
-  person = "Sandra" // raises an error, because reassignment is not allowed with const declared variables
-  ```
-
-  For arrays:
-  ```js
-  const person = [];
-  person.push('John'); // this will work ! person variable is not completely reassigned, but mutated
-  console.log(person[0]) // "John"
-  person = ["Nick"] // raises an error, because reassignment is not allowed with const declared variables
-  ```
-
-  #### External resource
-
-  - [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
-  - [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
-
-</details>
+- [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
+- [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
 
 ### <a name="arrow_func_concept"></a> Arrow function
 
@@ -335,130 +330,125 @@ function myFunc() {
 
 #### Detailed explanation
 
-<details>
-  <summary>Toggle detailed explanation</summary>
+##### Concision
 
-  ##### Concision
+Arrow functions are more concise than traditional functions in many ways. Let's review all the possible cases:
 
-  Arrow functions are more concise than traditional functions in many ways. Let's review all the possible cases:
+- Implicit VS Explicit return
 
-  - Implicit VS Explicit return
+An **explicit return** is a function where the *return* keyword is used in its body.
 
-  An **explicit return** is a function where the *return* keyword is used in its body.
-
-  ```js
-    function double(x) {
-      return x * 2; // this function explicitly returns x * 2, *return* keyword is used
-    }
-  ```
-
-  In the traditional way of writing functions, the return was always explicit. But with arrow functions, you can do *implicit return* which means that you don't need to use the keyword *return* to return a value.
-
-  To do an implicit return, the code must be written in a one-line sentence.
-
-  ```js
-    const double = (x) => {
-      return x * 2; // Explicit return here
-    }
-  ```
-
-  Since there only is a return value here, we can do an implicit return.
-
-  ```js
-   const double = (x) => x * 2;
-  ```
-
-  To do so, we only need to **remove the brackets** and the **return** keyword. That's why it's called an *implicit* return, the *return* keyword is not there, but this function will indeed return ```x * 2```.
-
-  > **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
-
-  Besides, if you want to implicitly return an *object* you **must have parenthesis around it** since it will conflict with the block braces:
-
-  ```js
-  const getPerson = () => ({ name: "Nick", age: 24 })
-  console.log(getPerson()) // { name: "Nick", age: 24 } -- object implicitly returned by arrow function
-  ```
-
-  - Only one argument
-
-  If your function only takes one parameter, you can omit the parenthesis around it. If we take back the above *double* code:
-
-  ```js
-   const double = (x) => x * 2; // this arrow function only takes one parameter
-  ```
-
-  Parenthesis around the parameter can be avoided:
-
-  ```js
-   const double = x => x * 2; // this arrow function only takes one parameter
-  ```
-
-  - No arguments
-
-  When there is no argument provided to an arrow function, you need to provide parentheses, or it won't be valid syntax.
-
-  ```js
-    () => { // parenthesis are provided, everything is fine
-      const x = 2;
-      return x;
-    }
-  ```
-
-  ```js
-    => { // No parenthesis, this won't work!
-      const x = 2;
-      return x;
-    }
-  ```
-
-  ##### *this* reference
-
-  To understand this subtlety introduced with arrow functions, you must know how [this](#this_def) behaves in JavaScript.
-
-  In an arrow function, *this* is equal to the *this* value of the enclosing execution context. What it means is that an arrow function doesn't create a new *this*, it grabs it from its surrounding instead.
-
-  Without arrow function, if you wanted to access a variable from *this* in a function inside a function, you had to use the *that = this* or *self = this* trick.
-
-  For instance, using setTimeout function inside myFunc:
-
-  ```js
-  function myFunc() {
-    this.myVar = 0;
-    var that = this; // that = this trick
-    setTimeout(
-      function() { // A new *this* is created in this function scope
-        that.myVar++;
-        console.log(that.myVar) // 1
-
-        console.log(this.myVar) // undefined -- see function declaration above
-      },
-      0
-    );
+```js
+  function double(x) {
+    return x * 2; // this function explicitly returns x * 2, *return* keyword is used
   }
-  ```
+```
 
-  But with arrow function, *this* is taken from its surrounding:
+In the traditional way of writing functions, the return was always explicit. But with arrow functions, you can do *implicit return* which means that you don't need to use the keyword *return* to return a value.
 
-  ```js
-  function myFunc() {
-    this.myVar = 0;
-    setTimeout(
-      () => { // this taken from surrounding, meaning myFunc here
-        this.myVar++;
-        console.log(this.myVar) // 1
-      },
-      0
-    );
+To do an implicit return, the code must be written in a one-line sentence.
+
+```js
+  const double = (x) => {
+    return x * 2; // Explicit return here
   }
-  ```
+```
 
-  #### Useful resources
+Since there only is a return value here, we can do an implicit return.
 
-  - [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
-  - [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
-  - [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
+```js
+  const double = (x) => x * 2;
+```
 
-</details>
+To do so, we only need to **remove the brackets** and the **return** keyword. That's why it's called an *implicit* return, the *return* keyword is not there, but this function will indeed return ```x * 2```.
+
+> **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
+
+Besides, if you want to implicitly return an *object* you **must have parenthesis around it** since it will conflict with the block braces:
+
+```js
+const getPerson = () => ({ name: "Nick", age: 24 })
+console.log(getPerson()) // { name: "Nick", age: 24 } -- object implicitly returned by arrow function
+```
+
+- Only one argument
+
+If your function only takes one parameter, you can omit the parenthesis around it. If we take back the above *double* code:
+
+```js
+  const double = (x) => x * 2; // this arrow function only takes one parameter
+```
+
+Parenthesis around the parameter can be avoided:
+
+```js
+  const double = x => x * 2; // this arrow function only takes one parameter
+```
+
+- No arguments
+
+When there is no argument provided to an arrow function, you need to provide parentheses, or it won't be valid syntax.
+
+```js
+  () => { // parenthesis are provided, everything is fine
+    const x = 2;
+    return x;
+  }
+```
+
+```js
+  => { // No parenthesis, this won't work!
+    const x = 2;
+    return x;
+  }
+```
+
+##### *this* reference
+
+To understand this subtlety introduced with arrow functions, you must know how [this](#this_def) behaves in JavaScript.
+
+In an arrow function, *this* is equal to the *this* value of the enclosing execution context. What it means is that an arrow function doesn't create a new *this*, it grabs it from its surrounding instead.
+
+Without arrow function, if you wanted to access a variable from *this* in a function inside a function, you had to use the *that = this* or *self = this* trick.
+
+For instance, using setTimeout function inside myFunc:
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  var that = this; // that = this trick
+  setTimeout(
+    function() { // A new *this* is created in this function scope
+      that.myVar++;
+      console.log(that.myVar) // 1
+
+      console.log(this.myVar) // undefined -- see function declaration above
+    },
+    0
+  );
+}
+```
+
+But with arrow function, *this* is taken from its surrounding:
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  setTimeout(
+    () => { // this taken from surrounding, meaning myFunc here
+      this.myVar++;
+      console.log(this.myVar) // 1
+    },
+    0
+  );
+}
+```
+
+#### Useful resources
+
+- [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
+- [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
 
 ### Function default parameter value
 
