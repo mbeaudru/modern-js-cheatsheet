@@ -1045,7 +1045,9 @@ I highly recommend to take a look at MDN resources on import/export (see externa
 
 ##### Named exports
 
-Named exports are used to export several values from a module. You can only name-export variables (not functions or class), so if you want to name-export a function, you have to store it in a variable before.
+Named exports are used to export several values from a module.
+
+> **Note :** You can only name-export [first-class citizens](https://en.wikipedia.org/wiki/First-class_citizen) that have a name.
 
 ```js
 // mathConstants.js
