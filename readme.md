@@ -1333,65 +1333,53 @@ fetchPostById('gzIrzeo64')
 - [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 - [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 
-# Truthy / Falsy
-In JavaScript, a truthy value is a value that is considered  true when evaluated in a Boolean context. All values are truthy unless they are defined as falsy (i.e., except for `false`, `0`, `""`, `null`, `undefined`, and `NaN`).
+### Truthy / Falsy
 
-#### Explanation with sample code
+In JavaScript, a truthy or falsy value is a value that is being casted into a boolean when evaluated in a boolean context. An example of boolean context would be the evaluation of an ```if``` condition:
 
-- How to use `!` operator for making new Truthy and Falsy:  
- 	If we agree on the fact that `0` can be evaluated as `false`, and `1` as true in the `Boolean` object like:
-	```js
-	new Boolean(0) // false
-	new Boolean(1) // true
-	```
-	, I have to tell you that there is something that is new with ES6 that will definitely make your life easier:
-	```js
-	!0 // not false, so true
-	!1 // not true, so false
-	// By the way:
-	!0 === true
-	!1 === false
-	```
-	We can push the concept forward by adding a second `!`:
-	```js
-	!!1 // not not true, so true
-	!!0 // not not false, so true
-	// Same as before
-	!!1 === true
-	!!0 === false
-	```
-- How to use Truthy and Falsy with `if` statements:
-	```js
-	// Example of Truthy values (which will translate to true and thus execute the if block):
-	if (true)
-	if ({})
-	if ([])
-	if (42)
-	if ("foo")
-	if (new Date())
-	if (-42)
-	if (3.14)
-	if (-3.14)
-	if (Infinity)
-	if (-Infinity)
-	// Same, but for Falsy:
-	if (false)
-	if (null)
-	if (undefined)
-	if (0)
-	if (NaN)
-	if ('')
-	if ("")
-	```
-	⚠️ Not every Truthy or Falsy can be compared with the `===` operator.
+Every value will be casted to ```true``` unless they are equal to:
 
-#### External resources
+- false
+- 0
+- "" (empty string)
+- null
+- undefined
+- NaN
 
-[Best Practice: Convert 1 and 0 to true and false in Javascript](https://en.code-bude.net/2016/03/14/best-practice-convert-1-and-0-to-true-and-false-in-javascript/)
+Here are examples of *boolean context*:
 
-[Truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
+- ```if``` condition evaluation
 
-[Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
+```js
+if (myVar) {}
+```
+
+```myVar``` can be any [first-class citizen](https://en.wikipedia.org/wiki/First-class_citizen) (variable, function, boolean) but it will be casted into a boolean because it's evaluated in a boolean context.
+
+- After logical **NOT** ```!``` operator
+
+This operator returns false if its single operand can be converted to true; otherwise, returns true.
+
+```js
+!0 // true -- 0 is falsy so it returns true
+!!0 // false -- 0 is falsy so !0 returns true so !(!0) returns false
+!!"" // false -- empty string is falsy so NOT (NOT false) equals false
+```
+
+- With the *Boolean* object constructor
+
+```js
+new Boolean(0) // false
+new Boolean(1) // true
+```
+
+- In a ternary evaluation
+
+```js
+myVar ? "truthy" : "falsy"
+```
+
+myVar is evaluated in a boolean context.
 
 ## Glossary
 
