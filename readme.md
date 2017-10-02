@@ -94,7 +94,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [Explanation with sample code](#explanation-with-sample-code-2)
       - [External resources](#external-resources-6)
     + [Truthy / Falsy](#truthy--falsy)
-      - [External ressources](#external-resources-7)
+      - [External resources](#external-resources-7)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
