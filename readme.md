@@ -1029,16 +1029,18 @@ const name = "Nick";
 
 ### Tagged template literals
 
-Template tags are *functions that can be prefixed to a template literal*. When a function is called this way, the first parameter is an array of the *strings* that appear between the template's interpolated variables, and the subsequent paremeters are the interpolated values. Use a spread operator `...` to capture all of them. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals)
+Template tags are *functions that can be prefixed to a [template literal](#template-literals)*. When a function is called this way, the first parameter is an array of the *strings* that appear between the template's interpolated variables, and the subsequent paremeters are the interpolated values. Use a spread operator `...` to capture all of them. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
+
+> **Note :** A famous library named [styled-components](https://www.styled-components.com/) heavily relies on this feature.
 
 Below is a toy example on they work.
 ```js
 function highlight(strings, ...values) {
-	const interpolation = strings.reduce((prev, next) => {
-      return prev + next + (values.shift() || "");
+  const interpolation = strings.reduce((prev, next) => {
+    return prev + next + (values.shift() || "");
   }, "");
 
-	return `<mark>${interpolation}</mark>`;
+  return `<mark>${interpolation}</mark>`;
 }
 
 const condiment = "jam";
@@ -1051,10 +1053,10 @@ highlight`I like ${condiment} on ${meal}.`;
 A more interesting example: 
 ```js
 function comma(strings, ...values) {
-	return strings.reduce((prev, next) => {
-		let value = values.shift() || [];
-		value = value.join(", ");
-		return prev + next + value;
+  return strings.reduce((prev, next) => {
+    let value = values.shift() || [];
+    value = value.join(", ");
+    return prev + next + value;
   }, "");
 }
 
