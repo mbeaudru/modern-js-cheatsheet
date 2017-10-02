@@ -77,6 +77,8 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     + [Template literals](#template-literals)
       - [Sample code](#sample-code-5)
       - [External resources](#external-resources-2)
+    + [Tagged Template Literals](#tagged-template-literals)
+      - [External resources](#external-resources-4)
     + [Imports / Exports](#imports--exports)
       - [Explanation with sample code](#explanation-with-sample-code-1)
         * [Named exports](#named-exports)
