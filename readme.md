@@ -1038,18 +1038,18 @@ Template tags are *functions that can be prefixed to a [template literal](#templ
 Below is a toy example on they work.
 ```js
 function highlight(strings, ...values) {
-  const interpolation = strings.reduce((prev, next) => {
-    return prev + next + (values.shift() || "");
+  const interpolation = strings.reduce((prev, current) => {
+    return prev + current + (values.length ? "<mark>" + values.shift() + "</mark>" : "");
   }, "");
 
-  return `<mark>${interpolation}</mark>`;
+  return interpolation;
 }
 
 const condiment = "jam";
 const meal = "toast";
 
 highlight`I like ${condiment} on ${meal}.`;
-// "<mark>I like jam on toast.</mark>"
+// "I like <mark>jam</mark> on <mark>toast</mark>."
 ```
 
 A more interesting example: 
