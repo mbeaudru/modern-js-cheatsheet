@@ -101,7 +101,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [Detailed Explanation](#detailed-explanation-2)
         * [Calling other static methods from a static method](#calling-other-static-methods-from-a-static-method)
         * [Calling static methods from non-static methods](#calling-static-methods-from-non-static-methods)
-      - [External resources](#external-resources-8)
+      - [External resources](#external-resources-9)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
