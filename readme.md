@@ -95,6 +95,13 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [External resources](#external-resources-6)
     + [Truthy / Falsy](#truthy--falsy)
       - [External resources](#external-resources-7)
+    + [Static Methods](#static-methods)
+      - [Short Explanation](#short-explanation-1)
+      - [Sample Code](#sample-code-7)
+      - [Detailed Explanation](#detailed-explanation-2)
+        * [Calling other static methods from a static method](#calling-other-static-methods-from-a-static-method)
+        * [Calling static methods from non-static methods](#calling-static-methods-from-non-static-methods)
+      - [External resources](#external-resources-8)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1425,6 +1432,94 @@ myVar ? "truthy" : "falsy"
 ```
 
 myVar is evaluated in a boolean context.
+
+### Static Methods
+
+#### Short explanation
+
+The `static` keyword is used in classes to declare static methods. Static methods are functions in a class that belong to the class object and they are not available to any instance of that class.
+
+#### Sample code
+
+```js
+class Repo{
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+}
+
+console.log(Repo.getName()) //Repo name is modern-js-cheatsheet
+
+let r = new Repo();
+console.log(r.getName()) //Uncaught TypeError: repo.getName is not a function
+```
+
+#### Detailed explanation
+
+Static methods can be called within another static method by using the `this` keyword, this doesn't work for non-static methods though. Non-static methods cannot directly access static method using the `this` keyword.
+
+##### Calling other static methods from a static method.
+
+To call a static method from another static method, the `this` keyword can be used like so;
+
+```js
+class Repo{
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  static modifyName(){
+    return this.getName() + '-added-this'
+  }
+}
+
+console.log(Repo.modifyName()) //Repo name is modern-js-cheatsheet-added-this
+```
+
+##### Calling static methods from non-static methods.
+
+Non-static methods can call static methods in 2 ways;
+1. ###### Using the class name.
+
+```js
+class Repo{
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  useName(){
+    return Repo.getName() + ' and it contains some really important stuff'
+  }
+}
+
+// we need to instantiate the class to use non-static methods
+let r = new Repo()
+console.log(r.useName()) //Repo name is modern-js-cheatsheet and it contains some really important stuff
+```
+
+2. ###### Using the constructor
+
+```js
+class Repo{
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  useName(){
+    //Calls the static method as a property of the constructor
+    return this.constructor.getName() + ' and it contains some really important stuff'
+  }
+}
+
+// we need to instantiate the class to use non-static methods
+let r = new Repo()
+console.log(r.useName()) //Repo name is modern-js-cheatsheet and it contains some really important stuff
+```
+
+#### External resources
+- [static keyword- MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)
+- [Static Methods- Javascript.info](https://javascript.info/class#static-methods)
+- [Static Members in ES6- OdeToCode](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
 
 ## Glossary
 
