@@ -366,7 +366,7 @@ To do so, we only need to **remove the brackets** and the **return** keyword. Th
 
 > **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
 
-Besides, if you want to implicitly return an *object* you **must have parenthesis around it** since it will conflict with the block braces:
+Besides, if you want to implicitly return an *object* you **must have parentheses around it** since it will conflict with the block braces:
 
 ```js
 const getPerson = () => ({ name: "Nick", age: 24 })
@@ -375,13 +375,13 @@ console.log(getPerson()) // { name: "Nick", age: 24 } -- object implicitly retur
 
 - Only one argument
 
-If your function only takes one parameter, you can omit the parenthesis around it. If we take back the above *double* code:
+If your function only takes one parameter, you can omit the parentheses around it. If we take back the above *double* code:
 
 ```js
   const double = (x) => x * 2; // this arrow function only takes one parameter
 ```
 
-Parenthesis around the parameter can be avoided:
+Parentheses around the parameter can be avoided:
 
 ```js
   const double = x => x * 2; // this arrow function only takes one parameter
@@ -392,14 +392,14 @@ Parenthesis around the parameter can be avoided:
 When there is no argument provided to an arrow function, you need to provide parentheses, or it won't be valid syntax.
 
 ```js
-  () => { // parenthesis are provided, everything is fine
+  () => { // parentheses are provided, everything is fine
     const x = 2;
     return x;
   }
 ```
 
 ```js
-  => { // No parenthesis, this won't work!
+  => { // No parentheses, this won't work!
     const x = 2;
     return x;
   }
@@ -559,7 +559,7 @@ joinFirstLastName(person); // "Nick-Anderson"
 
 - Array
 
-Lets consider the following array:
+Let's consider the following array:
 
 ```js
 const myArray = ["a", "b", "c"];
@@ -647,7 +647,7 @@ console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 
 What's happening here? We are using .map on the *numbers* array, the map is iterating on each element of the array and passes it to our function. The goal of the function is to produce and return a new value from the one passed so that map can replace it.
 
-Lets extract this function to make it more clear, just for this once:
+Let's extract this function to make it more clear, just for this once:
 
 ```js
 const doubleN = function(n) { return n * 2; };
@@ -711,7 +711,7 @@ Function returns *acc* + *n* --> 0 + 0 --> 0
 
 ###### At second iteration step
 
-```acc = 0``` because its the value the function returned at the previous iteration step
+```acc = 0``` because it's the value the function returned at the previous iteration step
 
 ```n = 1``` second element of the *number* array
 
@@ -719,7 +719,7 @@ Function returns *acc* + *n* --> 0 + 1 --> 1
 
 ###### At third iteration step
 
-```acc = 1``` because its the value the function returned at the previous iteration step
+```acc = 1``` because it's the value the function returned at the previous iteration step
 
 ```n = 2``` third element of the *number* array
 
