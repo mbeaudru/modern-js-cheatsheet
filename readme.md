@@ -94,6 +94,12 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [Explanation with sample code](#explanation-with-sample-code-2)
       - [External resources](#external-resources-8)
     + [Truthy / Falsy](#truthy--falsy)
+    + [Static Methods](#static-methods)
+      - [Short Explanation](#short-explanation-1)
+      - [Sample Code](#sample-code-7)
+      - [Detailed Explanation](#detailed-explanation-2)
+        * [Calling other static methods from a static method](#calling-other-static-methods-from-a-static-method)
+        * [Calling static methods from non-static methods](#calling-static-methods-from-non-static-methods)
       - [External resources](#external-resources-9)
   * [Glossary](#glossary)
     + [Scope](#-scope)
@@ -366,7 +372,7 @@ To do so, we only need to **remove the brackets** and the **return** keyword. Th
 
 > **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
 
-Besides, if you want to implicitly return an *object* you **must have parenthesis around it** since it will conflict with the block braces:
+Besides, if you want to implicitly return an *object* you **must have parentheses around it** since it will conflict with the block braces:
 
 ```js
 const getPerson = () => ({ name: "Nick", age: 24 })
@@ -375,13 +381,13 @@ console.log(getPerson()) // { name: "Nick", age: 24 } -- object implicitly retur
 
 - Only one argument
 
-If your function only takes one parameter, you can omit the parenthesis around it. If we take back the above *double* code:
+If your function only takes one parameter, you can omit the parentheses around it. If we take back the above *double* code:
 
 ```js
   const double = (x) => x * 2; // this arrow function only takes one parameter
 ```
 
-Parenthesis around the parameter can be avoided:
+Parentheses around the parameter can be avoided:
 
 ```js
   const double = x => x * 2; // this arrow function only takes one parameter
@@ -392,14 +398,14 @@ Parenthesis around the parameter can be avoided:
 When there is no argument provided to an arrow function, you need to provide parentheses, or it won't be valid syntax.
 
 ```js
-  () => { // parenthesis are provided, everything is fine
+  () => { // parentheses are provided, everything is fine
     const x = 2;
     return x;
   }
 ```
 
 ```js
-  => { // No parenthesis, this won't work!
+  => { // No parentheses, this won't work!
     const x = 2;
     return x;
   }
@@ -559,7 +565,7 @@ joinFirstLastName(person); // "Nick-Anderson"
 
 - Array
 
-Lets consider the following array:
+Let's consider the following array:
 
 ```js
 const myArray = ["a", "b", "c"];
@@ -647,7 +653,7 @@ console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 
 What's happening here? We are using .map on the *numbers* array, the map is iterating on each element of the array and passes it to our function. The goal of the function is to produce and return a new value from the one passed so that map can replace it.
 
-Lets extract this function to make it more clear, just for this once:
+Let's extract this function to make it more clear, just for this once:
 
 ```js
 const doubleN = function(n) { return n * 2; };
@@ -711,7 +717,7 @@ Function returns *acc* + *n* --> 0 + 0 --> 0
 
 ###### At second iteration step
 
-```acc = 0``` because its the value the function returned at the previous iteration step
+```acc = 0``` because it's the value the function returned at the previous iteration step
 
 ```n = 1``` second element of the *number* array
 
@@ -719,7 +725,7 @@ Function returns *acc* + *n* --> 0 + 1 --> 1
 
 ###### At third iteration step
 
-```acc = 1``` because its the value the function returned at the previous iteration step
+```acc = 1``` because it's the value the function returned at the previous iteration step
 
 ```n = 2``` third element of the *number* array
 
@@ -1031,7 +1037,7 @@ const name = "Nick";
 
 ### Tagged template literals
 
-Template tags are *functions that can be prefixed to a [template literal](#template-literals)*. When a function is called this way, the first parameter is an array of the *strings* that appear between the template's interpolated variables, and the subsequent paremeters are the interpolated values. Use a spread operator `...` to capture all of them. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
+Template tags are *functions that can be prefixed to a [template literal](#template-literals)*. When a function is called this way, the first parameter is an array of the *strings* that appear between the template's interpolated variables, and the subsequent parameters are the interpolated values. Use a spread operator `...` to capture all of them. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
 
 > **Note :** A famous library named [styled-components](https://www.styled-components.com/) heavily relies on this feature.
 
@@ -1425,6 +1431,99 @@ myVar ? "truthy" : "falsy"
 ```
 
 myVar is evaluated in a boolean context.
+
+### Static Methods
+
+#### Short explanation
+
+The `static` keyword is used in classes to declare static methods. Static methods are functions in a class that belongs to the class object and are not available to any instance of that class.
+
+#### Sample code
+
+```js
+class Repo{
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+}
+
+//Note that we did not have to create an instance of the Repo class
+console.log(Repo.getName()) //Repo name is modern-js-cheatsheet
+
+let r = new Repo();
+console.log(r.getName()) //Uncaught TypeError: repo.getName is not a function
+```
+
+#### Detailed explanation
+
+Static methods can be called within another static method by using the `this` keyword, this doesn't work for non-static methods though. Non-static methods cannot directly access static methods using the `this` keyword.
+
+##### Calling other static methods from a static method.
+
+To call a static method from another static method, the `this` keyword can be used like so;
+
+```js
+class Repo{
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  static modifyName(){
+    return this.getName() + '-added-this'
+  }
+}
+
+console.log(Repo.modifyName()) //Repo name is modern-js-cheatsheet-added-this
+```
+
+##### Calling static methods from non-static methods.
+
+Non-static methods can call static methods in 2 ways;
+1. ###### Using the class name.
+
+To get access to a static method from a non-static method we use the class name and call the static method like a property. e.g `ClassName.StaticMethodName`
+
+```js
+class Repo{
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  useName(){
+    return Repo.getName() + ' and it contains some really important stuff'
+  }
+}
+
+// we need to instantiate the class to use non-static methods
+let r = new Repo()
+console.log(r.useName()) //Repo name is modern-js-cheatsheet and it contains some really important stuff
+```
+
+2. ###### Using the constructor
+
+Static methods can be called as properties on the constructor object.
+
+```js
+class Repo{
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  useName(){
+    //Calls the static method as a property of the constructor
+    return this.constructor.getName() + ' and it contains some really important stuff'
+  }
+}
+
+// we need to instantiate the class to use non-static methods
+let r = new Repo()
+console.log(r.useName()) //Repo name is modern-js-cheatsheet and it contains some really important stuff
+```
+
+#### External resources
+- [static keyword- MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)
+- [Static Methods- Javascript.info](https://javascript.info/class#static-methods)
+- [Static Members in ES6- OdeToCode](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
 
 ## Glossary
 
