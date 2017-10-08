@@ -1357,6 +1357,8 @@ fetchPostById('gzIrzeo64')
 
 Unless we add *try / catch* blocks around *await* expressions, uncaught exceptions – regardless of whether they were raised in the body of your *async* function or while it’s suspended during *await* – will reject the promise returned by the *async* function. [(Ref: PonyFoo)](https://ponyfoo.com/articles/understanding-javascript-async-await#error-handling).
 
+> **Note :** Promises behave the same!
+
 With promises, here is how you would handle the error chain:
 
 ```js
@@ -1365,19 +1367,11 @@ function getUser() { // This promise will be rejected!
 };
 
 function getAvatarByUsername(userId) {
-  return new Promise((res, rej) =>
-    getUser(userId)
-      .then(user => res(user.avatar))
-      .catch(err => rej(err))
-  );
+  return getUser(userId).then(user => res(user.avatar))
 }
 
 function getUserAvatar(username) {
-  return new Promise((res, rej) =>
-    getAvatarByUsername(username)
-      .then(avatar => res({ username, avatar }))
-      .catch(err => rej(err))
-  );
+  return getAvatarByUsername(username).then(avatar => res({ username, avatar }))
 }
 
 getUserAvatar('mbeaudru')
@@ -1385,9 +1379,7 @@ getUserAvatar('mbeaudru')
   .catch(err => console.log(err)); // "User not found !"
 ```
 
-If you forgot a *catch*, the error will be uncaught!
-
-But with *async* functions, if an error is thrown in it's body the promise will reject:
+With *async / await*:
 
 ```js
 function getUser() { // This promise will be rejected!
