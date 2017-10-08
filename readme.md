@@ -93,6 +93,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     + [Async Await](#async-await)
       - [Sample code](#sample-code-6)
       - [Explanation with sample code](#explanation-with-sample-code-2)
+      - [Error handling](#error-handling)
       - [External resources](#external-resources-8)
     + [Truthy / Falsy](#truthy--falsy)
     + [Static Methods](#static-methods)
@@ -1276,15 +1277,13 @@ The purpose of async/await functions is to simplify the behavior of using promis
 
 ```js
 async function getGithubUser(username) { // async keyword allows usage of await in the function and means function returns a promise
-  try { // this is how errors are handled with async / await
-    const response = await fetch(`https://api.github.com/users/${username}`); // "synchronously" waiting fetch promise to resolve before going to next line
-    return response.json();
-  } catch (err) {
-    alert(err);
-  }
+  const response = await fetch(`https://api.github.com/users/${username}`); // "synchronously" waiting fetch promise to resolve before going to next line
+  return response.json();
 }
 
-getGithubUser('mbeaudru').then(user => console.log(user)); // logging user response - cannot use await syntax since this code isn't in async function
+getGithubUser('mbeaudru')
+  .then(user => console.log(user)) // logging user response - cannot use await syntax since this code isn't in async function
+  .catch(err => console.log(err)); // if an error is raised in our async function, we will catch it here
 ```
 
 #### Explanation with sample code
@@ -1296,11 +1295,7 @@ getGithubUser('mbeaudru').then(user => console.log(user)); // logging user respo
 ```js
 async function myFunc() {
   // we can use await operator because this function is async
-  try {
-    return "hello world";
-  } catch(e) {
-    throw new Error();
-  }
+  return "hello world";
 }
 
 myFunc().then(msg => console.log(msg)) // "hello world" -- myFunc is turned into a promise because of async operator
@@ -1316,14 +1311,9 @@ Let's see how we could fetch a github user with promises first:
 
 ```js
 function getGithubUser(username) {
-  return new Promise((resolve, reject) => {
-    fetch(`https://api.github.com/users/${username}`)
-      .then(response => {
-        const user = response.json();
-        resolve(user);
-      })
-      .catch(err => reject(err));
-  })
+  return fetch(`https://api.github.com/users/${username}`)
+    .then(response => response.json())
+    .catch(err => reject(err));
 }
 
 getGithubUser('mbeaudru')
@@ -1335,13 +1325,8 @@ Here's the *async / await* equivalent:
 
 ```js
 async function getGithubUser(username) { // promise + await keyword usage allowed
-  try { // We handle async function errors with try / catch
-    const response = await fetch(`https://api.github.com/users/${username}`); // Execution stops here until fetch promise is fulfilled.
-    const user = response.json();
-    return user; // equivalent of resolving the getGithubUser promise with user value.
-  } catch (err) {
-    throw new Error(err); // equivalent of rejecting getGithubUser promise with err value.
-  }
+  const response = await fetch(`https://api.github.com/users/${username}`); // Execution stops here until fetch promise is fulfilled.
+  return response.json();
 }
 
 getGithubUser('mbeaudru')
@@ -1355,16 +1340,12 @@ For instance, if you need to get a token in order to be able to fetch a blog pos
 
 ```js
 async function fetchPostById(postId) {
-  try {
-    const token = await fetch('token_url');
-    const post = await fetch(`/posts/${postId}?token=${token}`);
-    const author = await fetch(`/users/${post.authorId}`);
+  const token = await fetch('token_url');
+  const post = await fetch(`/posts/${postId}?token=${token}`);
+  const author = await fetch(`/users/${post.authorId}`);
 
-    post.author = author;
-    return post;
-  } catch(e) {
-    throw new Error(e);
-  }
+  post.author = author;
+  return post;
 }
 
 fetchPostById('gzIrzeo64')
@@ -1372,7 +1353,61 @@ fetchPostById('gzIrzeo64')
   .catch(err => console.log(err));
 ```
 
-> **Note :** As you can see, *try / catch* are necessary to handle errors. But if you are making *express routes*, you can use a middleware to avoid error handling and have a very pleasant code to read. See [this article from Alex Bazhenov](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016) to learn more.
+##### Error handling
+
+Unless we add *try / catch* blocks around *await* expressions, uncaught exceptions – regardless of whether they were raised in the body of your *async* function or while it’s suspended during *await* – will reject the promise returned by the *async* function. [(Ref: PonyFoo)](https://ponyfoo.com/articles/understanding-javascript-async-await#error-handling).
+
+With promises, here is how you would handle the error chain:
+
+```js
+function getUser() => { // This promise will be rejected!
+  return new Promise((res, rej) => rej("User not found !")
+};
+
+function getAvatarByUsername(userId) {
+  return new Promise((res, rej) =>
+    getUser(userId)
+      .then(user => res(user.avatar))
+      .catch(err => rej(err))
+  );
+}
+
+function getUserAvatar(username) {
+  return new Promise((res, rej) =>
+    getAvatarByUsername(username)
+      .then(avatar => res({ username, avatar }))
+      .catch(err => rej(err))
+  );
+}
+
+getUserAvatar('mbeaudru')
+  .then(res => console.log(res))
+  .catch(err => console.log(err)); // "User not found !"
+```
+
+If you forgot a *catch*, the error will be uncaught!
+
+But with *async* functions, if an error is thrown in it's body the promise will reject:
+
+```js
+function getUser() => { // This promise will be rejected!
+  return new Promise((res, rej) => rej("User not found !")
+};
+
+async function getAvatarByUsername(userId) => {
+  const user = await getUser(userId);
+  return user.avatar;
+};
+
+async function getUserAvatar(username) {
+  var avatar = await getAvatarByUsername(username);
+  return { username, avatar };
+}
+
+getUserAvatar('mbeaudru')
+  .then(res => console.log(res))
+  .catch(err => console.log(err)); // "User not found !"
+```
 
 #### External resources
 
