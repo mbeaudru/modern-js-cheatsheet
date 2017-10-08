@@ -1311,9 +1311,7 @@ Let's see how we could fetch a github user with promises first:
 
 ```js
 function getGithubUser(username) {
-  return fetch(`https://api.github.com/users/${username}`)
-    .then(response => response.json())
-    .catch(err => reject(err));
+  return fetch(`https://api.github.com/users/${username}`).then(response => response.json());
 }
 
 getGithubUser('mbeaudru')
