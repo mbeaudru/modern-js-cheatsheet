@@ -1361,7 +1361,7 @@ With promises, here is how you would handle the error chain:
 
 ```js
 function getUser() { // This promise will be rejected!
-  return new Promise((res, rej) => rej("User not found !")
+  return new Promise((res, rej) => rej("User not found !"))
 };
 
 function getAvatarByUsername(userId) {
@@ -1391,7 +1391,7 @@ But with *async* functions, if an error is thrown in it's body the promise will 
 
 ```js
 function getUser() { // This promise will be rejected!
-  return new Promise((res, rej) => rej("User not found !")
+  return new Promise((res, rej) => rej("User not found !"))
 };
 
 async function getAvatarByUsername(userId) => {
