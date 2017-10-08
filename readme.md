@@ -1360,7 +1360,7 @@ Unless we add *try / catch* blocks around *await* expressions, uncaught exceptio
 With promises, here is how you would handle the error chain:
 
 ```js
-function getUser() => { // This promise will be rejected!
+function getUser() { // This promise will be rejected!
   return new Promise((res, rej) => rej("User not found !")
 };
 
@@ -1390,7 +1390,7 @@ If you forgot a *catch*, the error will be uncaught!
 But with *async* functions, if an error is thrown in it's body the promise will reject:
 
 ```js
-function getUser() => { // This promise will be rejected!
+function getUser() { // This promise will be rejected!
   return new Promise((res, rej) => rej("User not found !")
 };
 
