@@ -1248,7 +1248,40 @@ const myPerson = new Person("Manu", 23);
 console.log(myPerson.age) // 23
 console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 ```
+### *Super* Keyword
+The `super` keyword is used to call methods or rerference properties in the parent class.
+#### Examples
+ 1. If you want to pass some arguments in a class's constructor to its parent's constructor, you call it with `super(arguments)`.
+  > Note: If you want to use `this` in a constructor, you must call `super` (ie. the parent's constructor) first.
+ ```js
+ class Polygon {
+  constructor(height, width) {
+    this.name = 'Polygon';
+    this.height = height;
+    this.width = width;
+  }
+  sayName() {
+    console.log('Hi, I am a ', this.name + '.');
+  }
+}
 
+class Square extends Polygon {
+  constructor(length) {
+    this.height; // ReferenceError, super needs to be called first!
+    
+    // Here, it calls the parent class' constructor with lengths
+    // provided for the Polygon's width and height
+    super(length, length);
+    
+    // Note: In derived classes, super() must be called before you
+    // can use 'this'. Leaving this out will cause a reference error.
+    this.name = 'Square';
+  }
+
+ ```
+ 2. If the parent class had a static method called `X`, You can use `super.X()` to to call it in a child class.
+ 3. You can use `super.prop`to access a the `prop` property in the parent class.
+ 
 #### External resources
 
 For prototype understanding:
