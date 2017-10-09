@@ -1248,6 +1248,19 @@ const myPerson = new Person("Manu", 23);
 console.log(myPerson.age) // 23
 console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 ```
+#### External resources
+
+For prototype understanding:
+
+- [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
+- [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
+- [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+
+For classes understanding:
+
+- [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
+- [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
+- [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 ### *Super* Keyword
 The `super` keyword is used to call methods or rerference properties in the parent class.
 #### Examples
@@ -1283,18 +1296,7 @@ class Square extends Polygon {
  3. You can use `super.prop`to access a the `prop` property in the parent class.
  
 #### External resources
-
-For prototype understanding:
-
-- [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
-- [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
-- [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
-
-For classes understanding:
-
-- [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
-- [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
-- [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
 
 ### Async Await
 
