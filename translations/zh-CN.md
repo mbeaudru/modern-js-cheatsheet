@@ -41,11 +41,11 @@
       - [详述](#详述)
       - [延伸资料](#延伸资料)
     + [箭头函数](#箭头函数)
-      - [简述](#简述)
-      - [详述](#详述)
+      - [简述](#简述-1)
+      - [详述](#详述-1)
           * [简洁性](#简洁性)
           * [*this* 关键字](#this-关键字)
-      - [延伸资料](#延伸资料)
+      - [相关资料](#相关资料)
 
 ## 正文
 
@@ -366,7 +366,7 @@ function myFunc() {
 }
 ```
 
-#### 延伸资料
+#### 相关资料
 
 - [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
 - [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
