@@ -1261,7 +1261,7 @@ For classes understanding:
 - [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
 - [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
-### *Super* Keyword
+### `Super` Keyword
 The `super` keyword is used to call methods or rerference properties in the parent class.
 #### Examples
  1. If you want to pass some arguments in a class's constructor to its parent's constructor, you call it with `super(arguments)`.
@@ -1297,6 +1297,28 @@ class Square extends Polygon {
  
 #### External resources
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
+### `Extends` keyword
+The `Extends` keyword is used to indicate a child class inheriting from a parent class. It is similar to the `extends` keyword in Java. Keep in mind that [inheritance in JavaScript is Prototypical](https://medium.com/javascript-scene/master-the-javascript-interview-what-s-the-difference-between-class-prototypal-inheritance-e4cd0a7562e9).
+#### Sample Code
+```
+class Square extends Polygon {
+  constructor(length) {
+    // Here, it calls the parent class' constructor with lengths
+    // provided for the Polygon's width and height
+    super(length, length);
+    // Note: In derived classes, super() must be called before you
+    // can use 'this'. Leaving this out will cause a reference error.
+    this.name = 'Square';
+  }
+
+  get area() {
+    return this.height * this.width;
+  }
+}
+```
+#### External Resources
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends
+- https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance
 
 ### Async Await
 
