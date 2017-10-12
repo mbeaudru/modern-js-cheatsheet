@@ -214,3 +214,5 @@ person = ["Nick"] // 提示错误，因为用 const 声明的变量不能被重�
 
 - [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
 - [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
+
+### <a name="arrow_func_concept"></a> 箭头函数
