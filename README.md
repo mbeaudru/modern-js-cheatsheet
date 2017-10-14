@@ -1301,7 +1301,7 @@ class Square extends Polygon {
 
   getCustomHelloPhrase() {
     const polygonPhrase = super.getHelloPhrase(); // accessing parent method with super.X() syntax
-    return `${polygonPhrase} with a lenght of ${this.length}`;
+    return `${polygonPhrase} with a length of ${this.length}`;
   }
 
   get area() {
@@ -1312,7 +1312,7 @@ class Square extends Polygon {
 const mySquare = new Square(10);
 console.log(mySquare.area) // 100
 console.log(mySquare.getHelloPhrase()) // 'Hi, I am a Square' -- Square inherits from Polygon and has access to its methods
-console.log(mySquare.getCustomHelloPhrase()) // 'Hi, I am a Square with a lenght of 10'
+console.log(mySquare.getCustomHelloPhrase()) // 'Hi, I am a Square with a length of 10'
 ```
 
 **Note :** If we had tried to use `this` before calling `super()` in Square class, a ReferenceError would have been raised:
