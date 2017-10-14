@@ -96,13 +96,14 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [Error handling](#error-handling)
       - [External resources](#external-resources-8)
     + [Truthy / Falsy](#truthy--falsy)
+      - [External resources](#external-resources-9)
     + [Static Methods](#static-methods)
       - [Short Explanation](#short-explanation-1)
       - [Sample Code](#sample-code-7)
       - [Detailed Explanation](#detailed-explanation-2)
         * [Calling other static methods from a static method](#calling-other-static-methods-from-a-static-method)
         * [Calling static methods from non-static methods](#calling-static-methods-from-non-static-methods)
-      - [External resources](#external-resources-9)
+      - [External resources](#external-resources-10)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1459,6 +1460,12 @@ myVar ? "truthy" : "falsy"
 ```
 
 myVar is evaluated in a boolean context.
+
+#### External resources
+
+- [Truthy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
+- [Falsy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
+- [Truthy and Falsy values in JS - Josh Clanton](http://adripofjavascript.com/blog/drips/truthy-and-falsy-values-in-javascript.html)
 
 ### Static Methods
 
