@@ -1415,12 +1415,12 @@ In JavaScript, a truthy or falsy value is a value that is being casted into a bo
 
 Every value will be casted to ```true``` unless they are equal to:
 
-- false
-- 0
-- "" (empty string)
-- null
-- undefined
-- NaN
+- ```false```
+- ```0```
+- ```""``` (empty string)
+- ```null```
+- ```undefined```
+- ```NaN```
 
 Here are examples of *boolean context*:
 
