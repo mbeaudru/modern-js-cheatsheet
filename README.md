@@ -90,19 +90,23 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     + [Class](#class)
       - [Samples](#samples)
       - [External resources](#external-resources-7)
+    + [Extends and super keywords](#extends-and-super-keywords)
+      - [Sample Code](#sample-code-6)
+      - [External Resources](#external-resources-8)
     + [Async Await](#async-await)
-      - [Sample code](#sample-code-6)
+      - [Sample code](#sample-code-7)
       - [Explanation with sample code](#explanation-with-sample-code-2)
       - [Error handling](#error-handling)
-      - [External resources](#external-resources-8)
+      - [External resources](#external-resources-9)
     + [Truthy / Falsy](#truthy--falsy)
+      - [External resources](#external-resources-10)
     + [Static Methods](#static-methods)
       - [Short Explanation](#short-explanation-1)
-      - [Sample Code](#sample-code-7)
+      - [Sample Code](#sample-code-8)
       - [Detailed Explanation](#detailed-explanation-2)
         * [Calling other static methods from a static method](#calling-other-static-methods-from-a-static-method)
         * [Calling static methods from non-static methods](#calling-static-methods-from-non-static-methods)
-      - [External resources](#external-resources-9)
+      - [External resources](#external-resources-11)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1060,7 +1064,7 @@ highlight`I like ${condiment} on ${meal}.`;
 // "I like <mark>jam</mark> on <mark>toast</mark>."
 ```
 
-A more interesting example: 
+A more interesting example:
 ```js
 function comma(strings, ...values) {
   return strings.reduce((prev, next) => {
@@ -1210,11 +1214,7 @@ JavaScript is a [prototype-based](https://en.wikipedia.org/wiki/Prototype-based_
 
 The word *class* is indeed error prone if you are familiar with classes in other languages. If you do, avoid assuming how JavaScript classes work on this basis and consider it an entirely different notion.
 
-Since this document is not an attempt to teach you the language from the ground up, I will believe you know what prototypes are and how they behave. But here are some links I found great to understand this notion:
-
-- [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
-- [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
-- [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+Since this document is not an attempt to teach you the language from the ground up, I will believe you know what prototypes are and how they behave. If you do not, see the external resouces listed below the sample code.
 
 #### Samples
 
@@ -1248,6 +1248,7 @@ const myPerson = new Person("Manu", 23);
 console.log(myPerson.age) // 23
 console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 ```
+
 #### External resources
 
 For prototype understanding:
@@ -1261,64 +1262,82 @@ For classes understanding:
 - [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
 - [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
-### `Super` Keyword
-The `super` keyword is used to call methods or rerference properties in the parent class.
-#### Examples
- 1. If you want to pass some arguments in a class's constructor to its parent's constructor, you call it with `super(arguments)`.
-  > Note: If you want to use `this` in a constructor, you must call `super` (ie. the parent's constructor) first.
- ```js
- class Polygon {
+
+### `Extends` and `super` keywords
+
+The `extends` keyword is used in class declarations or class expressions to create a class which is a child of another class ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)). The subclass inherits all the properties of the superclass and additionally can add new properties or modify the inherited ones.
+
+The `super` keyword is used to call functions on an object's parent, including its constructor.
+
+- `super` keyword must be used before the `this` keyword is used in constructor
+- Invoking `super()` calls the parent class constructor. If you want to pass some arguments in a class's constructor to its parent's constructor, you call it with `super(arguments)`.
+- If the parent class have a method (even static) called `X`, you can use `super.X()` to call it in a child class.
+
+#### Sample Code
+
+```js
+class Polygon {
   constructor(height, width) {
     this.name = 'Polygon';
     this.height = height;
     this.width = width;
   }
-  sayName() {
-    console.log('Hi, I am a ', this.name + '.');
+
+  getHelloPhrase() {
+    return `Hi, I am a ${this.name}`;
   }
 }
 
 class Square extends Polygon {
   constructor(length) {
-    this.height; // ReferenceError, super needs to be called first!
-    
     // Here, it calls the parent class' constructor with lengths
     // provided for the Polygon's width and height
     super(length, length);
-    
     // Note: In derived classes, super() must be called before you
     // can use 'this'. Leaving this out will cause a reference error.
     this.name = 'Square';
+    this.length = length;
   }
 
- ```
- 2. If the parent class had a static method called `X`, You can use `super.X()` to to call it in a child class.
- 3. You can use `super.prop`to access a the `prop` property in the parent class.
- 
-#### External resources
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
-### `Extends` keyword
-The `Extends` keyword is used to indicate a child class inheriting from a parent class. It is similar to the `extends` keyword in Java. Keep in mind that [inheritance in JavaScript is Prototypical](https://medium.com/javascript-scene/master-the-javascript-interview-what-s-the-difference-between-class-prototypal-inheritance-e4cd0a7562e9).
-#### Sample Code
-```
-class Square extends Polygon {
-  constructor(length) {
-    // Here, it calls the parent class' constructor with lengths
-    // provided for the Polygon's width and height
-    super(length, length);
-    // Note: In derived classes, super() must be called before you
-    // can use 'this'. Leaving this out will cause a reference error.
-    this.name = 'Square';
+  getCustomHelloPhrase() {
+    const polygonPhrase = super.getHelloPhrase(); // accessing parent method with super.X() syntax
+    return `${polygonPhrase} with a lenght of ${this.length}`;
   }
 
   get area() {
     return this.height * this.width;
   }
 }
+
+const mySquare = new Square(10);
+console.log(mySquare.area) // 100
+console.log(mySquare.getHelloPhrase()) // 'Hi, I am a Square' -- Square inherits from Polygon and has access to its methods
+console.log(mySquare.getCustomHelloPhrase()) // 'Hi, I am a Square with a lenght of 10'
 ```
+
+**Note :** If we had tried to use `this` before calling `super()` in Square class, a ReferenceError would have been raised:
+
+```js
+class Square extends Polygon {
+  constructor(length) {
+    this.height; // ReferenceError, super needs to be called first!
+
+    // Here, it calls the parent class' constructor with lengths
+    // provided for the Polygon's width and height
+    super(length, length);
+
+    // Note: In derived classes, super() must be called before you
+    // can use 'this'. Leaving this out will cause a reference error.
+    this.name = 'Square';
+  }
+}
+```
+
 #### External Resources
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends
-- https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance
+
+- [Extends - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
+- [Super operator - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super)
+- [Inheritance - MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance)
 
 ### Async Await
 
@@ -1475,12 +1494,12 @@ In JavaScript, a truthy or falsy value is a value that is being casted into a bo
 
 Every value will be casted to ```true``` unless they are equal to:
 
-- false
-- 0
-- "" (empty string)
-- null
-- undefined
-- NaN
+- ```false```
+- ```0```
+- ```""``` (empty string)
+- ```null```
+- ```undefined```
+- ```NaN```
 
 Here are examples of *boolean context*:
 
@@ -1516,6 +1535,12 @@ myVar ? "truthy" : "falsy"
 ```
 
 myVar is evaluated in a boolean context.
+
+#### External resources
+
+- [Truthy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
+- [Falsy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
+- [Truthy and Falsy values in JS - Josh Clanton](http://adripofjavascript.com/blog/drips/truthy-and-falsy-values-in-javascript.html)
 
 ### Static Methods
 
