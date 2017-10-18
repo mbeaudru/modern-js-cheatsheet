@@ -3,25 +3,21 @@
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
 <small>เครดิตรูปภาพ: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
 
-## คำนำ
+## เกริ่นนำ
 
 ### ที่มาที่ไป
 
-This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and most contemporary sample code.
-เอกสารนี้เป็น cheatsheet สำหรับ JavaScript ที่เราน่าจะพบเจอบ่อยๆ ใน​โปรเจ็คใหม่ๆ หรือโค้ดตัวอย่างใหม่ๆ
+เอกสารนี้เป็น cheatsheet สำหรับ JavaScript ที่จะแนะนำและอธิบายสิ่งที่เราน่าจะพบเจอบ่อยใน​โปรเจ็คใหม่ๆ หรือโค้ดตัวอย่างใหม่ๆ
 
-This guide is not intended to teach you JavaScript from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn React for instance) because of the JavaScript concepts used.
-ซึ่งในบทความนี้จะไม่ได้สอน Javascript ตั้งแต่พื้นฐานให้ แต่จะช่วย Developer ที่มีพื้นฐานอยู่แล้วแต่ติดปัญหาได้เข้าใจและคุ้นเคยกับโค้ดหรือคอนเซปของ Javascript สมัยใหม่ (หรืออย่างเช่นว่ากำลังเรียนรู้ React แต่ไม่เข้าใจตัวโค้ด เป็นต้น)
+ซึ่งในบทความนี้จะไม่ได้สอน Javascript ตั้งแต่พื้นฐานให้ แต่จะช่วย Developer ที่มีพื้นฐานอยู่แล้วแต่ติดปัญหาหรือไม่เข้าใจ ได้เข้าใจคอนเซปของ Javascript สมัยใหม่ (ยกตัวอย่างเช่นกำลังเรียนรู้ React)
 
-Besides, I will sometimes provide personal tips that may be debatable but will take care to mention that it's a personal recommendation when I do so.
-นอกจากนี้บทความนี้ได้มีแนะนำทิปส่วนตัวแนบไว้บางส่วนซึ่งสามารถมาดีเบทกันได้ ซึ่งส่วนไหนที่เป็นคำแนะนำส่วนตัวจะมีบอกเอาไว้
+นอกจากนี้บทความนี้ได้มีแนะนำทิปส่วนตัวแนบไว้บางส่วนซึ่งสามารถมาโต้แย้งหรือช่วยกันเสนอแนะได้ โดยจะมีหมายเหตุบอกเอาไว้
 
-> **Note:** Most of the concepts introduced here are coming from a JavaScript language update (ES2015, often called ES6). You can find new features added by this update [here](http://es6-features.org); it's very well done.
-> **หมายเหตุ:** คอนเซปส่วนใหญ่ในนี้จะมาจากอัปเดตใหม่ๆ ที่กำลังเป็นมาตรฐานของภาษา JavaScript (ES2015, หรือโดยทั่วไปเรียกว่า ES6). คุณสามารถดูฟีเจอร์ใหม่ๆ ที่เพิ่มเข้ามาโดยติดตามได้จากอัปเดต [ที่นี่](http://es6-features.org); ในนั้นได้มีครบทุกอย่าง
+> **หมายเหตุ:** คอนเซปส่วนใหญ่ในนี้จะมาจากอัปเดตใหม่ๆ ที่กำลังเป็นมาตรฐานของภาษา JavaScript (ES2015, หรือโดยทั่วไปเรียกว่า ES6). คุณสามารถดูฟีเจอร์ใหม่ๆ ที่เพิ่มเข้ามาโดยติดตามได้จากอัปเดต [ที่นี่](http://es6-features.org); ซึ่งมีครบเลยทุกข้อ
 
-### แหล่งเรียนรู้เพิ่มเติม
+### แหล่งเรียนรู้ฟรีที่แนะนำเพิ่มเติม
 
-ถ้าไม่เข้าใจหรือติดตรงไหน แนะนำให้ลองหาคำตอบจาก Link เหล่านี้ดูก่อน
+เมื่อติดปัญหาในการเข้าใจตรงจุดไหนแนะนำให้ลองหาคำตอบจากแหล่งข้อมูลเพิ่มเติมเหล่านี้ดูก่อน:
 
 - [MDN (Mozilla Developer Network)](https://developer.mozilla.org/en-US/search?q=)
 - [You don't know JS (book)](https://github.com/getify/You-Dont-Know-JS)
@@ -35,79 +31,79 @@ Besides, I will sometimes provide personal tips that may be debatable but will t
 ## สารบัญ
 
 - [Modern JavaScript cheatsheet](#modern-javascript-cheatsheet)
-  * [เกริ่นนำ](#introduction)
-    + [ที่มาที่ไป](#motivation)
-    + [แหล่งเรียนรู้เพิ่มเติม](#complementary-resources)
-  * [สารบัญ](#table-of-contents)
-  * [เนื้อหา](#notions)
-    + [Variable declaration: var, const, let](#variable-declaration-var-const-let)
-      - [Short explanation](#short-explanation)
-      - [Sample code](#sample-code)
-      - [Detailed explanation](#detailed-explanation)
-      - [External resource](#external-resource)
-    + [Arrow function](#-arrow-function)
-      - [Sample code](#sample-code-1)
-      - [Detailed explanation](#detailed-explanation-1)
-        * [Concision](#concision)
-        * [*this* reference](#this-reference)
-      - [Useful resources](#useful-resources)
-    + [Function default parameter value](#function-default-parameter-value)
-      - [External resource](#external-resource-1)
-    + [Destructuring objects and arrays](#destructuring-objects-and-arrays)
-      - [Explanation with sample code](#explanation-with-sample-code)
-      - [Useful resources](#useful-resources-1)
+  * [เกริ่นนำ](#เกริ่นนำ)
+    + [ที่มาที่ไป](#ที่มาที่ไป)
+    + [แหล่งเรียนรู้ฟรีที่แนะนำเพิ่มเติม](#แหล่งเรียนรู้ฟรีที่แนะนำเพิ่มเติม)
+  * [สารบัญ](#สารบัญ)
+  * [เนื้อหา](#เนื้อหา)
+    + [การประกาศตัวแปร: var, const, let](#การประกาศตัวแปร-var-const-let)
+      - [อธิบายสั้นๆ](#อธิบายสั้นๆ)
+      - [ตัวอย่างโค้ด](#ตัวอย่างโค้ด)
+      - [อธิบายรายละเอียด](#อธิบายรายละเอียด)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก)
+    + [Arrow ฟังก์ชั่น](#-arrow-ฟังก์ชั่น)
+      - [ตัวอย่างโค้ด](#ตัวอย่างโค้ด-1)
+      - [อธิบายรายละเอียด](#อธิบายรายละเอียด-1)
+        * [การย่อสั้น](#การย่อสั้น)
+        * [การอ้างอิงของ *this*](#การอ้างอิงของ-this)
+      - [แหล่งข้อมูลที่มีประโยชน์](#แหล่งข้อมูลที่มีประโยชน์)
+    + [ค่า default parameter ของฟังก์ชั่น](#ค่า-default-parameter-ของฟังก์ชั่น)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-1)
+    + [Destructuring objects และ arrays](#destructuring-objects-และ-arrays)
+      - [อธิบายตัวอย่างโค้ด](#อธิบายตัวอย่างโค้ด)
+      - [แหล่งข้อมูลที่มีประโยชน์](#แหล่งข้อมูลที่มีประโยชน์-1)
     + [Array methods - map / filter / reduce](#array-methods---map--filter--reduce)
-      - [Sample code](#sample-code-2)
-      - [Explanation](#explanation)
+      - [ตัวอย่างโค้ด](#ตัวอย่างโค้ด-2)
+      - [อธิบาย](#อธิบาย)
         * [Array.prototype.map()](#arrayprototypemap)
         * [Array.prototype.filter()](#arrayprototypefilter)
         * [Array.prototype.reduce()](#arrayprototypereduce)
-      - [External Resource](#external-resource-2)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-2)
     + [Spread operator "..."](#spread-operator-)
-      - [Sample code](#sample-code-3)
-      - [Explanation](#explanation-1)
-        * [In iterables (like arrays)](#in-iterables-like-arrays)
-        * [Function rest parameter](#function-rest-parameter)
+      - [ตัวอย่างโค้ด](#ตัวอย่างโค้ด-3)
+      - [อธิบาย](#อธิบาย-1)
+        * [ใช้กับสิ่งที่สามารถวนลูปได้ (iterables) (แบบ arrays)](#ใช้กับสิ่งที่สามารถวนลูปได้-iterables-แบบ-arrays)
+        * [ฟังก์ชั่น rest parameter](#ฟังก์ชั่น-rest-parameter)
         * [Object properties spreading](#object-properties-spreading)
-      - [External resources](#external-resources)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก)
     + [Object property shorthand](#object-property-shorthand)
-      - [Explanation](#explanation-2)
-      - [External resources](#external-resources-1)
+      - [อธิบาย](#อธิบาย-2)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-1)
     + [Promises](#promises)
-      - [Sample code](#sample-code-4)
-      - [Explanation](#explanation-3)
-        * [Create the promise](#create-the-promise)
-        * [Promise handlers usage](#promise-handlers-usage)
-      - [External Resources](#external-resources-2)
+      - [ตัวอย่างโค้ด](#ตัวอย่างโค้ด-4)
+      - [อธิบาย](#อธิบาย-3)
+        * [การสร้าง Promise](#create-the-promise)
+        * [การใช้งาน Promise handlers](#การใช้งาน-promise-handlers)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-2)
     + [Template literals](#template-literals)
-      - [Sample code](#sample-code-5)
-      - [External resources](#external-resources-3)
+      - [ตัวอย่างโค้ด](#ตัวอย่างโค้ด-5)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-3)
     + [Tagged Template Literals](#tagged-template-literals)
-      - [External resources](#external-resources-4)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-4)
     + [Imports / Exports](#imports--exports)
-      - [Explanation with sample code](#explanation-with-sample-code-1)
+      - [อธิบายตัวอย่างโค้ด](#อธิบายตัวอย่างโค้ด-1)
         * [Named exports](#named-exports)
         * [Default import / export](#default-import--export)
-      - [External resources](#external-resources-5)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-5)
     + [JavaScript *this*](#-javascript-this)
-      - [External resources](#external-resources-6)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-6)
     + [Class](#class)
-      - [Samples](#samples)
-      - [External resources](#external-resources-7)
+      - [ตัวอย่าง](#samples)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-7)
     + [Async Await](#async-await)
-      - [Sample code](#sample-code-6)
-      - [Explanation with sample code](#explanation-with-sample-code-2)
-      - [Error handling](#error-handling)
-      - [External resources](#external-resources-8)
+      - [ตัวอย่างโค้ด](#ตัวอย่างโค้ด-6)
+      - [อธิบายตัวอย่างโค้ด](#อธิบายตัวอย่างโค้ด-2)
+      - [การจัดการกับ Error](#การจัดการกับ-error)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-8)
     + [Truthy / Falsy](#truthy--falsy)
     + [Static Methods](#static-methods)
-      - [Short Explanation](#short-explanation-1)
-      - [Sample Code](#sample-code-7)
-      - [Detailed Explanation](#detailed-explanation-2)
-        * [Calling other static methods from a static method](#calling-other-static-methods-from-a-static-method)
-        * [Calling static methods from non-static methods](#calling-static-methods-from-non-static-methods)
-      - [External resources](#external-resources-9)
-  * [Glossary](#glossary)
+      - [อธิบายสั้นๆ](#อธิบายสั้นๆ-1)
+      - [ตัวอย่างโค้ด](#ตัวอย่างโค้ด-7)
+      - [อธิบายรายละเอียด](#อธิบายรายละเอียด-2)
+        * [เรียก static methods อื่นจาก static method](#เรียก-static-methods-อื่นจาก-static-method)
+        * [เรียก static methods จาก non-static method](#เรียก-static-methods-จาก-non-static-method)
+      - [ข้อมูลเพิ่มเติมจากภายนอก](#ข้อมูลเพิ่มเติมจากภายนอก-9)
+  * [คำศัพธ์](#คำศัพธ์)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
 
@@ -115,23 +111,20 @@ Besides, I will sometimes provide personal tips that may be debatable but will t
 
 ### การประกาศตัวแปร: var, const, let
 
-In JavaScript, there are three keywords available to declare a variable, and each has its differences. Those are ```var```, ```let``` and ```const```.
 ใน JavaScript มีวิธีการประกาศตัวแปรได้ 3 แบบคือ ```var```, ```let``` และ ```const``` ซึ่งแต่ละแบบมีความแตกต่างกัน
 
-#### คำอธิบายสั้นๆ
+#### อธิบายสั้นๆ
 
-Variables declared with ```const``` keyword can't be reassigned, while ```let``` and ```var``` can.
 ตัวแปรที่ประกาศโดยใช้ ```const``` จะไม่สามารถถูก assign ค่าให้กับตัวแปรใหม่ได้ ในขณะที่ ```let``` กับ ```var``` สามารถทำได้
 
-I recommend always declaring your variables with ```const``` by default, and with ```let``` if you need to *mutate* it or reassign it later.
 แนะนำให้ประกาศตัวแปรด้วย ```const``` เป็นปกติไปก่อน และค่อยเปลี่ยนเป็น ```let``` เมื่อพบว่าตัวแปรนั้นต้องการการ*เปลี่ยนแปลงค่า (mutate)* หรือว่ามีการ assign ค่าให้ตัวแปรในภายหลัง
 
 <table>
   <tr>
     <th></th>
     <th>Scope</th>
-    <th>Reassignable</th>
-    <th>Mutable</th>
+    <th>สามารถ Assign ค่าใหม่ได้</th>
+    <th>สามารถเปลี่ยนแปลงค่าได้</th>
    <th><a href="#tdz_sample">Temporal Dead Zone</a></th>
   </tr>
   <tr>
@@ -161,7 +154,7 @@ I recommend always declaring your variables with ```const``` by default, and wit
 
 ```javascript
 const person = "Nick";
-person = "John" // จะเกิด error เพราะว่า person ไม่สามารถ assign ค่าใหม่ได้
+person = "John" // จะ thrown error เพราะว่า person ไม่สามารถ assign ค่าใหม่ได้
 ```
 
 ```javascript
@@ -170,25 +163,24 @@ person = "John";
 console.log(person) // "John", let จะยอมให้สามารถ assign ค่าใหม่ได้
 ```
 
-#### อธิบายเพิ่มเติม
+#### อธิบายรายละเอียด
 
-[*scope*](#scope_def) ของตัวแปรคร่าวๆ แล้วหมายถึง "ขอบเขตที่ตัวแปรสามารถใช้งานได้ภายในโค้ด".
+[*scope*](#scope_def) ของตัวแปรคร่าวๆ แล้วหมายถึง "ขอบเขตที่ตัวแปรสามารถใช้งานได้ภายในโค้ด"
 
 ##### var
 
-ตัวแปรที่ถูกประกาศด้วย ```var``` จะเป็น *function scoped* หมายถึงว่าเมื่อตัวแปรถูกสร้างภายใน function ทุกอย่างภายใน function นั้นสามารถเข้าถึงตัวแปรนั้นได้ นอกจากนี้ ตัวแปรที่ถูกสร้างเป็น *function scoped* ใน function จะไม่สามารถถูกเข้าถึงจากภายนอก function ได้
+ตัวแปรที่ถูกประกาศด้วย ```var``` จะเป็น *function scoped* หมายถึงว่าเมื่อตัวแปรถูกสร้างภายใน function ทุกอย่างภายใน function นั้นสามารถเข้าถึงตัวแปรนั้นได้ และตัวแปรที่ถูกสร้างเป็น *function scoped* ใน function จะไม่สามารถถูกเข้าถึงจากภายนอก function ได้
 
-แนะนำให้ลองจินตนาการว่าถ้าตัวแปรเป้นตัวแปร *X scoped* หมายความว่าตัวแปรนี้เป็นทรัพย์สินของ X
+แนะนำให้ลองจินตนาการว่าถ้าตัวแปรเป้นตัวแปร *X scoped* หมายความว่าตัวแปรนี้เป็นทรัพย์สินของ X เท่านั้น
 
 ```javascript
 function myFunction() {
   var myVar = "Nick";
   console.log(myVar); // "Nick" - myVar จะสามารถเข้าถึงได้จากภายใน function
 }
-console.log(myVar); // จะเกิด ReferenceError, myVar จะไม่สามารถเข้าถึงได้จากภายนอก function
+console.log(myVar); // จะเกิด ReferenceError เพราะ myVar จะไม่สามารถเข้าถึงได้จากภายนอก function
 ```
 
-Still focusing on the variable scope, here is a more subtle example:
 ตัวอย่างเพิ่มเติมสำหรับเรื่อง scope ของตัวแปร
 
 ```javascript
@@ -199,13 +191,12 @@ function myFunction() {
     console.log(myVar); // "John"
     // จริงๆ แล้ว myvar เป็นตัวแปร function scoped นั่นหมายความว่าตอนนี้เราได้ลบค่าตัวแปร myVar ก่อนหน้าจาก "Nick" กลายเป็น "John"
   }
-  console.log(myVar); // "John" - see how the instructions in the if block affected this value
   console.log(myVar); // "John" - จะเห้นว่าค่าได้ถูกเปลี่ยนไปแล้ว
 }
-console.log(myVar); // จะเกิด ReferenceError, myVar จะไม่สามารถเข้าถึงได้จากภายนอก function
+console.log(myVar); // จะเกิด ReferenceError เพราะ myVar จะไม่สามารถเข้าถึงได้จากภายนอก function
 ```
 
-นอกจากนี้ตัวแปรที่ประกาสด้วย *var* จะถูกย้ายไปอยู่ด้านบนสุดของ scope เมื่อมีการ execution นี่คือสิ่งที่เราเรียกว่า  [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
+นอกจากนี้ตัวแปรที่ประกาสด้วย *var* จะถูกย้ายไปอยู่ด้านบนสุดของ scope เมื่อมีการ execution และนี่คือสิ่งที่เราเรียกว่า [var hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
 
 โค้ดตัวอย่างกรณีนี้:
 
@@ -214,8 +205,7 @@ console.log(myVar) // undefined -- ไม่มีการเกิด error
 var myVar = 2;
 ```
 
-is understood at execution like:
-ความเข้าใจของ Execution จะเป็นแบบนี้:
+เพราะว่าตามความเข้าใจเวลา Execution จะเป็นแบบนี้:
 
 ```js
 var myVar;
@@ -225,15 +215,13 @@ myVar = 2;
 
 ##### let
 
-```var``` and ```let ``` are about the same, but ```let``` declared variables
 ```var``` และ ```let ``` จะคล้ายกันแต่ตัวแปรที่ประกาศด้วย ```let``` จะ
 
 - เป็น *block scoped*
 - จะ**ไม่สามารถ**เข้าถึงก่อนที่มันจะถูก assign ค่าได้
 - ไม่สามารถประกาศตัวแปรซ้ำใน scope เดียวกันได้
 
-Let's see the impact of block-scoping taking our previous example:
-ลองดูตัวอย่างเรื่องผลกระทบของ block-scoping จากตัวอย่างก่อนหน้า
+ลองดูตัวอย่างเรื่องผลกระทบ (side effect) ของ block-scoping จากตัวอย่างก่อนหน้า
 
 ```javascript
 function myFunction() {
@@ -241,16 +229,13 @@ function myFunction() {
   if (true) {
     let myVar = "John";
     console.log(myVar); // "John"
-    // actually, myVar being block scoped, we just created a new variable myVar.
-    // this variable is not accessible outside this block and totally independent
-    // from the first myVar created !
     // จริงๆ แล้ว myVar เป็น block scoped เราสามารถสร้างตัวแปร myVar ใหม่ได้
     // ตัวแปรนี้จะไม่สามารถเข้าถึงได้จากภายนอก block นี้และเป็นอิสระจากกัน
     // กับตัวแปร myVar ตัวแรกที่เราสร้าง !
   }
   console.log(myVar); // "Nick", จะเห็นตามที่อธิบายข้างต้นว่าภายใน block ไม่ส่งผลกระทบกับค่านี้
 }
-console.log(myVar); // จะเกิด ReferenceError, myVar จะไม่สามารถเข้าถึงได้จากภายนอก function
+console.log(myVar); // จะเกิด ReferenceError เพราะ myVar จะไม่สามารถเข้าถึงได้จากภายนอก function
 ```
 
 <a name="tdz_sample"></a> ตอนนี้น่าจะเข้าใจเหตุผลแล้วว่าทำไมตัวแปรที่ประกาศโดยใช้ *let* (และ *const*) ไม่สามารถเข้าถึงได้ก่อนจะถูก assign ค่า
@@ -262,10 +247,8 @@ let myVar = 2;
 
 สิ่งนี้จะแตกต่างกับตัวแปรที่ประกาศโดยใช้ *var* ถ้าเราพยายามที่จะอ่านหรือเขียนตัวแปรที่ประกาศโดย *let* หรือ *const* ก่อนที่ทำการ assign ค่าจะเกิด Error ทันที ปรากฏการณ์นี้มักถูกเรียกว่า [*Temporal dead zone*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) หรือ *TDZ*.
 
-> **Note:** Technically, *let* and *const* variables declarations are being hoisted too, but not their assignation. Since they're made so that they can't be used before assignation, it intuitively feels like there is no hoisting, but there is. Find out more on this [very detailed explanation here](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) if you want to know more.
 > **หมายเหตุ:** ในทางเทคนิคแล้ว การประกาศตัวแปร *let* กับ *const* เป็น hoisted เหมือนกัน, แต่ไม่ใช่กับการ assign ค่า ดังนั้นเมื่อมันไม่สามารถใช้งานได้ก่อน assign ค่าได้ทำให้ดูเหมือนว่าไม่มี hoisting แต่จริงๆ แล้วมันมี อ่าน[คำอธิบายเพิ่มเติมแบบละเอียดที่นี่](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) ถ้าคุณต้องการ
 
-In addition, you can't re-declare a *let* variable:
 เพิ่มเติม คุณไม่สามารถประกาศตัวแปรที่ประกาศด้วย *let* ซ้ำได้:
 
 ```js
@@ -275,8 +258,7 @@ let myVar = 3; // เกิด SyntaxError
 
 ##### const
 
-```const``` declared variables behave like *let* variables, but also they can't be reassigned.
-การประกาศตัวแปรโดยใช้ ```const``` จะเหมือนกับ *let* แต่ต่างตรงที่พวกมันจะไม่สามารถ assign ซ้ำได้
+การประกาศตัวแปรโดยใช้ ```const``` จะเหมือนกับ *let* แต่ต่างตรงที่พวกมันจะไม่สามารถ assign ค่าซ้ำได้
 
 สรุปสั้นๆ สำหรับตัวแปรที่ประกาศแบบ *const*:
 
@@ -292,11 +274,10 @@ myVar = "John" // เกิด error เพราะไม่สามารถ 
 
 ```js
 const myVar = "Nick";
-const myVar = "John" // เกิด error เพราะไม่สามารถ assign ซ้ำได้
+const myVar = "John" // เกิด error เพราะไม่สามารถประกาศตัวแปรซ้ำได้
 ```
 
-<a name="const_mutable_sample"></a> มีบางจุดที่ต้องระวัง: ตัวแปร ```const``` ไม่ใช่ [**immutable**](#mutation_def) ! Concretely, it means that *object* and *array* ```const``` declared variables **can** be mutated.
-<a name="const_mutable_sample"></a> มีบางจุดที่ต้องระวัง: ตัวแปร ```const``` ไม่ใช่ [**immutable**](#mutation_def) ! อธิบายให้ชัดคือตัวแปรที่ประกาศโดย ```const``` ที่เป็น *object* และ *array* ค่าข้างใน**สามารถ**เปลี่ยนแปลงได้
+<a name="const_mutable_sample"></a> มีบางจุดที่ต้องระวัง: ตัวแปร ```const``` ไม่ใช่ [**immutable**](#mutation_def) ! อธิบายเพิ่มเติมคือตัวแปรที่ประกาศโดย ```const``` ที่เก็บค่าเป็น *object* และ *array* ค่าข้างใน**สามารถ**เปลี่ยนแปลงได้
 
 สำหรับ objects:
 ```js
