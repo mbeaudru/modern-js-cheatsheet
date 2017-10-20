@@ -1,5 +1,3 @@
-Modern JS Cheatsheet
-
 # Modern JavaScript Cheatsheet
 
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
