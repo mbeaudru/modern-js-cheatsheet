@@ -46,6 +46,7 @@
           * [简洁性](#简洁性)
           * [*this* 关键字](#this-关键字)
       - [相关资料](#相关资料)
+    + [方法默认参数值](#方法默认参数值)
 
 ## 正文
 
@@ -371,3 +372,22 @@ function myFunc() {
 - [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
 - [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 - [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
+
+#### 方法默认参数值
+
+从 ES2015 以后开始，你可以使用下面的语法，给你的方法参数来设置默认值
+
+```js
+function myFunc(x = 10) {
+  return x;
+}
+console.log(myFunc()) // 10 -- 没有值传入，所以默认的值10传给了myFunc
+console.log(myFunc(5)) // 5 -- 一个值被传入，所以x等于5 
+console.log(myFunc(undefined)) // 10 -- undefined 值提供了，所以默认值关联了x
+console.log(myFunc(null)) // null -- 提供了 (null) , 见一下详细解释
+```
+默认参数有且只有在以下两种情况下才会生效：
+- 没有参数提供的时候
+- *undefined* 参数被提供的时候
+
+换句话说，如果你传入*NULL* 默认值**将不会生效**
