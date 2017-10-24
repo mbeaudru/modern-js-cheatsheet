@@ -360,18 +360,16 @@ An **explicit return** is a function where the *return* keyword is used in its b
 
 In the traditional way of writing functions, the return was always explicit. But with arrow functions, you can do *implicit return* which means that you don't need to use the keyword *return* to return a value.
 
-To do an implicit return, the code must be written in a one-line sentence.
-
 ```js
   const double = (x) => {
     return x * 2; // Explicit return here
   }
 ```
 
-Since there only is a return value here, we can do an implicit return.
+Since this function only returns something (no instructions before the *return* keyword) we can do an implicit return.
 
 ```js
-  const double = (x) => x * 2;
+  const double = (x) => x * 2; // Correct, returns x*2
 ```
 
 To do so, we only need to **remove the brackets** and the **return** keyword. That's why it's called an *implicit* return, the *return* keyword is not there, but this function will indeed return ```x * 2```.
