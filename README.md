@@ -962,7 +962,7 @@ fetchingPosts
 
 When you do an *Ajax request* the response is not synchronous because you want a resource that takes some time to come. It even may never come if the resource you have requested is unavailable for some reason (404).
 
-To handle that kind of situations, ES2015 has given us *promises*. Promises can have three different states:
+To handle that kind of situation, ES2015 has given us *promises*. Promises can have three different states:
 
 - Pending
 - Fulfilled
