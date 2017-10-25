@@ -1534,7 +1534,7 @@ myVar ? "truthy" : "falsy"
 
 myVar is evaluated in a boolean context.
 
-Becareful when comparing 2 values. The object values (that should be cast to true) is not being casted to Boolean but it forced to convert into primitive value one using [ToPrimitives specification] (http://javascript.info/object-toprimitive). Internally when object is compare to Boolean value like `[] == true`, it does `[].toString() == true` so...
+Becareful when comparing 2 values. The object values (that should be cast to true) is not being casted to Boolean but it forced to convert into primitive value one using [ToPrimitives specification](http://javascript.info/object-toprimitive). Internally when object is compare to Boolean value like `[] == true`, it does `[].toString() == true` so...
 
 ```js
 let a = [] == true // a is false since [].toString() give "" back.
