@@ -103,14 +103,16 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     + [Anamorphisms / Catamporphisms](#anamorphisms-and-catamorphisms)
       - [Anamorphisms](#anamorphisms)
       - [Catamorphisms](#catamorphisms)
+      - [External resources](#external-resources-11)
     + [Generators](#generators)
+      - [External resources](#external-resources-12)
     + [Static Methods](#static-methods)
       - [Short Explanation](#short-explanation-1)
       - [Sample Code](#sample-code-8)
       - [Detailed Explanation](#detailed-explanation-2)
         * [Calling other static methods from a static method](#calling-other-static-methods-from-a-static-method)
         * [Calling static methods from non-static methods](#calling-static-methods-from-non-static-methods)
-      - [External resources](#external-resources-11)
+      - [External resources](#external-resources-13)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1580,7 +1582,7 @@ function product(list) {
   let product = 1;
 
   for (const n of list) {
-    product *= n;
+    product = product * n;
   }
 
   return product;
@@ -1588,6 +1590,12 @@ function product(list) {
 
 product(downToOne(5)) // 120
 ```
+
+#### External resources
+
+* [Anamorphisms in JavaScript](http://raganwald.com/2016/11/30/anamorphisms-in-javascript.html)
+* [Anamorphism](https://en.wikipedia.org/wiki/Anamorphism)
+* [Catamorphism](https://en.wikipedia.org/wiki/Catamorphism)
 
 ### Generators
 
@@ -1613,8 +1621,10 @@ Generators return an iterable object. When the iterator's `next()` function is c
 // Yield Example
 function * idMaker() {
   var index = 0;
-  while (index < 2)
-    yield index++;
+  while (index < 2) {
+    yield index;
+    index = index + 1;
+  }
 }
 
 var gen = idMaker();
@@ -1624,7 +1634,7 @@ gen.next().value; // 1
 gen.next().value; // undefined
 ```
 
-The `yield *` enables a generator to call another generator function during iteration.
+The `yield*` expression enables a generator to call another generator function during iteration.
 
 ```js
 // Yield * Example
@@ -1662,6 +1672,10 @@ gen.next(); // { value: "Y", done: false }
 gen.next(); // { value: "R", done: true }
 gen.next(); // { value: undefined, done: true }
 ```
+
+#### External resources
+
+* [Mozilla MDN Web Docs, Iterators and Generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Generators)
 
 ### Static Methods
 
