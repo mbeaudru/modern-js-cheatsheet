@@ -100,13 +100,19 @@ When you struggle to understand a notion, I suggest you look for answers on the 
       - [External resources](#external-resources-9)
     + [Truthy / Falsy](#truthy--falsy)
       - [External resources](#external-resources-10)
+    + [Anamorphisms / Catamporphisms](#anamorphisms-and-catamorphisms)
+      - [Anamorphisms](#anamorphisms)
+      - [Catamorphisms](#catamorphisms)
+      - [External resources](#external-resources-11)
+    + [Generators](#generators)
+      - [External resources](#external-resources-12)
     + [Static Methods](#static-methods)
       - [Short Explanation](#short-explanation-1)
       - [Sample Code](#sample-code-8)
       - [Detailed Explanation](#detailed-explanation-2)
         * [Calling other static methods from a static method](#calling-other-static-methods-from-a-static-method)
         * [Calling static methods from non-static methods](#calling-static-methods-from-non-static-methods)
-      - [External resources](#external-resources-11)
+      - [External resources](#external-resources-13)
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
@@ -1539,6 +1545,135 @@ myVar is evaluated in a boolean context.
 - [Truthy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
 - [Falsy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
 - [Truthy and Falsy values in JS - Josh Clanton](http://adripofjavascript.com/blog/drips/truthy-and-falsy-values-in-javascript.html)
+
+### Anamorphisms and Catamorphisms
+
+#### Anamorphisms
+
+Anamorphisms are functions that map from some object to a more complex structure containing the type of the object. It is the process of *unfolding* a simple structure into a more complex one. Consider unfolding an integer to a list of integers. The integer is our initial object and the list of integers is the more complex structure.
+
+**Sample code**
+
+```js
+function downToOne(n) {
+  const list = [];
+
+  for (let i = n; i > 0; --i) {
+    list.push(i);
+  }
+
+  return list;
+}
+
+downToOne(5)
+  //=> [ 5, 4, 3, 2, 1 ]
+```
+
+#### Catamorphisms
+
+Catamorphisms are the opposite of Anamorphisms, in that they take objects of more complex structure and *fold* them into simpler structures. Take the following example `product` which take a list of integers and returns a single integer.
+
+**Sample code**
+
+```js
+function product(list) {
+  let product = 1;
+
+  for (const n of list) {
+    product = product * n;
+  }
+
+  return product;
+}
+
+product(downToOne(5)) // 120
+```
+
+#### External resources
+
+* [Anamorphisms in JavaScript](http://raganwald.com/2016/11/30/anamorphisms-in-javascript.html)
+* [Anamorphism](https://en.wikipedia.org/wiki/Anamorphism)
+* [Catamorphism](https://en.wikipedia.org/wiki/Catamorphism)
+
+### Generators
+
+Another way to write the `downToOne` function is to use a Generator. To instantiate a `Generator` object, one must use the `function *` declaration. Generators are functions that can be exited and later re-entered with its context (variable bindings) saved across re-entrances.  
+
+For example, the `downToOne` function above can be rewritten as:
+
+```js
+function * downToOne(n) {
+  for (let i = n; i > 0; --i) {
+    yield i;
+  }
+}
+
+[...downToOne(5)] //[ 1, 2, 3, 4, 5 ]
+```
+
+Generators return an iterable object. When the iterator's `next()` function is called, it is executed until the first `yield` expression, which specifies the value to be returned from the iterator or with `yield*`, which delegates to another generator function. When a `return` expression is called in the generator, it will mark the generator as done and pass back as the return value. Further calls to `next()` will not return any new values.
+
+**Sample code**
+
+```js
+// Yield Example
+function * idMaker() {
+  var index = 0;
+  while (index < 2) {
+    yield index;
+    index = index + 1;
+  }
+}
+
+var gen = idMaker();
+
+gen.next().value; // 0
+gen.next().value; // 1
+gen.next().value; // undefined
+```
+
+The `yield*` expression enables a generator to call another generator function during iteration.
+
+```js
+// Yield * Example
+function * genB(i) {
+  yield i + 1;
+  yield i + 2;
+  yield i + 3;
+}
+
+function * genA(i) {
+  yield i;
+  yield* genB(i);
+  yield i + 10;
+}
+
+var gen = genA(10);
+
+gen.next().value; // 10
+gen.next().value; // 11
+gen.next().value; // 12
+gen.next().value; // 13
+gen.next().value; // 20
+```
+
+```js
+// Generator Return Example
+function* yieldAndReturn() {
+  yield "Y";
+  return "R";
+  yield "unreachable";
+}
+
+var gen = yieldAndReturn()
+gen.next(); // { value: "Y", done: false }
+gen.next(); // { value: "R", done: true }
+gen.next(); // { value: undefined, done: true }
+```
+
+#### External resources
+
+* [Mozilla MDN Web Docs, Iterators and Generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Generators)
 
 ### Static Methods
 
