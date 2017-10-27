@@ -172,7 +172,7 @@ function myFunction() {
   if (true) {
       var myVar = "Ваня";
       console.log(myVar); // -> "Ваня"
-      /* на самом деле, область видимости myVar — функция,
+      /* На самом деле, область видимости myVar — функция,
       мы всего лишь удалили предыдущее значение переменной myVar "Коля"
       и заменили его на "Ваня". */
     }
@@ -208,7 +208,7 @@ function myFunction() {
   if (true) {
     let myVar = "Ваня";
     console.log(myVar); // -> "Ваня"
-    /* Поскольку myVar имеет блочную область видимости, 
+    /* Поскольку myVar имеет блочную область видимости,
     здесь мы только что создали новую переменную myVar.
     Эта переменная недоступна вне блока и никак не зависит
     от первой переменной myVar, которую мы создали до этого! */
@@ -219,7 +219,7 @@ console.log(myVar); // -> ReferenceError, myVar недоступна за пре
 ```
 <a name="tdz_sample"></a> Теперь разберемся, что значит «переменные, объявленные с помощью `let` и `const`, недоступны до их объявления»:
 ```js
-console.log(myVar) // вызовет ReferenceError!
+console.log(myVar) // Вызовет ReferenceError!
 let myVar = 2;
 ```
 В отличие от переменных, объявленных через `var`, попытка обратиться к переменной `let` или `const` до её объявления вызовет ошибку. Этот феномен часто называют  [*Временной мёртвой зоной*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let).  
@@ -241,11 +241,11 @@ let myVar = 3; // Вызовет SyntaxError.
 - не могут быть переопределены.
 ```js
 const myVar = "Коля";
-myVar = "Ваня" // вызовет ошибку, переопределять переменную нельзя.
+myVar = "Ваня" // Вызовет ошибку, переопределять переменную нельзя.
 ```
 ```js
 const myVar = "Коля";
-const myVar = "Ваня" // вызовет ошибку, объявить переменную можно только один раз.
+const myVar = "Ваня" // Вызовет ошибку, объявить переменную можно только один раз.
 ```
 <a name="const_mutable_sample"></a> Но есть одна тонкость: переменные, объявленные с помощью `const`, не являются [**неизменными**](#mutation_def)! А именно, это означает, что *объекты* и *массивы*, объявленные с помощью `const`, **могут** быть изменены.
 
@@ -254,21 +254,21 @@ const myVar = "Ваня" // вызовет ошибку, объявить пер
 const person = {
   name: 'Коля',
 };
-person.name = 'Ваня'; // сработает! Переменная person не полностью переопределяется, а просто меняется.
+person.name = 'Ваня'; // Сработает! Переменная person не полностью переопределяется, а просто меняется.
 console.log(person.name); // -> "Ваня"
-person = "Сандра"; // вызовет ошибку, потому что переменные, объявленные через const, переопределять нельзя.
+person = "Сандра"; // Вызовет ошибку, потому что переменные, объявленные через const, переопределять нельзя.
 ```
 В случае массивов:
 ```js
 const person = [];
-person.push('Ваня'); // сработает!  Переменная person не полностью переопределяется, а просто меняется.
+person.push('Ваня'); // Сработает!  Переменная person не полностью переопределяется, а просто меняется.
 console.log(person[0]); // -> "Ваня"
-person = ["Коля"]; // вызовет ошибку, потому что переменные, объявленные через const, переопределять нельзя
+person = ["Коля"]; // Вызовет ошибку, потому что переменные, объявленные через const, переопределять нельзя.
 ```
 
 #### Дополнительные материалы
-- [How let and const are scoped in JavaScript — WesBos](http://wesbos.com/javascript-scoping/)
-- [Temporal dead zone (tdz) demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
+- [How let and const are scoped in JavaScript — WesBos](http://wesbos.com/javascript-scoping/).
+- [Temporal dead zone (tdz) demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified).
 
 ### <a name="arrow_func_concept"></a> Стрелочные функции
 В обновлении JavaScript ES6 добавлены *стрелочные функции* — новый синтаксис записи функций. Вот некоторые их преимущества:
@@ -308,7 +308,7 @@ function myFunc() {
 Функция может **явно возвращать** результат с использованием ключевого слова `return`.
 ```js
 function double(x) {
-  return x * 2; // эта функция явно возвращает x * 2, использовано ключевое слово *return*.
+  return x * 2; // Эта функция явно возвращает x * 2, использовано ключевое слово *return*.
 }
 ```
 При обычном способе написания функций возврат всегда был явным. Со стрелочными функциями его можно сделать *неявным*. Это значит, что для возврата значения не нужно использовать ключевое слово `return`.
@@ -337,11 +337,11 @@ console.log(getPerson())
 
 Если ваша функция принимает только один аргумент, то скобки вокруг него можно опустить. Возвращаясь к функции `double` в коде выше:  
 ```js
-const double = (x) => x * 2; // эта стрелочная функция принимает только один аргумент.
+const double = (x) => x * 2; // Эта стрелочная функция принимает только один аргумент.
 ```
 Скобки вокруг этого аргумента можно опустить:
 ```js
-const double = x => x * 2; // эта стрелочная функция принимает только один аргумент.
+const double = x => x * 2; // Эта стрелочная функция принимает только один аргумент.
 ```
 - Без аргументов.
 
@@ -412,7 +412,7 @@ console.log(myFunc(5)); /* -> 5 — передается значение,
 поэтому в myFunc х присваивается значение 5 */
 console.log(myFunc(undefined)); /* -> 10 — передается значение undefined,
 поэтому х присваивается значение по умолчанию */
-console.log(myFunc(null)); // -> null — передается значение null. Подробнее см. ниже
+console.log(myFunc(null)); // -> null — передается значение null. Подробнее см. ниже.
 ```
 Значения по умолчанию применяются только в двух случаях:
 - значение не передано;
@@ -452,11 +452,11 @@ const city = person.city || "Санкт-Петербург";
 ```js
 const { firstName: first, age, city = "Санкт-Петербург" } = person; // И всё!
 console.log(age); /* -> 35 — Создана новая переменная age,
-и ей присвоено значение, равное person.age */
+и ей присвоено значение, равное person.age. */
 console.log(first); /* -> "Коля" — Создана новая переменная first,
-и ей присвоено значение, равное person.firstName */
+и ей присвоено значение, равное person.firstName. */
 console.log(firstName); /* -> undefined — person.firstName существует,
-НО новая созданная переменная называется first */
+НО новая созданная переменная называется first. */
 console.log(city); /* -> "Санкт-Петербург" — Создана новая переменная city,
 и, поскольку свойство person.city ранее не было определено,
 переменной присвоено альтернативное значение "Санкт-Петербург". */
@@ -478,8 +478,8 @@ joinFirstLastName(person); // -> "Коля-Андреев"
 ```
 Если деструктурировать параметр `person`, то функция получится куда более лаконичной:
 ```js
-function joinFirstLastName({ firstName, lastName }) { /* мы создали переменные firstName и lastName
-  из частей параметра person */
+function joinFirstLastName({ firstName, lastName }) { /* Мы создали переменные firstName и lastName
+  из частей параметра person. */
   return `${firstName}—${lastName}`;
 }
 joinFirstLastName(person); // -> "Коля-Андреев"
@@ -539,9 +539,9 @@ const students = [
   { name: "Наташа", grade: 9 },
 ];
 const aboveTenSum = students
-  .map(student => student.grade) // создаём массив оценок из массива студентов с помощью метода map
-  .filter(grade => grade >= 10) // выбираем только оценки выше 10 при помощи метода filter
-  .reduce((prev, next) => prev + next, 0); // суммируем все оценки выше 10 друг с другом
+  .map(student => student.grade) // Создаём массив оценок из массива студентов с помощью метода map.
+  .filter(grade => grade >= 10) // Выбираем только оценки выше 10 при помощи метода filter.
+  .reduce((prev, next) => prev + next, 0); // Суммируем все оценки выше 10 друг с другом.
 console.log(aboveTenSum); /* -> 44: 10 (Коля) + 15 (Ваня) + 19 (Юля),
 оценка Наташи меньше 10 и была проигнорирована */
 ```
@@ -567,13 +567,13 @@ const doubleN = function(n) { return n * 2; };
 const doubledNumbers = numbers.map(doubleN);
 console.log(doubledNumbers); // -> [0, 2, 4, 6, 8, 10, 12]
 ```
-`numbers.map(doubleN)` создаёт `[doubleN(0), doubleN(1), doubleN(2), doubleN(3), doubleN(4), doubleN(5), doubleN(6)]` что равняется `[0, 2, 4, 6, 8, 10, 12]`.
+`numbers.map(doubleN)` создаёт `[doubleN(0), doubleN(1), doubleN(2), doubleN(3), doubleN(4), doubleN(5), doubleN(6)]`, что равняется `[0, 2, 4, 6, 8, 10, 12]`.
 > **Примечание:** Если вам не нужно возвращать новый массив и вы просто хотите перебрать существующий массив, совершая с его элементами некоторые действия, можете просто использовать `for` / `forEach` вместо метода `map`.
 
 ##### `Array.prototype.filter()`
 ```js
 const evenNumbers = numbers.filter(function(n) {
-  return n % 2 === 0; // истинно, если n чётное, ложно, если n нечетное
+  return n % 2 === 0; // Истинно, если n чётное; ложно, если n нечётное.
 });
 console.log(evenNumbers); // -> [0, 2, 4, 6]
 ```
@@ -586,7 +586,7 @@ const sum = numbers.reduce(
   function(acc, n) {
     return acc + n;
   },
-0 // значение аккумулирующей переменной на первом шаге цикла.
+0 // Значение аккумулирующей переменной на первом шаге цикла.
 );
 console.log(sum); // -> 21
 ```
@@ -710,7 +710,7 @@ function createStudent(firstName, lastName, ...grades) {
   [10, 12, 6] — оператор `...` берет все остальные параметры, переданные функции,
   и создает переменную grades с массивом, в котором они хранятся. */
   const avgGrade = grades.reduce((acc, curr) => acc + curr, 0) / grades.length;
-  // вычисляет средний балл из всех оценок
+  // Вычисляет средний балл из всех оценок.
   return {
     firstName: firstName,
     lastName: lastName,
@@ -727,13 +727,13 @@ grades: [10, 12, 6],
 avgGrade: 9,33
 } */
 ```
-> **Примечание:** `createStudent` — плохая функция, потому что мы не проверяем, существует ли `grades.length` и отличается ли от 0. Но так функцию легче прочитать, поэтому я этот не учитывал эти случаи.
+> **Примечание:** `createStudent` — плохая функция, потому что мы не проверяем, существует ли `grades.length` и отличается ли от 0. Но так функцию легче прочитать, поэтому я не учитывал эти случаи.
 
 ##### Расширение свойств объектов
 Чтобы понять эту часть, рекомендую прочитать предыдущие объяснения о применении оператора оставшихся аргументов к итерируемым объектам и параметрам функций.
 ```js
 const myObj = { x: 1, y: 2, a: 3, b: 4 };
-const { x, y, ...z } = myObj; // деструктуризация объекта
+const { x, y, ...z } = myObj; // Деструктуризация объекта.
 console.log(x); // -> 1
 console.log(y); // -> 2
 console.log(z); // -> { a: 3, b: 4 }
@@ -763,13 +763,13 @@ console.log(myObj.x) // -> 10
 const x = 10;
 const y = 20;
 const myObj = {
-  x: x, // запись значения переменной х в myObj.x
-  y: y, // запись значения переменной у в myObj.y
+  x: x, // Запись значения переменной х в myObj.x.
+  y: y, // Запись значения переменной у в myObj.y.
 };
 console.log(myObj.x); // -> 10
 console.log(myObj.y); // -> 20
 ```
-Как видите, приходится повторять одно и тоже, потому что имена свойств объекта совпадают с именами переменных, которые вы хотите записать в эти свойства.
+Как видите, приходится повторять одно и то же, потому что имена свойств объекта совпадают с именами переменных, которые вы хотите записать в эти свойства.
 
 С ES2015, если имя переменной совпадает с именем свойства, можно использовать такую сокращенную запись:
 ```js
@@ -818,14 +818,15 @@ fetchingPosts
 ```js
 const xFetcherPromise = new Promise(
 // Создаём промис с помощью ключевого слова new и сохраняем его в переменную
-  function(resolve, reject) { /* Конструктор промиса принимает в виде параметра функцию, которая, в свою очередь, принимает 2 параметра:
-  resolve и reject */
+  function(resolve, reject) {
+    /* Конструктор промиса принимает в виде параметра функцию, которая, в свою очередь,
+    принимает 2 параметра: resolve и reject. */
     $.get("X") // Запускаем AJAX-запрос
       .done(function(X) { // Как только запрос выполнен...
-        resolve(X); // ... выполняем промис со значением X в качестве параметра
+        resolve(X); // ... выполняем промис со значением X в качестве параметра.
       })
       .fail(function(error) { // Если запрос не прошёл...
-        reject(error); // ... отклоняем промис со значением error
+        reject(error); // ... отклоняем промис со значением error.
       });
   }
 )
@@ -866,16 +867,16 @@ xFetcherPromise
 #### Пример кода
 ```js
 const name = "Коля";
-`Привет, ${name}, следующее выражение равно четырем : ${2+2}`;
-// -> Привет, Коля, следующее выражение равно четырем: 4
+`Привет, ${name}, следующее выражение равно четырем: ${2+2}.`;
+// -> Привет, Коля, следующее выражение равно четырем: 4.
 ```
 
 #### Дополнительные материалы
-[String Interpolation — Особенности ES6](http://es6-features.org/#StringInterpolation).
-[Getting Literal With ES6 Template Strings — Addy Osmani](https://developers.google.com/web/updates/2015/01/ES6-Template-Strings).
+- [String Interpolation — Особенности ES6](http://es6-features.org/#StringInterpolation).
+- [Getting Literal With ES6 Template Strings — Addy Osmani](https://developers.google.com/web/updates/2015/01/ES6-Template-Strings).
 
 ### Тегированные шаблонные строки
-**Шаблонные теги** — это *функции, которые могут быть префиксом к [шаблонной строке](#template-literals)*. Когда функция вызывается таким образом, первый параметр представляет собой массив *строк*, которые выводятся между интерполированными переменными, а последующие параметры — значения выражений, вставленных в строку. Для захвата всех этих значений используйте оператор расширения `...`. [(Ссылка: MDN)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
+**Шаблонные теги** — это *функции, которые могут быть префиксом к [шаблонной строке](#Шаблонные-строки)*. Когда функция вызывается таким образом, первый параметр представляет собой массив *строк*, которые выводятся между интерполированными переменными, а последующие параметры — значения выражений, вставленных в строку. Для захвата всех этих значений используйте оператор расширения `...`. [(Ссылка: MDN)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
 > **Примечание:** Известная библиотека, которая называется [стилизованные компоненты](https://www.styled-components.com/), основана на этой возможности.
 
 Ниже приведен пример работы тегированных шаблонных строк:
@@ -888,8 +889,8 @@ function highlight(strings, ...values) {
 }
 const meal = "круассаны";
 const drink = "кофе";
-highlight`Я люблю ${meal} с ${meal}.`;
-// "<mark>Я люблю круассаны с кофе.</mark>"
+highlight`Я люблю ${meal} с ${drink}.`;
+// -> <mark>Я люблю круассаны с кофе.</mark>
 ```
 Более интересный пример:
 ```js
@@ -902,7 +903,7 @@ function comma(strings, ...values) {
 }
 const snacks = ["яблоки", "бананы", "апельсины"];
 comma`Я люблю ${snacks} на десерт.`;
-// -> "Я люблю яблоки, бананы, апельсины на десерт."
+// -> Я люблю яблоки, бананы, апельсины на десерт.
 ```
 
 #### Дополнительные материалы
@@ -942,7 +943,7 @@ console.log(constants.exp) // -> 2.7
 Кроме того, можно создавать псевдонимы, но их синтаксис будет отличаться от синтаксиса, используемого при деструктуризации:
 ```js
 import { foo as bar } from 'myFile.js';
-// foo импортируется и записывается в новую переменную bar
+// foo импортируется и записывается в новую переменную bar.
 ```
 
 ##### Импорт / экспорт по умолчанию
@@ -976,9 +977,9 @@ console.log(result) // -> 3
 - [Экспорт — MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/export).
 - [Импорт — MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/import).
 - [Understanding ES6 Modules](https://www.sitepoint.com/understanding-es6-modules/).
-- [Destructuring special case — import statements](https://ponyfoo.com/articles/es6-destructuring-in-depth#special-case-import-statements)
-- [Misunderstanding ES6 Modules — Kent C. Dodds](https://medium.com/@kentcdodds/misunderstanding-es6-modules-upgrading-babel-tears-and-a-solution-ad2d5ab93ce0)
-- [Modules in JavaScript](http://exploringjs.com/es6/ch_modules.html#sec_modules-in-javascript)
+- [Destructuring special case — import statements](https://ponyfoo.com/articles/es6-destructuring-in-depth#special-case-import-statements).
+- [Misunderstanding ES6 Modules — Kent C. Dodds](https://medium.com/@kentcdodds/misunderstanding-es6-modules-upgrading-babel-tears-and-a-solution-ad2d5ab93ce0).
+- [Modules in JavaScript](http://exploringjs.com/es6/ch_modules.html#sec_modules-in-javascript).
 
 ### <a name="this_def"></a> `this` в JavaScript
 Оператор `this` в JavaScript ведет себя не так, как в других языках. В большинстве случаев он определяется тем, как вызвана функция ([Ссылка: MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/this)).
@@ -988,30 +989,30 @@ console.log(result) // -> 3
 function myFunc() {
   ...
 }
-// После каждого выражения находим значение this в myFunc
+// После каждого выражения находим значение this в myFunc.
 myFunc.call("myString", "привет");
-// myString — в this записывается значение первого параметра .call
-// В non-strict-режиме
+// myString — в this записывается значение первого параметра .call.
+// В non-strict-режиме.
 myFunc("привет");
-// window — myFunc() — это синтаксический сахар для myFunc.call(window, "привет")
-// В strict-режиме
+// window — myFunc() — это синтаксический сахар для myFunc.call(window, "привет").
+// В strict-режиме.
 myFunc("привет");
-// undefined — myFunc() — это синтаксический сахар для myFunc.call(undefined, "привет")
+// undefined — myFunc() — это синтаксический сахар для myFunc.call(undefined, "привет").
 ```
 ```js
 var person = {
   myFunc: function() { ... }
 }
 person.myFunc.call(person, "test");
-// person Object — в this записывается значение первого параметра call
+// person Object — в this записывается значение первого параметра call.
 person.myFunc("test");
-// person Object — person.myFunc() — это синтаксический сахар для person.myFunc.call(person, "test")
+// person Object — person.myFunc() — это синтаксический сахар для person.myFunc.call(person, "test").
 var myBoundFunc = person.myFunc.bind("привет");
-// Создает новую функцию, в которой мы записываем "привет" в значение this
+// Создает новую функцию, в которой мы записываем "привет" в значение this.
 person.myFunc("test");
-// person Object — Метод bind не влияет на первоначальный метод
+// person Object — Метод bind не влияет на первоначальный метод.
 myBoundFunc("test");
-// "hello" — myBoundFunc — это person.myFunc, в которой this привязана к "привет"
+// "hello" — myBoundFunc — это person.myFunc, в которой this привязана к "привет".
 ```
 
 #### Дополнительные материалы
@@ -1068,7 +1069,7 @@ console.log(myPerson.stringSentence()); // -> "Привет, меня зовут
 - [Классы JavaScript — MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes).
 
 ### Async Await
-Помимо [Промисов](#promises) вам может встретиться еще один синтаксис для обработки асинхронного кода — `async`/`await`.
+Помимо [Промисов](#Промисы) вам может встретиться еще один синтаксис для обработки асинхронного кода — `async`/`await`.
 
 Цель функций `async`/`await` — упростить синхронное использование промисов и выполнить какое-либо действие над группой промисов. Точно так же, как промисы похожи на структурированные функции обратного вызова, `async`/`await` похожи на комбинацию генераторов и промисов. ([Ссылка: MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/async_function))
 > **Примечание:** перед тем как пытаться понять `async`/`await`, вы должны понимать, что такое промисы и как они работают, поскольку `async`/`await` основаны на промисах.
@@ -1078,15 +1079,18 @@ console.log(myPerson.stringSentence()); // -> "Привет, меня зовут
 #### Пример кода
 ```js
 async function getGithubUser(username) {
-// ключевое слово async позволяет использовать await в функции и означает, что функция возвращает промис
+  // Ключевое слово async позволяет использовать await в функции и означает, что функция возвращает промис.
   const response = await fetch(`https://api.github.com/users/${username}`);
-  // «синхронное» ожидание промиса перед переходом на новую строку
+  // «Синхронное» ожидание промиса перед переходом на новую строку.
   return response.json();
 }
 
 getGithubUser('mbeaudru')
-  .then(user => console.log(user)) // логирование пользователя — не может использовать синтаксис await, так как этот код не находится внутри async-функции.
-  .catch(err => console.log(err)); // если в нашей асинхронной функции возникнет ошибка, то мы перехватим ее здесь
+  .then(user => console.log(user))
+  /* Логирование пользователя — не может использовать синтаксис await,
+  так как этот код не находится внутри async-функции. */
+  .catch(err => console.log(err));
+  // Если в нашей асинхронной функции возникнет ошибка, то мы перехватим ее здесь.
 ```
 
 #### Объяснение с помощью примера кода
@@ -1095,11 +1099,11 @@ getGithubUser('mbeaudru')
 Оператор `async` объявляет функцию как асинхронную, и данная функция всегда будет возвращать *промис*. В async-функции можно использовать оператор `await` для приостановки выполнения до тех пор, пока возвращаемый промис либо выполнится, либо будет отклонен.
 ```js
 async function myFunc() {
-// можно использовать оператор await, так как это async-функция
+  // Можно использовать оператор await, так как это async-функция.
   return "hello world";
 }
-myFunc().then(msg => console.log(msg))
-// "Привет, мир!" — возвращаемое значение myFunc превращается в промис из-за оператора async
+myFunc().then(msg => console.log(msg));
+// "Привет, мир!" — возвращаемое значение myFunc превращается в промис из-за оператора async.
 ```
 Когда будет достигнут оператор `return` async-функции, промис выполняется с возвращаемым значением. Если внутри async-функции генерируется ошибка, состояние промиса изменится на `rejected`. Если async-функция не возвращает никакого значения, промис всё равно будет возвращен и выполнится без значения, когда выполнение async-функции будет завершено.
 
@@ -1119,7 +1123,7 @@ getGithubUser('mbeaudru')
 Вот эквивалент с использованием  `async`/`await`:
 ```js
 async function getGithubUser(username) {
-// превращение в промис + разрешено использование ключевого слова await
+  // Превращение в промис + разрешено использование ключевого слова await.
   const response = await fetch(`https://api.github.com/users/${username}`);
   // Выполнение останавливается здесь, пока не закончится выполнение промиса.
   return response.json();
@@ -1255,10 +1259,10 @@ class Repo {
     return "Repo name is modern-js-cheatsheet";
   }
 }
-// Обратите внимание, что нам не пришлось создавать экземпляр класса Repo
+// Обратите внимание, что нам не пришлось создавать экземпляр класса Repo.
 console.log(Repo.getName()); // Repo name is modern-js-cheatsheet
 let r = new Repo();
-console.log(r.getName()); // Не пойманный TypeError: repo.getName не является функцией
+console.log(r.getName()); // Не пойманный TypeError: repo.getName не является функцией.
 ```
 
 #### Подробное объяснение
@@ -1293,9 +1297,9 @@ class Repo {
     return `${Repo.getName()} and it contains some really important stuff`;
   }
 }
-// нужно создать экземпляр класса для использования нестатических методов
+// Нужно создать экземпляр класса для использования нестатических методов.
 let r = new Repo();
-console.log(r.useName()); //Repo name is modern-js-cheatsheet and it contains some really important stuff
+console.log(r.useName()); // Repo name is modern-js-cheatsheet and it contains some really important stuff
 ```
 
 2. Используя конструктор.
@@ -1307,19 +1311,19 @@ class Repo {
     return "Repo name is modern-js-cheatsheet"
   }
 useName(){
-//Вызывает статический метод как обычное свойство конструктора
+// Вызывает статический метод как обычное свойство конструктора.
   return `${this.constructor.getName()} and it contains some really important stuff`;
   }
 }
-// нужно создать экземпляр класса для использования нестатических функций
+// Нужно создать экземпляр класса для использования нестатических функций.
 let r = new Repo();
 console.log(r.useName()); // Repo name is modern-js-cheatsheet and it contains some really important stuff
 ```
 
 #### Дополнительные материалы
 - [Ключевое слово static — MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes/static).
-- [Static Methods- Javascript.info](https://javascript.info/class#static-methods)
-- [Static Members in ES6- OdeToCode](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
+- [Static Methods- Javascript.info](https://javascript.info/class#static-methods).
+- [Static Members in ES6 — OdeToCode](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx).
 
 ## Глоссарий
 
@@ -1332,7 +1336,7 @@ console.log(r.useName()); // Repo name is modern-js-cheatsheet and it contains s
 Говорят, что переменная изменилась, когда её значение изменилось относительно начального.
 ```js
 var myArray = [];
-myArray.push("firstEl") // значение myArray изменено
+myArray.push("firstEl") // Значение myArray изменено.
 ```
 Переменная называется *неизменяемой*, если она не может быть изменена.
 
