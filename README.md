@@ -1540,6 +1540,14 @@ myVar ? "truthy" : "falsy"
 
 myVar is evaluated in a boolean context.
 
+Be careful when comparing 2 values. The object values (that should be cast to true) is **not** being casted to Boolean but it forced to convert into a primitive value one using [ToPrimitives specification](http://javascript.info/object-toprimitive). Internally, when an object is compared to Boolean value like `[] == true`, it does `[].toString() == true` so...
+
+```js
+let a = [] == true // a is false since [].toString() give "" back.
+let b = [1] == true // b is true since [1].toString() give "1" back.
+let c = [2] == true // c is false since [2].toString() give "2" back.
+```
+
 #### External resources
 
 - [Truthy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
