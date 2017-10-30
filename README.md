@@ -1051,7 +1051,7 @@ Template tags are *functions that can be prefixed to a [template literal](#templ
 
 > **Note :** A famous library named [styled-components](https://www.styled-components.com/) heavily relies on this feature.
 
-Below is a toy example on they work.
+Below is a toy example on how they work.
 ```js
 function highlight(strings, ...values) {
   const interpolation = strings.reduce((prev, current) => {
