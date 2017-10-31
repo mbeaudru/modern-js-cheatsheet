@@ -24,16 +24,16 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
 - [ES6 Funcionalidades e exemplos](http://es6-features.org)
 - [WesBos blog (ES6)](http://wesbos.com/category/es6/)
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
-- [Google](https://www.google.com/) to find specific blog and resources
+- [Google](https://www.google.com/) para encontrar blogs e recursos específicos
 
-## Tabela de Conteúdos
+## Sumário
 
 - [Modern JavaScript cheatsheet](#modern-javascript-cheatsheet)
-  * [Introdução](#introduction)
-    + [Motivação](#motivation)
-    + [Material Complementar](#complementary-resources)
-  * [Tabela de Conteúdos](#table-of-contents)
-  * [Noções](#notions)
+  * [Introdução](#Introdução)
+    + [Motivação](#Motivação)
+    + [Material Complementar](#Material-Complementar)
+  * [Tabela de Conteúdos](#Sumário)
+  * [Noções](#Noções)
     + [Declaração de variáveis: var, const, let](#variable-declaration-var-const-let)
       - [Breve explicação](#short-explanation)
       - [Exemplo](#sample-code)
