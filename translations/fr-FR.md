@@ -246,7 +246,7 @@ function myFunction() {
     // cette variable n'est pas accessible en dehors du bloc if
     // et est totalement indépendante du premier myVar créé.
   }
-  console.log(myVar); // "John" - les instructions dans le bloc if n'ont PAS affecté cette valeur
+  console.log(myVar); // "Nick" - les instructions dans le bloc if n'ont PAS affecté cette valeur
 }
 console.log(myVar); // Produit une ReferenceError, myVar n'étant pas disponible en dehors de la fonction
 ```
