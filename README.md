@@ -1616,7 +1616,7 @@ function * downToOne(n) {
   }
 }
 
-[...downToOne(5)] //[ 1, 2, 3, 4, 5 ]
+[...downToOne(5)] //[ 5, 4, 3, 2, 1 ]
 ```
 
 Generators return an iterable object. When the iterator's `next()` function is called, it is executed until the first `yield` expression, which specifies the value to be returned from the iterator or with `yield*`, which delegates to another generator function. When a `return` expression is called in the generator, it will mark the generator as done and pass back as the return value. Further calls to `next()` will not return any new values.
