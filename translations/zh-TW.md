@@ -647,8 +647,8 @@ const students = [
 
 const aboveTenSum = students
   .map(student => student.grade) // map the students array to an array of their grades
-  .filter(grade => grade >= 10) // we filter the grades array to keep those above 10
-  .reduce((prev, next) => prev + next, 0); // we sum all the grades above 10 one by one
+  .filter(grade => grade >= 10) // we filter the grades array to keep those 10 or above
+  .reduce((prev, next) => prev + next, 0); // we sum all the grades 10 or above one by one
 
 console.log(aboveTenSum) // 44 -- 10 (Nick) + 15 (John) + 19 (Julia), Nathalie below 10 is ignored
 ```
