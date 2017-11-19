@@ -626,7 +626,7 @@ const evenNumbers = numbers.filter(n => n % 2 === 0); // [0, 2, 4, 6]
 const sum = numbers.reduce((prev, next) => prev + next, 0); // 21
 ```
 
-Compute total grade sum for students above 10 by composing map, filter and reduce:
+Compute total grade sum for students with grades 10 or above by composing map, filter and reduce:
 
 ```js
 const students = [
@@ -638,8 +638,8 @@ const students = [
 
 const aboveTenSum = students
   .map(student => student.grade) // we map the students array to an array of their grades
-  .filter(grade => grade >= 10) // we filter the grades array to keep those above 10
-  .reduce((prev, next) => prev + next, 0); // we sum all the grades above 10 one by one
+  .filter(grade => grade >= 10) // we filter the grades array to keep those 10 or above
+  .reduce((prev, next) => prev + next, 0); // we sum all the grades 10 or above one by one
 
 console.log(aboveTenSum) // 44 -- 10 (Nick) + 15 (John) + 19 (Julia), Nathalie below 10 is ignored
 ```
