@@ -1224,6 +1224,7 @@ async function myFunc() {
   // Можно использовать оператор await, так как это async-функция.
   return "hello world";
 }
+
 myFunc().then(msg => console.log(msg));
 // "Привет, мир!" — возвращаемое значение myFunc превращается в промис из-за оператора async.
 ```
@@ -1250,6 +1251,7 @@ async function getGithubUser(username) {
   // Выполнение останавливается здесь, пока не закончится выполнение промиса.
   return response.json();
 }
+
 getGithubUser('mbeaudru')
   .then(user => console.log(user))
   .catch(err => console.log(err));
@@ -1369,6 +1371,152 @@ myVar ? "истина" : "ложь"
 
 Значение `myVar` вычисляется в булевом контексте.
 
+Будьте внимательны при сравнении двух значений. Значения объектов (которые должны быть приведены к истине), **не** приводятся к булеву типу, а приводятся к примитивному типу в соответствии со [спецификацией](http://javascript.info/object-toprimitive). Внутри, когда объект сравнивается с булевым значением, например, `[] == true`, выполняется `[].toString() == true`, происходит следующее:
+
+```js
+let a = [] == true // a ложно, так как [].toString() возвращает пустую строку ("").
+let b = [1] == true // b истинно, так как [1].toString() возвращает "1".
+let c = [2] == true // c ложно, так как [2].toString() возвращает "2".
+```
+
+#### Дополнительные материалы
+
+- [Truthy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Truthy).
+- [Falsy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Falsy).
+- [Truthy and Falsy values in JS — Josh Clanton](http://adripofjavascript.com/blog/drips/truthy-and-falsy-values-in-javascript.html).
+
+### Анаморфизмы и катаморфизмы
+
+#### Анаморфизмы
+
+Анаморфизмы — это фунции, которые отображают некоторый объект на более сложную структуру, содержащую тип объекта. Это процесс *разворачивания* простой структуры в более сложную.
+
+Рассмотрим разворачивание целого числа в список целых чисел. Целое число — наш изначальный объект, а список целых чисел — более сложная структура.
+
+##### Пример кода
+
+```js
+function downToOne(n) {
+  const list = [];
+
+  for (let i = n; i > 0; --i) {
+    list.push(i);
+  }
+
+  return list;
+}
+
+downToOne(5)
+  //-> [ 5, 4, 3, 2, 1 ]
+```
+
+#### Катаморфизмы
+
+Катаморфизмы противоположны анаморфизмам: они берут объекты более сложной структуры и *складывают* их в более простые структуры.
+
+Рассмотрим следующий пример функции `product`, которая принимает список целых чисел и возвращает простое целое число.
+
+##### Пример кода
+
+```js
+function product(list) {
+  let product = 1;
+
+  for (const n of list) {
+    product = product * n;
+  }
+
+  return product;
+}
+
+product(downToOne(5)) // -> 120
+```
+
+#### Дополнительные материалы
+
+- [Anamorphisms in JavaScript](http://raganwald.com/2016/11/30/anamorphisms-in-javascript.html).
+- [Anamorphism](https://en.wikipedia.org/wiki/Anamorphism).
+- [Catamorphism](https://en.wikipedia.org/wiki/Catamorphism).
+
+### Генераторы
+
+Другой способ написания функции `downToOne` — использование генератора. Чтобы создать объект типа `Generator`, нужно использовать объявление `function *`. Генераторы — это функции, выполнение которых может быть прервано, а затем продолжено с тем же контекстом (привязками переменных), сохраняющимся при всех вызовах.
+
+Например, функция `downToOne` может быть переписана следующим образом:
+
+```js
+function * downToOne(n) {
+  for (let i = n; i > 0; --i) {
+    yield i;
+  }
+}
+
+[...downToOne(5)] // -> [ 5, 4, 3, 2, 1 ]
+```
+
+Генераторы возвращают итерируемый объект. Когда вызывается метод `next()` итератор, она выполняется до первого выражения `yield`, которое указывает значение, которое должно быть возвращено из итератора или с помощью `yield*`, которое дегегирует выполнение другому генератору. Когда в генераторе вызывается выражение `return`, он будет помечать генератор как выполненный и возвращать значение из выражения `return`. Дальнейшие вызовы `next()` не будут возвращать никаких новых значений.
+
+#### Пример кода
+
+```js
+// Пример использования
+function * idMaker() {
+  var index = 0;
+  while (index < 2) {
+    yield index;
+    index = index + 1;
+  }
+}
+
+var gen = idMaker();
+
+gen.next().value; // -> 0
+gen.next().value; // -> 1
+gen.next().value; // -> undefined
+```
+
+Выражение `yield*` позволяет генератору вызывать другую функцию-генератор во время итерации.
+
+```js
+// Пример использования yield *
+function * genB(i) {
+  yield i + 1;
+  yield i + 2;
+  yield i + 3;
+}
+
+function * genA(i) {
+  yield i;
+  yield* genB(i);
+  yield i + 10;
+}
+
+var gen = genA(10);
+
+gen.next().value; // -> 10
+gen.next().value; // -> 11
+gen.next().value; // -> 12
+gen.next().value; // -> 13
+gen.next().value; // -> 20
+```
+
+```js
+// Пример возврата из генератора
+function* yieldAndReturn() {
+  yield "Y";
+  return "R";
+  yield "unreachable";
+}
+
+var gen = yieldAndReturn()
+gen.next(); // -> { value: "Y", done: false }
+gen.next(); // -> { value: "R", done: true }
+gen.next(); // -> { value: undefined, done: true }
+```
+
+#### Дополнительные материалы
+- [Итераторы и генераторы — MDN](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Iterators_and_Generators#%D0%93%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B).
+
 ### Статические методы
 
 #### Краткое объяснение
@@ -1381,8 +1529,10 @@ class Repo {
     return "Repo name is modern-js-cheatsheet";
   }
 }
+
 // Обратите внимание, что нам не пришлось создавать экземпляр класса Repo.
 console.log(Repo.getName()); // Repo name is modern-js-cheatsheet
+
 let r = new Repo();
 console.log(r.getName()); // Не пойманный TypeError: repo.getName не является функцией.
 ```
@@ -1397,10 +1547,12 @@ class Repo {
   static getName() {
     return "Repo name is modern-js-cheatsheet";
   }
+
   static modifyName(){
     return `${this.getName()}-added-this`;
   }
 }
+
 console.log(Repo.modifyName()); // Repo name is modern-js-cheatsheet-added-this
 ```
 
@@ -1415,10 +1567,12 @@ class Repo {
   static getName() {
     return "Repo name is modern-js-cheatsheet"
   }
+
   useName(){
     return `${Repo.getName()} and it contains some really important stuff`;
   }
 }
+
 // Нужно создать экземпляр класса для использования нестатических методов.
 let r = new Repo();
 console.log(r.useName()); // Repo name is modern-js-cheatsheet and it contains some really important stuff
@@ -1432,11 +1586,13 @@ class Repo {
   static getName() {
     return "Repo name is modern-js-cheatsheet"
   }
+
 useName(){
 // Вызывает статический метод как обычное свойство конструктора.
   return `${this.constructor.getName()} and it contains some really important stuff`;
   }
 }
+
 // Нужно создать экземпляр класса для использования нестатических функций.
 let r = new Repo();
 console.log(r.useName()); // Repo name is modern-js-cheatsheet and it contains some really important stuff
