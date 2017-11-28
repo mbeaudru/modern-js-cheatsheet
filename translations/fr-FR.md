@@ -1179,8 +1179,7 @@ console.log(result) // 3
 
 ### <a name="this_def"></a> *this* en JavaScript
 
-L'opérateur *this* se comporte différemment que dans d'autres langages et est dans la plupart des cas déterminé par la manière dont une fonction est appelée.
-*this* operator behaves differently than in other languages and is in most cases determined by how a function is called. ([Ref: MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/L_op%C3%A9rateur_this)).
+L'opérateur *this* se comporte différemment que dans d'autres langages et est dans la plupart des cas déterminé par la manière dont une fonction est appelée. ([Ref: MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/L_op%C3%A9rateur_this)).
 
 Cette notion a beaucoup de subtilités et comme elle est assez complexe, je vous recommande donc fortement de lire avec attention les ressources externes ci-dessous. Par conséquent, je vais utiliser l’idée personnelle que j’ai en tête pour déterminer ce qu’est *this*. J’ai appris cette astuce de [cet article écrit par Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/).
 
