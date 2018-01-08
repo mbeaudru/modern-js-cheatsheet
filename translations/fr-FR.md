@@ -618,7 +618,7 @@ Pour résumer :
 - **Array.prototype.filter()** prend un tableau, décide élément par élément s'il faut le garder ou non et retourne un tableau contenant uniquement les éléments conservés.
 - **Array.prototype.reduce()** prend un tableau et agrège ses éléments en une seule valeur (qui est retournée).
 
-Je recommande de les utiliser autnat que possibles pour suivre les principes de la programmation fonctionelle car ils sont composables, concis et élégants.
+Je recommande de les utiliser autant que possibles pour suivre les principes de la programmation fonctionelle car ils sont composables, concis et élégants.
 
 Avec toutes ces méthodes, vous pouvez éviter l'utilisation des boucles *for* et *forEach* dans la plupart des situations. Vous pouvez avoir de la peine au début à les utiliser car ils vous obligent à apprendre une nouvelle façon de penser, mais une fois que vous avez compris comment cela fonctionne tout devient plus facile.
 
@@ -665,7 +665,7 @@ const doubledNumbers = numbers.map(function(n) {
 console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 ```
 
-Que se passe-t-il ici ? Nous utilisons .map sur le tableau *numbers*, le map itère sur chaque élément du tableau et le passe à notre fonction. Le but de la fontcion est de produire et de retourner une nouvelle valeur pour chaque valeur donnée pour que le map puisse la remplacer.
+Que se passe-t-il ici ? Nous utilisons .map sur le tableau *numbers*, le map itère sur chaque élément du tableau et le passe à notre fonction. Le but de la fonction est de produire et de retourner une nouvelle valeur pour chaque valeur donnée pour que le map puisse la remplacer.
 
 Extrayons cette fonction pour la rendre plus claire, juste pour cette fois-ci :
 
