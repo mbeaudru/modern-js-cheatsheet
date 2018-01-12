@@ -525,7 +525,7 @@ const { firstName: first, age, city = "Paris" } = person; // แบบนี้ 
 
 console.log(age) // 35 -- ตัวแปร age ถูกสร้างขึ้นมาใหม่และมีค่าเท่ากับ person.age
 console.log(first) // "Nick" -- ตัวแปร first ถูกสร้างขึ้นมาใหม่และมีค่าเท่ากับ person.firstName
-console.log(firstName) // Undefined -- person.firstName มีอยู่จริง แต่ตัวแปรที่ถูกสร้างขึ้นใหม่ถูกตั้งชื่อว่า first
+console.log(firstName) // ReferenceError -- person.firstName มีอยู่จริง แต่ตัวแปรที่ถูกสร้างขึ้นใหม่ถูกตั้งชื่อว่า first
 console.log(city) // "Paris" -- ตัวแปร city ถูกสร้างขึ้นใหม่ และ person.city มีค่าเป็น undefined เพราะฉะนั้น city จะมีค่าเท่ากับ default ที่ระบุไว้คือ "Paris"
 ```
 

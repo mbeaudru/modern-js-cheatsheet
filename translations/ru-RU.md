@@ -470,7 +470,7 @@ console.log(age); /* -> 35 — Создана новая переменная ag
 и ей присвоено значение, равное person.age. */
 console.log(first); /* -> "Коля" — Создана новая переменная first,
 и ей присвоено значение, равное person.firstName. */
-console.log(firstName); /* -> undefined — person.firstName существует,
+console.log(firstName); /* -> ReferenceError — person.firstName существует,
 НО новая созданная переменная называется first. */
 console.log(city); /* -> "Санкт-Петербург" — Создана новая переменная city,
 и, поскольку свойство person.city ранее не было определено,
