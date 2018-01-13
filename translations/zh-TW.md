@@ -538,7 +538,7 @@ const { firstName: first, age, city = "Paris" } = person; // 這樣就搞定了�
 
 console.log(age) // 35 -- 一個名為 age 的新變數被創建出來了，其值等同於 person.age
 console.log(first) // "Nick" -- 一個名為 first 的新變數被創建出來了，其值等同於person.firstName
-console.log(firstName) // Undefined -- person.firstName 雖然存在，但其值是存在名叫 first 的新變數
+console.log(firstName) // ReferenceError -- person.firstName 雖然存在，但其值是存在名叫 first 的新變數
 console.log(city) // "Paris" -- 一個名為 city 的新變數被創建出來了，同時因為 person.city 是未被定義的，所以 city 將等同於預設值也就是 "Paris"。
 ```
 

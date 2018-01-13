@@ -534,7 +534,7 @@ const { firstName: first, age, city = "Paris" } = person; // Gotowe !
 
 console.log(age) // 35 -- Stworzono nową zmienną równą person.age
 console.log(first) // "Nick" -- Stworzono nową zmienną równą person.firstName
-console.log(firstName) // Undefined -- person.firstName istnieje, ale nowo stworzona zmienna nazywa się first
+console.log(firstName) // ReferenceError -- person.firstName istnieje, ale nowo stworzona zmienna nazywa się first
 console.log(city) // "Paris" -- Stworzono nową zmienną city i, ponieważ person.city jest równe undefined, zmienna jest równa domyślnej wartość "Paris".
 ```
 

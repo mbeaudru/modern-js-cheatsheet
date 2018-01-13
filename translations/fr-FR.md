@@ -538,7 +538,7 @@ const { firstName: first, age, city = "Paris" } = person; // Et voilà !
 
 console.log(age) // 35 -- Une nouvelle variable age est créée et est égale à person.age
 console.log(first) // "Nick" -- Une nouvelle variable first est créée et est égale à person.firstName
-console.log(firstName) // undefined -- person.firstName existe MAIS la nouvelle variable créée est nommée first
+console.log(firstName) // ReferenceError -- person.firstName existe MAIS la nouvelle variable créée est nommée first
 console.log(city) // "Paris" -- Une nouvelle variable city est créée et comme person.city n'est pas défini, city est égal à la valeur par défaut donnée, à savoir "Paris"
 ```
 
