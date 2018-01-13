@@ -403,8 +403,6 @@ function myFunc() {
 
 > **メモ:** もしある関数が値を返さなければ、それは暗黙的な `return` も明示的な `return` も行っていません。
 
-> **Note:** If your function does not return a value (with *side effects*), it doesn't do an explicit nor an implicit return.
-
 加えて、 *オブジェクト* を暗黙的に返したい場合は、ブロックのかっことの衝突を防ぐために **その周りにかっこを付ける必要があります**:
 
 ```js
