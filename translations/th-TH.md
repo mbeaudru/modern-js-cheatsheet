@@ -812,7 +812,7 @@ const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 
 ##### Rest parameter ของฟังก์ชั่น
 
-ใน parameter ของฟังก์ชั่นเราสามารถใช้ rest operator สำหรับรวม parameters เป็น array ที่เราสามารถนำไปวนลูปได้ ถ้าเทียบก็เหมือนการห่อ **argument** ที่รับมาเป็น object เอาไว้
+ใน parameter ของฟังก์ชั่นเราสามารถใช้ rest operator สำหรับรวม parameters เป็น array ที่เราสามารถนำไปวนลูปได้ ถ้าเทียบก็เหมือนการห่อ **arguments** ที่รับมาเป็น object เอาไว้
 
 ```js
 function myFunc() {
