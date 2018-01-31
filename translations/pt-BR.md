@@ -1,7 +1,7 @@
-# Modern JavaScript Cheatsheet
+# Cheatsheet de JavaScript Moderno
 
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
-<small>Image Credits: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
+<small>Crédito da Imagem: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
 
 ## Introdução
 
