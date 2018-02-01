@@ -91,3 +91,9 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
   * [Glossary](#glossary)
     + [Scope](#-scope)
     + [Variable mutation](#-variable-mutation)
+
+## Noções
+
+### Declaração de variáveis: var, const, let
+
+Em JavaScript, existem três palavras-chave disponíveis para declarar uma variável, e cada uma tem suas diferenças. São elas ```var```, ```let``` e ```const```.
