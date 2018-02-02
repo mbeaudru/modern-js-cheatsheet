@@ -34,7 +34,7 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
     + [Material Complementar](#Material-Complementar)
   * [Tabela de Conteúdos](#Sumário)
   * [Noções](#Noções)
-    + [Declaração de variáveis: var, const, let](#variable-declaration-var-const-let)
+    + [Declaração de variáveis: var, const, let](#declaração-de-variáveis-var-const-let)
       - [Breve explicação](#short-explanation)
       - [Exemplo](#sample-code)
       - [Explicação Detalhada](#detailed-explanation)
@@ -97,3 +97,40 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
 ### Declaração de variáveis: var, const, let
 
 Em JavaScript, existem três palavras-chave disponíveis para declarar uma variável, e cada uma tem suas diferenças. São elas ```var```, ```let``` e ```const```.
+
+#### Breve explicação
+
+Variáveis declaradas com a palavra-chave ```const``` não podem ser reatribuídas, enquanto ```let``` e ```var``` podem.
+
+Eu recomendo sempre declarar suas variáveis com ```const``` por padrão, e com ```let``` se você precisar *modifica-lo* ou reatribuí-lo mais tarde.
+
+<table>
+  <tr>
+    <th></th>
+    <th>Escopo</th>
+    <th>Reatribuível</th>
+    <th>Mutável</th>
+   <th><a href="#tdz_sample">Zona Temporal Inoperante</a></th>
+  </tr>
+  <tr>
+    <th>const</th>
+    <td>Bloco</td>
+    <td>Não</td>
+    <td><a href="#const_mutable_sample">Sim</a></td>
+    <td>Sim</td>
+  </tr>
+  <tr>
+    <th>let</th>
+    <td>Bloco</td>
+    <td>Sim</td>
+    <td>Sim</td>
+    <td>Sim</td>
+  </tr>
+   <tr>
+    <th>var</th>
+    <td>Função</td>
+    <td>Sim</td>
+    <td>Sim</td>
+    <td>Não</td>
+  </tr>
+</table>
