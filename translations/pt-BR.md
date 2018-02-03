@@ -37,9 +37,9 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
     + [Declaração de variáveis: var, const, let](#declaração-de-variáveis-var-const-let)
       - [Breve explicação](#breve-explicação)
       - [Exemplo](#exemplo)
-      - [Explicação Detalhada](#detailed-explanation)
+      - [Explicação Detalhada](#explicação-detalhada)
       - [Material Complementar](#external-resource)
-    + [Arrow function](#-arrow-function)
+    + [Função de Seta](#-função-de-seta)
       - [Exemplo](#sample-code-1)
       - [Explicação Detalhada](#detailed-explanation-1)
         * [Concision](#concision)
@@ -146,4 +146,54 @@ person = "John" // Irá ocorrer um erro, person não pode ser reatribuída
 let person = "Nick";
 person = "John";
 console.log(person) // "John", a reatribuição é permitida com let
+```
+
+#### Explicação Detalhada
+
+O [*escopo*](#scope_def) de uma variável grosseiramente significa "onde esta variável está disponível no código".
+
+##### var
+
+Variáveis declaradas com ```var``` são *função escopada*, significando que quando uma variável é criada em uma função, tudo naquela função pode acessar essa variável. Além disso, uma variável de *função escopada* criada em uma função não pode ser acessada fora desta função.
+
+Eu recomendo que você imagine isso, como se uma variável *X escopada* significasse que essa variável era uma propriedade de X.
+
+```javascript
+function myFunction() {
+  var myVar = "Nick";
+  console.log(myVar); // "Nick" - myVar é acessível dentro da função.
+}
+console.log(myVar); // Lança um ReferenceError, myVar não está acessível fora da função.
+```
+
+Ainda focado na variável de escopo, aqui está um exemplo mais sutil:
+
+```javascript
+function myFunction() {
+  var myVar = "Nick";
+  if (true) {
+    var myVar = "John";
+    console.log(myVar); // "John"
+    // na verdade, sendo myVar do escopo da função, nós simplesmente apagamos o valor anterior do myVar "Nick" para "John"
+  }
+  console.log(myVar); // "John" - veja como as instruções no bloco if afetaram esse valor
+}
+console.log(myVar); // Lança um ReferenceError, myVar não é acessível fora da função.
+```
+
+Além disso, variáveis declaradas *var* são movidas para o topo do escopo na execução. É o que chamamos de [içando a var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting).
+
+Esta parte do código:
+
+```js
+console.log(myVar) // undefined -- sem erro lançado
+var myVar = 2;
+```
+
+is understood at execution like:
+
+```js
+var myVar;
+console.log(myVar) // undefined -- sem erro lançado
+myVar = 2;
 ```
