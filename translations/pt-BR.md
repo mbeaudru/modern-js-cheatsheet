@@ -35,8 +35,8 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
   * [Tabela de Conteúdos](#Sumário)
   * [Noções](#Noções)
     + [Declaração de variáveis: var, const, let](#declaração-de-variáveis-var-const-let)
-      - [Breve explicação](#short-explanation)
-      - [Exemplo](#sample-code)
+      - [Breve explicação](#breve-explicação)
+      - [Exemplo](#exemplo)
       - [Explicação Detalhada](#detailed-explanation)
       - [Material Complementar](#external-resource)
     + [Arrow function](#-arrow-function)
@@ -134,3 +134,16 @@ Eu recomendo sempre declarar suas variáveis com ```const``` por padrão, e com 
     <td>Não</td>
   </tr>
 </table>
+
+#### Exemplo
+
+```javascript
+const person = "Nick";
+person = "John" // Irá ocorrer um erro, person não pode ser reatribuída
+```
+
+```javascript
+let person = "Nick";
+person = "John";
+console.log(person) // "John", a reatribuição é permitida com let
+```
