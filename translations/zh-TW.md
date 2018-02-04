@@ -838,7 +838,7 @@ const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 <a name="function-rest-parameter-26"></a>
 ##### 不定參數
 
-在有著不定參數的函數當中，我們可以使用 rest 運算子將參數注入到我們可以進行迴圈操作的 array。這裡已經有一個名為 **argument** 的 object 被綁定在函數上，等同於把 array 中的所有參數都傳遞給函數。
+在有著不定參數的函數當中，我們可以使用 rest 運算子將參數注入到我們可以進行迴圈操作的 array。這裡已經有一個名為 **arguments** 的 object 被綁定在函數上，等同於把 array 中的所有參數都傳遞給函數。
 
 ```js
 function myFunc() {
