@@ -671,6 +671,12 @@ const doubledNumbers = numbers.map(doubleN);
 console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 ```
 
+In ES6
+```js
+const doubledNumbers = numbers.map(n => n * 2);
+console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
+```
+
 ```numbers.map(doubleN)``` produces ```[doubleN(0), doubleN(1), doubleN(2), doubleN(3), doubleN(4), doubleN(5), doubleN(6)]``` which is equal to ```[0, 2, 4, 6, 8, 10, 12]```.
 
 > **Note:** If you do not need to return a new array and just want to do a loop that has side effects, you might just want to use a for / forEach loop instead of a map.
@@ -681,6 +687,13 @@ console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 const evenNumbers = numbers.filter(function(n) {
   return n % 2 === 0; // true if "n" is par, false if "n" isn't
 });
+console.log(evenNumbers); // [0, 2, 4, 6]
+```
+
+In ES6
+
+```js
+const evenNumbers = numbers.filter(n => n % 2 === 0);
 console.log(evenNumbers); // [0, 2, 4, 6]
 ```
 
@@ -698,6 +711,13 @@ const sum = numbers.reduce(
   0 // accumulator variable value at first iteration step
 );
 
+console.log(sum) //21
+```
+
+In ES6
+
+```js
+const sum = numbers.reduce((acc, n) =>acc + n, 0);
 console.log(sum) //21
 ```
 
