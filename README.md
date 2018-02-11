@@ -671,7 +671,7 @@ const doubledNumbers = numbers.map(doubleN);
 console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
 ```
 
-**Note** : You will frequently encounter this method used in combination with [arrow functions](-arrow-function)
+**Note** : You will frequently encounter this method used in combination with [arrow functions](#-arrow-function)
 
 ```js
 const doubledNumbers = numbers.map(n => n * 2);
@@ -691,7 +691,7 @@ const evenNumbers = numbers.filter(function(n) {
 console.log(evenNumbers); // [0, 2, 4, 6]
 ```
 
-**Note** : You will frequently encounter this method used in combination with [arrow functions](-arrow-function)
+**Note** : You will frequently encounter this method used in combination with [arrow functions](#-arrow-function)
 
 ```js
 const evenNumbers = numbers.filter(n => n % 2 === 0);
@@ -715,7 +715,7 @@ const sum = numbers.reduce(
 console.log(sum) //21
 ```
 
-**Note** : You will frequently encounter this method used in combination with [arrow functions](-arrow-function)
+**Note** : You will frequently encounter this method used in combination with [arrow functions](#-arrow-function)
 
 ```js
 const sum = numbers.reduce((acc, n) =>acc + n, 0);
