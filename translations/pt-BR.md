@@ -197,3 +197,46 @@ var myVar;
 console.log(myVar) // undefined -- sem erro lançado
 myVar = 2;
 ```
+
+##### let
+
+```var``` e ```let ``` são quase os mesmos, mas variáveis declaradas com ```let```
+
+- são *escopado em bloco*
+- **não** são acessíveis antes de serem atribuídas
+- não podem ser re-declaradas no mesmo escopo
+
+Vamos ver o impacto do escopo em bloco em nosso exemplo anterior:
+
+```javascript
+function myFunction() {
+  let myVar = "Nick";
+  if (true) {
+    let myVar = "John";
+    console.log(myVar); // "John"
+    // na verdade, myVar sendo escopada em bloco, nós criamos uma nova variável myVar.
+    // essa variável não é acessível fora do bloco e é totalmente independente
+    // da primeira myVar criada !
+  }
+  console.log(myVar); // "Nick", veja como as instruções no bloco IF NÃO afetou este valor
+}
+console.log(myVar); // lançado um ReferenceError, myVar não é acessível fora da fucnção.
+```
+
+<a name="tdz_sample"></a> Agora, o que significa para as variáveis *let* (e *const*) não estarem acessíveis antes de serem atribuídas:
+
+```js
+console.log(myVar) // lança um ReferenceError !
+let myVar = 2;
+```
+
+Em contraste com as variáveis *var*, se você tentar ler ou escrever em uma variável *let* ou *const* antes de serem atribuídos, um erro será gerado. Esse fenômeno é freqüentemente chamado [*Zona Temporal Inoperante*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) ou *TDZ*.
+
+> **Nota:** Tecnicamente, as declarações de *let* e *const* também estão sendo içadas, mas não a sua atribuição. Uma vez que eles são feitos para que eles não possam ser usados antes da atribuição, ele intuitivamente parece que não há içamento, mas existe. Saiba mais sobre isso [explicação muito detalhada aqui](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) se quiser saber mais.
+
+Além disso, você não pode re-declarar uma variável *let*:
+
+```js
+let myVar = 2;
+let myVar = 3; // Retorna um SyntaxError
+```
