@@ -240,3 +240,44 @@ Além disso, você não pode re-declarar uma variável *let*:
 let myVar = 2;
 let myVar = 3; // Retorna um SyntaxError
 ```
+
+##### const
+
+Variáveis declaradas ```const``` agem como variáveis *let*, mas elas não podem ser reatribuídas.
+
+Para resumir, variáveis *const*:
+
+- são *escopado em bloco*
+- não são acessíveis antes de serem atribuídos
+- não podem ser re-declaradas no mesmo escopo
+- não podem ser reatribuídas
+
+```js
+const myVar = "Nick";
+myVar = "John" // lança um erro, reatribuição não é permitido
+```
+
+```js
+const myVar = "Nick";
+const myVar = "John" // lança um erro, re-declaração não é permitida
+```
+
+<a name="const_mutable_sample"></a> Mas há uma sutileza : variáveis ```const``` não são [**imutáveis**](#mutation_def) ! Concretamente, Isto significa que variáveis *objetos* e *arrays* declaradas com ```const``` **podem** podem ser mutadas.
+
+Para objetos:
+```js
+const person = {
+  name: 'Nick'
+};
+person.name = 'John' // isto irá funcionar! A variável objeto person não é completamente reatribuída, mas mutada
+console.log(person.name) // "John"
+person = "Sandra" // lança um erro, porque a reatribuição não é permitida com variáveis declaradas com const
+```
+
+Para arrays:
+```js
+const person = [];
+person.push('John'); // isto irá funcionar! A variável array person não é completamente reatribuída, mas mutada
+console.log(person[0]) // "John"
+person = ["Nick"] // lança um erro, porque a reatribuição não é permitida com variáveis declaradas com array
+```
