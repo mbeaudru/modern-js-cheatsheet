@@ -38,7 +38,7 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
       - [Breve explicação](#breve-explicação)
       - [Exemplo](#exemplo)
       - [Explicação Detalhada](#explicação-detalhada)
-      - [Material Complementar](#external-resource)
+      - [Material Complementar](#material-complementar)
     + [Função de Seta](#-função-de-seta)
       - [Exemplo](#sample-code-1)
       - [Explicação Detalhada](#detailed-explanation-1)
@@ -262,7 +262,7 @@ const myVar = "Nick";
 const myVar = "John" // lança um erro, re-declaração não é permitida
 ```
 
-<a name="const_mutable_sample"></a> Mas há uma sutileza : variáveis ```const``` não são [**imutáveis**](#mutation_def) ! Concretamente, Isto significa que variáveis *objetos* e *arrays* declaradas com ```const``` **podem** podem ser mutadas.
+<a name="const_mutable_sample"></a> Mas há uma sutileza : variáveis ```const``` não são [**imutáveis**](#mutation_def) ! Concretamente, Isto significa que variáveis *objetos* e *arrays* declaradas com ```const``` **podem** ser mutadas.
 
 Para objetos:
 ```js
@@ -280,4 +280,45 @@ const person = [];
 person.push('John'); // isto irá funcionar! A variável array person não é completamente reatribuída, mas mutada
 console.log(person[0]) // "John"
 person = ["Nick"] // lança um erro, porque a reatribuição não é permitida com variáveis declaradas com array
+```
+
+#### Material Complementar
+
+- [Como let e const são escopados em JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
+- [Zona temporal Inoperante (TDZ) desmistificada](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
+
+### <a name="arrow_func_concept"></a> Função de seta
+
+A atualização do JavaScript ES6 introduziu *funções de seta*, que é outra maneira de declarar e usar funções. Aqui estão os benefícios que elas trazem:
+
+- Mais conciso
+- *this* é retirado dos arredores
+- retorno implícito
+
+#### Exemplo de código
+
+- Concisão e retorno implícito
+
+```js
+function double(x) { return x * 2; } // Forma tradicional
+console.log(double(2)) // 4
+```
+
+```js
+const double = x => x * 2; // A mesma função escrita como uma função de seta com retorno implícito
+console.log(double(2)) // 4
+```
+
+- Referência *this*
+
+Em uma função de seta, *this* é igual ao valor *this* do contexto de execução envolvente. Basicamente, com as funções de seta, você não precisa fazer o truque "that/self = this" antes de chamar uma função dentro de uma função.
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  setTimeout(() => {
+    this.myVar++;
+    console.log(this.myVar) // 1
+  }, 0);
+}
 ```
