@@ -820,7 +820,7 @@ const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 
 ##### <a name="function-rest-parameter"></a>Parametry rest
 
-Operator rest pozwala przedstawić dowolna liczbę argumentów w postaci tablicy, po elementach której można iterować. Istnieje już obiekt **argument** związany z każdą funkcją i równy tablicy wszystkich argumentów przekazanych do danej funkcji.
+Operator rest pozwala przedstawić dowolna liczbę argumentów w postaci tablicy, po elementach której można iterować. Istnieje już obiekt **arguments** związany z każdą funkcją i równy tablicy wszystkich argumentów przekazanych do danej funkcji.
 
 
 ```js

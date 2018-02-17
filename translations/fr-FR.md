@@ -823,7 +823,7 @@ const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 
 ##### Paramètre de reste d'une fonction
 
-Dans les paramètres d'une fonction, nous pouvons utiliser l'opérateur de reste pour injecter les paramètres dans un tableau dans lequel nous pouvons faire une bocle. Il existe déjà un objet **argument** lié à chaque fonction, qui est un tableau contenant tous les paramètres passés à la fonction.
+Dans les paramètres d'une fonction, nous pouvons utiliser l'opérateur de reste pour injecter les paramètres dans un tableau dans lequel nous pouvons faire une bocle. Il existe déjà un objet **arguments** lié à chaque fonction, qui est un tableau contenant tous les paramètres passés à la fonction.
 
 ```js
 function myFunc() {
