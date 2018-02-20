@@ -40,7 +40,7 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
       - [Explicação Detalhada](#explicação-detalhada)
       - [Material Complementar](#material-complementar)
     + [Função de Seta](#-função-de-seta)
-      - [Exemplo](#sample-code-1)
+      - [Exemplo](#exemplo-de-codigo)
       - [Explicação Detalhada](#detailed-explanation-1)
         * [Concision](#concision)
         * [*this* reference](#this-reference)
@@ -321,4 +321,77 @@ function myFunc() {
     console.log(this.myVar) // 1
   }, 0);
 }
+```
+
+#### Explicação detalhada
+
+##### Concisão
+
+As funções de seta são mais concisas do que as funções tradicionais em diversas maneiras. Vamos rever todos os casos possíveis:
+
+- Retorno implícito VS explícito
+
+Um **retorno explícito** é uma função em que a palavra-chave *return* é usada em seu corpo.
+
+```js
+  function double(x) {
+    return x * 2; // esta função retorna explicitamente x * 2, a palavra-chave *retorno*  é usada
+  }
+```
+
+Na maneira tradicional de escrever funções, o retorno sempre foi explícito. Mas com funções de seta, você pode fazer *retorno implícito*, o que significa que você não precisa usar a palavra-chave *return* para retornar um valor.
+
+```js
+  const double = (x) => {
+    return x * 2; // um retorno explícito aqui
+  }
+```
+
+Uma vez que esta função apenas retorna algo (sem instruções antes da palavra-chave *return*), podemos fazer um retorno implícito.
+
+```js
+  const double = (x) => x * 2; // Correto, retorna x*2
+```
+
+Para fazer isso, só precisamos ** remover os colchetes ** e a palavra-chave **return**. É por isso que é chamado de *retorno implícito*, a palavra-chave *return* não existe, mas essa função retornará ```x * 2```.
+
+> **Nota:** Se sua função não retornar um valor (com *efeitos colaterais*), ele não faz um retorno explícito nem implícito.
+
+Além disso, se você quiser retornar implicitamente um *objeto*, você **deve ter parênteses em torno dele**, pois isso entrará em conflito com as chaves do bloco:
+
+```js
+const getPerson = () => ({ name: "Nick", age: 24 })
+console.log(getPerson()) // { name: "Nick", age: 24 } -- objeto implicitamente retornado pela função de seta
+```
+
+- Só um argumento
+
+Se a sua função apenas tiver um parâmetro, você pode omitir os parênteses à sua volta. Se pegarmos o código *double* acima:
+
+```js
+  const double = (x) => x * 2; // esta função de seta apenas leva um parâmetro
+```
+
+Parênteses ao redor do parâmetro podem ser evitados:
+
+```js
+  const double = x => x * 2; // esta função de seta tem apenas um parâmetro
+```
+
+- Nenhum argumento
+
+Quando não há argumento fornecido para uma função de seta, você precisa fornecer parênteses, ou não será uma sintaxe válida.
+
+```js
+  () => { // parênteses são fornecidos, tudo está ok
+    const x = 2;
+    return x;
+  }
+```
+
+```js
+  => { // Sem parênteses, isso não funcionará!
+    const x = 2;
+    return x;
+  }
 ```
