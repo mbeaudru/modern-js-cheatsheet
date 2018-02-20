@@ -42,7 +42,7 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
     + [Função de Seta](#-função-de-seta)
       - [Exemplo](#exemplo-de-codigo)
       - [Explicação Detalhada](#detailed-explanation-1)
-        * [Concision](#concision)
+        * [Concisão](#concisão)
         * [*this* reference](#this-reference)
       - [Material Útil](#useful-resources)
     + [Parametros padrão de uma Function](#function-default-parameter-value)
@@ -353,7 +353,7 @@ Uma vez que esta função apenas retorna algo (sem instruções antes da palavra
   const double = (x) => x * 2; // Correto, retorna x*2
 ```
 
-Para fazer isso, só precisamos ** remover os colchetes ** e a palavra-chave **return**. É por isso que é chamado de *retorno implícito*, a palavra-chave *return* não existe, mas essa função retornará ```x * 2```.
+Para fazer isso, só precisamos **remover os colchetes** e a palavra-chave **return**. É por isso que é chamado de *retorno implícito*, a palavra-chave *return* não existe, mas essa função retornará ```x * 2```.
 
 > **Nota:** Se sua função não retornar um valor (com *efeitos colaterais*), ele não faz um retorno explícito nem implícito.
 
