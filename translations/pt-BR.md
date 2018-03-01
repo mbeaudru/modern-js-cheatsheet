@@ -43,7 +43,7 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
       - [Exemplo](#exemplo-de-codigo)
       - [Explicação Detalhada](#detailed-explanation-1)
         * [Concisão](#concisão)
-        * [*this* reference](#this-reference)
+        * [Referência *this*](#referência-this)
       - [Material Útil](#useful-resources)
     + [Parametros padrão de uma Function](#function-default-parameter-value)
       - [Material Complementar](#external-resource-1)
@@ -394,4 +394,45 @@ Quando não há argumento fornecido para uma função de seta, você precisa for
     const x = 2;
     return x;
   }
+```
+
+##### Referência *this*
+
+Para entender essa sutileza introduzida com funções de seta, você deve saber como [this](#this_def) se comporta em JavaScript.
+
+Em funções de seta, *this* é igual ao valor *this* do contexto de execução envolvente. O que significa que uma função de seta não cria um novo *this*, Ela pega do seu entorno em vez disso.
+
+Sem uma função de seta, se você quisesse acessar uma variável de *this* em uma função dentro de outra função, você tinha que usar *that = this* ou *self = this*.
+
+Por exemplo, usando a função setTimeout dentro de myFunc:
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  var that = this; // that = this (truque)
+  setTimeout(
+    function() { // Um novo *this* é criado neste escopo de função
+      that.myVar++;
+      console.log(that.myVar) // 1
+
+      console.log(this.myVar) // undefined -- veja a declaração da função acima
+    },
+    0
+  );
+}
+```
+
+Mas com função de seta, *this* é retirado do seu entorno:
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  setTimeout(
+    () => { // this é retirado do entorno, o que significa de myFunc aqui
+      this.myVar++;
+      console.log(this.myVar) // 1
+    },
+    0
+  );
+}
 ```
