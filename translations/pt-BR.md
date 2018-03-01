@@ -44,7 +44,7 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
       - [Explicação Detalhada](#detailed-explanation-1)
         * [Concisão](#concisão)
         * [Referência *this*](#referência-this)
-      - [Material Útil](#useful-resources)
+      - [Material Útil](#material-útil)
     + [Parametros padrão de uma Function](#function-default-parameter-value)
       - [Material Complementar](#external-resource-1)
     + [Desestruturação de objetos e listas](#destructuring-objects-and-arrays)
@@ -437,7 +437,7 @@ function myFunc() {
 }
 ```
 
-#### Useful resources
+#### Material Útil
 
 - [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
 - [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
