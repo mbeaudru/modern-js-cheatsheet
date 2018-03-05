@@ -38,13 +38,13 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
       - [Breve explicação](#breve-explicação)
       - [Exemplo](#exemplo)
       - [Explicação Detalhada](#explicação-detalhada)
-      - [Material Complementar](#external-resource)
+      - [Material Complementar](#material-complementar)
     + [Função de Seta](#-função-de-seta)
-      - [Exemplo](#sample-code-1)
+      - [Exemplo](#exemplo-de-codigo)
       - [Explicação Detalhada](#detailed-explanation-1)
-        * [Concision](#concision)
-        * [*this* reference](#this-reference)
-      - [Material Útil](#useful-resources)
+        * [Concisão](#concisão)
+        * [Referência *this*](#referência-this)
+      - [Material Útil](#material-útil)
     + [Parametros padrão de uma Function](#function-default-parameter-value)
       - [Material Complementar](#external-resource-1)
     + [Desestruturação de objetos e listas](#destructuring-objects-and-arrays)
@@ -197,3 +197,248 @@ var myVar;
 console.log(myVar) // undefined -- sem erro lançado
 myVar = 2;
 ```
+
+##### let
+
+```var``` e ```let ``` são quase os mesmos, mas variáveis declaradas com ```let```
+
+- são *escopado em bloco*
+- **não** são acessíveis antes de serem atribuídas
+- não podem ser re-declaradas no mesmo escopo
+
+Vamos ver o impacto do escopo em bloco em nosso exemplo anterior:
+
+```javascript
+function myFunction() {
+  let myVar = "Nick";
+  if (true) {
+    let myVar = "John";
+    console.log(myVar); // "John"
+    // na verdade, myVar sendo escopada em bloco, nós criamos uma nova variável myVar.
+    // essa variável não é acessível fora do bloco e é totalmente independente
+    // da primeira myVar criada !
+  }
+  console.log(myVar); // "Nick", veja como as instruções no bloco IF NÃO afetou este valor
+}
+console.log(myVar); // lançado um ReferenceError, myVar não é acessível fora da fucnção.
+```
+
+<a name="tdz_sample"></a> Agora, o que significa para as variáveis *let* (e *const*) não estarem acessíveis antes de serem atribuídas:
+
+```js
+console.log(myVar) // lança um ReferenceError !
+let myVar = 2;
+```
+
+Em contraste com as variáveis *var*, se você tentar ler ou escrever em uma variável *let* ou *const* antes de serem atribuídos, um erro será gerado. Esse fenômeno é freqüentemente chamado [*Zona Temporal Inoperante*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let) ou *TDZ*.
+
+> **Nota:** Tecnicamente, as declarações de *let* e *const* também estão sendo içadas, mas não a sua atribuição. Uma vez que elas são feitas para que elas não possam ser usados antes da atribuição, ela intuitivamente parece que não há içamento, mas existe. Saiba mais sobre isso [explicação muito detalhada aqui](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) se quiser saber mais.
+
+Além disso, você não pode re-declarar uma variável *let*:
+
+```js
+let myVar = 2;
+let myVar = 3; // Retorna um SyntaxError
+```
+
+##### const
+
+Variáveis declaradas ```const``` agem como variáveis *let*, mas elas não podem ser reatribuídas.
+
+Para resumir, variáveis *const*:
+
+- são *escopado em bloco*
+- não são acessíveis antes de serem atribuídos
+- não podem ser re-declaradas no mesmo escopo
+- não podem ser reatribuídas
+
+```js
+const myVar = "Nick";
+myVar = "John" // lança um erro, reatribuição não é permitido
+```
+
+```js
+const myVar = "Nick";
+const myVar = "John" // lança um erro, re-declaração não é permitida
+```
+
+<a name="const_mutable_sample"></a> Mas há uma sutileza : variáveis ```const``` não são [**imutáveis**](#mutation_def) ! Concretamente, Isto significa que variáveis *objetos* e *arrays* declaradas com ```const``` **podem** ser mutadas.
+
+Para objetos:
+```js
+const person = {
+  name: 'Nick'
+};
+person.name = 'John' // isto irá funcionar! A variável objeto person não é completamente reatribuída, mas mutada
+console.log(person.name) // "John"
+person = "Sandra" // lança um erro, porque a reatribuição não é permitida com variáveis declaradas com const
+```
+
+Para arrays:
+```js
+const person = [];
+person.push('John'); // isto irá funcionar! A variável array person não é completamente reatribuída, mas mutada
+console.log(person[0]) // "John"
+person = ["Nick"] // lança um erro, porque a reatribuição não é permitida com variáveis declaradas com array
+```
+
+#### Material Complementar
+
+- [Como let e const são escopados em JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
+- [Zona temporal Inoperante (TDZ) desmistificada](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
+
+### <a name="arrow_func_concept"></a> Função de seta
+
+A atualização do JavaScript ES6 introduziu *funções de seta*, que é outra maneira de declarar e usar funções. Aqui estão os benefícios que elas trazem:
+
+- Mais conciso
+- *this* é retirado dos arredores
+- retorno implícito
+
+#### Exemplo de código
+
+- Concisão e retorno implícito
+
+```js
+function double(x) { return x * 2; } // Forma tradicional
+console.log(double(2)) // 4
+```
+
+```js
+const double = x => x * 2; // A mesma função escrita como uma função de seta com retorno implícito
+console.log(double(2)) // 4
+```
+
+- Referência *this*
+
+Em uma função de seta, *this* é igual ao valor *this* do contexto de execução envolvente. Basicamente, com as funções de seta, você não precisa fazer o truque "that/self = this" antes de chamar uma função dentro de uma função.
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  setTimeout(() => {
+    this.myVar++;
+    console.log(this.myVar) // 1
+  }, 0);
+}
+```
+
+#### Explicação detalhada
+
+##### Concisão
+
+As funções de seta são mais concisas do que as funções tradicionais em diversas maneiras. Vamos rever todos os casos possíveis:
+
+- Retorno implícito VS explícito
+
+Um **retorno explícito** é uma função em que a palavra-chave *return* é usada em seu corpo.
+
+```js
+  function double(x) {
+    return x * 2; // esta função retorna explicitamente x * 2, a palavra-chave *retorno*  é usada
+  }
+```
+
+Na maneira tradicional de escrever funções, o retorno sempre foi explícito. Mas com funções de seta, você pode fazer *retorno implícito*, o que significa que você não precisa usar a palavra-chave *return* para retornar um valor.
+
+```js
+  const double = (x) => {
+    return x * 2; // um retorno explícito aqui
+  }
+```
+
+Uma vez que esta função apenas retorna algo (sem instruções antes da palavra-chave *return*), podemos fazer um retorno implícito.
+
+```js
+  const double = (x) => x * 2; // Correto, retorna x*2
+```
+
+Para fazer isso, só precisamos **remover os colchetes** e a palavra-chave **return**. É por isso que é chamado de *retorno implícito*, a palavra-chave *return* não existe, mas essa função retornará ```x * 2```.
+
+> **Nota:** Se sua função não retornar um valor (com *efeitos colaterais*), ele não faz um retorno explícito nem implícito.
+
+Além disso, se você quiser retornar implicitamente um *objeto*, você **deve ter parênteses em torno dele**, pois isso entrará em conflito com as chaves do bloco:
+
+```js
+const getPerson = () => ({ name: "Nick", age: 24 })
+console.log(getPerson()) // { name: "Nick", age: 24 } -- objeto implicitamente retornado pela função de seta
+```
+
+- Só um argumento
+
+Se a sua função apenas tiver um parâmetro, você pode omitir os parênteses à sua volta. Se pegarmos o código *double* acima:
+
+```js
+  const double = (x) => x * 2; // esta função de seta apenas leva um parâmetro
+```
+
+Parênteses ao redor do parâmetro podem ser evitados:
+
+```js
+  const double = x => x * 2; // esta função de seta tem apenas um parâmetro
+```
+
+- Nenhum argumento
+
+Quando não há argumento fornecido para uma função de seta, você precisa fornecer parênteses, ou não será uma sintaxe válida.
+
+```js
+  () => { // parênteses são fornecidos, tudo está ok
+    const x = 2;
+    return x;
+  }
+```
+
+```js
+  => { // Sem parênteses, isso não funcionará!
+    const x = 2;
+    return x;
+  }
+```
+
+##### Referência *this*
+
+Para entender essa sutileza introduzida com funções de seta, você deve saber como [this](#this_def) se comporta em JavaScript.
+
+Em funções de seta, *this* é igual ao valor *this* do contexto de execução envolvente. O que significa que uma função de seta não cria um novo *this*, Ela pega do seu entorno em vez disso.
+
+Sem uma função de seta, se você quisesse acessar uma variável de *this* em uma função dentro de outra função, você tinha que usar *that = this* ou *self = this*.
+
+Por exemplo, usando a função setTimeout dentro de myFunc:
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  var that = this; // that = this (truque)
+  setTimeout(
+    function() { // Um novo *this* é criado neste escopo de função
+      that.myVar++;
+      console.log(that.myVar) // 1
+
+      console.log(this.myVar) // undefined -- veja a declaração da função acima
+    },
+    0
+  );
+}
+```
+
+Mas com função de seta, *this* é retirado do seu entorno:
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  setTimeout(
+    () => { // this é retirado do entorno, o que significa de myFunc aqui
+      this.myVar++;
+      console.log(this.myVar) // 1
+    },
+    0
+  );
+}
+```
+
+#### Material Útil
+
+- [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
+- [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
