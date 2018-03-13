@@ -712,14 +712,14 @@ const sum = numbers.reduce(
   0 // accumulator variable value at first iteration step
 );
 
-console.log(sum) //21
+console.log(sum) // 21
 ```
 
 **Note** : You will frequently encounter this method used in combination with [arrow functions](#-arrow-function)
 
 ```js
-const sum = numbers.reduce((acc, n) =>acc + n, 0);
-console.log(sum) //21
+const sum = numbers.reduce((acc, n) => acc + n, 0);
+console.log(sum) // 21
 ```
 
 Just like for .map and .filter methods, .reduce is applied on an array and takes a function as the first parameter.
@@ -1626,7 +1626,7 @@ product(downToOne(5)) // 120
 
 ### Generators
 
-Another way to write the `downToOne` function is to use a Generator. To instantiate a `Generator` object, one must use the `function *` declaration. Generators are functions that can be exited and later re-entered with its context (variable bindings) saved across re-entrances.  
+Another way to write the `downToOne` function is to use a Generator. To instantiate a `Generator` object, one must use the `function *` declaration. Generators are functions that can be exited and later re-entered with its context (variable bindings) saved across re-entrances.
 
 For example, the `downToOne` function above can be rewritten as:
 
@@ -1637,7 +1637,7 @@ function * downToOne(n) {
   }
 }
 
-[...downToOne(5)] //[ 5, 4, 3, 2, 1 ]
+[...downToOne(5)] // [ 5, 4, 3, 2, 1 ]
 ```
 
 Generators return an iterable object. When the iterator's `next()` function is called, it is executed until the first `yield` expression, which specifies the value to be returned from the iterator or with `yield*`, which delegates to another generator function. When a `return` expression is called in the generator, it will mark the generator as done and pass back as the return value. Further calls to `next()` will not return any new values.
@@ -1719,11 +1719,11 @@ class Repo{
   }
 }
 
-//Note that we did not have to create an instance of the Repo class
-console.log(Repo.getName()) //Repo name is modern-js-cheatsheet
+// Note that we did not have to create an instance of the Repo class
+console.log(Repo.getName()) // Repo name is modern-js-cheatsheet
 
 let r = new Repo();
-console.log(r.getName()) //Uncaught TypeError: repo.getName is not a function
+console.log(r.getName()) // Uncaught TypeError: repo.getName is not a function
 ```
 
 #### Detailed explanation
@@ -1745,7 +1745,7 @@ class Repo{
   }
 }
 
-console.log(Repo.modifyName()) //Repo name is modern-js-cheatsheet-added-this
+console.log(Repo.modifyName()) // Repo name is modern-js-cheatsheet-added-this
 ```
 
 ##### Calling static methods from non-static methods.
@@ -1768,7 +1768,7 @@ class Repo{
 
 // we need to instantiate the class to use non-static methods
 let r = new Repo()
-console.log(r.useName()) //Repo name is modern-js-cheatsheet and it contains some really important stuff
+console.log(r.useName()) // Repo name is modern-js-cheatsheet and it contains some really important stuff
 ```
 
 2. ###### Using the constructor
@@ -1782,14 +1782,14 @@ class Repo{
   }
 
   useName(){
-    //Calls the static method as a property of the constructor
+    // Calls the static method as a property of the constructor
     return this.constructor.getName() + ' and it contains some really important stuff'
   }
 }
 
 // we need to instantiate the class to use non-static methods
 let r = new Repo()
-console.log(r.useName()) //Repo name is modern-js-cheatsheet and it contains some really important stuff
+console.log(r.useName()) // Repo name is modern-js-cheatsheet and it contains some really important stuff
 ```
 
 #### External resources
