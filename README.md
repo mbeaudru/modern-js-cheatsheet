@@ -1723,7 +1723,7 @@ class Repo{
 console.log(Repo.getName()) // Repo name is modern-js-cheatsheet
 
 let r = new Repo();
-console.log(r.getName()) // Uncaught TypeError: repo.getName is not a function
+console.log(r.getName()) // Uncaught TypeError: r.getName is not a function
 ```
 
 #### Detailed explanation
