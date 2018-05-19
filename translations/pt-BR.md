@@ -39,17 +39,17 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
       - [Exemplo](#exemplo)
       - [Explicação Detalhada](#explicação-detalhada)
       - [Material Complementar](#material-complementar)
-    + [Função de Seta](#-função-de-seta)
+    + [Função de Seta](#função-de-seta)
       - [Exemplo](#exemplo-de-codigo)
       - [Explicação Detalhada](#detailed-explanation-1)
         * [Concisão](#concisão)
         * [Referência *this*](#referência-this)
       - [Material Útil](#material-útil)
     + [Parametros padrão de uma Function](#parametros-padrão-de-uma-function)
-      - [Material Complementar](#material-complementar-1)
-    + [Desestruturação de objetos e listas](#destructuring-objects-and-arrays)
-      - [Explicação com Exemplo](#explanation-with-sample-code)
-      - [Material Útil](#useful-resources-1)
+      - [Material Complementar](#material-complementar)
+    + [Desestruturação de objetos e arrays](#desestruturação-de-objetos-e-arrays)
+      - [Explicação com exemplo de código](#explicação-com-exemplo-de-código)
+      - [Material Útil](#material-útil-1)
     + [Metodos de lista - map / filter / reduce](#array-methods---map--filter--reduce)
       - [Exemplo](#sample-code-2)
       - [Explicação](#explanation)
@@ -287,7 +287,7 @@ person = ["Nick"] // lança um erro, porque a reatribuição não é permitida c
 - [Como let e const são escopados em JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
 - [Zona temporal Inoperante (TDZ) desmistificada](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
 
-### <a name="arrow_func_concept"></a> Função de seta
+### <a name="função-de-seta"></a> Função de seta
 
 A atualização do JavaScript ES6 introduziu *funções de seta*, que é outra maneira de declarar e usar funções. Aqui estão os benefícios que elas trazem:
 
@@ -471,3 +471,109 @@ Em outras palavras, se você passar um *null* o parâmetro padrão **não irá s
 
 - [Default parameter value - ES6 Features](http://es6-features.org/#DefaultParameterValues)
 - [Default parameters - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+
+### Desestruturação de objetos e arrays
+
+*Desestruturação* é uma maneira conveniente de criar novas variáveis extraindo alguns valores de dados armazenados em objetos ou arrays (matrizes).
+
+Para nomear alguns casos de uso, *desestruturação* pode ser usado para desestruturar parâmetros de função ou *this.props* em projetos React, por exemplo.
+
+#### Explicação com exemplo de código
+
+- Objeto
+
+Vamos considerar o seguinte objeto para todos os exemplos:
+
+```js
+const person = {
+  firstName: "Nick",
+  lastName: "Anderson",
+  age: 35,
+  sex: "M"
+}
+```
+
+Sem desestruturação
+
+```js
+const first = person.firstName;
+const age = person.age;
+const city = person.city || "Paris";
+```
+
+Com desestruturação, tudo em uma única linha:
+
+```js
+const { firstName: first, age, city = "Paris" } = person; // É isso ! :)
+
+console.log(age) // 35 -- uma nova variável age é criada e é igual a person.age
+console.log(first) // "Nick" -- uma nova variável first é criada e é igual person.firstName
+console.log(firstName) // ReferenceError -- person.firstName existe MAS a nova variável criada é nomeada primeiro
+console.log(city) // "Paris" -- uma nova variável city é criada e uma vez que person.city é indefinida, city é igual ao valor padrão fornecido "Paris".
+```
+
+**Nota :** Em ```const { age } = person;```, os colchetes depois da palavra-chave *const* não são usados para declarar um objeto nem um bloco, mas é a sintaxe da *desestruturação*.
+
+- Parâmetros de função
+
+*Desestruturação* é freqüentemente usado para desestruturar parâmetros de objetos em funções.
+
+Sem desestruturação
+
+```js
+function joinFirstLastName(person) {
+  const firstName = person.firstName;
+  const lastName = person.lastName;
+  return firstName + '-' + lastName;
+}
+
+joinFirstLastName(person); // "Nick-Anderson"
+```
+
+Ao desestruturar o parâmetro de objeto *person*, obtemos uma função mais concisa:
+
+```js
+function joinFirstLastName({ firstName, lastName }) { // criamos variáveis firstName e lastName por desestruturação person parameter
+  return firstName + '-' + lastName;
+}
+
+joinFirstLastName(person); // "Nick-Anderson"
+```
+
+A desestruturação é ainda mais agradável para usar com [funções de seta] (#função-de-seta):
+
+```js
+const joinFirstLastName = ({ firstName, lastName }) => firstName + '-' + lastName;
+
+joinFirstLastName(person); // "Nick-Anderson"
+```
+
+- Array (Matriz)
+
+Vamos considerar a seguinte array:
+
+```js
+const myArray = ["a", "b", "c"];
+```
+
+Sem desestruturação
+
+```js
+const x = myArray[0];
+const y = myArray[1];
+```
+
+Com desestruturação
+
+```js
+const [x, y] = myArray; // É isso !
+
+console.log(x) // "a"
+console.log(y) // "b"
+```
+
+#### Material Útil
+
+- [ES6 Features - Destructuring Assignment (Funcionalidades ES6 - Atribuição de Destruturação)](http://es6-features.org/#ArrayMatching)
+- [Destructuring Objects - WesBos](http://wesbos.com/destructuring-objects/)
+- [ExploringJS - Destructuring](http://exploringjs.com/es6/ch_destructuring.html)
