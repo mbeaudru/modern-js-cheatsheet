@@ -45,8 +45,8 @@ Se você estiver com dificuldades em entender alguma coisa, eu sugiro que você 
         * [Concisão](#concisão)
         * [Referência *this*](#referência-this)
       - [Material Útil](#material-útil)
-    + [Parametros padrão de uma Function](#function-default-parameter-value)
-      - [Material Complementar](#external-resource-1)
+    + [Parametros padrão de uma Function](#parametros-padrão-de-uma-function)
+      - [Material Complementar](#material-complementar-1)
     + [Desestruturação de objetos e listas](#destructuring-objects-and-arrays)
       - [Explicação com Exemplo](#explanation-with-sample-code)
       - [Material Útil](#useful-resources-1)
@@ -439,6 +439,35 @@ function myFunc() {
 
 #### Material Útil
 
-- [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
+- [Arrow functions introduction (Introdução à Funções de Seta) - WesBos](http://wesbos.com/arrow-functions/)
 - [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 - [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
+
+### Parametros padrão de uma Function
+
+A partir da atualização do JavaScript ES2015, você pode definir um valor padrão para os parâmetros da função usando a seguinte sintaxe:
+
+```js
+function myFunc(x = 10) {
+  return x;
+}
+console.log(myFunc()) // 10 -- nenhum valor é fornecido então o valor padrão de x que é 10 será atribuído a x em myFunc
+console.log(myFunc(5)) // 5 -- um valor é fornecido então x é igual a 5 em myFunc
+
+console.log(myFunc(undefined)) // 10 -- um valor undefined é fornecido então o valor padrão é atribuído para x
+console.log(myFunc(null)) // null -- um valor (null) é fornecido, veja abaixo para mais detalhes neste caso
+```
+
+O valor de parâmetro padrão é aplicado em duas e somente duas situações:
+
+- Nenhum parâmetro fornecido
+- *undefined* parâmetro fornecido
+
+Em outras palavras, se você passar um *null* o parâmetro padrão **não irá ser aplicado**.
+
+> **Nota:** Atribuição de valor padrão também pode ser usada com parâmetros desestruturados (veja o próximo conceito para ver um exemplo)
+
+#### Material Complementar
+
+- [Default parameter value - ES6 Features](http://es6-features.org/#DefaultParameterValues)
+- [Default parameters - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
