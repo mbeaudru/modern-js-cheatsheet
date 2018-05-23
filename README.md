@@ -1265,7 +1265,7 @@ class Person {
   }
 
   stringSentence() {
-    return "Hello, my name is " + this.name + " and I'm " + this.age;
+    return `Hello, my name is ${this.name} and I am ${this.age}`;
   }
 }
 
