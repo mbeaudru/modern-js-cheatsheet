@@ -132,21 +132,21 @@
 <th><a href="#tdz_sample">Временная мертвая зона</a></th>
 </tr>
 <tr>
-<th>`const`</th>
+<th>const</th>
 <td>Блок</td>
 <td>Нет</td>
 <td><a href="#const_mutable_sample">Да</a></td>
 <td>Да</td>
 </tr>
 <tr>
-<th>`let`</th>
+<th>let</th>
 <td>Блок</td>
 <td>Да</td>
 <td>Да</td>
 <td>Да</td>
 </tr>
 <tr>
-<th>`var`</th>
+<th>var</th>
 <td>Функция</td>
 <td>Да</td>
 <td>Да</td>
