@@ -1239,7 +1239,7 @@ JavaScript is a [prototype-based](https://en.wikipedia.org/wiki/Prototype-based_
 
 The word *class* is indeed error prone if you are familiar with classes in other languages. If you do, avoid assuming how JavaScript classes work on this basis and consider it an entirely different notion.
 
-Since this document is not an attempt to teach you the language from the ground up, I will believe you know what prototypes are and how they behave. If you do not, see the external resources listed below the sample code.
+Since this document is not an attempt to teach you the language from the ground up, I will assume you know what prototypes are and how they behave. If you do not, see the external resources listed below the sample code.
 
 #### Samples
 
@@ -1713,7 +1713,7 @@ The `static` keyword is used in classes to declare static methods. Static method
 #### Sample code
 
 ```js
-class Repo{
+class Repo {
   static getName() {
     return "Repo name is modern-js-cheatsheet"
   }
@@ -1735,12 +1735,12 @@ Static methods can be called within another static method by using the `this` ke
 To call a static method from another static method, the `this` keyword can be used like so;
 
 ```js
-class Repo{
+class Repo {
   static getName() {
     return "Repo name is modern-js-cheatsheet"
   }
 
-  static modifyName(){
+  static modifyName() {
     return this.getName() + '-added-this'
   }
 }
@@ -1756,12 +1756,12 @@ Non-static methods can call static methods in 2 ways;
 To get access to a static method from a non-static method we use the class name and call the static method like a property. e.g `ClassName.StaticMethodName`
 
 ```js
-class Repo{
+class Repo {
   static getName() {
     return "Repo name is modern-js-cheatsheet"
   }
 
-  useName(){
+  useName() {
     return Repo.getName() + ' and it contains some really important stuff'
   }
 }
@@ -1776,12 +1776,12 @@ console.log(r.useName()) // Repo name is modern-js-cheatsheet and it contains so
 Static methods can be called as properties on the constructor object.
 
 ```js
-class Repo{
+class Repo {
   static getName() {
     return "Repo name is modern-js-cheatsheet"
   }
 
-  useName(){
+  useName() {
     // Calls the static method as a property of the constructor
     return this.constructor.getName() + ' and it contains some really important stuff'
   }
