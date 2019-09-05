@@ -3,7 +3,7 @@
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
 <sub>Image Credits: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</sub>
 
-If you liked this content, you can ping me or follow me on Twitter :+1:
+> If you like this content, you can ping me or follow me on Twitter :+1:
 
 [![Tweet for help](https://img.shields.io/twitter/follow/mbeaudru?label=Tweet%20%40mbeaudru&style=social)](https://twitter.com/mbeaudru/)
 
