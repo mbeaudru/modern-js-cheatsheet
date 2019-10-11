@@ -62,6 +62,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
         * [Array.prototype.map()](#arrayprototypemap)
         * [Array.prototype.filter()](#arrayprototypefilter)
         * [Array.prototype.reduce()](#arrayprototypereduce)
+        * [Array.prototype.find()](#arrayprototypefind)
       - [External Resource](#external-resource-2)
     + [Spread operator "..."](#spread-operator-)
       - [Sample code](#sample-code-3)
@@ -607,19 +608,20 @@ console.log(y) // "b"
 - [Destructuring Objects - WesBos](http://wesbos.com/destructuring-objects/)
 - [ExploringJS - Destructuring](http://exploringjs.com/es6/ch_destructuring.html)
 
-### Array methods - map / filter / reduce
+### Array methods - map / filter / reduce / find
 
-*Map*, *filter* and *reduce* are array methods that are coming from a programming paradigm named [*functional programming*](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0).
+*Map*, *filter*, *reduce* and *find* are array methods that are coming from a programming paradigm named [*functional programming*](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0).
 
 To sum it up:
 
 - **Array.prototype.map()** takes an array, does something on its elements and returns an array with the transformed elements.
 - **Array.prototype.filter()** takes an array, decides element by element if it should keep it or not and returns an array with the kept elements only
 - **Array.prototype.reduce()** takes an array and aggregates the elements into a single value (which is returned)
+- **Array.prototype.find()** takes an array, and returns the first element that satisfies the provided condition.
 
 I recommend to use them as much as possible in following the principles of functional programming because they are composable, concise and elegant.
 
-With those three methods, you can avoid the use of *for* and *forEach* loops in most situations. When you are tempted to do a *for* loop, try to do it with *map*, *filter* and *reduce* composed. You might struggle to do it at first because it requires you to learn a new way of thinking, but once you've got it things get easier.
+With those four methods, you can avoid the use of *for* and *forEach* loops in most situations. When you are tempted to do a *for* loop, try to do it with *map*, *filter*, *reduce* and *find* composed. You might struggle to do it at first because it requires you to learn a new way of thinking, but once you've got it things get easier.
 
 #### Sample code
 
@@ -628,6 +630,7 @@ const numbers = [0, 1, 2, 3, 4, 5, 6];
 const doubledNumbers = numbers.map(n => n * 2); // [0, 2, 4, 6, 8, 10, 12]
 const evenNumbers = numbers.filter(n => n % 2 === 0); // [0, 2, 4, 6]
 const sum = numbers.reduce((prev, next) => prev + next, 0); // 21
+const greaterThanFour = numbers.find((n) => n>4); // 5
 ```
 
 Compute total grade sum for students with grades 10 or above by composing map, filter and reduce:
@@ -783,6 +786,21 @@ Function returns *acc* + *n* --> 3 + 3 --> 6
 Function returns *acc* + *n* --> 15 + 6 --> 21
 
 As it is the last iteration step, **.reduce** returns 21.
+
+##### Array.prototype.find()
+
+```js
+const greaterThanZero = numbers.find(function(n) {
+  return n > 0; // return number just greater than 0 is present
+});
+console.log(greaterThanZero); // 1
+```
+
+**Note** : You will frequently encounter this method used in combination with [arrow functions](#-arrow-function)
+
+We are using .find on the *numbers* array, .find is iterating on each element of the array and passes it to our function, until the condition is met. The goal of the function is to return the element that satisfies the current testing function. The .find method executes the callback function once for each index of the array until the callback returns a truthy value.
+
+**Note** : It immediately returns the value of that element (that satisfies the condition) if found. Otherwise, returns undefined.
 
 #### External Resource
 
