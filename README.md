@@ -132,7 +132,7 @@ In JavaScript, there are three keywords available to declare a variable, and eac
 
 Variables declared with ```const``` keyword can't be reassigned, while ```let``` and ```var``` can.
 
-I recommend always declaring your variables with ```const``` by default, and with ```let``` if you need to *mutate* it or reassign it later.
+I recommend always declaring your variables with ```const``` by default, but with ```let``` if it is a variable that you need to *mutate* or reassign later.
 
 <table>
   <tr>
