@@ -1,4 +1,4 @@
-﻿﻿# <a name="modern-javascript-cheatsheet"></a>Współczesny JavaScript - ściągawka
+# <a name="modern-javascript-cheatsheet"></a>Współczesny JavaScript - ściągawka
 
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
 <small>Image Credits: [Ahmad Awais ⚡️](https://github.com/ahmadawais)</small>
