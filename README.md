@@ -439,7 +439,7 @@ Without arrow function, if you wanted to access a variable from *this* in a func
 For instance, using setTimeout function inside myFunc:
 
 ```js
-function myFunc() {
+new (function () {
   this.myVar = 0;
   var that = this; // that = this trick
   setTimeout(
@@ -451,13 +451,13 @@ function myFunc() {
     },
     0
   );
-}
+})()
 ```
 
 But with arrow function, *this* is taken from its surrounding:
 
 ```js
-function myFunc() {
+new (function () {
   this.myVar = 0;
   setTimeout(
     () => { // this taken from surrounding, meaning myFunc here
@@ -466,7 +466,7 @@ function myFunc() {
     },
     0
   );
-}
+})()
 ```
 
 #### Useful resources
