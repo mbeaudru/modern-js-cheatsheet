@@ -13,3 +13,17 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
 در کنار این، تلاش می‌کنم گاهی نکاتی شخصی را ارائه دهم که ممکن است بحث برانگیز باشند اما هر کجا به آن‌ها اشاره کنم، بیان خواهم کرد که آن موارد، پیشنهادهای شخصی‌ام هستند.
 
 > **نکته:** بیشتر مفاهمیمی که اینجا معرفی می‌شوند از به‌روزرسانی زبان جاوااسکریپت (ES2015 یا آن‌طور که معمولا گفته می‌شود ES6) می‌آیند. می‌توانید ویژگی‌های جدیدی که در این به‌روزرسانی اضافه شده‌اند را [این‌ جا](http://es6-features.org/) پیدا کنید که بسیار خوب ارائه شده‌اند.
+
+## منابع مکمل
+پیشنهاد می‌کنم وقتی در درک یک مفهوم دچار مشکل می‌شوید، در منابع زیر دنبال پاسخ بگردید:
+
+- [MDN (Mozilla Developer Network)](https://developer.mozilla.org/en-US/search?q=)
+- [You don't know JS (book)](https://github.com/getify/You-Dont-Know-JS)
+- [Eloquent JavaScript (book)](https://eloquentjavascript.net)
+- [Douglas Crockford's blog](https://www.crockford.com/javascript/)
+- [ES6 Features with examples](http://es6-features.org)
+- [Wes Bos blog (ES6)](http://wesbos.com/category/es6/)
+- [Javascript Basics for Beginners](https://www.udacity.com/course/javascript-basics--ud804) - a free Udacity course
+- [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
+- [Google](https://www.google.com/) to find specific blog and resources
+- [StackOverflow](https://stackoverflow.com/questions/tagged/javascript)
