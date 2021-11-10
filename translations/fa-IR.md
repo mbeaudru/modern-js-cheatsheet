@@ -27,3 +27,12 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
 - [Google](https://www.google.com/) to find specific blog and resources
 - [StackOverflow](https://stackoverflow.com/questions/tagged/javascript)
+
+## فهرست مطالب
+
+- [برگه تقلب جاوااسکریپت مدرن](#برگه-تقلب-جاوااسکریپت-مدرن)
+  * [مقدمه](#مقدمه)
+    + [انگیزه](#انگیزه)
+    + [منابع مکمل](#منابع-مکمل)
+  * [فهرست مطالب](#فهرست-مطالب)
+
