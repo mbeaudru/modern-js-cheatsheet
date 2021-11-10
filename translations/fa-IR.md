@@ -158,3 +158,49 @@ let myVar = 2;
 let myVar = 3; // SyntaxError
 ```
 
+##### استفاده از const
+
+متغیرهای اعلان شده با `const` مشابه متغیرهای `let` رفتار می‌کنند با این تفاوت که قابل مقداردهی مجدد نیستند. به طور خلاصه، متغیرهای `const`:
+
+- *در قلمروی بلوک* هستند
+- پیش از مقداردهی قابل دسترسی نیستند
+- نمی‌توانند در همان قلمرو بازاعلان شوند
+- نمی‌توانند مقداردهی مجدد شوند
+
+```js
+const myVar = "Nick";
+myVar = "John" // خطایی می‌بینید که مقداردهی مجدد ممکن نیست
+```
+
+```js
+const myVar = "Nick";
+const myVar = "John" // خطایی می‌بینید که اعلان مجدد ممکن نیست
+```
+
+اما یک نکته ظریف در این جا وجود دارد: متغیرهای `const` تغییرناپذیر یا immutable نیستند! به معنای دقیق‌تر، آرایه‌ها و شیءهایی که با `const` اعلان شده‌اند **می‌توانند** تغییر کنند.
+
+برای شی‌ءها:
+
+```js
+const person = {
+  name: 'Nick'
+};
+person.name = 'John' // کار می‌کند چون این متغیر کاملا مقداردهی نشده، می‌تواند تغییر کند
+console.log(person.name) // "John"
+person = "Sandra" // خطا دریافت خواهید کرد چون قابل مقداردهی مجدد نیست
+```
+
+برای آرایه‌ها:
+
+```js
+const person = [];
+person.push('John'); // کار می‌کند چون این متغیر کاملا مقداردهی نشده، می‌تواند تغییر کند
+console.log(person[0]) // "John"
+person = ["Nick"] // خطا دریافت خواهید کرد چون قابل مقداردهی مجدد نیست
+```
+
+#### منابع خارجی
+
+
+- [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
+- [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
