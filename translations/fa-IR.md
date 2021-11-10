@@ -48,6 +48,8 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
         - [اختصار](#اختصار)
         - [ارجاع this](#ارجاع-this)
       - [منابع مفید](#منابع-مفید)
+    - [مقدار پیش‌فرض پارامتر تابع](#مقدار-پیشفرض-پارامتر-تابع)
+      - [منابع خارجی](#منابع-خارجی-1)
     
 ## مفاهیم
 
@@ -374,3 +376,33 @@ function myFunc() {
 - [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
 - [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 - [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
+
+
+### مقدار پیش‌فرض پارامتر تابع
+
+از به‌روزرسانی ES2015 جاوااسکریپت می‌توانید با نحو زیر، مقدار پیش‌فرض برای پارامترهای تابع تنظیم کنید:
+
+```js
+function myFunc(x = 10) {
+  return x;
+}
+console.log(myFunc()) // 10
+console.log(myFunc(5)) // 5
+
+console.log(myFunc(undefined)) // 10
+console.log(myFunc(null)) // null
+```
+
+پارامتر پیش‌فرض تنها در دو و فقط دو موقعیت اعمال می‌شود:
+
+- پارامتری ارائه نشده باشد
+- پارامتر *undefined* ارائه شده باشد
+
+به بیان دیگر، اگر مقدار *null* را به پارامتر پیش‌فرض بدهید، این مقدار **اعمال نخواهد شد**.
+
+> **نکته:** تخصیص مقدار پیش‌فرض می‌تواند با پارامترهای destructured هم استفاده شود (مفهوم بعدی را برای مثال ببینید)
+
+#### منابع خارجی
+
+- [Default parameter value - ES6 Features](http://es6-features.org/#DefaultParameterValues)
+- [Default parameters - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
