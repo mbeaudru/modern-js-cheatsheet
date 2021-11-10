@@ -362,3 +362,9 @@ function myFunc() {
   );
 }
 ```
+
+#### منابع مفید
+
+- [Arrow functions introduction - WesBos](http://wesbos.com/arrow-functions/)
+- [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
