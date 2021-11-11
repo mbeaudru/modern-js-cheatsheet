@@ -77,6 +77,9 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
         - [ساخت یک وعده](#ساخت-یک-وعده)
         - [به‌کارگیری گرداننده وعده](#بهکارگیری-گرداننده-وعده)
       - [منابع خارجی](#منابع-خارجی-4)
+    - [قالب لفظی (Template literals)](#قالب-لفظی-template-literals)
+      - [نمونه کد](#نمونه-کد-5)
+      - [منابع خارجی](#منابع-خارجی-5)
 
 ## مفاهیم
 
@@ -1004,3 +1007,22 @@ xFetcherPromise
 - [JavaScript Promises: an Introduction - Jake Archibald](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
 - [Promise documentation - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
+### قالب لفظی (Template literals)
+
+قالب لفظی یک «درج عبارت» یا [*expression interpolation*](https://en.wikipedia.org/wiki/String_interpolation) برای رشته‌های تک یا چندخطی است.
+
+به عبارت دیگر، یک نحو جدید رشته است که در آن می‌توانید به راحتی هر گونه عبارت (مثلا متغیرها) جاوااسکریپتی را استفاده کنید.
+
+#### نمونه کد
+
+```js
+const name = "Nick";
+`Hello ${name}, the following expression is equal to four : ${2+2}`;
+
+// Hello Nick, the following expression is equal to four: 4
+```
+
+#### منابع خارجی
+
+- [String interpolation - ES6 Features](http://es6-features.org/#StringInterpolation)
+- [ES6 Template Strings - Addy Osmani](https://developers.google.com/web/updates/2015/01/ES6-Template-Strings)
