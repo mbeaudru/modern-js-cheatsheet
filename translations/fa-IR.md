@@ -532,4 +532,30 @@ console.log(y) // "b"
 
 با این چهار متدی که اشاره شد، می‌توانید در موارد بسیاری از به کار بردن حلقه *for* و *forEach* اجتناب کنید. به جای حلقه *for* سعی کنید از ترکیب این چهار متد استفاده کنید. شاید در نگاه اول قدری چالش برانگیز باشد. طبیعی است چون لازم است روش جدیدی برای اندیشیدن را فرابگیرید. اما وقتی این مهارت را فرابگیرید، کارها آسان‌تر می‌شوند.
 
+#### نمونه کد
+
+```js
+const numbers = [0, 1, 2, 3, 4, 5, 6];
+const doubledNumbers = numbers.map(n => n * 2); // [0, 2, 4, 6, 8, 10, 12]
+const evenNumbers = numbers.filter(n => n % 2 === 0); // [0, 2, 4, 6]
+const sum = numbers.reduce((prev, next) => prev + next, 0); // 21
+const greaterThanFour = numbers.find((n) => n>4); // 5
+```
+محاسبه مجموع نمرات دانش‌آموزانی که نمره ۱۰ یا بالاتر گرفته‌اند با کمک ترکیب متدهای map و filter و reduce:
+
+```js
+const students = [
+  { name: "Nick", grade: 10 },
+  { name: "John", grade: 15 },
+  { name: "Julia", grade: 19 },
+  { name: "Nathalie", grade: 9 },
+];
+
+const aboveTenSum = students
+  .map(student => student.grade) // ‫ما آرایه student را روی آرایه‌ای از نمره‌های‌شان نگاشت (map) کردیم
+  .filter(grade => grade >= 10) // ‫ما آرایه grades را به منظور نگه‌داشتن نمره‌های ۱۰ و بالاتر مورد پالایش (filter) قرار دادیم
+  .reduce((prev, next) => prev + next, 0); // همه نمره‌های ۱۰ و بالاتر را یک به یک با هم جمع کردیم 
+
+console.log(aboveTenSum) // 44 -- 10 (Nick) + 15 (John) + 19 (Julia), Nathalie below 10 is ignored
+```
 
