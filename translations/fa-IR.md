@@ -913,3 +913,88 @@ console.log(myObj.y) // 20
 #### منابع خارجی
 
 - [Property shorthand - ES6 Features](http://es6-features.org/#PropertyShorthand)
+
+### وعده‌ها (Promises)
+
+وعده یا promise یک شیء است که می‌تواند به صورت هم‌گام از یک تابع ناهم‌گام بازگردانده شود. ([ارجاع](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)).
+
+وعده‌ها می‌توانند برای پرهیز از دوزخ callback یا [callback hell](http://callbackhell.com/) استفاده شوند که در پروژه‌های مدرن جاوااسکریپت به کرات بروز می‌کنند.
+
+
+#### نمونه کد
+
+```js
+const fetchingPosts = new Promise((res, rej) => {
+  $.get("/posts")
+    .done(posts => res(posts))
+    .fail(err => rej(err));
+});
+
+fetchingPosts
+  .then(posts => console.log(posts))
+  .catch(err => console.log(err));
+```
+
+#### توضیح
+
+وقتی که یک *درخواست ای‌جکس* می‌فرستید، پاسخ به‌هنگام یا هم‌گام نیست زیرا زمانی طول می‌کشد تا پاسخ این درخواست دریافت شود. حتی ممکن است به به دلیل دردسترس نبودن خدمت مورد نظر، این پاسخ هرگز به دست ما نرسد.
+
+برای مدیریت چنین شرایطی، ES2015 *وعده‌ها* یا Promises را به ما هدیه داده است. وعده‌ها می‌توانند یکی از سه حالت وضعیت را داشته باشند:
+
+- معلق (Pending)
+- محقق شده (Fulfilled)
+- رد شده (Rejected)
+
+در نظر بگیرید که می‌خواهیم از وعده‌ها برای مدیریت یک درخواست ای‌جکس برای واکشی منبع X استفاده کنیم.
+
+##### ساخت یک وعده
+
+ابتدا یک وعده را می‌سازیم. از متد get جی‌کوئری برای فرستادن درخواست ای‌جکش به X استفاده خواهیم کرد.
+
+```js
+const xFetcherPromise = new Promise( // ‫با کلیدواژه new یک وعده می‌سازیم و آن را در یک متغیر ذخیره می‌کنیم
+  function(resolve, reject) { //‫ سازنده وعده یک پارامتر تابع دریافت می‌کند که خودش دو پارامتر resolve و reject دارد
+    $.get("X") // درخواست ای‌جکس را می‌فرستیم
+      .done(function(X) { //‫ وقتی درخواست فرستاده شد...
+        resolve(X); //‫ ...وعده با مقدار X به عنوان پارامتر رفع می‌شود
+      })
+      .fail(function(error) { //‫ اگر درخواست با شکست مواجه شود...
+        reject(error); //‫ ...وعده با خطایی به عنوان پارامتر رد می‌شود
+      });
+  }
+)
+```
+
+همان طور که در مثال بالا دیده می‌شود، شیء Promise یک تابع *اجراکننده* (executor) دریافت می‌کند که خودش دو پارامتر **resolve** و **reject** می‌گیرد. این پارامترها توابعی هستند که وقتی صدا زده شوند، متناسب با شرایطی که حادث می‌شود وضعیت وعده را به *محقق شده* یا *رد شده* تغییر می‌دهند.
+
+وعده بعد از این جا ساخته می‌شود وارد وضعیت معلق می‌شود و تابع *اجرا کننده* بلادرنگ اجرا می‌شود. به محض صدا زده شدن *resolve* یا *reject* در تابع اجرا کننده، وعده اقدام به فراخوانی گرداننده (handler) مرتبط می‌کند.
+
+##### به‌کارگیری گرداننده وعده
+
+برای دریافت نتیجه (یا خطای) وعده بایستی به این شکل گرداننده‌ای به آن الصاق کنیم:
+
+```js
+xFetcherPromise
+  .then(function(X) {
+    console.log(X);
+  })
+  .catch(function(err) {
+    console.log(err)
+  })
+```
+
+اگر وعده با موفقیت انجام شود، *resolve* اجرا شده و تابعی به صورت پارامتر ‪`.then`‬ وارد شده است اجرا خواهد شد.
+
+اگر به شکست بخورد، *reject* اجرا شده و تابعی که به صورت پارامتر به ‪`.catch`‬ وارد شده است اجرا خواهد شد.
+
+> **نکته:** اگر وعده پیش از الصاق گرداننده، محقق یا رد شده باشد، گرداننده فراخوانده خواهد شد. مسابقه‌ای بین کامل شدن عملیات ناهم‌گام و الصاق شدن گرداننده‌های آن نیست. [ارجاع](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Description)
+
+#### منابع خارجی
+
+- [JavaScript Promises for dummies - Jecelyn Yeen](https://scotch.io/tutorials/javascript-promises-for-dummies)
+- [JavaScript Promise API - David Walsh](https://davidwalsh.name/promises)
+- [Using promises - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)
+- [What is a promise - Eric Elliott](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
+- [JavaScript Promises: an Introduction - Jake Archibald](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
+- [Promise documentation - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
