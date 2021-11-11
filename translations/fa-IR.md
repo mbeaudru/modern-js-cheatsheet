@@ -80,6 +80,8 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
     - [قالب لفظی (Template literals)](#قالب-لفظی-template-literals)
       - [نمونه کد](#نمونه-کد-5)
       - [منابع خارجی](#منابع-خارجی-5)
+    - [قالب لفظی برچسب‌دار](#قالب-لفظی-برچسبدار)
+      - [منابع خارجی](#منابع-خارجی-6)
 
 ## مفاهیم
 
@@ -1026,3 +1028,48 @@ const name = "Nick";
 
 - [String interpolation - ES6 Features](http://es6-features.org/#StringInterpolation)
 - [ES6 Template Strings - Addy Osmani](https://developers.google.com/web/updates/2015/01/ES6-Template-Strings)
+
+### قالب لفظی برچسب‌دار
+
+برچسب‌های قالب *توابعی هستند که می‌توانند به صورت پیش‌وند به [قالب‌های لفظی](#قالب-لفظی-template-literals) متصل شوند*. وقتی یک تابع به این روش صدا زده می‌شود اولین پارامتر، یک آرایه از *رشته‌ها* است که بین متغیرهای درج قالب ظاهرا می‌شوند و پارامتر بعدی مقادری است که باید درج شوند. از یک عملگر گسترش `...` برای دستیابی به همه آن‌ها بهره ببرید. [(مرجع)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
+
+> **نکته:** کتابخانه معروفی به نام [styled-components](https://www.styled-components.com/) به شدت به این ویژگی متکی است.
+
+این مثالی است از این که این قابلیت چگونه کار می‌کند:
+
+```js
+function highlight(strings, ...values) {
+  const interpolation = strings.reduce((prev, current) => {
+    return prev + current + (values.length ? "<mark>" + values.shift() + "</mark>" : "");
+  }, "");
+
+  return interpolation;
+}
+
+const condiment = "jam";
+const meal = "toast";
+
+highlight`I like ${condiment} on ${meal}.`;
+// "I like <mark>jam</mark> on <mark>toast</mark>."
+```
+
+مثالی جالب‌تر:
+
+```js
+function comma(strings, ...values) {
+  return strings.reduce((prev, next) => {
+    let value = values.shift() || [];
+    value = value.join(", ");
+    return prev + next + value;
+  }, "");
+}
+
+const snacks = ['apples', 'bananas', 'cherries'];
+comma`I like ${snacks} to snack on.`;
+// "I like apples, bananas, cherries to snack on."
+```
+
+#### منابع خارجی
+- [Wes Bos on Tagged Template Literals](http://wesbos.com/tagged-template-literals/)
+- [Library of common template tags](https://github.com/declandewet/common-tags)
+
