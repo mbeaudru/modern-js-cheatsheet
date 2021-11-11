@@ -53,6 +53,14 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
     - [تجزیه اشیاء و آرایه‌ها](#تجزیه-اشیاء-و-آرایهها)
       - [توضیح با مثال](#توضیح-با-مثال)
       - [منابع مفید](#منابع-مفید-1)
+    - [متدهای آرایه - map / filter / reduce / find](#متدهای-آرایه-map-filter-reduce-find)
+      - [نمونه کد](#نمونه-کد-2)
+      - [توضیح](#توضیح)
+        - [متد ‪Array.prototype.map()‬](#متد-arrayprototypemap)
+        - [متد ‪Array.prototype.filter()‬](#متد-arrayprototypefilter)
+        - [متد ‪Array.prototype.reduce()‬](#متد-arrayprototypereduce)
+        - [متد ‪Array.prototype.find()‬](#متد-arrayprototypefind)
+      - [منبع خارجی](#منبع-خارجی)
     
 ## مفاهیم
 
