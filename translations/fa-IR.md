@@ -483,3 +483,33 @@ const joinFirstLastName = ({ firstName, lastName }) => firstName + '-' + lastNam
 joinFirstLastName(person); // "Nick-Anderson"
 ```
 
+
+- آرایه
+
+آرایه زیر را در نظر بگیریم:
+
+```js
+const myArray = ["a", "b", "c"];
+```
+
+بدون تجزیه کردن
+
+```js
+const x = myArray[0];
+const y = myArray[1];
+```
+
+با تجزیه کردن
+
+```js
+const [x, y] = myArray; // همین و پس
+
+console.log(x) // "a"
+console.log(y) // "b"
+```
+
+#### منابع مفید
+
+- [ES6 Features - Destructuring Assignment](http://es6-features.org/#ArrayMatching)
+- [Destructuring Objects - WesBos](http://wesbos.com/destructuring-objects/)
+- [ExploringJS - Destructuring](http://exploringjs.com/es6/ch_destructuring.html)
