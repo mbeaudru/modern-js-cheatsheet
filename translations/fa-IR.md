@@ -516,3 +516,20 @@ console.log(y) // "b"
 - [ES6 Features - Destructuring Assignment](http://es6-features.org/#ArrayMatching)
 - [Destructuring Objects - WesBos](http://wesbos.com/destructuring-objects/)
 - [ExploringJS - Destructuring](http://exploringjs.com/es6/ch_destructuring.html)
+
+### متدهای آرایه - map / filter / reduce / find
+
+خواستگاه متدهای *Map*، *filter*، *reduce* و *find* برای آرایه، یک پارادایم برنامه‌نویسی به نام برنامه‌نویسی تابعی یا [*functional programming*](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0) است.
+
+به طور خلاصه:
+
+- متد ‪**Array.prototype.map()**‬ یک آرایه دریافت می‌کند، کاری روی تک تک اعضای آن انجام می‌دهد و آرایه‌ای حاوی اعضای تغییریافته باز می‌گرداند.
+- متد ‪**Array.prototype.filter()**‬ یک آرایه دریافت می‌کند، عضو به عضو پیش می‌رود و تصمیم می‌گیرد که آیا آن عضو در آرایه‌ای که بازگشت داده خواهد شد باقی بماند یا خیر. نهایتا هم یک آرایه از اعضای تایید شده را باز می‌گرداند.
+- متد ‪**Array.prototype.reduce()**‬ یک آرایه دریافت ی‌کند اعضای آن را روی هم ریخته و به صورت یک مقدار واحد باز می‌گرداند.
+- متد ‪**Array.prototype.find()**‬ یک آرایه دریافت می‌کند و اولین عضوی را که شرط اعلام شده را داشته باشد باز می‌گرداند.
+
+پیشنهاد می‌کنم که تا می‌توانید از اصول برنامه‌نویسی تابعی بهره ببرید زیرا قابل ترکیب، موجز و زیبا هستند.
+
+با این چهار متدی که اشاره شد، می‌توانید در موارد بسیاری از به کار بردن حلقه *for* و *forEach* اجتناب کنید. به جای حلقه *for* سعی کنید از ترکیب این چهار متد استفاده کنید. شاید در نگاه اول قدری چالش برانگیز باشد. طبیعی است چون لازم است روش جدیدی برای اندیشیدن را فرابگیرید. اما وقتی این مهارت را فرابگیرید، کارها آسان‌تر می‌شوند.
+
+
