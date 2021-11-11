@@ -723,3 +723,136 @@ console.log(greaterThanZero); // 1
 #### منبع خارجی
 
 - [Understanding map / filter / reduce in JS](https://hackernoon.com/understanding-map-filter-and-reduce-in-javascript-5df1c7eee464)
+
+### عملگر گسترش «...»
+
+عملگر گسترش `...` (spread) با ES2015 معرفی شد و برای گستردن عناصر یک متغیر قابل شمارش یا iterable (مانند یک آرایه) به مکان‌هایی است که چندین عنصر قابل جای‌گذاری هستند.
+
+#### نمونه کد
+
+```js
+const arr1 = ["a", "b", "c"];
+const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
+```
+
+```js
+function myFunc(x, y, ...params) {
+  console.log(x);
+  console.log(y);
+  console.log(params)
+}
+
+myFunc("a", "b", "c", "d", "e", "f")
+// "a"
+// "b"
+// ["c", "d", "e", "f"]
+```
+
+
+```js
+const { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
+console.log(x); // 1
+console.log(y); // 2
+console.log(z); // { a: 3, b: 4 }
+
+const n = { x, y, ...z };
+console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
+```
+
+#### توضیح
+
+##### در شمارش‌پذیرها (مانند آرایه)
+
+اگر دو آرایه زیر را داشته باشیم:
+
+```js
+const arr1 = ["a", "b", "c"];
+const arr2 = [arr1, "d", "e", "f"]; // [["a", "b", "c"], "d", "e", "f"]
+```
+
+در آرایه *arr2*، اولین عضو ما یک آرایه است چرا که *arr1* همان‌گونه که هست در *arr2* تزریق شده است. اما چیزی که می‌خواهیم این است که *arr2*، آرایه‌ای از حروف باشد. برای این منظور می‌توانید عناصر *arr1* را در *arr2* *گسترش* دهیم.
+
+با عملگر گسترش
+
+```js
+const arr1 = ["a", "b", "c"];
+const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
+```
+
+##### پارامتر باقی (rest) تابع
+
+در پارامترهای تابع می‌توانیم از عملگر باقی (rest) به منظور تزریق پارامترها به آرایه‌ای که رویش بتوانیم حلقه اجرا کنیم بهره می‌بریم. همواره یک شیء **arguments** همراه با هر تابعی وجود دارد که برابر است با آرایه‌ای از تمام پارامترهایی که به آن تابع حواله شده‌اند.
+
+```js
+function myFunc() {
+  for (var i = 0; i < arguments.length; i++) {
+    console.log(arguments[i]);
+  }
+}
+
+myFunc("Nick", "Anderson", 10, 12, 6);
+// "Nick"
+// "Anderson"
+// 10
+// 12
+// 6
+```
+
+اما حالتی را در نظر بگیرید که بخواهیم این تابع یک دانشجوی جدید همراه با معدل نمره‌هایش بسازد. آیا راحت‌تر نیست که که فقط دو پارامتر اول را استخراج کنیم و در دو متغیر مجزا قرار داده و سپس تمام نمره‌ها را آرایه‌ای بریزیم که بشود روی آن شمارش انجام داد؟
+
+این دقیقا همان کاری است که عملگر باقی به ما اجازهٔ انجامش را می‌دهد!
+
+```js
+function createStudent(firstName, lastName, ...grades) {
+  // firstName = "Nick"
+  // lastName = "Anderson"
+‪  // [10, 12, 6]
+  // به کمک «...» تمام دیگر پارامترهای را دریافت و در آرایه «grades» ذخیره می‌کنیم
+
+  const avgGrade = grades.reduce((acc, curr) => acc + curr, 0) / grades.length; //‫ معدل نمره‌های موجود در آرایه grades را محاسبه می‌کند
+
+  return {
+    firstName: firstName,
+    lastName: lastName,
+    grades: grades,
+    avgGrade: avgGrade
+  }
+}
+
+const student = createStudent("Nick", "Anderson", 10, 12, 6);
+console.log(student);
+// {
+//   firstName: "Nick",
+//   lastName: "Anderson",
+//   grades: [10, 12, 6],
+//   avgGrade: 9,33
+// }
+```
+
+> **نکته:** تابع createStudent تابع بدی است زیرا بررسی نمی‌کنیم که اساسا grades.length وجود دارد یا خیر و یا متفاوت از صفر است یا نه. اما چون خوانایی آن به این شکل بهتر بود، آن را این گونه نوشتم.
+
+##### گسترش خاصیت‌های شیء
+
+برای این مورد پیشنهاد می‌کنم توضیحات قبلی را درباره عملگر باقی بر روی پارامترهای تابع و عناصر شمارش‌پذیر (iterables) بخوانید.
+
+```js
+const myObj = { x: 1, y: 2, a: 3, b: 4 };
+const { x, y, ...z } = myObj; // تجزیه شیء
+console.log(x); // 1
+console.log(y); // 2
+console.log(z); // { a: 3, b: 4 }
+
+// متغیر z حاوی باقی مقادیر حاصل از تجزیهٔ شیء است: شیء myObj منهای مقادیر تجزیه شدهٔ x و y
+
+const n = { x, y, ...z };
+console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
+
+// اینجا z حاوی خاصیت‌های شیء است که در n گسترانده می‌شود.
+```
+
+#### منابع خارجی
+
+- [TC39 - Object rest/spread](https://github.com/tc39/proposal-object-rest-spread)
+- [Spread operator introduction - WesBos](https://github.com/wesbos/es6-articles/blob/master/28%20-%20Spread%20Operator%20Introduction.md)
+- [JavaScript & the spread operator](https://codeburst.io/javascript-the-spread-operator-a867a71668ca)
+- [6 Great uses of the spread operator](https://davidwalsh.name/spread-operator)
