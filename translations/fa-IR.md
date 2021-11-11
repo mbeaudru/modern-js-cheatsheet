@@ -863,3 +863,50 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 - [Spread operator introduction - WesBos](https://github.com/wesbos/es6-articles/blob/master/28%20-%20Spread%20Operator%20Introduction.md)
 - [JavaScript & the spread operator](https://codeburst.io/javascript-the-spread-operator-a867a71668ca)
 - [6 Great uses of the spread operator](https://davidwalsh.name/spread-operator)
+
+### میان‌بر خاصیت شیء
+
+در زمان نسبت دادن یک متغیری به یک خاصیت شیء، اگر هر دو دارای نام یک‌سان باشند می‌توانیم این کار را انجام دهیم:
+
+```js
+const x = 10;
+const myObj = { x };
+console.log(myObj.x) // 10
+```
+
+#### توضیح
+
+معمولا (پیش از ES2015) زمانی که یک *object literal* جدید تعریف می‌کنیم و بخواهیم متغیرها را به عنوان مقادیر خاصیت‌های شیء استفاده کنیم، باید چنین کدی بنویسیم:
+
+```js
+const x = 10;
+const y = 20;
+
+const myObj = {
+  x: x, // ‫نسبت دادن مقدار متغیر x به myObj.x
+  y: y // ‫نسبت دادن مقدار متغیر y به myObj.y
+};
+
+console.log(myObj.x) // 10
+console.log(myObj.y) // 20
+```
+همان‌طور که می‌بینید، این کار خیلی تکراری است زیرا نام خاصیت‌های myObj دقیقا همان نام‌های متغیرهایی است که می‌خواهیم نسبت دهیم.
+
+با معرفی ES2015، اگر نام متغیر همان نامی خاصیت باشد می‌توانیم از این روش میان‌بر استفاده کنیم:
+
+```js
+const x = 10;
+const y = 20;
+
+const myObj = {
+  x,
+  y
+};
+
+console.log(myObj.x) // 10
+console.log(myObj.y) // 20
+```
+
+#### منابع خارجی
+
+- [Property shorthand - ES6 Features](http://es6-features.org/#PropertyShorthand)
