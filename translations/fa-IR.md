@@ -406,3 +406,80 @@ console.log(myFunc(null)) // null
 
 - [Default parameter value - ES6 Features](http://es6-features.org/#DefaultParameterValues)
 - [Default parameters - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+
+### تجزیه اشیاء و آرایه‌ها
+
+*تجزیه* (destructuring) روشی آسان برای ساخت متغیرهای جدید از راه استخراج مقادیر از داده‌های ذخیره شده در اشیاء یا آرایه‌هاست.
+
+به عنوان مثال، *تجزیه کردن* می‌تواند به منظور تجزیه پارامترهای تابع و یا *this.props* در پروژه‌های ری‌اکت مورد استفاده قرار گیرد.
+
+#### توضیح با مثال
+
+- شیء
+
+بگذارید شیء زیر را برای تمام مثال‌ها در نظر بگیریم:
+
+```js
+const person = {
+  firstName: "Nick",
+  lastName: "Anderson",
+  age: 35,
+  sex: "M"
+}
+```
+
+بدون تجزیه کردن:
+
+```js
+const first = person.firstName;
+const age = person.age;
+const city = person.city || "Paris";
+```
+
+با تجزیه کردن، تماما در یک خط:
+
+```js
+const { firstName: first, age, city = "Paris" } = person; // همین و بس
+
+console.log(age) // 35 -- ‫متغیر جدید age ساخته شده و معادل است با person.age 
+console.log(first) // "Nick" -- ‫متغیر جدید first ساخته شده و معادل است با person.firstName
+console.log(firstName) // ReferenceError -- ‫در واقع person.firstName وجود دارد اما نام متغیر جدیدی که ساخته شده،first است
+console.log(city) // "Paris" -- ‫متغیر جدیدی به نام city ساخته شده است اما چون person.city تغیرنشده است، مقدار موجود در city برابر است با مقدار پیش‌فرض ارائه شده یعنی Paris
+```
+
+**نکته:** آکولادهای استفاده شده در `const { age } = person` بعد از *const* نه برای اعلان شیء یا بلوک بلکه به عنوان نحو تجزیه نوشته شده است.
+
+- پارامترهای تابع
+
+*تجزیه کردن* معمولا برای تجزیه پارامترهای شیء در توابع استفاده می‌شود.
+
+بدون تجزیه کردن
+
+```js
+function joinFirstLastName(person) {
+  const firstName = person.firstName;
+  const lastName = person.lastName;
+  return firstName + '-' + lastName;
+}
+
+joinFirstLastName(person); // "Nick-Anderson"
+```
+
+با تجزیه کردن پارامتر *person* شیء، ما به یک تابع جمع و جورتر دست پیدا می‌کنیم:
+
+```js
+function joinFirstLastName({ firstName, lastName }) { // ‫ما متغیرهای firstName و lastName را با تجزیه پارامترهای شیء person به دست می‌آوریم
+  return firstName + '-' + lastName;
+}
+
+joinFirstLastName(person); // "Nick-Anderson"
+```
+
+استفاده از تجزیه به خصوص در زمان استفاده از توابع پیکانی، شیرین‌تر هم می‌شود:
+
+```js
+const joinFirstLastName = ({ firstName, lastName }) => firstName + '-' + lastName;
+
+joinFirstLastName(person); // "Nick-Anderson"
+```
+
