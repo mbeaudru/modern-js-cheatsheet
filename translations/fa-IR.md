@@ -92,6 +92,9 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
     - [کلاس](#کلاس)
       - [نمونه‌ها](#نمونهها)
       - [منابع خارجی](#منابع-خارجی-9)
+    - [کلیدواژه‌های `Extends` و `super`](#کلیدواژههای-extends-و-super)
+      - [نمونه کد](#نمونه-کد-6)
+      - [منابع خارجی](#منابع-خارجی-10)
 
 ## مفاهیم
 
@@ -1269,3 +1272,81 @@ console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
 - [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
 - [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
 - [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+
+### کلیدواژه‌های `Extends` و `super`
+
+کلیدواژه `extends` در اعلان کلاس یا عبارات کلی برای ساخت یک کلاس که فرزند کلاس دیگری است استفاده می‌شود ([مرجع: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)). زیرکلاس تمام خاصیت‌های فراکلاس را به ارث می‌برد و افزون بر این می‌تواند خاصیت‌های جدید اضافه کند یا خاصیت‌های ارث برده را تغییر دهد.
+
+کلیدواژه `super` برای فراخوانی توابع در والد شیء شامل سازنده (constructor) استفاده می‌شود.
+
+- کلیدواژه `super` بایستی پیش از کلیدواژه `this` در constructor استفاده شود
+- اجرای ‪`super()`‬، سازنده کلاس والد را فرامی‌خواند. برای فرستادن چند آرگومان از سازندهٔ کلاس به سازندهٔ کلاس والد از `super(arguments)` استفاده کنید.
+- اگر کلاس والد متدی (حتی ایستا یا static) به نام `X` دارد می‌توانید از ‪`super.X()`‬ برای فراخوانی‌اش در کلاس فرزند استفاده کنید.
+
+#### نمونه کد
+
+```js
+class Polygon {
+  constructor(height, width) {
+    this.name = 'Polygon';
+    this.height = height;
+    this.width = width;
+  }
+
+  getHelloPhrase() {
+    return `Hi, I am a ${this.name}`;
+  }
+}
+
+class Square extends Polygon {
+  constructor(length) {
+    // اینجا، سازندهٔ کلاس والد به همراه طول ارائه شده برای
+    // عرض و ارتفاع چندضلعی فراخوانده می‌شود
+    super(length, length);
+    // نکته: در کلاس‌های مشتق شده، ‪super()‬ بایستی پیش از this فراخوانی
+    // شود. در غیر این صورت خطای reference دریافت خواهید کرد.
+    this.name = 'Square';
+    this.length = length;
+  }
+
+  getCustomHelloPhrase() {
+    const polygonPhrase = super.getHelloPhrase();
+    // دسترسی به متد والد با نحو ‪super.X()
+    return `${polygonPhrase} with a length of ${this.length}`;
+  }
+
+  get area() {
+    return this.height * this.width;
+  }
+}
+
+const mySquare = new Square(10);
+console.log(mySquare.area) // 100
+console.log(mySquare.getHelloPhrase()) // 'Hi, I am a Square'
+// در واقع Square از Polygon ارث بده و به متدهای آن دسترسی دارد
+console.log(mySquare.getCustomHelloPhrase()) // 'Hi, I am a Square with a length of 10'
+```
+
+**نکته:** اگر در کلاس Square پیش از فراخوانی `super()` از `this` استفاده کنید، خطای ReferenceError دریافت خواهید کرد.
+
+```js
+class Square extends Polygon {
+  constructor(length) {
+    this.height; // ReferenceError, super needs to be called first!
+
+    // اینجا، سازندهٔ کلاس والد همراه با طول‌های ارائه شده
+    // برای طول و عرض چندضلعی فراخوانی می‌شود.
+    super(length, length);
+
+    // توجه: در کلاس‌های مشتق شده، ‪super()‬ باید پیش از this
+    // فراخوانی شود. در غیر این صورت خطا دریافت خواهید کرد.
+    this.name = 'Square';
+  }
+}
+```
+
+#### منابع خارجی
+
+- [Extends - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
+- [Super operator - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super)
+- [Inheritance - MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance)
