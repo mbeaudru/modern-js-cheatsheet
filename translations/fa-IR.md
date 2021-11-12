@@ -89,6 +89,9 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
       - [منابع خارجی](#منابع-خارجی-7)
     - [مفهوم this در جاوااسکریپت](#مفهوم-this-در-جاوااسکریپت)
       - [منابع خارجی](#منابع-خارجی-8)
+    - [کلاس](#کلاس)
+      - [نمونه‌ها](#نمونهها)
+      - [منابع خارجی](#منابع-خارجی-9)
 
 ## مفاهیم
 
@@ -1211,3 +1214,58 @@ myBoundFunc("test") // "hello"
 
 - [Understanding JavaScript Function Invocation and "this" - Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/)
 - [JavaScript this - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+
+### کلاس
+
+جاوااسکریپت یک زبان برنامه‌نویسی بر پایه پیش‌نمونه یا [prototype-based](https://en.wikipedia.org/wiki/Prototype-based_programming) است (در حالی که جاوا یک زبان کلاس محور یا [class-based](https://en.wikipedia.org/wiki/Class-based_programming) است). ES6 کلاس‌های جاوااسکریپت را معرفی کرده است که بیشتر به منظور ارائه نحوی راه‌دست‌تر برای ارث‌بری مبتنی بر پیش‌نمونه است و نه یک مدل ارث‌بری کلاس‌محور ([مرجع](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)).
+
+اگر با کلاس‌ها در سایر زبان‌ها آشنایی داشته باشید، واژه *class* اینجا در واقع مستعد بروز خطاست. اگر آشنایی دارید، از تصور این که کلاس‌های جاوااسکریپت بر همان اساس کار می‌کنند پرهیز کنید و در نظر بگیرید که مفهومش در اینجا به کلی چیز دیگری است.
+
+از آن جایی که این سند تلاش ندارد تا زبان را از بیخ آموزش بدهد، فرض خواهم کرد که شما با پیش‌نمونه‌ها (prototypes) و این که چه طور کار می‌کنند آشنایی دارید. اگر آشنایی ندارید به منابع خارجی همین بخش مراجعه کنید.
+
+#### نمونه‌ها
+
+نحو پیش‌نمونه‌ها پیش از ES6:
+
+```js
+var Person = function(name, age) {
+  this.name = name;
+  this.age = age;
+}
+Person.prototype.stringSentence = function() {
+  return "Hello, my name is " + this.name + " and I'm " + this.age;
+}
+```
+
+نحو کلاس پس از ES6:
+
+```js
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  stringSentence() {
+    return `Hello, my name is ${this.name} and I am ${this.age}`;
+  }
+}
+
+const myPerson = new Person("Manu", 23);
+console.log(myPerson.age) // 23
+console.log(myPerson.stringSentence()) // "Hello, my name is Manu and I'm 23
+```
+
+#### منابع خارجی
+
+برای فهم پیش‌نمونه:
+
+- [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
+- [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
+- [Inheritance and the prototype chain - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+
+برای فهم کلاس‌ها:
+
+- [ES6 Classes in Depth - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
+- [ES6 Features - Classes](http://es6-features.org/#ClassDefinition)
+- [JavaScript Classes - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
