@@ -87,6 +87,8 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
         - [برون‌ریزی بانام](#برونریزی-بانام)
         - [درون‌ریزی / برون‌ریزی پیش‌فرض](#درونریزی-برونریزی-پیشفرض)
       - [منابع خارجی](#منابع-خارجی-7)
+    - [مفهوم this در جاوااسکریپت](#مفهوم-this-در-جاوااسکریپت)
+      - [منابع خارجی](#منابع-خارجی-8)
 
 ## مفاهیم
 
@@ -1164,3 +1166,48 @@ console.log(result) // 3
 - [Destructuring special case - import statements](https://ponyfoo.com/articles/es6-destructuring-in-depth#special-case-import-statements)
 - [Misunderstanding ES6 Modules - Kent C. Dodds](https://medium.com/@kentcdodds/misunderstanding-es6-modules-upgrading-babel-tears-and-a-solution-ad2d5ab93ce0)
 - [Modules in JavaScript](http://exploringjs.com/es6/ch_modules.html#sec_modules-in-javascript)
+
+### مفهوم this در جاوااسکریپت
+
+رفتار عملگر *this* جاوااسکریپت متفاوت است از دیگر زبان‌ها و در بسیاری موارد به این بستگی دارد که چه طور یک تابع فراخوانی شده باشد. ([مرجع: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this))
+
+این مفهوم ظرافت‌های بسیاری دارد و تا حدودی دشوار است. شدیدا پیشنهاد می‌کنم که شیرجه عمیقی بزنید به منابع خارجی‌ای که پایین‌تر معرفی شده‌اند. با این حال آن چه را که شخصا از چیستی *this* در ذهنم دارم را اینجا ارائه می‌کنم. این نکته را از [این مقاله به قلم یودا کتز](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) فراگرفته‌ام.
+
+```js
+function myFunc() {
+  ...
+}
+// پس از هر گزاره، مقدار *this* در تابع myFunc را خواهید دید
+
+myFunc.call("myString", "hello") // "myString"
+// مقدار اولین پارامتر ‪.call‬ در *this* تزریق می‌شود
+
+// در حال غیرسخت‌گیرانه (non-strict mode)
+myFunc("hello") // window
+// در واقع ‪myFunc()‬ نحو راه‌دست‌تر برای myFunc.call(window,"hello") است
+
+// در حالت سخت‌گیرانه (strict mode)
+myFunc("hello") // undefined
+اینجا ‪myFunc()‬ نحو راه‌دست‌تر برای myFunc.call(undefined, "hello") است
+```
+
+```js
+var person = {
+  myFunc: function() { ... }
+}
+
+person.myFunc.call(person, "test") // ‫شیء person
+// اولین پارامتر call در *this* تزریق می‌شود
+person.myFunc("test") // ‫شیء person
+// اینجا ‪person.myFunc()‬ نحو راه‌دست‌تر برای person.myFunc.call(person, "test") است
+var myBoundFunc = person.myFunc.bind("hello") // ‫تابعی جدید می‌سازد که ما «hello» را در *this* آن تزریق می‌کنیم.
+person.myFunc("test") // ‫شیء person
+// متد bind تاثیر روی متد اصلی ندارد
+myBoundFunc("test") // "hello"
+//تابع myBoundFunc در واقع همان person.myFunc است که در آن «hello» به *this* بند (bind) زده شده است.
+```
+
+#### منابع خارجی
+
+- [Understanding JavaScript Function Invocation and "this" - Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/)
+- [JavaScript this - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
