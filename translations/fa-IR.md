@@ -82,6 +82,11 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
       - [منابع خارجی](#منابع-خارجی-5)
     - [قالب لفظی برچسب‌دار](#قالب-لفظی-برچسبدار)
       - [منابع خارجی](#منابع-خارجی-6)
+    - [درون‌ریزی / برون‌ریزی](#درونریزی-برونریزی)
+      - [توضیح به همراه نمونه کد](#توضیح-به-همراه-نمونه-کد)
+        - [برون‌ریزی بانام](#برونریزی-بانام)
+        - [درون‌ریزی / برون‌ریزی پیش‌فرض](#درونریزی-برونریزی-پیشفرض)
+      - [منابع خارجی](#منابع-خارجی-7)
 
 ## مفاهیم
 
@@ -1073,3 +1078,89 @@ comma`I like ${snacks} to snack on.`;
 - [Wes Bos on Tagged Template Literals](http://wesbos.com/tagged-template-literals/)
 - [Library of common template tags](https://github.com/declandewet/common-tags)
 
+### درون‌ریزی / برون‌ریزی
+
+پیمانه‌ها (modules) در ES6 این امکان را فراهم می‌آورند که بتوان به متغیرها و توابعی که توسط یک پیمانه صریحا برون‌ریزی شده‌اند از پیمانه‌ای دیگر که آن پیمانه را درون‌ریزی می‌کنند دسترسی داشت.
+
+قویا پیشنهاد می‌کنم به منابع موجود روی MDN درباره درون‌ریزی/برون‌ریزی یا import/export (به منابع خارجی این بخش رجوع کنید) نگاهی داشته باشید که هم سرراست است و هم کامل.
+
+#### توضیح به همراه نمونه کد
+
+##### برون‌ریزی بانام
+
+برون‌ریزی بانام برای برون ریزی مقادیر از یک پیمانه مورد استفاده قرار می‌گیرد.
+
+> **نکته:** فقط می‌توانید [first-class citizens](https://en.wikipedia.org/wiki/First-class_citizen) که دارای نام هستند را به صورت بانام برون‌ریزی کنید.
+
+```js
+// mathConstants.js
+export const pi = 3.14;
+export const exp = 2.7;
+export const alpha = 0.35;
+
+// -------------
+
+// myFile.js
+import { pi, exp } from './mathConstants.js'; // درون‌ریزی نام‌دار -- با نحوی مشابه تجزیه کردن
+console.log(pi) // 3.14
+console.log(exp) // 2.7
+
+// -------------
+
+// mySecondFile.js
+import * as constants from './mathConstants.js';
+// تزریق همه مقادیر برون‌ریزی شده به متغیر constants
+console.log(constants.pi) // 3.14
+console.log(constants.exp) // 2.7
+```
+
+در حالی که درون‌ریزی‌های نام‌دار شبیه به *تجزیه کردن* به نظر می‌رسند، اما دارای نحوی متفاوت بوده و مشابه آن نیستند. آن‌ها نه از مقادیر پیش‌فرض پشتیبانی مي‌کنند و نه از تجزیه کردن *عمیق*.
+
+در کنار این، شما می‌توانید از مترادف‌ها (alias) استفاده کنید اما قواعد نحوی با آن چه که در تجزیه کردن وجود دارد متفاوت است.
+
+```js
+import { foo as bar } from 'myFile.js';
+// در این جا foo درون‌ریزی شده و در متغیر جدیدی به نام bar تزریق شده است.
+```
+
+##### درون‌ریزی / برون‌ریزی پیش‌فرض
+
+نظر به برون‌ریزی پیش‌فرض، هر پیمانه تنها می‌تواند یک برون‌ریزی پیش‌فرض داشته باشد. این برون‌ریزی پیش‌فرض می‌تواند یک تابع، یک کلاس، یک شیء و یا هر چیز دیگری باشد. این مقدار مقدار برون‌ریزی اصلی (main) شناخته می‌شود چرا که راحت‌ترین روش برای درون‌ریزی است. [مرجع: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
+
+```js
+// coolNumber.js
+const ultimateNumber = 42;
+export default ultimateNumber;
+
+// ------------
+
+// myFile.js
+import number from './coolNumber.js';
+// برون‌ریزی پیش‌فرض، مستقل از این که چه نامی داشته باشد به طور خودکار متغیر number درون‌ریزی شده است.
+console.log(number) // 42
+```
+
+برون‌ریزی تابع
+
+```js
+// sum.js
+export default function sum(x, y) {
+  return x + y;
+}
+// -------------
+
+// myFile.js
+import sum from './sum.js';
+const result = sum(1, 2);
+console.log(result) // 3
+```
+
+#### منابع خارجی
+
+- [ES6 Modules in bulletpoints](https://ponyfoo.com/articles/es6#modules)
+- [Export - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+- [Import - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+- [Understanding ES6 Modules](https://www.sitepoint.com/understanding-es6-modules/)
+- [Destructuring special case - import statements](https://ponyfoo.com/articles/es6-destructuring-in-depth#special-case-import-statements)
+- [Misunderstanding ES6 Modules - Kent C. Dodds](https://medium.com/@kentcdodds/misunderstanding-es6-modules-upgrading-babel-tears-and-a-solution-ad2d5ab93ce0)
+- [Modules in JavaScript](http://exploringjs.com/es6/ch_modules.html#sec_modules-in-javascript)
