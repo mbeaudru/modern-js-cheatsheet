@@ -1350,3 +1350,156 @@ class Square extends Polygon {
 - [Extends - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
 - [Super operator - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super)
 - [Inheritance - MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance)
+
+### استفاده از Async Await
+
+افزون بر [وعده‌ها](#وعدهها-promises) ممکن است با یک نحو جدید دیگر نیز در مواجهه با کدهای ناهم‌گام مواجه شوید به نام *async / await*.
+
+هدف توابع async/await، ساده‌سازی رفتار استفاده از وعده‌ها به صورت هم‌گام و انجام برخی رفتارها روی گروهی از وعده‌هاست. درست همان طور که وعده‌ها مشابه callbackهای ساختاردار هستند، async/await مشابه ترکیب سازنده‌ها (generators) و وعده‌هاست. ([مرجمع: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function))
+
+> **توجه:** لازم است پیش از تلاش برای فهم async / await بدانید که وعده‌ها چیستند و چگونه کار می‌کنند چرا که شالوده کار همان است.
+
+> **نکته ۲:** [*await* بایستی با یک تابع *async* استفاده شود](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9#f3f0) که یعنی نمی‌توانید از await در سطح بالای کدتان استفاده کنید چرا که داخل یک تابع ناهمگام یا async نیست.
+
+#### نمونه کد
+
+```js
+async function getGithubUser(username) { 
+// کلیدواژه asunc اجازه استفاده از await را در تابع می‌دهد که یعنی تابع، یک وعده را باز خواهد گرداند.
+  const response = await fetch(`https://api.github.com/users/${username}`);
+  // اجرای کد در اینجا متوقف می‌شود تا زمانی که وعده بازگردانده شده از fetch رفع شده و یک ‪responce.json()‬ بازگرداند
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user)) // logging user response
+  // نمی‌توان از نحو await استفاده کرد چون این کد داخل یک تابع async نیست
+  .catch(err => console.log(err)); // اگر خطایی در تابع ناهم‌گام ما بروز کند اینجا آن را دریافت خواهیم کرد
+```
+
+#### توضیح با نمونه کد
+
+در واقع *Async / Await* برروی وعده‌ها ساخته شده اما اجازه می‌دهد به سبکی دستوری‌تر (imperative) کدنویسی کنیم.
+
+عملگر *async* یک تابع را به عنوان تابع ناهم‌گام علامت‌گذاری می‌کند و همواره یک *وعده* یا Promise باز می‌گرداند. می‌توانید از عملگر *await* در یک تابع *async* به منظور ایجاد مکث در روند اجرا در آن خط تا زمانی که وعده بازگردانده شود استفاده شود. این وعده می‌تواند محقق یا رد شده باشد.
+
+```js
+async function myFunc() {
+  // می‌توانیم از عملگر await استفاده کنیم زیرا در یک تابع async هستیم
+  return "hello world";
+}
+
+myFunc().then(msg => console.log(msg)) // "hello world"
+// به واسطه عملگر async، مقدار بازگشتی از myFunc به یک وعده تغییر یافته است
+```
+
+وقتی به دستور *return* در یک تابع ناهم‌گام یا async می‌رسیم، وعده با مقداری که بازگشت داده می‌شود محقق شده است. اگر خطایی داخل تابع async بروز کند، وضعیت وعده به *رد شده* تغییر می‌کند. اگر مقداری از تابع async بازگردانده نشود، با اتمام اجرای تابع async همچنان وعده‌ای باز گردانده می‌شود که فاقد مقدار است.
+
+عملگر *await* برای آن استفاده می‌شود که منتظر محقق شدن *وعده* بمانیو و تنها می‌تواند در بدنه یک تابع *async* استفاده شود. به محض رسیدن اجرای برنامه به این خط، چرخه اجرا مکث می‌کند تا زمانی که وعده محقق شود.
+
+> **توجه:** *fatch* تابعی است که وعده‌ای باز می‌گرداند و اجازه می‌دهد که یک درخواست ای‌جکس بفرستیم.
+
+بگذارید ابتدا ببینیم چه طور می‌توانیم یک کاربر گیت‌هاب را با fetch دریافت کنیم:
+
+```js
+function getGithubUser(username) {
+  return fetch(`https://api.github.com/users/${username}`).then(response => response.json());
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+و این، معادلش با استفاده از *async / await* است:
+
+```js
+async function getGithubUser(username) { // promise + await keyword usage allowed
+  const response = await fetch(`https://api.github.com/users/${username}`); // اجرا در اینجا متوقف می‌شود تا وعده‫ fetch محقق شود
+  Execution stops here until fetch promise is fulfilled
+  return response.json();
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+نحو *async / await* به خصوص زمانی که می‌خواهید وعده‌های مستقل از هم را به هم زنجیر کنید بسیار راه‌دست است.
+
+به عنوان مثلا اگر نیاز داشته باشید توکنی را بگیرد که با آن بتوانید یک مطلب وبلاگ را واکشی کنید از پایگاه داده و سپس اطلاعات نویسنده را به دست آورید:
+
+> **توجه:** عبارت‌های *await* نیازمند آن است که داخل پرانتز قرار بگیرد تا بتوان متدها و خاصیت‌های مقدار حاصل شده‌اش در همان خط دست یافت.
+
+```js
+async function fetchPostById(postId) {
+  const token = (await fetch('token_url')).json().token;
+  const post = (await fetch(`/posts/${postId}?token=${token}`)).json();
+  const author = (await fetch(`/users/${post.authorId}`)).json();
+
+  post.author = author;
+  return post;
+}
+
+fetchPostById('gzIrzeo64')
+  .then(post => console.log(post))
+  .catch(err => console.log(err));
+```
+
+##### مدیریت خطا
+
+جز در حالتی که عبارت‌های *await* را داخل بلوک‌های *try / catch* قرار داده باشیم، خطاهایی که بروز می‌کنند (فارغ از این که در بدنه تابع *async* حادث شده باشد یا زمانی که حین *await* معلق شده باشد) وعده‌ای که توسط تابع async بازگردانده می‌شود رد خواهد شد. استفاده از دستور `throw` در تابع async درست همانند برگرداندن یک وعده رده‌شده است ([(مرجع: PonyFoo)](https://ponyfoo.com/articles/understanding-javascript-async-await#error-handling)).
+
+> **توجه:** وعده‌ها مثل هم رفتار می‌کنند.
+
+این جا روشی است که به کمکش می‌توانید خطاهای مرتبط با وعده‌ها را مدیریت کنید:
+
+```js
+function getUser() { // ‫این وعده رد خواهد شد!
+  return new Promise((res, rej) => rej("User not found !"));
+}
+
+function getAvatarByUsername(userId) {
+  return getUser(userId).then(user => user.avatar);
+}
+
+function getUserAvatar(username) {
+  return getAvatarByUsername(username).then(avatar => ({ username, avatar }));
+}
+
+getUserAvatar('mbeaudru')
+  .then(res => console.log(res))
+  .catch(err => console.log(err)); // "User not found !"
+```
+
+معادل آن با *async / await*:
+
+```js
+async function getUser() { // وعده بازگردانده‌شده رد خواهد شد
+  throw "User not found !";
+}
+
+async function getAvatarByUsername(userId) => {
+  const user = await getUser(userId);
+  return user.avatar;
+}
+
+async function getUserAvatar(username) {
+  var avatar = await getAvatarByUsername(username);
+  return { username, avatar };
+}
+
+getUserAvatar('mbeaudru')
+  .then(res => console.log(res))
+  .catch(err => console.log(err)); // "User not found !"
+```
+
+#### منابع خارجی
+
+- [Async/Await - JavaScript.Info](https://javascript.info/async-await)
+- [ES7 Async/Await](http://rossboucher.com/await/#/)
+- [6 Reasons Why JavaScript’s Async/Await Blows Promises Away](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
+- [JavaScript awaits](https://dev.to/kayis/javascript-awaits)
+- [Using Async Await in Express with Node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
+- [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+- [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
