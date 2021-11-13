@@ -1711,3 +1711,98 @@ gen.next(); // { value: undefined, done: true }
 #### منابع خارجی
 
 * [Mozilla MDN Web Docs, Iterators and Generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Generators)
+
+### متدهای ایستا
+
+#### توضیح کوتاه
+
+در کلاس‌ها، کلیدواژه `static` برای اعلان متدهای ایستا استفاده می‌شود. متدهای ایستا، توابعی در کلاس هستند که به شیء کلاس تعلق داشته و در دسترس هیچ یک از نمونه‌های آن کلاس نیستند.
+
+#### نمونه کد
+
+```js
+class Repo {
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+}
+
+console.log(Repo.getName()) // Repo name is modern-js-cheatsheet
+
+// توجه کنید که ما نیازی به ایجاد نمونه‌ای از کلاس Repo نداریم.
+
+let r = new Repo();
+console.log(r.getName()) // Uncaught TypeError: r.getName is not a function
+```
+
+#### توضیح مبسوط
+
+متدهای ایستا می‌توانند توسط دیگر متدهای ایستا و با کمک کلیدواژه `this` فراخوانی شوند. این کار توسط سایر متدهای غیرایستا قابل انجام نیست. متدهای غیرایستا نمی‌توانند با کمک کلیدواژه `this` مستقیما به متدهای ایستا دسترسی پیدا کنند.
+
+##### فراخوانی متد ایستای دیگر از یک متد ایستا
+
+به منظور فراخوانی یک متد ایستا دیگر توسط یک متد ایستای دیگر کافی است از کلیدواژه `this` به این شکل استفاده کنیم:
+
+```js
+class Repo {
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  static modifyName() {
+    return this.getName() + '-added-this'
+  }
+}
+
+console.log(Repo.modifyName()) // Repo name is modern-js-cheatsheet-added-this
+```
+
+##### فراخوانی متدهای ایستا توسط متدهای غیرایستا
+
+این کار به دو روش قابل انجام است:
+
+1. ###### استفاده از نام کلاس
+
+برای دسترسی به متد ایستا از داخل یک متد غیر ایستا، از نام کلاس استفاده کرده و آن متد را مانند یک خاصیت مثل `ClassName.StaticMethodName` فرامی‌خوانیم:
+
+```js
+class Repo {
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  useName() {
+    return Repo.getName() + ' and it contains some really important stuff'
+  }
+}
+
+// برای استفاده از متدهای غیرایستا لازم است نمونه‌ای از کلاس ساخته شود
+let r = new Repo()
+console.log(r.useName()) // Repo name is modern-js-cheatsheet and it contains some really important stuff
+```
+
+2. ###### استفاده از سازنده
+
+متدهای ایستا می‌توانند به عنوان خاصیت در شیء سازنده (constructor) صدا زده شوند.
+
+```js
+class Repo {
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  useName() {
+    // متد ایستا را به عنوان یک خاصیت سازنده فرا می‌خوانیم
+    return this.constructor.getName() + ' and it contains some really important stuff'
+  }
+}
+
+// برای استفاده از متدهای غیرایستا لازم است نمونه‌ای از کلاس ساخته شود
+let r = new Repo()
+console.log(r.useName()) // Repo name is modern-js-cheatsheet and it contains some really important stuff
+```
+
+#### منابع خارجی
+- [static keyword- MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)
+- [Static Methods- Javascript.info](https://javascript.info/class#static-methods)
+- [Static Members in ES6- OdeToCode](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
