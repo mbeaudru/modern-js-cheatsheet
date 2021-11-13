@@ -108,6 +108,9 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
       - [تابع Catamorphisms](#تابع-catamorphisms)
         - [نمونه کد](#نمونه-کد-9)
       - [منابع خارجی](#منابع-خارجی-13)
+    - [تولیدکننده‌ها](#تولیدکنندهها)
+      - [نمونه کد](#نمونه-کد-10)
+      - [منابع خارجی](#منابع-خارجی-14)
 
 ## مفاهیم
 
@@ -1628,3 +1631,83 @@ product(downToOne(5)) // 120
 * [Anamorphisms in JavaScript](http://raganwald.com/2016/11/30/anamorphisms-in-javascript.html)
 * [Anamorphism](https://en.wikipedia.org/wiki/Anamorphism)
 * [Catamorphism](https://en.wikipedia.org/wiki/Catamorphism)
+
+### تولیدکننده‌ها
+
+راه دیگر نوشتن تابع `downToOne` استفاده از تولیدکننده‌ها یا Generatorهاست. برای برپاسازی یک شیء `Generator` می‌بایست از اعلان ‪`function *`‬ استفاده کنیم. تولیدکننده‌ها توابعی هستند که می‌شود از آن‌ها خارج و سپس وارد زمینه‌شان (متغیر گره‌خورده به‌شان) شد که در طول ورودها حفظ می‌شود.
+
+به عنوان مثال می‌توانیم تابع `downToOne` را این گونه بازنویسی کنیم:
+
+```js
+function * downToOne(n) {
+  for (let i = n; i > 0; --i) {
+    yield i;
+  }
+}
+
+[...downToOne(5)] // [ 5, 4, 3, 2, 1 ]
+```
+
+تابع تولیدکننده، یک شیء شمارش‌گر از بازمی‌گرداند. وقتی تابع ‪`Next()`‬ شمارش‌گر صدا زده می‌شود، تا رسیدن به عبارت `yield` (که مقدار مورد نظر برای بازگردانده شدن از آن شمارش به خصوص را تعیین می‌کند) و یا با ‪`yield*`‬ که به تابع تولید کننده دیگری اشاره می‌کند اجرا می‌شود. وقتی که عبارت `return` در تولیدکننده صدا زده می‌شود، تولیدکننده برچسب انجام شده دریافت می‌کند و مقدار تولید شده در آن شمارش بازگردانده می‌شود. فراخوانی‌های بعدی ‪`next()`‬ منجر به بازگرداندن مقادیر جدیدی نمی‌شود.
+ 
+#### نمونه کد
+
+```js
+// Yield Example
+function * idMaker() {
+  var index = 0;
+  while (index < 2) {
+    yield index;
+    index = index + 1;
+  }
+}
+
+var gen = idMaker();
+
+gen.next().value; // 0
+gen.next().value; // 1
+gen.next().value; // undefined
+```
+
+عبارت `yield` یک تولیدکننده را قادر می‌سازد تا در خلال شمارش، تابع تولیدکننده دیگری را فراخوانی کند.
+
+```js
+// Yield * Example
+function * genB(i) {
+  yield i + 1;
+  yield i + 2;
+  yield i + 3;
+}
+
+function * genA(i) {
+  yield i;
+  yield* genB(i);
+  yield i + 10;
+}
+
+var gen = genA(10);
+
+gen.next().value; // 10
+gen.next().value; // 11
+gen.next().value; // 12
+gen.next().value; // 13
+gen.next().value; // 20
+```
+
+```js
+// Generator Return Example
+function* yieldAndReturn() {
+  yield "Y";
+  return "R";
+  yield "unreachable";
+}
+
+var gen = yieldAndReturn()
+gen.next(); // { value: "Y", done: false }
+gen.next(); // { value: "R", done: true }
+gen.next(); // { value: undefined, done: true }
+```
+
+#### منابع خارجی
+
+* [Mozilla MDN Web Docs, Iterators and Generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Generators)
