@@ -102,6 +102,12 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
       - [منابع خارجی](#منابع-خارجی-11)
     - [درستی / غلطی](#درستی-غلطی)
       - [منابع خارجی](#منابع-خارجی-12)
+    - [توابع Anamorphisms و Catamorphisms](#توابع-anamorphisms-و-catamorphisms)
+      - [تابع Anamorphisms](#تابع-anamorphisms)
+        - [نمونه کد](#نمونه-کد-8)
+      - [تابع Catamorphisms](#تابع-catamorphisms)
+        - [نمونه کد](#نمونه-کد-9)
+      - [منابع خارجی](#منابع-خارجی-13)
 
 ## مفاهیم
 
@@ -1573,3 +1579,52 @@ let c = [2] == true // c is false since [2].toString() give "2" back.
 - [Falsy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
 - [Truthy and Falsy values in JS - Josh Clanton](http://adripofjavascript.com/blog/drips/truthy-and-falsy-values-in-javascript.html)
 
+### توابع Anamorphisms و Catamorphisms
+
+#### تابع Anamorphisms
+
+‫Anamorphisms توابع هستند که از برخشی اشیاء به ساختارهای پیچیده‌تری شامل نوع شیء نگاشت می‌شوند. فرایند گسترش یا *unfolding* یک ساختار ساده به یک ساختار پیچیده‌تر هستند. گسترش دادن یک عدد صحیح به فهرستی (list) از اعداد صحیح را در نظر بگیرید. عدد صحیح، شیء اولیه ماست و فهرست اعداد صحیح، آن ساختار پیچیده‌تر.
+
+
+##### نمونه کد
+
+```js
+function downToOne(n) {
+  const list = [];
+
+  for (let i = n; i > 0; --i) {
+    list.push(i);
+  }
+
+  return list;
+}
+
+downToOne(5)
+  //=> [ 5, 4, 3, 2, 1 ]
+```
+
+#### تابع Catamorphisms
+
+‫Catamorphisms نقطه مقابل Anamorphisms است و یک شیء با ساختاری پیچیده‌تر را به ساختاری ساده‌تر می‌کاهند. مثای بعدی را در نظر بگیرید که در آن، تابع `product` فهرستی از اعداد صحیح را گرفته و تنها یک عدد صحیح باز می‌گرداند.
+
+##### نمونه کد
+
+```js
+function product(list) {
+  let product = 1;
+
+  for (const n of list) {
+    product = product * n;
+  }
+
+  return product;
+}
+
+product(downToOne(5)) // 120
+```
+
+#### منابع خارجی
+
+* [Anamorphisms in JavaScript](http://raganwald.com/2016/11/30/anamorphisms-in-javascript.html)
+* [Anamorphism](https://en.wikipedia.org/wiki/Anamorphism)
+* [Catamorphism](https://en.wikipedia.org/wiki/Catamorphism)
