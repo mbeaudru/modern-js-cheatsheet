@@ -1508,3 +1508,66 @@ getUserAvatar('mbeaudru')
 - [Async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 - [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 - [Using async / await in express with node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
+
+### درستی / غلطی
+
+در جاوااسکریپت، مقدار صحیح و غلط (true و false) مقداری است که در زمان ارزیابی در زمینه بولی، به مقدار بولی تبدیل می‌شود. به عنوان مثالی از زمینه بولی می‌توان به ارزیابی شرط `if` اشاره کرد.
+
+هر مقداری به مقدار صحیح یا ‍`true` تبدیل می‌شود مگر آن که برابر باشد با یکی از موارد زیر:
+
+- ```false```
+- ```0```
+- ```""``` (empty string)
+- ```null```
+- ```undefined```
+- ```NaN```
+
+این‌ها مثال‌هایی هستند از *مزینه بولی*:
+
+- ارزیابی شرط `if`
+
+```js
+if (myVar) {}
+```
+
+مقدار `myVar` می‌تواند هر یک از شهروندان درجه یک یا [first-class citizen](https://en.wikipedia.org/wiki/First-class_citizen) (متغیر، تابع، بولی) باشد اما به مقدار بولی تبدیل می‌شود زیرا در یک زمینه بولی درحال ارزیابی شدن است.
+
+- بعد از عملگر منطقی **NOT** یعنی `!`
+
+اگر گزاره‌ای که این عملگر روی اعمال می‌شود قابل تبدیل شدن به true باشد، این عملگر باعث می‌شود که مقدار false برگردانده شود در غیر این صورت مقدار بازگشتی، true خواهد بود.
+
+```js
+!0 // true -- 0 is falsy so it returns true
+!!0 // false -- 0 is falsy so !0 returns true so !(!0) returns false
+!!"" // false -- empty string is falsy so NOT (NOT false) equals false
+```
+
+- با سازنده شیٔ بولی
+
+```js
+new Boolean(0) // false
+new Boolean(1) // true
+```
+
+- در یک ارزیابی سه بخشی
+
+```js
+myVar ? "truthy" : "falsy"
+```
+
+اینجا myVar در حال ارزیابی شدن در یک زمینه بولی است.
+
+زمانی که در حال مقایسه دو مقدار هستید مراقب باشید. مقادیر شیء (که باید تبدیل به true شوند) به مقدار بولی تبدیل **نمی‌شود* بلکه قهرا به واسطه [ToPrimitives specification](http://javascript.info/object-toprimitive) به مقدار اولیهٔ یک تبدیل می‌شوند. در اصل زمانی که یک شیء با یک مقدار بولی مانند ‬‪`[] == true`‬ مقایسه می‌شود، این عملیات رح مي‌دهد: ‪`[].toString() == true`
+
+```js
+let a = [] == true // a is false since [].toString() give "" back.
+let b = [1] == true // b is true since [1].toString() give "1" back.
+let c = [2] == true // c is false since [2].toString() give "2" back.
+```
+
+#### منابع خارجی
+
+- [Truthy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
+- [Falsy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
+- [Truthy and Falsy values in JS - Josh Clanton](http://adripofjavascript.com/blog/drips/truthy-and-falsy-values-in-javascript.html)
+
