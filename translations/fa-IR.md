@@ -118,6 +118,9 @@ _توضیح مترجم: اگر این سند را روی گیت‌هاب می‌
         - [فراخوانی متد ایستا توسط متد ایستای دیگر](#فراخوانی-متد-ایستا-توسط-متد-ایستای-دیگر)
         - [فراخوانی متدهای ایستا توسط متدهای غیرایستا](#فراخوانی-متدهای-ایستا-توسط-متدهای-غیرایستا)
       - [منابع خارجی](#منابع-خارجی-15)
+  - [واژه‌نامه](#واژهنامه)
+    - [قلمرو](#قلمرو)
+    - [تغییر متغیر](#تغییر-متغیر)
 
 ## مفاهیم
 
@@ -1813,3 +1816,24 @@ console.log(r.useName()) // Repo name is modern-js-cheatsheet and it contains so
 - [static keyword- MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)
 - [Static Methods- Javascript.info](https://javascript.info/class#static-methods)
 - [Static Members in ES6- OdeToCode](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
+
+## واژه‌نامه
+
+### قلمرو
+
+زمینه‌ای که در ان مقادیر و عبارات «نمایان» هستند یا می‌توانند مورد ارجاع داده شوند. اگر یک متغیر یا عبارت دیگر در «قلمروی جاری» نیست برای استفاده قابل دسترس نخواهد بود.
+
+منبع: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
+
+### تغییر متغیر
+
+یک متغیر را تغییریافته می‌خوانیم اگر مقدار اولیه آن در ادامه کار تغییر کند.
+
+```js
+var myArray = [];
+myArray.push("firstEl") // آرایه ما تغییر یافته است
+```
+
+یک متغیر یا غیرقابل تغییر یا *immutable* می‌نامیم اگر نتوان آن را تغییر داد.
+
+[مقاله تغییرپذیری در MDN](https://developer.mozilla.org/en-US/docs/Glossary/Mutable) را برای جزئیات بیشتر ببینید.
