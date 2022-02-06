@@ -58,7 +58,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     + [Destructuring objects and arrays](#destructuring-objects-and-arrays)
       - [Explanation with sample code](#explanation-with-sample-code)
       - [Useful resources](#useful-resources-1)
-    + [Array methods - map / filter / reduce](#array-methods---map--filter--reduce)
+    + [Array methods - map / filter / reduce](#array-methods---map--filter--reduce--find)
       - [Sample code](#sample-code-2)
       - [Explanation](#explanation)
         * [Array.prototype.map()](#arrayprototypemap)
