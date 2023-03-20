@@ -139,7 +139,14 @@ I recommend always declaring your variables with ```const``` by default, but wit
 <table>
   <tr>
     <th></th>
-    <th>Scope</th>
+    <th>
+    
+    
+    
+    
+    
+    
+    </th>
     <th>Reassignable</th>
     <th>Mutable</th>
    <th><a href="#tdz_sample">Temporal Dead Zone</a></th>
@@ -160,12 +167,14 @@ I recommend always declaring your variables with ```const``` by default, but wit
   </tr>
    <tr>
     <th>var</th>
-    <td>Function</td>
+    <td>Function or Global</td>
     <td>Yes</td>
     <td>Yes</td>
     <td>No</td>
   </tr>
 </table>
+
+Scopes can be Block || Function || Global
 
 #### Sample code
 
