@@ -769,6 +769,27 @@ console.log(x) // "a"
 console.log(y) // "b"
 ```
 
+Destructuring as a trick to swap variable values
+
+[a,b] = [b,a] 
+
+We can also skip during destructuring
+```js
+const [a , , b] = [1,2,3];
+// a = 1, b = 3
+```
+
+Syntax error if we destructure like this (starting with braces, JS assumes code block)
+
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227323179-c423b3f9-3552-491a-896f-e478d6210f43.png">
+
+
+Solution: Wrap in parenthesis
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227323320-1b29219c-10af-4a10-86e9-e89b67fa184b.png">
+
+Spr
+
+
 #### Useful resources
 
 - [ES6 Features - Destructuring Assignment](http://es6-features.org/#ArrayMatching)
