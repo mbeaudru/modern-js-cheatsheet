@@ -9,6 +9,52 @@
 
 ## Introduction
 
+### What is Javascript? How does it behave behind the scenes?
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227247835-cb46b0ea-7b5d-4309-812f-1d7de94dc542.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227248045-6c0d3590-ca1b-4ccc-bcc0-a8fabbcccb91.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227248123-d18f5e26-01d0-4f2a-b0e0-94bbe4ae2ad2.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227248306-bb408ae2-7a90-46a9-a555-b677236bb45b.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227248573-595d9796-5af3-4dd8-8a3f-92b6b167c9e3.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227248868-21d76257-ed6d-4160-9d79-e5744db6746d.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227249123-21b23437-1c62-4634-8a27-ab4ccbdffcb0.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227249310-fe0aae4a-2a01-4b2a-81d2-0d150e545ebb.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227249764-9abba5cd-9435-494e-861f-e1d7e558f309.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227249953-5041c05f-91ed-4337-ac82-66283d600eb0.png">
+
+### What is a JS Engine?
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227264553-84baabb0-d937-4352-8826-0da2c3ed6934.png">
+
+#### Interpretation vs Compilation
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227265346-9ff60751-cf93-474f-b6d5-999b4f0c57ba.png">
+
+#### JS is a just in time compiled language
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227266092-2d3e07cf-4a20-4b86-8a5e-50cd650383b1.png">
+
+#### Runtime is bigger than just the engine
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227266737-02430d0a-0e1d-4a55-8556-8ae70cbdd32d.png">
+
+##### JS Runtime without browser
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227266923-1ea7cad6-6d82-4074-abcf-7b0d65d381ec.png">
+
+### Execution Context
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227268108-c2cd5da0-7c81-4b79-8257-968dcff55685.png">
+
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227269214-b4ef8771-1aac-41bb-877e-55795dc4017f.png">
+
+### The call stack
+<img width="884" alt="image" src="https://user-images.githubusercontent.com/8856945/227269759-6555991e-35b5-4b5d-a407-04b5d002a4f7.png">
+
+
+
 ### Motivation
 
 This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and most contemporary sample code.
@@ -193,6 +239,13 @@ console.log(person) // "John", reassignment is allowed with let
 
 The [*scope*](#scope_def) of a variable roughly means "where is this variable available in the code".
 
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227270711-5e60329c-f763-4927-887f-497426bfc906.png">
+
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227272620-29b08b8b-af6c-4e2a-9aff-9b09e291a4d4.png">
+
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227272725-a72b6dca-6f67-4983-8b86-05b55f92ad5a.png">
+
+
 ##### var
 
 ```var``` declared variables are *function scoped*, meaning that when a variable is created in a function, everything in that function can access that variable. Besides, a *function scoped* variable created in a function can't be accessed outside this function.
@@ -328,9 +381,60 @@ person = ["Nick"] // raises an error, because reassignment is not allowed with c
 - [How let and const are scoped in JavaScript - WesBos](http://wesbos.com/javascript-scoping/)
 - [Temporal Dead Zone (TDZ) Demystified](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
 
+
+## Strict Mode
+Strict mode helps us write safe code. It can throw explicit errors when they happen and not silently go wrong
+
+Without strict mode with wrong variable name
+![image](https://user-images.githubusercontent.com/8856945/227186797-498b26fd-bdb0-4bc0-a729-acb7a05183dd.png)
+
+Note that non strict mode directly accepts the wrong variable name 
+
+With strict mode
+![image](https://user-images.githubusercontent.com/8856945/227187154-70e156ab-6f42-4cc1-a5df-674bcb5e15cf.png)
+
+Note that non strict mode directly accepts the `not defined` variable name
+
+Another example
+![image](https://user-images.githubusercontent.com/8856945/227189607-ac204fa6-8782-4723-a184-fe0a1fa2f895.png)
+
+Note: linting can also help catch this: ESLint
+
+## Functions
+
+### Old school functions
+
+**Function declaration**
+```js
+function add (a, b){
+ return a + b;
+}
+
+const result = add(1,2);
+// result is set to 3
+```
+
+**Function expressions**
+```js
+const add = function (a,b) {
+ return a + b;
+}
+```
+`Here function evaluates to something and therefore its an expression. In JS functions are not primitive types. They just spit out values and so they can be assigned`
+
+`Weird Note:` Declared functions can be called before being defined (They're hoisted then) while Functions defined as expressions can't be defined.
+![image](https://user-images.githubusercontent.com/8856945/227192894-8b44e8ee-4b70-4ade-9259-bd9a9e35d1ed.png)
+
+Expressions lead to safer code
+
 ### <a name="arrow_func_concept"></a> Arrow function
 
-The ES6 JavaScript update has introduced *arrow functions*, which is another way to declare and use functions. Here are the benefits they bring:
+The ES6 JavaScript update has introduced *arrow functions*, which is another way to declare and use functions. This is closer to function expressions than function declarations. 
+
+![image](https://user-images.githubusercontent.com/8856945/227194553-b49140d5-ef8f-47cf-8bc9-0ab279d64825.png)
+
+
+Here are the benefits they bring:
 
 - More concise
 - *this* is picked up from surroundings
@@ -441,6 +545,17 @@ When there is no argument provided to an arrow function, you need to provide par
 
 To understand this subtlety introduced with arrow functions, you must know how [this](#this_def) behaves in JavaScript.
 
+##### this function behavior
+`self = this` pattern
+
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227279511-7e230054-ba10-4fb0-b9ae-89165f223d7f.png">
+
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227279671-e4112173-e344-46a8-994b-25f6d462cc28.png">
+
+ES6 way: Use the arrow function. This works because arrow function this is inherited from parent scope
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227279979-0fc1b829-6a6b-4cdc-8022-d18e0d555486.png">
+
+
 In an arrow function, *this* is equal to the *this* value of the enclosing execution context. What it means is that an arrow function doesn't create a new *this*, it grabs it from its surrounding instead.
 
 Without arrow function, if you wanted to access a variable from *this* in a function inside a function, you had to use the *that = this* or *self = this* trick.
@@ -512,6 +627,47 @@ In other words, if you pass in *null* the default parameter **won't be applied**
 
 - [Default parameter value - ES6 Features](http://es6-features.org/#DefaultParameterValues)
 - [Default parameters - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+
+
+### Primitive vs Objects
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227282838-a8df68b2-1237-47e5-b1a5-f49233799a3e.png">
+
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/8856945/227283642-eca0f4ad-ebd7-42ba-91c3-5e9a751d9aac.png">
+
+
+### Arrays
+Two ways of intializing
+![image](https://user-images.githubusercontent.com/8856945/227195271-18b454af-3290-4730-8b5b-b7ebf7d3d0f7.png)
+
+Immutable and multi value
+![image](https://user-images.githubusercontent.com/8856945/227195440-c1b726e7-49c7-4cce-a520-be3c79571517.png)
+
+`Only primitive values are immutable`
+![image](https://user-images.githubusercontent.com/8856945/227195999-f7841fa3-85db-48f4-888e-d427bd3fbfa1.png)
+
+
+```
+The concept of immutability with const only applies to primitive values. Arrays are not primitive. This is related to how javascript stores variables in memory (to be explored later). 
+
+So what is the use of const for an array?
+
+The entire array itself can't be replaced however. That will still throw the const error. So we can use it in that context.
+
+Immutability for python is also similar. Primitive values are immutable, whereas arrays and dictionaries are not.
+
+Excerpt from https://realpython.com/python-pass-by-reference/#best-practice-use-dictionaries-and-lists
+
+Lists and sets are mutable, as are dictionaries and other mapping types. Strings and tuples are not mutable. Attempting to modify an element of an immutable object will raise a `TypeError`.
+```
+
+`Multi valued`
+
+![image](https://user-images.githubusercontent.com/8856945/227196088-322941d8-c35f-433f-9eb3-eb389ab22905.png)
+
+Operations on arrays
+![image](https://user-images.githubusercontent.com/8856945/227196361-2e540fc5-2ae9-4759-bbae-8b7165212663.png)
+
+
 
 ### Destructuring objects and arrays
 
