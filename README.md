@@ -57,7 +57,7 @@
 
 ### Motivation
 
-This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and most contemporary sample code.
+This document is a cheatsheet for JavaScript you will frequently encounter in modern projects and most contemporary sample code. Test
 
 This guide is not intended to teach you JavaScript from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn React for instance) because of the JavaScript concepts used.
 
