@@ -28,7 +28,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 - [Eloquent JavaScript (book)](https://eloquentjavascript.net)
 - [Douglas Crockford's blog](https://www.crockford.com/javascript/)
 - [ES6 Features with examples](http://es6-features.org)
-- [Wes Bos blog (ES6)](https://wesbos.com/blog)
+- [Wes Bos blog (ES6)](https://wesbos.com/javascript)
 - [Javascript Basics for Beginners](https://www.udacity.com/course/javascript-basics--ud804) - a free Udacity course
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
 - [Google](https://www.google.com/) to find specific blog and resources
