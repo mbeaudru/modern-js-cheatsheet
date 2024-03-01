@@ -988,3 +988,282 @@ console.log(myObj.y) // 20
 - [Property shorthand - ES6 Features](http://es6-features.org/#PropertyShorthand)
 
 
+### Promises
+
+Ein Promise ist ein Objekt, das synchron aus einer asynchronen Funktion zurückgegeben werden kann ([ref](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261#3cd0)).
+
+Promises können verwendet werden, um der [Callback-Hölle](http://callbackhell.com/) zu entkommen, und sie begegnen uns in modernen JavaScript-Projekten immer häufiger.
+
+#### Beispielcode
+
+```js
+const fetchingPosts = new Promise((res, rej) => {
+  $.get("/posts")
+    .done(posts => res(posts))
+    .fail(err => rej(err));
+});
+
+fetchingPosts
+  .then(posts => console.log(posts))
+  .catch(err => console.log(err));
+```
+
+#### Erklärung
+
+Wenn du eine *Ajax-Anfrage* machst, ist die Antwort nicht synchron, weil du eine Ressource anforderst, die einige Zeit zur Antwort braucht. Sie könnte sogar nie kommen, falls die angeforderte Ressource aus irgendeinem Grund nicht verfügbar ist (404).
+
+Um diese Art von Situation zu handhaben, hat uns ES2015 *Promises* gegeben. Promises können drei verschiedene Zustände haben:
+
+- Pending (Im Warten)
+- Fulfilled (Erfüllt)
+- Rejected (Abgelehnt)
+
+Nehmen wir an, wir möchten Promises verwenden, um eine Ajax-Anfrage zu tätigen und die Ressource X zu holen.
+
+##### Das Promise erstellen
+
+Zuerst erstellen wir ein Promise. Wir verwenden die jQuery get-Methode, um unsere Ajax-Anfrage an X zu stellen.
+
+```js
+const xFetcherPromise = new Promise( // Erstelle Promise mit dem "new" Schlüsselwort und speichere es in einer Variable
+  function(resolve, reject) { // Der Promise-Konstruktor nimmt eine Funktion entgegen, die selbst die Parameter resolve und reject besitzt
+    $.get("X") // Starte die Ajax-Anfrage
+      .done(function(X) { // Sobald die Anfrage beendet ist...
+        resolve(X); // ... erfülle das Promise mit dem Wert X als Parameter
+      })
+      .fail(function(error) { // Falls die Anfrage fehlschlägt...
+        reject(error); // ... lehne das Promise mit dem Fehler als Parameter ab
+      });
+  }
+)
+```
+
+Wie im obigen Beispiel zu sehen ist, nimmt das Promise-Objekt eine *Executor*-Funktion entgegen, die zwei Parameter **resolve** und **reject** hat. Diese Parameter sind Funktionen, die, wenn aufgerufen, den Promise-Zustand *pending* jeweils in einen *fulfilled* und *rejected* Zustand überführen.
+
+Das Promise befindet sich in einem Pending-Zustand nach seiner Erstellung, und seine *Executor*-Funktion wird sofort ausgeführt. Sobald eine der Funktionen *resolve* oder *reject* in der *Executor*-Funktion aufgerufen wird, ruft das Promise seine zugehörigen Handler auf.
+
+##### Verwendung von Promise-Handlern
+
+Um das Ergebnis (oder den Fehler) des Promises zu erhalten, müssen wir ihm Handler zuweisen, indem wir Folgendes tun:
+
+```js
+xFetcherPromise
+  .then(function(X) {
+    console.log(X);
+  })
+  .catch(function(err) {
+    console.log(err)
+  })
+```
+
+Wenn das Promise erfolgreich ist, wird *resolve* ausgeführt und die Funktion, die als `.then` Parameter übergeben wurde, wird ausgeführt.
+
+Wenn es fehlschlägt, wird *reject* ausgeführt und die Funktion, die als `.catch` Parameter übergeben wurde, wird ausgeführt.
+
+> **Hinweis :** Wenn das Promise bereits erfüllt oder abgelehnt wurde, wenn ein entsprechender Handler angehängt wird, wird der Handler aufgerufen, sodass es keinen Wettlaufzustand zwischen dem Abschluss einer asynchronen Operation und dem Anhängen ihrer Handler gibt. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Description)
+
+#### Externe Ressourcen
+
+- [JavaScript Promises für Dummys - Jecelyn Yeen](https://scotch.io/tutorials/javascript-promises-for-dummies)
+- [JavaScript Promise API - David Walsh](https://davidwalsh.name/promises)
+- [Promises verwenden - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)
+- [Was ist ein Promise - Eric Elliott](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
+- [JavaScript Promises: Eine Einführung - Jake Archibald](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
+- [Promise Dokumentation - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+### Template Literale
+
+Template Literale sind eine [*Ausdrucksinterpolation*](https://en.wikipedia.org/wiki/String_interpolation) für ein- und mehrzeilige Strings.
+
+Anders ausgedrückt, handelt es sich um eine neue String-Syntax, in der du bequem jede JavaScript-Ausdrücke verwenden kannst (beispielsweise Variablen).
+
+#### Beispielcode
+
+```js
+const name = "Nick";
+`Hallo ${name}, der folgende Ausdruck ist gleich vier : ${2+2}`;
+
+// Hallo Nick, der folgende Ausdruck ist gleich vier: 4
+```
+
+#### Externe Ressourcen
+
+- [String-Interpolation - ES6 Features](http://es6-features.org/#StringInterpolation)
+- [ES6 Template Literale - Addy Osmani](https://developers.google.com/web/updates/2015/01/ES6-Template-Strings)
+
+### Gekennzeichnete Template Literale
+
+Template Tags sind *Funktionen, die einem [Template Literal](#template-literals) vorangestellt werden können*. Wenn eine Funktion auf diese Weise aufgerufen wird, ist der erste Parameter ein Array der *Strings*, die zwischen den interpolierten Variablen des Templates auftreten, und die nachfolgenden Parameter sind die interpolierten Werte. Verwende einen Spread-Operator `...`, um alle zu erfassen. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
+
+> **Hinweis :** Eine berühmte Bibliothek namens [styled-components](https://www.styled-components.com/) setzt schwer auf dieses Feature.
+
+Hier ist ein Spielzeugbeispiel, wie sie funktionieren.
+```js
+function highlight(strings, ...values) {
+  const interpolation = strings.reduce((prev, current) => {
+    return prev + current + (values.length ? "<mark>" + values.shift() + "</mark>" : "");
+  }, "");
+
+  return interpolation;
+}
+
+const condiment = "Marmelade";
+const meal = "Toast";
+
+highlight`Ich mag ${condiment} auf ${meal}.`;
+// "Ich mag <mark>Marmelade</mark> auf <mark>Toast</mark>."
+```
+
+Ein interessanteres Beispiel:
+```js
+function comma(strings, ...values) {
+  return strings.reduce((prev, next) => {
+    let value = values.shift() || [];
+    value = value.join(", ");
+    return prev + next + value;
+  }, "");
+}
+
+const snacks = ['Äpfel', 'Bananen', 'Kirschen'];
+comma`Ich mag ${snacks} zum Knabbern.`;
+// "Ich mag Äpfel, Bananen, Kirschen zum Knabbern."
+```
+
+#### Externe Ressourcen
+- [Wes Bos zu gekennzeichneten Template Literalen](http://wesbos.com/tagged-template-literals/)
+- [Bibliothek von gängigen Template Tags](https://github.com/declandewet/common-tags)
+
+### Imports / Exports
+
+ES6-Module werden verwendet, um auf Variablen oder Funktionen in einem Modul zuzugreifen, die explizit von den Modulen exportiert wurden, die es importiert.
+
+Ich empfehle dringend, sich die Ressourcen von MDN zu Import/Export anzusehen (siehe externe Ressourcen unten), da sie sowohl unkompliziert als auch vollständig sind.
+
+#### Erklärung mit Beispielcode
+
+##### Benannte Exports
+
+Mit benannten Exports können mehrere Werte aus einem Modul exportiert werden.
+
+> **Hinweis :** Du kannst nur [Erstklassige Bürger](https://en.wikipedia.org/wiki/First-class_citizen) mit einem Namen benannt exportieren.
+
+```js
+// mathConstants.js
+export const pi = 3.14;
+export const exp = 2.7;
+export const alpha = 0.35;
+
+// -------------
+
+// myFile.js
+import { pi, exp } from './mathConstants.js'; // Benannter Import -- Destructuring-ähnliche Syntax
+console.log(pi) // 3.14
+console.log(exp) // 2.7
+
+// -------------
+
+// mySecondFile.js
+import * as constants from './mathConstants.js'; // Injiziere alle exportierten Werte in die Variable constants
+console.log(constants.pi) // 3.14
+console.log(constants.exp) // 2.7
+```
+
+Obwohl benannte Imports wie *Destructuring* aussehen, haben sie eine andere Syntax und sind nicht dasselbe. Sie unterstützen keine Standardwerte oder *tiefes* Destructuring.
+
+Außerdem kannst du Aliase verwenden, aber die Syntax ist anders als die, die beim Destructuring verwendet wird:
+
+```js
+import { foo as bar } from 'myFile.js'; // foo wird importiert und in eine neue bar Variable injiziert
+```
+
+##### Standardimport / -export
+
+Bezüglich des Standardexports gibt es nur einen einzigen Standardexport pro Modul. Ein Standardexport kann eine Funktion, eine Klasse, ein Objekt oder irgendetwas anderes sein. Dieser Wert wird als der "Haupt"-exportierte Wert angesehen, da er am einfachsten zu importieren ist. [Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
+
+```js
+// coolNumber.js
+const ultimateNumber = 42;
+export default ultimateNumber;
+
+// ------------
+
+// myFile.js
+import number from './coolNumber.js';
+// Standardexport, unabhängig von seinem Namen, wird automatisch in die Variable number injiziert;
+console.log(number) // 42
+```
+
+Exportieren einer Funktion:
+
+```js
+// sum.js
+export default function sum(x, y) {
+  return x + y;
+}
+// -------------
+
+// myFile.js
+import sum from './sum.js';
+const result = sum(1, 2);
+console.log(result) // 3
+```
+
+#### Externe Ressourcen
+
+- [ES6-Module in Stichpunkten](https://ponyfoo.com/articles/es6#modules)
+- [Export - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+- [Import - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+- [Verständnis von ES6-Modulen](https://www.sitepoint.com/understanding-es6-modules/)
+- [Destructuring Sonderfall - Importanweisungen](https://ponyfoo.com/articles/es6-destructuring-in-depth#special-case-import-statements)
+- [Missverständnisse bezüglich ES6-Modulen - Kent C. Dodds](https://medium.com/@kentcdodds/misunderstanding-es6-modules-upgrading-babel-tears-and-a-solution-ad2d5ab93ce0)
+- [Module in JavaScript](http://exploringjs.com/es6/ch_modules.html#sec_modules-in-javascript)
+
+### <a name="this_def"></a> JavaScript *this*
+
+Der *this*-Operator verhält sich anders als in anderen Sprachen und wird in den meisten Fällen durch die Art und Weise bestimmt, wie eine Funktion aufgerufen wird. ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)).
+
+Diese Vorstellung hat viele Feinheiten und ist ziemlich schwierig, daher schlage ich vor, in die unten aufgeführten externen Ressourcen einzutauchen. Ich werde das wiedergeben, was ich persönlich im Kopf habe, um zu bestimmen, was *this* gleich ist. Ich habe diesen Tipp aus [diesem Artikel von Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) gelernt.
+
+```js
+function myFunc() {
+  ...
+}
+
+// Nach jeder Anweisung findest du den Wert von *this* in myFunc
+
+myFunc.call("myString", "hallo") // "myString" -- der erste .call-Parameterwert wird in *this* injiziert
+
+// Im Nicht-Strict-Modus
+myFunc("hallo") // window -- myFunc() ist syntaktischer Zucker für myFunc.call(window, "hallo")
+
+// Im Strict-Modus
+myFunc("hallo") // undefined -- myFunc() ist syntaktischer Zucker für myFunc.call(undefined, "hallo")
+```
+
+```js
+var person = {
+  myFunc: function() { ... }
+}
+
+person.myFunc.call(person, "test") // person Objekt -- der erste call-Parameter wird in *this* injiziert
+person.myFunc("test") // person Objekt -- person.myFunc() ist syntaktischer Zucker für person.myFunc.call(person, "test")
+
+var myBoundFunc = person.myFunc.bind("hallo") // Erstellt eine neue Funktion, in der wir "hallo" in den *this*-Wert injizieren
+person.myFunc("test") // person Objekt -- Die bind-Methode hat keine Auswirkung auf die Originalmethode
+myBoundFunc("test") // "hallo" -- myBoundFunc ist person.myFunc mit "hallo" gebunden an *this*
+```
+
+#### Externe Ressourcen
+
+- [Verständnis von JavaScript-Funktionsaufrufen und "this" - Yehuda Katz](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/)
+- [JavaScript this - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+
+### Klasse
+
+JavaScript ist eine [prototypbasierte](https://en.wikipedia.org/wiki/Prototype-based_programming) Sprache (während Java beispielsweise eine [klassenbasierte](https://en.wikipedia.org/wiki/Class-based_programming) Sprache ist). ES6 hat JavaScript-Klassen eingeführt, die als syntaktischer Zucker für die prototypbasierte Vererbung gedacht sind und **kein** neues klassenbasiertes Vererbungsmodell darstellen ([ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)).
+
+Das Wort *class* ist tatsächlich irreführend, wenn du mit Klassen in anderen Sprachen vertraut bist. Wenn du es bist, vermeide Annahmen darüber, wie JavaScript-Klassen funktionieren, auf dieser Grundlage und betrachte es als eine völlig unterschiedliche Vorstellung.
+
+Da dieses Dokument nicht den Anspruch hat, dir die Sprache von Grund auf beizubringen, gehe ich davon aus, dass du weißt, was Prototypen sind und wie sie sich verhalten. Wenn nicht, sieh dir die unten aufgeführten externen Ressourcen nach dem Beispielcode an.
+
+
