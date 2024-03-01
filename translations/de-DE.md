@@ -1267,3 +1267,276 @@ Das Wort *class* ist tatsächlich irreführend, wenn du mit Klassen in anderen S
 Da dieses Dokument nicht den Anspruch hat, dir die Sprache von Grund auf beizubringen, gehe ich davon aus, dass du weißt, was Prototypen sind und wie sie sich verhalten. Wenn nicht, sieh dir die unten aufgeführten externen Ressourcen nach dem Beispielcode an.
 
 
+#### Beispiele
+
+Vor ES6, Prototyp-Syntax:
+
+```js
+var Person = function(name, age) {
+  this.name = name;
+  this.age = age;
+}
+Person.prototype.stringSentence = function() {
+  return "Hallo, mein Name ist " + this.name + " und ich bin " + this.age;
+}
+```
+
+Mit ES6-Klassensyntax:
+
+```js
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  stringSentence() {
+    return `Hallo, mein Name ist ${this.name} und ich bin ${this.age}`;
+  }
+}
+
+const myPerson = new Person("Manu", 23);
+console.log(myPerson.age) // 23
+console.log(myPerson.stringSentence()) // "Hallo, mein Name ist Manu und ich bin 23
+```
+
+#### Externe Ressourcen
+
+Zum Verständnis von Prototypen:
+
+- [Understanding Prototypes in JS - Yehuda Katz](http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/)
+- [A plain English guide to JS prototypes - Sebastian Porto](http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/)
+- [Vererbung und die Prototyp-Kette - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+
+Zum Verständnis von Klassen:
+
+- [ES6 Klassen im Detail - Nicolas Bevacqua](https://ponyfoo.com/articles/es6-classes-in-depth)
+- [ES6-Features - Klassen](http://es6-features.org/#ClassDefinition)
+- [JavaScript Klassen - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+
+### Die Schlüsselwörter `Extends` und `super`
+
+Das Schlüsselwort `extends` wird in Klassendeklarationen oder Klassenausdrücken verwendet, um eine Klasse zu erstellen, die ein Kind einer anderen Klasse ist ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)). Die Unterklasse erbt alle Eigenschaften der Oberklasse und kann zusätzlich neue Eigenschaften hinzufügen oder die geerbten modifizieren.
+
+Das Schlüsselwort `super` wird verwendet, um Funktionen eines Oberobjekts aufzurufen, einschließlich seines Konstruktors.
+
+- Das Schlüsselwort `super` muss verwendet werden, bevor das Schlüsselwort `this` im Konstruktor verwendet wird.
+- Der Aufruf von `super()` ruft den Konstruktor der Oberklasse auf. Wenn du einige Argumente im Konstruktor einer Klasse an den Konstruktor ihres Elternteils weitergeben möchtest, rufst du ihn mit `super(arguments)` auf.
+- Wenn die Oberklasse eine Methode (auch statisch) namens `X` hat, kannst du mit `super.X()` diese in einer Unterklasse aufrufen.
+
+#### Beispielcode
+
+```js
+class Polygon {
+  constructor(height, width) {
+    this.name = 'Polygon';
+    this.height = height;
+    this.width = width;
+  }
+
+  getHelloPhrase() {
+    return `Hallo, ich bin ein ${this.name}`;
+  }
+}
+
+class Square extends Polygon {
+  constructor(length) {
+    // Hier wird der Konstruktor der Oberklasse mit den Längen
+    // für die Breite und Höhe des Polygons aufgerufen
+    super(length, length);
+    // Hinweis: In abgeleiteten Klassen muss super() aufgerufen werden, bevor du
+    // 'this' verwenden kannst. Wenn du dies auslässt, wird ein Referenzfehler verursacht.
+    this.name = 'Quadrat';
+    this.length = length;
+  }
+
+  getCustomHelloPhrase() {
+    const polygonPhrase = super.getHelloPhrase(); // Zugriff auf die Elternmethode mit super.X()-Syntax
+    return `${polygonPhrase} mit einer Länge von ${this.length}`;
+  }
+
+  get area() {
+    return this.height * this.width;
+  }
+}
+
+const mySquare = new Square(10);
+console.log(mySquare.area) // 100
+console.log(mySquare.getHelloPhrase()) // 'Hallo, ich bin ein Quadrat' -- Square erbt von Polygon und hat Zugriff auf seine Methoden
+console.log(mySquare.getCustomHelloPhrase()) // 'Hallo, ich bin ein Quadrat mit einer Länge von 10'
+```
+
+**Hinweis :** Wenn wir versucht hätten, `this` vor dem Aufruf von `super()` in der Square-Klasse zu verwenden, wäre ein ReferenceError ausgelöst worden:
+
+```js
+class Square extends Polygon {
+  constructor(length) {
+    this.height; // ReferenceError, super muss zuerst aufgerufen werden!
+
+    // Hier wird der Konstruktor der Oberklasse mit den Längen
+    // für die Breite und Höhe des Polygons aufgerufen
+    super(length, length);
+
+    // Hinweis: In abgeleiteten Klassen muss super() aufgerufen werden bevor du
+    // 'this' verwenden kannst. Wenn du dies auslässt, wird ein Referenzfehler verursacht.
+    this.name = 'Quadrat';
+  }
+}
+```
+
+#### Externe Ressourcen
+
+- [Extends - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
+- [Super-Operator - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super)
+- [Vererbung - MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance)
+
+### Async Await
+
+Zusätzlich zu [Promises](#promises) gibt es eine neue Syntax, die du vielleicht antriffst, um asynchronen Code zu handhaben, nämlich *async / await*.
+
+Der Zweck von async/await-Funktionen ist es, die Verwendung von Promises synchron zu vereinfachen und ein Verhalten für eine Gruppe von Promises durchzuführen. Genau wie Promises ähnlich wie strukturierte Callbacks sind, ist async/await ähnlich wie die Kombination von Generatoren und Promises. Async-Funktionen geben *immer* ein Promise zurück. ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function))
+
+> **Hinweis :** Du musst verstehen, was Promises sind und wie sie funktionieren, bevor du versuchst, async / await zu verstehen, da diese darauf basieren.
+
+> **Hinweis 2:** [*await* muss in einer *async* Funktion verwendet werden](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9#f3f0), was bedeutet, dass du await nicht auf der obersten Ebene unseres Codes verwenden kannst, da dies nicht innerhalb einer async-Funktion ist.
+
+#### Beispielcode
+
+```js
+async function getGithubUser(username) { // das async-Schlüsselwort ermöglicht die Verwendung von await in der Funktion und bedeutet, dass die Funktion ein Promise zurückgibt
+  const response = await fetch(`https://api.github.com/users/${username}`); // Die Ausführung wird hier pausiert, bis das von fetch zurückgegebene Promise aufgelöst ist
+  return response.json();
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user)) // das Nutzer-Response loggen - await-Syntax kann nicht verwendet werden, da dieser Code nicht in einer async-Funktion ist
+  .catch(err => console.log(err)); // wenn ein Fehler in unserer async-Funktion geworfen wird, werden wir ihn hier erwischen
+```
+
+#### Erklärung mit Beispielcode
+
+*Async / Await* basiert auf Promises, ermöglicht aber eine imperativere Code-Stil.
+
+Der *async*-Operator markiert eine Funktion als asynchron und wird immer ein *Promise* zurückgeben. Du kannst den *await*-Operator in einer *async*-Funktion verwenden, um die Ausführung in dieser Zeile zu pausieren, bis das vom Ausdruck zurückgegebene Promise entweder aufgelöst oder abgelehnt wird.
+
+```js
+async function myFunc() {
+  // wir können den await-Operator verwenden, weil diese Funktion async ist
+  return "hallo welt";
+}
+
+myFunc().then(msg => console.log(msg)) // "hallo welt" -- der Rückgabewert von myFunc wird durch den async-Operator in ein Promise umgewandelt
+```
+
+Wenn das *return*-Statement einer async-Funktion erreicht wird, wird das Promise mit dem zurückgegebenen Wert erfüllt. Wenn innerhalb einer async-Funktion ein Fehler geworfen wird, wechselt der Promise-Zustand zu *abgelehnt*. Wenn aus einer async-Funktion kein Wert zurückgegeben wird, wird trotzdem ein Promise zurückgegeben und löst ohne Wert auf, wenn die Ausführung der async-Funktion abgeschlossen ist.
+
+Der *await*-Operator wird verwendet, um auf die Erfüllung eines *Promise* zu warten und kann nur im Körper einer *async*-Funktion verwendet werden. Beim Auftreffen wird die Codeausführung pausiert, bis das Promise erfüllt ist.
+
+> **Hinweis :** *fetch* ist eine Funktion, die ein Promise zurückgibt, das einen AJAX-Anfrage ermöglicht
+
+Sehen wir uns an, wie wir einen Github-Nutzer mit Promises zuerst abrufen würden:
+
+```js
+function getGithubUser(username) {
+  return fetch(`https://api.github.com/users/${username}`).then(response => response.json());
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+Hier ist das äquivalente *async / await*:
+
+```js
+async function getGithubUser(username) { // promise + await-Schlüsselwortverwendung erlaubt
+  die Antwort = await fetch(`https://api.github.com/users/${username}`); // Die Ausführung stoppt hier, bis das fetch-Promise erfüllt ist
+  return response.json();
+}
+
+getGithubUser('mbeaudru')
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+```
+
+Die *async / await*-Syntax ist besonders praktisch, wenn du Promises verketten musst, die voneinander abhängig sind.
+
+Wenn du beispielsweise einen Token abrufen musst, um einen Blogeintrag in einer Datenbank und dann die Autoreninformationen abzurufen:
+
+> **Hinweis :** *await*-Ausdrücke müssen in Klammern eingefasst werden, um Methoden und Eigenschaften des aufgelösten Werts auf derselben Zeile aufzurufen.
+
+```js
+async function fetchPostById(postId) {
+  const token = (await fetch('token_url')).json().token;
+  const post = (await fetch(`/posts/${postId}?token=${token}`)).json();
+  der Autor = (await fetch(`/users/${post.authorId}`)).json();
+
+  post.author = author;
+  return post;
+}
+
+fetchPostById('gzIrzeo64')
+  .then(post => console.log(post))
+  .catch(err => console.log(err));
+```
+
+##### Fehlerbehandlung
+
+Sofern wir *try / catch*-Blöcke nicht um *await*-Ausdrücke herum hinzufügen, werden unerfasste Ausnahmen – unabhängig davon, ob sie im Körper Ihrer *async*-Funktion oder während ihrer Unterbrechung während *await* geworfen wurden – das Promise, das von der *async*-Funktion zurückgegeben wird, ablehnen. Die Verwendung des `throw`-Statements in einer asynchronen Funktion ist dasselbe wie die Rückgabe eines Promises, das abgelehnt wird. [(Ref: PonyFoo)](https://ponyfoo.com/articles/understanding-javascript-async-await#error-handling).
+
+> **Hinweis :** Promises verhalten sich gleich!
+
+Mit Promises sieht die Fehlerbearbeitungskette so aus:
+
+```js
+function getUser() { // Dieses Promise wird abgelehnt!
+  return new Promise((res, rej) => rej("Benutzer nicht gefunden!"));
+}
+
+function getAvatarByUsername(userId) {
+  return getUser(userId).then(user => user.avatar);
+}
+
+function getUserAvatar(username) {
+  return getAvatarByUsername(username).then(avatar => ({ username, avatar }));
+}
+
+getUserAvatar('mbeaudru')
+  .then(res => console.log(res))
+  .catch(err => console.log(err)); // "Benutzer nicht gefunden!"
+```
+
+Das Äquivalent mit *async / await*:
+
+```js
+async function getUser() { // Das zurückgegebene Promise wird abgelehnt sein!
+  wirf "Benutzer nicht gefunden!";
+}
+
+async function getAvatarByUsername(userId) => {
+  const user = await getUser(userId);
+  return user.avatar;
+}
+
+async function getUserAvatar(username) {
+  var avatar = await getAvatarByUsername(username);
+  return { username, avatar };
+}
+
+getUserAvatar('mbeaudru')
+  .then(res => console.log(res))
+  .catch(err => console.log(err)); // "Benutzer nicht gefunden!"
+```
+
+#### Externe Ressourcen
+
+- [Async/Await - JavaScript.Info](https://javascript.info/async-await)
+- [ES7 Async/Await](http://rossboucher.com/await/#/)
+- [6 Gründe, warum JavaScripts Async/Await Promises wegblasen](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
+- [JavaScript awaits](https://dev.to/kayis/javascript-awaits)
+- [Verwendung von Async Await in Express mit Node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
+- [Async-Funktion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+- [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [Verwendung von async / await in express mit node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
+
+
