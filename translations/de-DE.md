@@ -1540,3 +1540,307 @@ getUserAvatar('mbeaudru')
 - [Verwendung von async / await in express mit node 8](https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016)
 
 
+### Truthy / Falsy
+
+In JavaScript ist ein Truthy- oder Falsy-Wert ein Wert, der in einen Boolean umgewandelt wird, wenn er in einem booleschen Kontext ausgewertet wird. Ein Beispiel für einen booleschen Kontext wäre die Auswertung einer ```if```-Bedingung:
+
+Jeder Wert wird zu ```true``` umgewandelt, es sei denn, sie sind gleich:
+
+- ```false```
+- ```0```
+- ```""``` (leerer String)
+- ```null```
+- ```undefined```
+- ```NaN```
+
+Hier sind Beispiele für *booleschen Kontext*:
+
+- Auswertung einer ```if```-Bedingung
+
+```js
+if (myVar) {}
+```
+
+```myVar``` kann ein [first-class citizen](https://en.wikipedia.org/wiki/First-class_citizen) (Variable, Funktion, Boolean) sein, aber es wird in einen Boolean umgewandelt, weil es in einem booleschen Kontext ausgewertet wird.
+
+- Nach dem logischen **NICHT** ```!```-Operator
+
+Dieser Operator gibt false zurück, wenn sein einzelner Operand in true umgewandelt werden kann; andernfalls gibt er true zurück.
+
+```js
+!0 // true -- 0 ist falsy, also gibt es true zurück
+!!0 // false -- 0 ist falsy, also gibt !0 true zurück, daher liefert !(!0) false
+!!"" // false -- leerer String ist falsy, also NICHT (NICHT false) ist gleich false
+```
+
+- Mit dem *Boolean*-Objektkonstruktor
+
+```js
+new Boolean(0) // false
+new Boolean(1) // true
+```
+
+- In einer ternären Auswertung
+
+```js
+myVar ? "truthy" : "falsy"
+```
+
+myVar wird in einem booleschen Kontext ausgewertet.
+
+Sei vorsichtig beim Vergleichen von 2 Werten. Die Objektwerte (die zu true umgewandelt werden sollten) werden **nicht** in einen Boolean umgewandelt, sondern es wird gezwungen, in einen primitiven Wert mithilfe der [ToPrimitives-Spezifikation](http://javascript.info/object-toprimitive) umgewandelt. Intern, wenn ein Objekt mit einem Boolean-Wert wie `[] == true` verglichen wird, macht es `[].toString() == true`, also...
+
+```js
+let a = [] == true // a ist false, da [].toString() "" zurückgibt.
+let b = [1] == true // b ist true, da [1].toString() "1" zurückgibt.
+let c = [2] == true // c ist false, da [2].toString() "2" zurückgibt.
+```
+
+#### Externe Ressourcen
+
+- [Truthy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
+- [Falsy (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
+- [Truthy und Falsy-Werte in JS - Josh Clanton](http://adripofjavascript.com/blog/drips/truthy-and-falsy-values-in-javascript.html)
+
+### Anamorphismen und Katamorphismen
+
+#### Anamorphismen
+
+Anamorphismen sind Funktionen, die von einem Objekt auf eine komplexere Struktur abbilden, die den Typ des Objekts enthält. Es ist der Prozess des *Entfaltens* einer einfachen Struktur in eine komplexere. Betrachte das Entfalten einer Ganzzahl in eine Liste von Ganzzahlen. Die Ganzzahl ist unser Ausgangsobjekt und die Liste von Ganzzahlen ist die komplexere Struktur.
+
+**Beispielcode**
+
+```js
+function downToOne(n) {
+  const list = [];
+
+  for (let i = n; i > 0; --i) {
+    list.push(i);
+  }
+
+  return list;
+}
+
+downToOne(5)
+  //=> [ 5, 4, 3, 2, 1 ]
+```
+
+#### Katamorphismen
+
+Katamorphismen sind das Gegenteil von Anamorphismen, da sie Objekte einer komplexeren Struktur nehmen und sie in einfachere Strukturen *falten*. Nehme das folgende Beispiel `product`, welches eine Liste von Ganzzahlen nimmt und eine einzelne Ganzzahl zurückgibt.
+
+**Beispielcode**
+
+```js
+function product(list) {
+  let product = 1;
+
+  for (const n of list) {
+    product = product * n;
+  }
+
+  return product;
+}
+
+product(downToOne(5)) // 120
+```
+
+#### Externe Ressourcen
+
+* [Anamorphisms in JavaScript](http://raganwald.com/2016/11/30/anamorphisms-in-javascript.html)
+* [Anamorphism](https://en.wikipedia.org/wiki/Anamorphism)
+* [Catamorphism](https://en.wikipedia.org/wiki/Catamorphism)
+
+### Generatoren
+
+Eine andere Möglichkeit, die Funktion `downToOne` zu schreiben, ist die Verwendung eines Generators. Um ein `Generator`-Objekt zu instanziieren, muss man die `function *`-Deklaration verwenden. Generatoren sind Funktionen, die verlassen und später mit gespeichertem Kontext (Variablenbindungen) wieder betreten werden können.
+
+Zum Beispiel kann die oben genannte Funktion `downToOne` wie folgt umgeschrieben werden:
+
+```js
+function * downToOne(n) {
+  for (let i = n; i > 0; --i) {
+    yield i;
+  }
+}
+
+[...downToOne(5)] // [ 5, 4, 3, 2, 1 ]
+```
+
+Generatoren geben ein iterierbares Objekt zurück. Wenn die `next()`-Funktion des Iterators aufgerufen wird, wird sie ausgeführt, bis zum ersten `yield`-Ausdruck, welcher den zurückzugebenden Wert vom Iterator angibt oder mit `yield*`, das an eine andere Generatorfunktion delegiert. Wenn in dem Generator eine `return`-Anweisung aufgerufen wird, wird der Generator als beendet markiert und gibt den Rückgabewert zurück. Weitere Aufrufe von `next()` geben keine neuen Werte zurück.
+
+**Beispielcode**
+
+```js
+// Yield-Beispiel
+function * idMaker() {
+  var index = 0;
+  while (index < 2) {
+    yield index;
+    index = index + 1;
+  }
+}
+
+var gen = idMaker();
+
+gen.next().value; // 0
+gen.next().value; // 1
+gen.next().value; // undefined
+```
+
+Der `yield*`-Ausdruck ermöglicht einem Generator, eine andere Generatorfunktion während der Iteration aufzurufen.
+
+```js
+// Yield * Beispiel
+function * genB(i) {
+  yield i + 1;
+  yield i + 2;
+  yield i + 3;
+}
+
+function * genA(i) {
+  yield i;
+  yield* genB(i);
+  yield i + 10;
+}
+
+var gen = genA(10);
+
+gen.next().value; // 10
+gen.next().value; // 11
+gen.next().value; // 12
+gen.next().value; // 13
+gen.next().value; // 20
+```
+
+```js
+// Generator Return-Beispiel
+function* yieldAndReturn() {
+  yield "Y";
+  return "R";
+  yield "unerreichbar";
+}
+
+var gen = yieldAndReturn()
+gen.next(); // { value: "Y", done: false }
+gen.next(); // { value: "R", done: true }
+gen.next(); // { value: undefined, done: true }
+```
+
+#### Externe Ressourcen
+
+* [Mozilla MDN Web Docs, Iteratoren und Generatoren](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Generators)
+
+### Statische Methoden
+
+#### Kurze Erklärung
+
+Das Schlüsselwort `static` wird in Klassen verwendet, um statische Methoden zu deklarieren. Statische Methoden sind Funktionen in einer Klasse, die zum Klassenobjekt gehören und nicht für irgendeine Instanz dieser Klasse verfügbar sind.
+
+#### Beispielcode
+
+```js
+class Repo {
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+}
+
+// Beachte, dass wir keine Instanz der Repo-Klasse erstellen mussten
+console.log(Repo.getName()) // Der Name des Repos ist modern-js-cheatsheet
+
+let r = new Repo();
+console.log(r.getName()) // Ungefangener TypeError: r.getName ist keine Funktion
+```
+
+#### Ausführliche Erklärung
+
+Statische Methoden können innerhalb einer anderen statischen Methode mithilfe des Schlüsselworts `this` aufgerufen werden, dies funktioniert jedoch nicht für nicht-statische Methoden. Nicht-statische Methoden können nicht direkt auf statische Methoden mit dem Schlüsselwort `this` zugreifen.
+
+##### Andere statische Methoden aus einer statischen Methode aufrufen.
+
+Um eine statische Methode aus einer anderen statischen Methode aufzurufen, kann das Schlüsselwort `this` verwendet werden wie folgt;
+
+```js
+class Repo {
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  static modifyName() {
+    return this.getName() + '-added-this'
+  }
+}
+
+console.log(Repo.modifyName()) // Der Name des Repos ist modern-js-cheatsheet-added-this
+```
+
+##### Statische Methoden aus nicht-statischen Methoden aufrufen.
+
+Nicht-statische Methoden können auf zwei Weisen statische Methoden aufrufen;
+1. ###### Mit dem Klassennamen.
+
+Um Zugriff auf eine statische Methode von einer nicht-statischen Methode zu bekommen, verwenden wir den Klassennamen und rufen die statische Methode wie eine Eigenschaft auf. z.B `ClassName.StaticMethodName`
+
+```js
+class Repo {
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  useName() {
+    return Repo.getName() + ' and it contains some really important stuff'
+  }
+}
+
+// Wir müssen die Klasse instanziieren, um nicht-statische Methoden zu verwenden
+let r = new Repo()
+console.log(r.useName()) // Der Name des Repos ist modern-js-cheatsheet und enthält einige wirklich wichtige Dinge
+```
+
+2. ###### Mit dem Konstruktor
+
+Statische Methoden können als Eigenschaften des Konstruktorobjekts aufgerufen werden.
+
+```js
+class Repo {
+  static getName() {
+    return "Repo name is modern-js-cheatsheet"
+  }
+
+  useName() {
+    // Ruft die statische Methode als Eigenschaft des Konstruktors auf
+    return this.constructor.getName() + ' and it contains some really important stuff'
+  }
+}
+
+// Wir müssen die Klasse instanziieren, um nicht-statische Methoden zu verwenden
+let r = new Repo()
+console.log(r.useName()) // Der Name des Repos ist modern-js-cheatsheet und enthält einige wirklich wichtige Dinge
+```
+
+#### Externe Ressourcen
+- [static keyword- MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)
+- [Statische Methoden- Javascript.info](https://javascript.info/class#static-methods)
+- [Statische Mitglieder in ES6- OdeToCode](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
+
+## Glossar
+
+### <a name="scope_def"></a> Scope
+
+Der Kontext, in dem Werte und Ausdrücke "sichtbar" sind oder referenziert werden können. Wenn eine Variable oder ein anderer Ausdruck "nicht im aktuellen Scope" ist, dann ist er nicht zur Verwendung verfügbar.
+
+Quelle: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Scope)
+
+### <a name="mutation_def"></a> Variablenmutation
+
+Von einer Variablen wird gesagt, dass sie mutiert wurde, wenn ihr anfänglicher Wert sich danach geändert hat.
+
+```js
+var myArray = [];
+myArray.push("firstEl") // myArray wird mutiert
+```
+
+Eine Variable wird als *unveränderlich* bezeichnet, wenn sie nicht mutiert werden kann.
+
+[Schau dir den MDN Mutable-Artikel an](https://developer.mozilla.org/en-US/docs/Glossary/Mutable) für weitere Details.
