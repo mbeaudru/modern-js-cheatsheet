@@ -11,7 +11,7 @@
 
 ### Motivation
 
-Dieses Dokument ist ein Spickzettel für JavaScript, den du häufig in modernen Projekten und den meisten aktuellen Beispielcodes antreffen wirst.
+Dieses Dokument ist ein Spickzettel für JavaScript, das du häufig in modernen Projekten und den meisten aktuellen Beispielcodes antreffen wirst.
 
 Dieser Leitfaden ist nicht dazu gedacht, dir JavaScript von Grund auf beizubringen, sondern ist eine Hilfe für Entwickler mit grundlegendem Wissen, die Schwierigkeiten haben, sich mit modernen Codebasen vertraut zu machen (oder sagen wir, React zu lernen), aufgrund der in JavaScript verwendeten Konzepte.
 
@@ -309,4 +309,303 @@ person = "Sandra" // wirft einen Fehler, da Neu-Zuweisung nicht erlaubt ist für
 Für Arrays:
 ```js
 const person = [];
-person.push('John'); //
+person.push('John'); // das funktioniert! Die Variable person wird nicht komplett neu zugewiesen, sondern verändert
+console.log(person[0]) // "John"
+person = ["Nick"] // wirft einen Fehler, da Neu-Zuweisung nicht erlaubt ist für const deklarierte Variablen
+```
+
+#### Externe Ressource
+
+- [Wie let und const in JavaScript skopiert werden - WesBos](http://wesbos.com/javascript-scoping/)
+- [Temporal Dead Zone (TDZ) Demystifiziert](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified)
+
+### <a name="arrow_func_concept"></a> Pfeilfunktion
+
+Das ES6 JavaScript Update hat *Pfeilfunktionen* eingeführt, die eine weitere Methode darstellen, Funktionen zu deklarieren und zu verwenden. Hier sind die Vorteile, die sie mitbringen:
+
+- Kürzerer Code
+- *this* wird aus der Umgebung übernommen
+- implizite Rückgabe
+
+#### Beispielcode
+
+- Kürze und implizite Rückgabe
+
+```js
+function double(x) { return x * 2; } // Traditioneller Weg
+console.log(double(2)) // 4
+```
+
+```js
+const double = x => x * 2; // Gleiche Funktion als Pfeilfunktion mit impliziter Rückgabe geschrieben
+console.log(double(2)) // 4
+```
+
+- *this*-Referenz
+
+In einer Pfeilfunktion ist *this* gleich dem *this*-Wert des umschließenden Ausführungskontextes. Im Grunde musst du mit Pfeilfunktionen nicht mehr den Trick "that = this" anwenden, bevor du eine Funktion in einer Funktion aufrufst.
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  setTimeout(() => {
+    this.myVar++;
+    console.log(this.myVar) // 1
+  }, 0);
+}
+```
+
+#### Detaillierte Erklärung
+
+##### Kürze
+
+Pfeilfunktionen sind in vielerlei Hinsicht prägnanter als traditionelle Funktionen. Lass uns alle möglichen Fälle überprüfen:
+
+- Implizite vs. explizite Rückgabe
+
+Eine **explizite Rückgabe** ist eine Funktion, in deren Körper das Schlüsselwort *return* verwendet wird.
+
+```js
+  function double(x) {
+    return x * 2; // diese Funktion gibt explizit x * 2 zurück, das Schlüsselwort *return* wird verwendet
+  }
+```
+
+Auf traditionelle Weise geschriebene Funktionen hatten immer eine explizite Rückgabe. Aber mit Pfeilfunktionen kannst du eine *implizite Rückgabe* durchführen, was bedeutet, dass du das Schlüsselwort *return* nicht verwenden musst, um einen Wert zurückzugeben.
+
+```js
+  const double = (x) => {
+    return x * 2; // Hier explizite Rückgabe
+  }
+```
+
+Da diese Funktion nur etwas zurückgibt (keine Anweisungen vor dem Schlüsselwort *return*), können wir eine implizite Rückgabe durchführen.
+
+```js
+  const double = (x) => x * 2; // Korrekt, gibt x*2 zurück
+```
+
+Um dies zu tun, müssen wir nur die **Klammern** und das Schlüsselwort **return** entfernen. Daher wird sie als *implizite* Rückgabe bezeichnet, das Schlüsselwort *return* ist nicht vorhanden, aber diese Funktion wird tatsächlich ```x * 2``` zurückgeben.
+
+> **Hinweis:** Wenn deine Funktion keinen Wert zurückgibt (mit *Nebenwirkungen*), führt sie weder eine explizite noch eine implizite Rückgabe durch.
+
+Außerdem, wenn du ein *Objekt* implizit zurückgeben möchtest, **musst du es in Klammern setzen**, da es sonst zu Konflikten mit den Blockklammern kommen würde:
+
+```js
+const getPerson = () => ({ name: "Nick", age: 24 })
+console.log(getPerson()) // { name: "Nick", age: 24 } -- Objekt wird implizit durch Pfeilfunktion zurückgegeben
+```
+
+- Nur ein Argument
+
+Wenn deine Funktion nur einen Parameter hat, kannst du die Klammern um ihn herum weglassen. Wenn wir den oben genannten *double*-Code wieder aufgreifen:
+
+```js
+  const double = (x) => x * 2; // diese Pfeilfunktion nimmt nur einen Parameter entgegen
+```
+
+Klammern um den Parameter können vermieden werden:
+
+```js
+  const double = x => x * 2; // diese Pfeilfunktion nimmt nur einen Parameter entgegen
+```
+
+- Keine Argumente
+
+Wenn einer Pfeilfunktion kein Argument übergeben wird, musst du Klammern angeben, sonst ist die Syntax nicht gültig.
+
+```js
+  () => { // Klammern werden angegeben, alles ist in Ordnung
+    const x = 2;
+    return x;
+  }
+```
+
+```js
+  => { // Keine Klammern, das wird nicht funktionieren!
+    const x = 2;
+    return x;
+  }
+```
+
+##### *this*-Referenz
+
+Um diese Nuance, die mit Pfeilfunktionen eingeführt wurde, zu verstehen, muss du wissen, wie [this](#this_def) sich in JavaScript verhält.
+
+In einer Pfeilfunktion ist *this* gleich dem *this*-Wert des umschließenden Ausführungskontextes. Das bedeutet, dass eine Pfeilfunktion kein neues *this* erstellt, sondern es stattdessen aus seiner Umgebung übernimmt.
+
+Ohne Pfeilfunktion, wenn du in einer Funktion innerhalb einer Funktion auf eine Variable von *this* zugreifen wolltest, musstest du den Trick *that = this* oder *self = this* anwenden.
+
+Zum Beispiel beim Verwenden der setTimeout-Funktion innerhalb von myFunc:
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  var that = this; // that = this Trick
+  setTimeout(
+    function() { // Ein neues *this* wird in diesem Funktionsbereich erstellt
+      that.myVar++;
+      console.log(that.myVar) // 1
+
+      console.log(this.myVar) // undefiniert -- siehe Funktionsdeklaration oben
+    },
+    0
+  );
+}
+```
+
+Aber mit Pfeilfunktion wird *this* aus seiner Umgebung übernommen:
+
+```js
+function myFunc() {
+  this.myVar = 0;
+  setTimeout(
+    () => { // this wird aus der Umgebung übernommen, was hier myFunc bedeutet
+      this.myVar++;
+      console.log(this.myVar) // 1
+    },
+    0
+  );
+}
+```
+
+#### Nützliche Ressourcen
+
+- [Einführung in Pfeilfunktionen - WesBos](http://wesbos.com/arrow-functions/)
+- [JavaScript Pfeilfunktion - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [Pfeilfunktion und lexikalisches *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
+
+### Standardparameterwert für Funktionen
+
+Ab dem ES2015 JavaScript Update kannst du deinen Funktionsparametern Standardwerte zuweisen, indem du folgende Syntax verwendest:
+
+```js
+function myFunc(x = 10) {
+  return x;
+}
+console.log(myFunc()) // 10 -- kein Wert wird übergeben, daher wird dem x in myFunc der Standardwert 10 zugewiesen
+console.log(myFunc(5)) // 5 -- ein Wert wird übergeben, daher ist x gleich 5 in myFunc
+
+console.log(myFunc(undefined)) // 10 -- der Wert undefined wird übergeben, daher wird der Standardwert dem x zugewiesen
+console.log(myFunc(null)) // null -- ein Wert (null) wird übergeben, siehe unten für weitere Details
+```
+
+Der Standardparameter wird in zwei und nur zwei Situationen angewendet:
+
+- Kein Parameter übergeben
+- *undefined* Parameter übergeben
+
+Anders ausgedrückt, wenn du *null* übergibst, wird der Standardparameter **nicht angewendet**.
+
+> **Hinweis:** Die Zuweisung eines Standardwerts kann auch mit destrukturierten Parametern verwendet werden (siehe nächste Notion, um ein Beispiel zu sehen)
+
+#### Externe Ressource
+
+- [Standardparameterwert - ES6 Features](http://es6-features.org/#DefaultParameterValues)
+- [Standardparameter - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+
+### Destrukturierung von Objekten und Arrays
+
+*Destrukturierung* ist eine praktische Methode, neue Variablen zu erstellen, indem einige Werte aus in Objekten oder Arrays gespeicherten Daten extrahiert werden.
+
+Um nur einige Anwendungsfälle zu nennen, kann die *Destrukturierung* verwendet werden, um Funktionsparameter oder *this.props* in React-Projekten zu destrukturieren.
+
+#### Erklärung mit Beispielcode
+
+- Objekt
+
+Betrachten wir das folgende Objekt für alle Beispiele:
+
+```js
+const person = {
+  firstName: "Nick",
+  lastName: "Anderson",
+  age: 35,
+  sex: "M"
+}
+```
+
+Ohne Destrukturierung
+
+```js
+const first = person.firstName;
+const age = person.age;
+const city = person.city || "Paris";
+```
+
+Mit Destrukturierung, alles in einer Zeile:
+
+```js
+const { firstName: first, age, city = "Paris" } = person; // Das war's !
+
+console.log(age) // 35 -- Eine neue Variable age wird erstellt und ist gleich person.age
+console.log(first) // "Nick" -- Eine neue Variable first wird erstellt und ist gleich person.firstName
+console.log(firstName) // ReferenceError -- person.firstName existiert, ABER die neu erstellte Variable ist als first benannt
+console.log(city) // "Paris" -- Eine neue Variable city wird erstellt und da person.city undefiniert ist, ist city gleich dem bereitgestellten Standardwert "Paris".
+```
+
+**Hinweis:** In ```const { age } = person;``` werden die Klammern nach dem *const*-Schlüsselwort nicht verwendet, um ein Objekt oder einen Block zu deklarieren, sondern es ist die *Destrukturierungssyntax*.
+
+- Funktionsparameter
+
+*Destrukturierung* wird häufig verwendet, um Objektparameter in Funktionen zu destrukturieren.
+
+Ohne Destrukturierung
+
+```js
+function joinFirstLastName(person) {
+  const firstName = person.firstName;
+  const lastName = person.lastName;
+  return firstName + '-' + lastName;
+}
+
+joinFirstLastName(person); // "Nick-Anderson"
+```
+
+Bei der Destrukturierung des Objektparameters *person* erhalten wir eine präzisere Funktion:
+
+```js
+function joinFirstLastName({ firstName, lastName }) { // wir erstellen Variablen firstName und lastName durch Destrukturierung des person-Parameters
+  return firstName + '-' + lastName;
+}
+
+joinFirstLastName(person); // "Nick-Anderson"
+```
+
+Destrukturierung ist noch angenehmer mit [Pfeilfunktionen](#arrow_func_concept) zu verwenden:
+
+```js
+const joinFirstLastName = ({ firstName, lastName }) => firstName + '-' + lastName;
+
+joinFirstLastName(person); // "Nick-Anderson"
+```
+
+- Array
+
+Betrachten wir das folgende Array:
+
+```js
+const myArray = ["a", "b", "c"];
+```
+
+Ohne Destrukturierung
+
+```js
+const x = myArray[0];
+const y = myArray[1];
+```
+
+Mit Destrukturierung
+
+```js
+const [x, y] = myArray; // Das war's !
+
+console.log(x) // "a"
+console.log(y) // "b"
+```
+
+#### Nützliche Ressourcen
+
+- [ES6 Features - Destrukturierende Zuweisung](http://es6-features.org/#ArrayMatching)
+- [Objektdestrukturierung - WesBos](http://wesbos.com/destructuring-objects/)
+- [ExploringJS - Destrukturierung](http://exploringjs.com/es6/ch_destructuring.html)
