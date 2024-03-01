@@ -609,3 +609,382 @@ console.log(y) // "b"
 - [ES6 Features - Destrukturierende Zuweisung](http://es6-features.org/#ArrayMatching)
 - [Objektdestrukturierung - WesBos](http://wesbos.com/destructuring-objects/)
 - [ExploringJS - Destrukturierung](http://exploringjs.com/es6/ch_destructuring.html)
+
+### Array-Methoden - map / filter / reduce / find
+
+*Map*, *filter*, *reduce* und *find* sind Array-Methoden, die aus einem Programmierparadigma namens [*funktionale Programmierung*](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0) stammen.
+
+Zusammengefasst:
+
+- **Array.prototype.map()** nimmt ein Array, führt eine Operation auf seinen Elementen durch und gibt ein Array mit den transformierten Elementen zurück.
+- **Array.prototype.filter()** nimmt ein Array, entscheidet elementweise, ob es dieses behalten will oder nicht, und gibt ein Array nur mit den behaltenen Elementen zurück.
+- **Array.prototype.reduce()** nimmt ein Array und aggregiert die Elemente zu einem einzelnen Wert (der zurückgegeben wird).
+- **Array.prototype.find()** nimmt ein Array und gibt das erste Element zurück, das die bereitgestellte Bedingung erfüllt.
+
+Ich empfehle, sie so oft wie möglich zu verwenden, indem du den Prinzipien der funktionalen Programmierung folgst, da sie zusammensetzbar, prägnant und elegant sind.
+
+Mit diesen vier Methoden kannst du in den meisten Situationen die Verwendung von *for* und *forEach* Schleifen vermeiden. Wenn du versucht bist, eine *for*-Schleife zu machen, versuche es mit *map*, *filter*, *reduce* und *find* zusammengesetzt. Es könnte anfangs schwierig sein, da es dich zwingt, eine neue Denkweise zu erlernen, aber sobald du es beherrschst, wird alles einfacher.
+
+#### Beispielcode
+
+```js
+const numbers = [0, 1, 2, 3, 4, 5, 6];
+const doubledNumbers = numbers.map(n => n * 2); // [0, 2, 4, 6, 8, 10, 12]
+const evenNumbers = numbers.filter(n => n % 2 === 0); // [0, 2, 4, 6]
+const sum = numbers.reduce((prev, next) => prev + next, 0); // 21
+const greaterThanFour = numbers.find((n) => n>4); // 5
+```
+
+Berechne die Gesamtsumme der Noten für Schüler mit Noten 10 oder darüber, indem du map, filter und reduce zusammensetzt:
+
+```js
+const students = [
+  { name: "Nick", grade: 10 },
+  { name: "John", grade: 15 },
+  { name: "Julia", grade: 19 },
+  { name: "Nathalie", grade: 9 },
+];
+
+const aboveTenSum = students
+  .map(student => student.grade) // wir mappen das students Array auf ein Array ihrer Noten
+  .filter(grade => grade >= 10) // wir filtern das Noten-Array, um diejenigen 10 oder darüber zu behalten
+  .reduce((prev, next) => prev + next, 0); // wir summieren alle Noten 10 oder darüber nacheinander
+
+console.log(aboveTenSum) // 44 -- 10 (Nick) + 15 (John) + 19 (Julia), Nathalie unter 10 wird ignoriert
+```
+
+#### Erklärung
+
+Betrachten wir das folgende Array von Zahlen für unsere Beispiele:
+
+```js
+const numbers = [0, 1, 2, 3, 4, 5, 6];
+```
+
+##### Array.prototype.map()
+
+```js
+const doubledNumbers = numbers.map(function(n) {
+  return n * 2;
+});
+console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
+```
+
+Was passiert hier? Wir verwenden .map auf dem *numbers*-Array, die Map iteriert über jedes Element des Arrays und übergibt es unserer Funktion. Das Ziel der Funktion ist es, einen neuen Wert aus dem übergebenen Wert zu erzeugen und zurückzugeben, so dass map ihn ersetzen kann.
+
+Lasst uns diese Funktion extrahieren, um es einmal klarer zu machen:
+
+```js
+const doubleN = function(n) { return n * 2; };
+const doubledNumbers = numbers.map(doubleN);
+console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
+```
+
+**Hinweis**: Du wirst diese Methode oft in Kombination mit [Pfeilfunktionen](#-pfeilfunktion) antreffen
+
+```js
+const doubledNumbers = numbers.map(n => n * 2);
+console.log(doubledNumbers); // [0, 2, 4, 6, 8, 10, 12]
+```
+
+```numbers.map(doubleN)``` produziert ```[doubleN(0), doubleN(1), doubleN(2), doubleN(3), doubleN(4), doubleN(5), doubleN(6)]```, was gleich ```[0, 2, 4, 6, 8, 10, 12]``` ist.
+
+> **Hinweis:** Wenn du kein neues Array zurückgeben musst und nur eine Schleife mit Nebeneffekten machen willst, solltest du vielleicht stattdessen eine for / forEach-Schleife anstelle von map verwenden.
+
+##### Array.prototype.filter()
+
+```js
+const evenNumbers = numbers.filter(function(n) {
+  return n % 2 === 0; // true, wenn "n" gerade ist, false, wenn "n" ungerade ist
+});
+console.log(evenNumbers); // [0, 2, 4, 6]
+```
+
+**Hinweis**: Du wirst diese Methode oft in Kombination mit [Pfeilfunktionen](#-pfeilfunktion) antreffen
+
+```js
+const evenNumbers = numbers.filter(n => n % 2 === 0);
+console.log(evenNumbers); // [0, 2, 4, 6]
+```
+
+Wir verwenden .filter auf dem *numbers*-Array, filter iteriert über jedes Element des Arrays und übergibt es unserer Funktion. Das Ziel der Funktion ist es, einen Boolean zurückzugeben, der bestimmt, ob der aktuelle Wert behalten wird oder nicht. Filter gibt dann das Array nur mit den behaltenen Werten zurück.
+
+##### Array.prototype.reduce()
+
+Das Ziel der reduce-Methode ist es, alle Elemente des Arrays, über das sie iteriert, in einen einzigen Wert zu *reduzieren*. Wie diese Elemente aggregiert werden, liegt bei dir.
+
+```js
+const sum = numbers.reduce(
+  function(acc, n) {
+    return acc + n;
+  },
+  0 // Wert der Akkumulatorvariablen beim ersten Iterationsschritt
+);
+
+console.log(sum) // 21
+```
+
+**Hinweis**: Du wirst diese Methode oft in Kombination mit [Pfeilfunktionen](#-pfeilfunktion) antreffen
+
+```js
+const sum = numbers.reduce((acc, n) => acc + n, 0);
+console.log(sum) // 21
+```
+
+Wie bei den .map- und .filter-Methoden wird .reduce auf einem Array angewandt und nimmt eine Funktion als ersten Parameter.
+
+Diesmal gibt es allerdings Änderungen:
+
+- .reduce nimmt zwei Parameter
+
+Der erste Parameter ist eine Funktion, die bei jedem Iterationsschritt aufgerufen wird.
+
+Der zweite Parameter ist der Wert der Akkumulatorvariablen (*acc* hier) beim ersten Iterationsschritt (lies den nächsten Punkt, um dies zu verstehen).
+
+- Funktionsparameter
+
+Die Funktion, die du als ersten Parameter von .reduce übergibst, nimmt zwei Parameter entgegen. Der erste (*acc* hier) ist die Akkumulatorvariable, während der zweite Parameter (*n*) das aktuelle Element ist.
+
+Die Akkumulatorvariable entspricht dem Rückgabewert deiner Funktion im **vorherigen** Iterationsschritt. Beim ersten Schritt der Iteration ist *acc* gleich dem Wert, den du als zweiten Parameter von .reduce übergeben hast.
+
+###### Beim ersten Iterationsschritt
+
+```acc = 0```, weil wir 0 als zweiten Parameter für reduce übergeben haben
+
+```n = 0```, erstes Element des *numbers*-Arrays
+
+Die Funktion gibt *acc* + *n* --> 0 + 0 --> 0 zurück
+
+###### Beim zweiten Iterationsschritt
+
+```acc = 0```, weil es der Wert ist, den die Funktion im vorherigen Iterationsschritt zurückgegeben hat
+
+```n = 1```, zweites Element des *numbers*-Arrays
+
+Die Funktion gibt *acc* + *n* --> 0 + 1 --> 1 zurück
+
+###### Beim dritten Iterationsschritt
+
+```acc = 1```, weil es der Wert ist, den die Funktion im vorherigen Iterationsschritt zurückgegeben hat
+
+```n = 2```, drittes Element des *numbers*-Arrays
+
+Die Funktion gibt *acc* + *n* --> 1 + 2 --> 3 zurück
+
+###### Beim vierten Iterationsschritt
+
+```acc = 3```, weil es der Wert ist, den die Funktion im vorherigen Iterationsschritt zurückgegeben hat
+
+```n = 3```, viertes Element des *numbers*-Arrays
+
+Die Funktion gibt *acc* + *n* --> 3 + 3 --> 6 zurück
+
+###### [...] Beim letzten Iterationsschritt
+
+```acc = 15```, weil es der Wert ist, den die Funktion im vorherigen Iterationsschritt zurückgegeben hat
+
+```n = 6```, letztes Element des *numbers*-Arrays
+
+Die Funktion gibt *acc* + *n* --> 15 + 6 --> 21 zurück
+
+Da dies der letzte Iterationsschritt ist, gibt **.reduce** 21 zurück.
+
+##### Array.prototype.find()
+
+```js
+const greaterThanZero = numbers.find(function(n) {
+  return n > 0; // gibt die Nummer zurück, die gerade größer als 0 ist
+});
+console.log(greaterThanZero); // 1
+```
+
+**Hinweis**: Du wirst diese Methode oft in Kombination mit [Pfeilfunktionen](#-pfeilfunktion) antreffen
+
+Wir verwenden .find auf dem *numbers*-Array, .find iteriert über jedes Element des Arrays und übergibt es unserer Funktion, bis die Bedingung erfüllt ist. Das Ziel der Funktion ist es, das Element zurückzugeben, das die aktuelle Testfunktion erfüllt. Die .find-Methode führt die Callback-Funktion einmal für jeden Index des Arrays aus, bis der Callback einen wahren Wert zurückgibt.
+
+**Hinweis**: Sie gibt sofort den Wert des Elements zurück (das die Bedingung erfüllt), wenn gefunden. Andernfalls gibt sie undefined zurück.
+
+#### Externe Ressource
+
+- [Verständnis von map / filter / reduce in JS](https://hackernoon.com/understanding-map-filter-and-reduce-in-javascript-5df1c7eee464)
+
+### Spread-Operator "..."
+
+Der Spread-Operator ```...``` wurde mit ES2015 eingeführt und wird verwendet, um Elemente eines iterierbaren Objekts (wie ein Array) an Stellen auszubreiten, an denen mehrere Elemente passen können.
+
+#### Beispielcode
+
+```js
+const arr1 = ["a", "b", "c"];
+const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
+```
+
+```js
+function myFunc(x, y, ...params) {
+  console.log(x);
+  console.log(y);
+  console.log(params)
+}
+
+myFunc("a", "b", "c", "d", "e", "f")
+// "a"
+// "b"
+// ["c", "d", "e", "f"]
+```
+
+```js
+const { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
+console.log(x); // 1
+console.log(y); // 2
+console.log(z); // { a: 3, b: 4 }
+
+const n = { x, y, ...z };
+console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
+```
+
+#### Erklärung
+
+##### In iterierbaren Objekten (wie Arrays)
+
+Wenn wir die folgenden zwei Arrays haben:
+
+```js
+const arr1 = ["a", "b", "c"];
+const arr2 = [arr1, "d", "e", "f"]; // [["a", "b", "c"], "d", "e", "f"]
+```
+
+*arr2* das erste Element ist ein Array, weil *arr1* so, wie es ist, in *arr2* eingefügt wird. Aber was wir wollen, ist, dass *arr2* ein Array von Buchstaben ist. Um dies zu erreichen, können wir die Elemente von *arr1* in *arr2* *ausbreiten*.
+
+Mit dem Spread-Operator
+
+```js
+const arr1 = ["a", "b", "c"];
+const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
+```
+
+##### Funktion rest Parameter
+
+In Funktionsparametern können wir den Rest-Operator verwenden, um Parameter in einem Array einzufügen, über das wir iterieren können. Es gibt bereits ein **arguments**-Objekt, das an jede Funktion gebunden ist und einem Array mit allen Parametern entspricht, die in die Funktion eingegeben wurden.
+
+```js
+function myFunc() {
+  for (var i = 0; i < arguments.length; i++) {
+    console.log(arguments[i]);
+  }
+}
+
+myFunc("Nick", "Anderson", 10, 12, 6);
+// "Nick"
+// "Anderson"
+// 10
+// 12
+// 6
+```
+
+Aber nehmen wir an, dass wir wollen, dass diese Funktion einen neuen Schüler mit seinen Noten und seinem Durchschnitt erstellt. Wäre es nicht praktischer, die ersten beiden Parameter in zwei separate Variablen zu extrahieren und dann alle Noten in einem Array zu haben, über das wir iterieren können?
+
+Genau das ermöglicht der Rest-Operator!
+
+```js
+function createStudent(firstName, lastName, ...grades) {
+  // firstName = "Nick"
+  // lastName = "Anderson"
+  // [10, 12, 6] -- "..." nimmt alle anderen übergebenen Parameter und erzeugt eine "grades"-Arrayvariable, die sie enthält
+
+  const avgGrade = grades.reduce((acc, curr) => acc + curr, 0) / grades.length; // berechnet den Durchschnitt aus den Noten
+
+  return {
+    firstName: firstName,
+    lastName: lastName,
+    grades: grades,
+    avgGrade: avgGrade
+  }
+}
+
+const student = createStudent("Nick", "Anderson", 10, 12, 6);
+console.log(student);
+// {
+//   firstName: "Nick",
+//   lastName: "Anderson",
+//   grades: [10, 12, 6],
+//   avgGrade: 9,33
+// }
+```
+
+> **Hinweis:** Die Funktion createStudent ist schlecht, weil wir nicht überprüfen, ob grades.length existiert oder verschieden von 0 ist. Aber so ist es einfacher zu lesen, deshalb habe ich diesen Fall nicht behandelt.
+
+##### Objekteigenschaften ausbreiten
+
+Für dieses Beispiel empfehle ich, die vorherigen Erklärungen zum Rest-Operator bei iterierbaren Objekten und Funktionsparametern zu lesen.
+
+```js
+const myObj = { x: 1, y: 2, a: 3, b: 4 };
+const { x, y, ...z } = myObj; // Objektdestrukturierung hier
+console.log(x); // 1
+console.log(y); // 2
+console.log(z); // { a: 3, b: 4 }
+
+// z sind die restlichen Eigenschaften des destrukturierten Objekts: myObj-Objekt minus x- und y-Eigenschaften, die destrukturiert wurden
+
+const n = { x, y, ...z };
+console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
+
+// Hier werden die Eigenschaften von z-Objekten in n ausgespreitet
+```
+
+#### Externe Ressourcen
+
+- [TC39 - Objekt rest/spread](https://github.com/tc39/proposal-object-rest-spread)
+- [Einführung in den Spread-Operator - WesBos](https://github.com/wesbos/es6-articles/blob/master/28%20-%20Spread%20Operator%20Introduction.md)
+- [JavaScript & der Spread-Operator](https://codeburst.io/javascript-the-spread-operator-a867a71668ca)
+- [6 großartige Verwendungen des Spread-Operators](https://davidwalsh.name/spread-operator)
+
+### Objekteigenschaften Kurzschreibweise
+
+Wenn man einer Objekteigenschaft eine Variable zuweist, deren Name gleich dem Eigenschaftsnamen ist, kann man folgendes tun:
+
+```js
+const x = 10;
+const myObj = { x };
+console.log(myObj.x) // 10
+```
+
+#### Erklärung
+
+Normalerweise (vor ES2015) wenn du ein neues *Objektliteral* deklarierst und Variablen als Werte für Objekteigenschaften verwenden möchtest, würdest du diesen Code schreiben:
+
+```js
+const x = 10;
+const y = 20;
+
+const myObj = {
+  x: x, // weist x Variable Wert myObj.x zu
+  y: y // weist y Variable Wert myObj.y zu
+};
+
+console.log(myObj.x) // 10
+console.log(myObj.y) // 20
+```
+
+Wie du sehen kannst, ist das ziemlich wiederholend, weil die Namen der Eigenschaften von myObj den Variablennamen entsprechen, die du diesen zuweisen willst.
+
+Mit ES2015 kannst du diese Abkürzung verwenden, wenn der Variablenname dem Namen der Eigenschaft entspricht:
+
+```js
+const x = 10;
+const y = 20;
+
+const myObj = {
+  x,
+  y
+};
+
+console.log(myObj.x) // 10
+console.log(myObj.y) // 20
+```
+
+#### Externe Ressourcen
+
+- [Property shorthand - ES6 Features](http://es6-features.org/#PropertyShorthand)
+
+
