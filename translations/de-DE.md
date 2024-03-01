@@ -109,7 +109,7 @@ Wenn du Schwierigkeiten hast, eine Vorstellung zu verstehen, schlage ich vor, da
       - [Externe Ressourcen](#externe-ressourcen-10)
     + [Anamorphismen / Katamorphismen](#anamorphismen-und-katamorphismen)
       - [Anamorphismen](#anamorphismen)
-      - [Katamorphismen](#catamorphismen)
+      - [Katamorphismen](#katamorphismen)
       - [Externe Ressourcen](#externe-ressourcen-11)
     + [Generatoren](#generatoren)
       - [Externe Ressourcen](#externe-ressourcen-12)
