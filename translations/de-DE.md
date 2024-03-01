@@ -71,9 +71,9 @@ Wenn du Schwierigkeiten hast, eine Vorstellung zu verstehen, schlage ich vor, da
       - [Erklärung](#erklärung-1)
         * [In Iterables (wie Arrays)](#in-iterables-wie-arrays)
         * [Funktionsrestparameter](#funktionsrestparameter)
-        * [Objekteigenschaften verbreiten](#objekteigenschaften-verbreiten)
+        * [Objekteigenschaften ausbreiten](#objekteigenschaften-ausbreiten)
       - [Externe Ressourcen](#externe-ressourcen)
-    + [Eigenschaftskurzschrift in Objekten](#eigenschaftskurzschrift-in-objekten)
+    + [Objekteigenschaften Kurzschreibweise](#objekteigenschaften-kurzschreibweise)
       - [Erklärung](#erklärung-2)
       - [Externe Ressourcen](#externe-ressourcen-1)
     + [Promises](#promises)
@@ -82,22 +82,22 @@ Wenn du Schwierigkeiten hast, eine Vorstellung zu verstehen, schlage ich vor, da
         * [Das Promise erstellen](#das-promise-erstellen)
         * [Verwendung von Promise-Handlern](#verwendung-von-promise-handlern)
       - [Externe Ressourcen](#externe-ressourcen-2)
-    + [Template literals](#template-literals)
+    + [Template Literale](#template-literale)
       - [Beispielcode](#beispielcode-5)
       - [Externe Ressourcen](#externe-ressourcen-3)
-    + [Tagged Template Literals](#tagged-template-literals)
+    + [Tagged Template Literale](#tagged-template-literale)
       - [Externe Ressourcen](#externe-ressourcen-4)
-    + [Importe / Exporte](#importe--exporte)
+    + [Imports / Exports](#imports--exports)
       - [Erklärung mit Beispielcode](#erklärung-mit-beispielcode-1)
-        * [Benannte Exporte](#benannte-exporte)
-        * [Standardimport / -export](#standardimport--export)
+        * [Benannte Exports](#benannte-exports)
+        * [Standardimport / export](#standardimport-export)
       - [Externe Ressourcen](#externe-ressourcen-5)
     + [JavaScript *this*](#-javascript-this)
       - [Externe Ressourcen](#externe-ressourcen-6)
     + [Klasse](#klasse)
       - [Beispiele](#beispiele)
       - [Externe Ressourcen](#externe-ressourcen-7)
-    + [Extends und super Schlüsselwörter](#extends-und-super-schlüsselwörter)
+    + [Extends und super](#extends-und-super)
       - [Beispielcode](#beispielcode-6)
       - [Externe Ressourcen](#externe-ressourcen-8)
     + [Async Await](#async-await)
@@ -107,9 +107,9 @@ Wenn du Schwierigkeiten hast, eine Vorstellung zu verstehen, schlage ich vor, da
       - [Externe Ressourcen](#externe-ressourcen-9)
     + [Truthy / Falsy](#truthy--falsy)
       - [Externe Ressourcen](#externe-ressourcen-10)
-    + [Anamorphisms / Catamorphisms](#anamorphisms-und-catamorphisms)
-      - [Anamorphisms](#anamorphisms)
-      - [Catamorphisms](#catamorphisms)
+    + [Anamorphismen / Catamorphismen](#anamorphismen-und-catamorphismen)
+      - [Anamorphismen](#anamorphismen)
+      - [Catamorphismen](#catamorphismen)
       - [Externe Ressourcen](#externe-ressourcen-11)
     + [Generatoren](#generatoren)
       - [Externe Ressourcen](#externe-ressourcen-12)
@@ -121,8 +121,8 @@ Wenn du Schwierigkeiten hast, eine Vorstellung zu verstehen, schlage ich vor, da
         * [Statische Methoden aus nicht-statischen Methoden aufrufen](#statische-methoden-aus-nicht-statischen-methoden-aufrufen)
       - [Externe Ressourcen](#externe-ressourcen-13)
   * [Glossar](#glossar)
-    + [Scope](#scope)
-    + [Variablenmutation](#variablenmutation)
+    + [Scope](#-scope)
+    + [Variablenmutation](#-variablenmutation)
 
 ## Begriffe
 
@@ -355,9 +355,9 @@ function myFunc() {
 }
 ```
 
-#### Detaillierte Erklärung
+#### Ausführliche Erklärung
 
-##### Kürze
+##### Prägnanz
 
 Pfeilfunktionen sind in vielerlei Hinsicht prägnanter als traditionelle Funktionen. Lass uns alle möglichen Fälle überprüfen:
 
@@ -844,7 +844,7 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
 #### Erklärung
 
-##### In iterierbaren Objekten (wie Arrays)
+##### In Iterables (wie Arrays)
 
 Wenn wir die folgenden zwei Arrays haben:
 
@@ -862,7 +862,7 @@ const arr1 = ["a", "b", "c"];
 const arr2 = [...arr1, "d", "e", "f"]; // ["a", "b", "c", "d", "e", "f"]
 ```
 
-##### Funktion rest Parameter
+##### Funktionsrestparameter
 
 In Funktionsparametern können wir den Rest-Operator verwenden, um Parameter in einem Array einzufügen, über das wir iterieren können. Es gibt bereits ein **arguments**-Objekt, das an jede Funktion gebunden ist und einem Array mit allen Parametern entspricht, die in die Funktion eingegeben wurden.
 
@@ -1091,7 +1091,7 @@ const name = "Nick";
 - [String-Interpolation - ES6 Features](http://es6-features.org/#StringInterpolation)
 - [ES6 Template Literale - Addy Osmani](https://developers.google.com/web/updates/2015/01/ES6-Template-Strings)
 
-### Gekennzeichnete Template Literale
+### Tagged Template Literale
 
 Template Tags sind *Funktionen, die einem [Template Literal](#template-literals) vorangestellt werden können*. Wenn eine Funktion auf diese Weise aufgerufen wird, ist der erste Parameter ein Array der *Strings*, die zwischen den interpolierten Variablen des Templates auftreten, und die nachfolgenden Parameter sind die interpolierten Werte. Verwende einen Spread-Operator `...`, um alle zu erfassen. [(Ref: MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
 
@@ -1176,7 +1176,7 @@ Außerdem kannst du Aliase verwenden, aber die Syntax ist anders als die, die be
 import { foo as bar } from 'myFile.js'; // foo wird importiert und in eine neue bar Variable injiziert
 ```
 
-##### Standardimport / -export
+##### Standardimport / export
 
 Bezüglich des Standardexports gibt es nur einen einzigen Standardexport pro Modul. Ein Standardexport kann eine Funktion, eine Klasse, ein Objekt oder irgendetwas anderes sein. Dieser Wert wird als der "Haupt"-exportierte Wert angesehen, da er am einfachsten zu importieren ist. [Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
 
@@ -1314,7 +1314,7 @@ Zum Verständnis von Klassen:
 - [ES6-Features - Klassen](http://es6-features.org/#ClassDefinition)
 - [JavaScript Klassen - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
-### Die Schlüsselwörter `Extends` und `super`
+### `Extends` und `super`
 
 Das Schlüsselwort `extends` wird in Klassendeklarationen oder Klassenausdrücken verwendet, um eine Klasse zu erstellen, die ein Kind einer anderen Klasse ist ([Ref: MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)). Die Unterklasse erbt alle Eigenschaften der Oberklasse und kann zusätzlich neue Eigenschaften hinzufügen oder die geerbten modifizieren.
 
