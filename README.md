@@ -204,7 +204,7 @@ Still focusing on the variable scope, here is a more subtle example:
 function myFunction() {
   var myVar = "Nick";
   if (true) {
-    var myVar = "John";
+    myVar = "John";
     console.log(myVar); // "John"
     // actually, myVar being function scoped, we just erased the previous myVar value "Nick" for "John"
   }
