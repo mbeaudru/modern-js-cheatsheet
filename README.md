@@ -33,6 +33,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 - [Reddit (JavaScript)](https://www.reddit.com/r/javascript/)
 - [Google](https://www.google.com/) to find specific blog and resources
 - [StackOverflow](https://stackoverflow.com/questions/tagged/javascript)
+- [Visual JavaScript Cheat Sheet](https://www.git-tower.com/learn/cheat-sheets/javascript)
 
 ## Table of Contents
 
