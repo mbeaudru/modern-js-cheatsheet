@@ -373,7 +373,7 @@ function myFunc() {
 - [JavaScript arrow function - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 - [Arrow function and lexical *this*](https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4)
 
-#### 方法默认参数值
+### 方法默认参数值
 
 从 ES2015 以后开始，你可以使用下面的语法，给你的方法参数来设置默认值
 
@@ -391,3 +391,10 @@ console.log(myFunc(null)) // null -- 提供了 (null) , 见一下详细解释
 - *undefined* 参数被提供的时候
 
 换句话说，如果你传入*NULL* 默认值**将不会生效**
+
+> **注意:** 默认值赋值也可以用于解构形参（参见下一个概念以查看示例）
+
+#### 相关资料
+
+- [Default parameter value - ES6 Features](http://es6-features.org/#DefaultParameterValues)
+- [Default parameters - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
