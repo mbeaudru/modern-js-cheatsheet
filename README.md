@@ -71,6 +71,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
         * [In iterables (like arrays)](#in-iterables-like-arrays)
         * [Function rest parameter](#function-rest-parameter)
         * [Object properties spreading](#object-properties-spreading)
+        * [Array destructuring with rest operator](#array-destructuring-with-rest-operator)
       - [External resources](#external-resources)
     + [Object property shorthand](#object-property-shorthand)
       - [Explanation](#explanation-2)
@@ -930,6 +931,30 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
 // Here z object properties are spread into n
 ```
+
+##### Array destructuring with rest operator
+
+The rest operator (`...`) can also be used in array destructuring to collect all remaining elements into a new array:
+
+```js
+const arr = [3, 5, 7, 9, 11];
+
+const [first, second, ...rest] = arr;
+console.log(first); // 3
+console.log(second); // 5
+console.log(rest); // [7, 9, 11]
+```
+
+You can also skip elements and collect the rest:
+
+```js
+const [first, , third, ...rest] = arr;
+console.log(first); // 3
+console.log(third); // 7
+console.log(rest); // [9, 11]
+```
+
+**Note:** The rest operator must always be the last element in the destructuring pattern.
 
 #### External resources
 
